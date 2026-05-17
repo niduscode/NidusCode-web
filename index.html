@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NidusCode — Desarrollo web con Inteligencia Artificial, kits de automatización y optimización para tu negocio." />
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <title>NidusCode — Web con IA, Automatización y Optimización</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            ink: {
+              50:  '#f7f7f8',
+              100: '#ececef',
+              200: '#d4d4da',
+              300: '#a8a8b3',
+              400: '#71717f',
+              500: '#52525e',
+              600: '#3f3f48',
+              700: '#2a2a32',
+              800: '#16161c',
+              900: '#0a0a0f',
+            },
+            accent: {
+              DEFAULT: '#5b8cff',
+              hover:   '#3f74ff',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="font-sans antialiased text-ink-900 dark:text-ink-50 selection:bg-accent/30 selection:text-ink-900 dark:selection:text-white">
+
+  <!-- Scroll progress bar -->
+  <div id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Fondo decorativo: dot pattern -->
+  <div aria-hidden="true" class="dot-pattern pointer-events-none fixed inset-0 -z-10"></div>
+
+  <!-- ============ NAVBAR (pill flotante) ============ -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center justify-between h-14 px-4 sm:px-6">
+        <a href="#hero" class="flex items-center gap-2.5 group">
+          <span class="logo-mark inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-accent via-violet-500 to-fuchsia-500 text-white font-display font-bold text-sm">N</span>
+          <span class="font-display font-semibold tracking-tight">NidusCode</span>
+        </a>
+
+        <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-ink-600 dark:text-ink-300">
+          <li><a href="#servicios" class="hover:text-ink-900 dark:hover:text-white transition-colors">Servicios</a></li>
+          <li><a href="#kits" class="hover:text-ink-900 dark:hover:text-white transition-colors">Stack</a></li>
+          <li><a href="#portafolio" class="hover:text-ink-900 dark:hover:text-white transition-colors">Portafolio</a></li>
+          <li><a href="#faq" class="hover:text-ink-900 dark:hover:text-white transition-colors">FAQ</a></li>
+          <li><a href="#contacto" class="hover:text-ink-900 dark:hover:text-white transition-colors">Contacto</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <span class="hidden sm:inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-ink-200 dark:border-ink-700 text-[10px] font-mono uppercase tracking-wider text-ink-600 dark:text-ink-300">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            CL · AR
+          </span>
+          <button id="menuToggle" aria-label="Abrir menú" class="md:hidden p-2 rounded-md hover:bg-ink-100 dark:hover:bg-ink-800 transition-colors">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="hidden md:hidden mt-2 mx-4 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white/95 dark:bg-ink-900/95 backdrop-blur-xl">
+      <ul class="px-6 py-4 space-y-1 text-base font-medium">
+        <li><a href="#servicios" class="block py-2">Servicios</a></li>
+        <li><a href="#kits" class="block py-2">Stack</a></li>
+        <li><a href="#portafolio" class="block py-2">Portafolio</a></li>
+        <li><a href="#faq" class="block py-2">FAQ</a></li>
+        <li><a href="#contacto" class="block py-2">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-28 pb-20 px-6 lg:px-8 overflow-hidden">
+
+      <!-- Aurora gradient animada -->
+      <div class="aurora" aria-hidden="true">
+        <div class="aurora-3"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto w-full relative">
+        <div class="max-w-4xl">
+          <div class="hero-title inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-ink-200/80 dark:border-ink-700/80 bg-white/60 dark:bg-ink-800/40 backdrop-blur-md text-xs font-mono text-ink-600 dark:text-ink-300 mb-10">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Disponibles para nuevos proyectos · 2026
+          </div>
+
+          <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95]">
+            <span class="hero-title block">Webs vivas,</span>
+            <span class="hero-title-2 block">construidas con <span class="gradient-text">IA.</span></span>
+          </h1>
+
+          <p class="hero-title-2 mt-8 text-lg sm:text-xl text-ink-600 dark:text-ink-300 max-w-2xl leading-relaxed">
+            Desde Chile y Argentina diseñamos sitios web, automatizaciones y auditorías inteligentes para que tu negocio funcione más rápido, gaste menos y venda más.
+          </p>
+
+          <div class="hero-title-2 mt-10 flex flex-col sm:flex-row gap-3">
+            <a href="#contacto" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-ink-900 dark:bg-white text-white dark:text-ink-900 font-medium hover:-translate-y-0.5 transition-transform">
+              Habla con nosotros
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#servicios" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-ink-200 dark:border-ink-700 hover:border-ink-900 dark:hover:border-white font-medium transition-colors backdrop-blur-sm">
+              Ver servicios
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="mt-20 grid grid-cols-3 gap-6 sm:gap-12 max-w-xl">
+            <div class="reveal">
+              <div class="font-display text-4xl sm:text-5xl font-bold counter tracking-tight gradient-text" data-target="4">0</div>
+              <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">PROYECTOS</div>
+            </div>
+            <div class="reveal">
+              <div class="font-display text-4xl sm:text-5xl font-bold counter tracking-tight gradient-text" data-target="100">0<span>%</span></div>
+              <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">A MEDIDA</div>
+            </div>
+            <div class="reveal">
+              <div class="font-display text-4xl sm:text-5xl font-bold tracking-tight gradient-text">CL·AR</div>
+              <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">PAÍSES</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="scroll-hint absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-ink-400 dark:text-ink-500">
+        <span>scroll</span>
+        <div class="w-px h-10 bg-gradient-to-b from-ink-300 dark:from-ink-600 to-transparent"></div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE de tecnologías ============ -->
+    <section aria-label="Tecnologías que usamos" class="py-8 border-y border-ink-200/60 dark:border-ink-800 bg-white/60 dark:bg-ink-900/50 backdrop-blur-sm">
+      <div class="marquee">
+        <div class="marquee-track">
+          <span class="marquee-chip">⚡ Claude · IA</span>
+          <span class="marquee-chip">◆ n8n</span>
+          <span class="marquee-chip">▲ Next.js</span>
+          <span class="marquee-chip">◇ Tailwind</span>
+          <span class="marquee-chip">⬢ Supabase</span>
+          <span class="marquee-chip">▶ Netlify</span>
+          <span class="marquee-chip">⬡ Vercel</span>
+          <span class="marquee-chip">★ OpenAI</span>
+          <span class="marquee-chip">◉ Make</span>
+          <span class="marquee-chip">⚙ Zapier</span>
+          <span class="marquee-chip">◐ Figma</span>
+          <span class="marquee-chip">⬢ Stripe</span>
+          <!-- duplicado para loop -->
+          <span class="marquee-chip">⚡ Claude · IA</span>
+          <span class="marquee-chip">◆ n8n</span>
+          <span class="marquee-chip">▲ Next.js</span>
+          <span class="marquee-chip">◇ Tailwind</span>
+          <span class="marquee-chip">⬢ Supabase</span>
+          <span class="marquee-chip">▶ Netlify</span>
+          <span class="marquee-chip">⬡ Vercel</span>
+          <span class="marquee-chip">★ OpenAI</span>
+          <span class="marquee-chip">◉ Make</span>
+          <span class="marquee-chip">⚙ Zapier</span>
+          <span class="marquee-chip">◐ Figma</span>
+          <span class="marquee-chip">⬢ Stripe</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICIOS (bento) ============ -->
+    <section id="servicios" class="py-24 sm:py-32 px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal max-w-2xl mb-16">
+          <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 01 — Servicios</p>
+          <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
+            Cuatro formas <br/>de impulsar tu negocio.
+          </h2>
+          <p class="mt-5 text-lg text-ink-600 dark:text-ink-300">
+            Soluciones reales con tecnología actual. Sin humo, sin plantillas genéricas.
+          </p>
+        </div>
+
+        <div class="bento">
+
+          <!-- LARGE — Desarrollo con IA (2x2) -->
+          <article class="bento-item large reveal spotlight-card group p-8 rounded-3xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:-translate-y-1 transition-transform relative overflow-hidden">
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-accent/20 to-violet-500/20 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+            <div class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-accent mb-6">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+              SERVICIO INSIGNIA
+            </div>
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent via-violet-500 to-fuchsia-500 flex items-center justify-center mb-6 transition-transform group-hover:rotate-6 shadow-lg shadow-accent/20">
+              <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-3xl sm:text-4xl font-bold mb-4 tracking-tight">Desarrollo<br/>con IA</h3>
+            <p class="text-ink-600 dark:text-ink-300 leading-relaxed max-w-md">
+              Webs y aplicaciones diseñadas y construidas combinando código artesanal con modelos de IA generativa. Más rápido, más afinado, más tuyo.
+            </p>
+            <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-ink-500 dark:text-ink-400 max-w-md">
+              <li class="flex items-center gap-2"><span class="text-accent">→</span> Landing pages</li>
+              <li class="flex items-center gap-2"><span class="text-accent">→</span> Tiendas online</li>
+              <li class="flex items-center gap-2"><span class="text-accent">→</span> Dashboards</li>
+              <li class="flex items-center gap-2"><span class="text-accent">→</span> Integraciones LLM</li>
+            </ul>
+          </article>
+
+          <!-- Automatizaciones -->
+          <article class="bento-item reveal spotlight-card group p-7 rounded-3xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:-translate-y-1 transition-transform">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-fuchsia-500 to-rose-500 flex items-center justify-center mb-5 shadow-lg shadow-fuchsia-500/20">
+              <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-xl font-bold mb-2">Automatizaciones</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Conectamos tus herramientas para que los procesos repetitivos se ejecuten solos.</p>
+          </article>
+
+          <!-- Optimizaciones -->
+          <article class="bento-item reveal spotlight-card group p-7 rounded-3xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:-translate-y-1 transition-transform">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-5 shadow-lg shadow-emerald-500/20">
+              <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 14l4-4 4 4 5-5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-xl font-bold mb-2">Optimizaciones</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Web rápida, accesible y bien posicionada. Core Web Vitals + SEO técnico.</p>
+          </article>
+
+          <!-- WIDE — Mantenimiento mensual -->
+          <article class="bento-item wide reveal spotlight-card group p-8 rounded-3xl border border-ink-100 dark:border-ink-800 bg-gradient-to-br from-ink-50 to-white dark:from-ink-800/40 dark:to-ink-900/40 hover:-translate-y-1 transition-transform relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-amber-500/10 to-transparent pointer-events-none"></div>
+            <div class="grid sm:grid-cols-[auto_1fr_auto] gap-6 items-center relative">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20 flex-shrink-0">
+                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <h3 class="font-display text-2xl font-bold tracking-tight">Mantenimiento mensual</h3>
+                  <span class="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20">NUEVO</span>
+                </div>
+                <p class="text-ink-600 dark:text-ink-300 leading-relaxed">
+                  Tu web siempre actualizada, segura y respaldada. Cambios pequeños, soporte prioritario y mejoras cada mes.
+                </p>
+                <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-500 dark:text-ink-400">
+                  <span class="flex items-center gap-1.5"><span class="text-accent">→</span>Backups</span>
+                  <span class="flex items-center gap-1.5"><span class="text-accent">→</span>Cambios y textos</span>
+                  <span class="flex items-center gap-1.5"><span class="text-accent">→</span>Soporte prioritario</span>
+                </div>
+              </div>
+              <a href="#contacto" class="hidden sm:inline-flex items-center justify-center w-12 h-12 rounded-full bg-ink-900 dark:bg-white text-white dark:text-ink-900 hover:scale-110 transition-transform flex-shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STACK ============ -->
+    <section id="kits" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800 relative overflow-hidden">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal max-w-2xl mb-16">
+          <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 02 — Stack</p>
+          <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
+            Las herramientas <br/>con las que trabajamos.
+          </h2>
+          <p class="mt-5 text-lg text-ink-600 dark:text-ink-300">
+            Estas son las áreas que dominamos para entregarte un servicio completo. No vendemos las herramientas: las usamos para resolver tu problema.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+
+          <!-- Kit 1: Web Scrolling -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-violet-500 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z M3 9h18 M9 3v18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">01</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Webs con scroll premium</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Sitios animados con efecto Apple, parallax y reveals. Listos para impresionar.</p>
+          </article>
+
+          <!-- Kit 2: Automatizaciones n8n -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-fuchsia-500 to-rose-500 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">02</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Automatizaciones n8n</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Workflows visuales que conectan tus apps y ejecutan tareas sin intervención.</p>
+          </article>
+
+          <!-- Kit 3: Auditoría Meta Ads -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2" stroke-linecap="round"/><path d="M16 8l-4 4-2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">03</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Auditoría Meta Ads</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Revisamos tus campañas en Facebook e Instagram y detectamos dónde se quema el presupuesto.</p>
+          </article>
+
+          <!-- Kit 4: Auditoría SEO -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8" stroke-linecap="round"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">04</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Auditoría SEO</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Análisis técnico, palabras clave y plan de acción para subir en Google.</p>
+          </article>
+
+          <!-- Kit 5: Auditoría de Negocio -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14l4-4 4 4 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">05</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Auditoría de negocio</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Diagnóstico integral: qué funciona, qué frena el crecimiento y por dónde empezar.</p>
+          </article>
+
+          <!-- Kit 6: Dashboard de Facturas -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round"/><path d="M7 8h10M7 12h10M7 16h6" stroke-linecap="round"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">06</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Dashboard de facturas</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Panel para visualizar, filtrar y exportar tus facturas. Adiós a las hojas de cálculo.</p>
+          </article>
+
+          <!-- Kit 7: Extensiones de Chrome -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke-linecap="round"/><path d="M21.17 8H12M3.95 6.06l4.07 7.03M10.88 21.94l4.07-7.03" stroke-linecap="round"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">07</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Extensiones de Chrome</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Plugins a medida que automatizan tareas dentro del navegador de tu equipo.</p>
+          </article>
+
+          <!-- Kit 8: Instagram Web -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 via-rose-500 to-orange-400 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke-linecap="round"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">08</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Instagram → Web</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Convertimos tu feed de Instagram en una web con catálogo y contacto directo.</p>
+          </article>
+
+          <!-- Kit 9: Prospección -->
+          <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">09</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Prospección automática</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300">Encontramos, calificamos y contactamos a tus leads ideales mientras duermes.</p>
+          </article>
+
+          <!-- CTA card -->
+          <article class="reveal group p-6 rounded-2xl border-2 border-dashed border-ink-200 dark:border-ink-700 flex flex-col justify-between hover:border-accent dark:hover:border-accent transition-colors">
+            <div>
+              <div class="w-10 h-10 rounded-lg border border-ink-200 dark:border-ink-700 flex items-center justify-center mb-4">
+                <svg class="w-5 h-5 text-ink-600 dark:text-ink-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+              </div>
+              <h3 class="font-display text-lg font-semibold mb-2">¿Tu caso es diferente?</h3>
+              <p class="text-sm text-ink-600 dark:text-ink-300">Cuéntanos qué problema quieres resolver y vemos cómo aplicar estas herramientas a tu proyecto.</p>
+            </div>
+            <a href="#contacto" class="mt-6 text-sm font-medium text-accent inline-flex items-center gap-1 group/link">
+              Hablar con nosotros
+              <svg class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESO ============ -->
+    <section id="proceso" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal max-w-2xl mb-16">
+          <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 03 — Proceso</p>
+          <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
+            Cómo trabajamos.
+          </h2>
+        </div>
+
+        <div class="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Línea conectora horizontal en desktop -->
+          <div aria-hidden="true" class="hidden lg:block absolute top-7 left-12 right-12 h-px bg-gradient-to-r from-transparent via-ink-200 dark:via-ink-700 to-transparent"></div>
+
+          <div class="reveal relative">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 dark:from-ink-800 dark:to-ink-900 border border-blue-200 dark:border-ink-700 flex items-center justify-center mb-5 relative z-10 font-mono text-sm font-bold text-blue-600 dark:text-ink-300 shadow-md shadow-blue-500/10">01</div>
+            <h3 class="font-display text-xl font-bold mb-2">Descubrimos</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Una llamada corta para entender qué necesitas y qué resuelve realmente tu problema.</p>
+          </div>
+          <div class="reveal relative">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-violet-100 to-violet-50 dark:from-ink-800 dark:to-ink-900 border border-violet-200 dark:border-ink-700 flex items-center justify-center mb-5 relative z-10 font-mono text-sm font-bold text-violet-600 dark:text-ink-300 shadow-md shadow-violet-500/10">02</div>
+            <h3 class="font-display text-xl font-bold mb-2">Diseñamos</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Prototipo navegable en menos de una semana. Iteramos hasta que encaje.</p>
+          </div>
+          <div class="reveal relative">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-fuchsia-100 to-fuchsia-50 dark:from-ink-800 dark:to-ink-900 border border-fuchsia-200 dark:border-ink-700 flex items-center justify-center mb-5 relative z-10 font-mono text-sm font-bold text-fuchsia-600 dark:text-ink-300 shadow-md shadow-fuchsia-500/10">03</div>
+            <h3 class="font-display text-xl font-bold mb-2">Construimos</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Código limpio, rápido y mantenible. Sin dependencias innecesarias.</p>
+          </div>
+          <div class="reveal relative">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-accent via-violet-500 to-fuchsia-500 flex items-center justify-center mb-5 relative z-10 font-mono text-sm font-bold text-white shadow-lg shadow-fuchsia-500/40">04</div>
+            <h3 class="font-display text-xl font-bold mb-2">Lanzamos</h3>
+            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Desplegamos, medimos y seguimos contigo si necesitas evolucionar el producto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PORTAFOLIO ============ -->
+    <section id="portafolio" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
+          <div class="max-w-2xl">
+            <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 04 — Portafolio</p>
+            <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
+              Nuestros primeros<br/>4 proyectos.
+            </h2>
+          </div>
+          <p class="text-ink-600 dark:text-ink-300 max-w-md">
+            Somos un equipo nuevo y honesto: estos son los proyectos que ya hemos entregado. La calidad no se negocia.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          <!-- Proyecto 1 -->
+          <article class="reveal group cursor-pointer">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-violet-500 via-fuchsia-500 to-orange-400 relative">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
+              <div class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center gap-2 text-xs font-mono text-ink-400 dark:text-ink-500 mb-1">
+                <span>2026</span><span>·</span><span>E-commerce</span>
+              </div>
+              <h3 class="font-display text-xl font-semibold">Tienda de moda con IA</h3>
+              <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">Recomendador personalizado y checkout optimizado. +38% conversión.</p>
+            </div>
+          </article>
+
+          <!-- Proyecto 2 -->
+          <article class="reveal group cursor-pointer">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-ink-900 via-indigo-900 to-accent relative">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
+              <div class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center gap-2 text-xs font-mono text-ink-400 dark:text-ink-500 mb-1">
+                <span>2026</span><span>·</span><span>SaaS</span>
+              </div>
+              <h3 class="font-display text-xl font-semibold">Dashboard analítico</h3>
+              <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">Panel con métricas en tiempo real y alertas inteligentes.</p>
+            </div>
+          </article>
+
+          <!-- Proyecto 3 -->
+          <article class="reveal group cursor-pointer">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 relative">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
+              <div class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center gap-2 text-xs font-mono text-ink-400 dark:text-ink-500 mb-1">
+                <span>2025</span><span>·</span><span>Automatización</span>
+              </div>
+              <h3 class="font-display text-xl font-semibold">Pipeline de leads</h3>
+              <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">Captura, califica y enruta leads sin intervención manual.</p>
+            </div>
+          </article>
+
+          <!-- Proyecto 4 -->
+          <article class="reveal group cursor-pointer">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-rose-400 via-pink-500 to-red-500 relative">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
+              <div class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center gap-2 text-xs font-mono text-ink-400 dark:text-ink-500 mb-1">
+                <span>2025</span><span>·</span><span>Branding</span>
+              </div>
+              <h3 class="font-display text-xl font-semibold">Web para estudio creativo</h3>
+              <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">Identidad visual y site con animaciones scroll-driven.</p>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="reveal mt-10 text-sm text-ink-500 dark:text-ink-400 font-mono">
+          // Sustituye los títulos y los degradados por capturas reales de tus 4 proyectos en /assets.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
+      <div class="max-w-4xl mx-auto">
+        <div class="reveal max-w-2xl mb-12">
+          <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 05 — FAQ</p>
+          <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
+            Preguntas frecuentes.
+          </h2>
+        </div>
+
+        <div class="reveal">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Cuánto tarda un proyecto desde cero?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner"><div>
+              Depende del alcance. Una landing como esta toma entre 1 y 2 semanas. Una web con catálogo o dashboard 3–5 semanas. En la llamada inicial te damos un plazo concreto y lo cumplimos.
+            </div></div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Trabajan con clientes fuera de Chile y Argentina?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner"><div>
+              Sí. Trabajamos 100% remoto. Aceptamos pagos en pesos chilenos, pesos argentinos, dólares y transferencia internacional. La diferencia horaria con la mayoría de Latam y España no genera fricción.
+            </div></div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Qué incluye el mantenimiento mensual?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner"><div>
+              Backups semanales, actualizaciones de seguridad, cambios menores de texto e imágenes, monitoreo de uptime y soporte prioritario por WhatsApp. Pensado para que no tengas que preocuparte por tu web después del lanzamiento.
+            </div></div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Realmente usan IA para construir las webs?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner"><div>
+              Sí, usamos Claude y otros modelos de IA como copilotos para acelerar partes del trabajo: generación de copy, código repetitivo, análisis de datos y pruebas. La toma de decisiones, el diseño y la arquitectura los hacemos nosotros — la IA es la herramienta, no el sustituto.
+            </div></div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿La web es mía al 100%?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner"><div>
+              Totalmente. Te entregamos el código, las cuentas (dominio, hosting, analítica) y la documentación. Si en algún momento decides trabajar con otra persona, no hay ataduras.
+            </div></div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Y si después necesito agregar algo nuevo?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner"><div>
+              Lo hablamos. Si está cubierto por tu plan de mantenimiento, va incluido. Si es algo más grande (una sección nueva, una integración), te pasamos presupuesto fijo antes de empezar.
+            </div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACTO ============ -->
+    <section id="contacto" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div class="reveal">
+            <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 06 — Contacto</p>
+            <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
+              Cuéntanos tu idea.
+            </h2>
+            <p class="mt-4 text-lg text-ink-600 dark:text-ink-300 max-w-md">
+              Respondemos en menos de 24 horas. Sin compromiso, sin plantillas de venta.
+            </p>
+
+            <div class="mt-10 space-y-5">
+              <a href="mailto:hola@niduscode.com" class="flex items-start gap-4 group">
+                <div class="w-10 h-10 rounded-lg border border-ink-200 dark:border-ink-700 flex items-center justify-center flex-shrink-0 group-hover:border-accent transition-colors">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6l-10 7L2 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400">Email</div>
+                  <div class="font-medium group-hover:text-accent transition-colors">hola@niduscode.com</div>
+                </div>
+              </a>
+
+              <a href="https://wa.me/56000000000" target="_blank" rel="noopener" class="flex items-start gap-4 group">
+                <div class="w-10 h-10 rounded-lg border border-ink-200 dark:border-ink-700 flex items-center justify-center flex-shrink-0 group-hover:border-accent transition-colors">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400">WhatsApp</div>
+                  <div class="font-medium group-hover:text-accent transition-colors">[+56 / +54 TU NÚMERO AQUÍ]</div>
+                </div>
+              </a>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg border border-ink-200 dark:border-ink-700 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400">Ubicación</div>
+                  <div class="font-medium">Chile · Argentina · 100% remoto</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulario Netlify -->
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            class="reveal p-6 sm:p-8 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 space-y-5"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="hidden">
+              <label>No rellenar: <input name="bot-field" /></label>
+            </p>
+
+            <div>
+              <label for="nombre" class="block text-sm font-medium mb-2">Nombre</label>
+              <input
+                type="text" id="nombre" name="nombre" required
+                placeholder="Tu nombre"
+                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">Email</label>
+              <input
+                type="email" id="email" name="email" required
+                placeholder="tu@email.com"
+                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+              />
+            </div>
+
+            <div>
+              <label for="servicio" class="block text-sm font-medium mb-2">¿Qué te interesa?</label>
+              <select
+                id="servicio" name="servicio"
+                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+              >
+                <option value="desarrollo">Desarrollo con IA</option>
+                <option value="automatizacion">Automatización</option>
+                <option value="optimizacion">Optimización</option>
+                <option value="otro">Otro / No estoy seguro</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="mensaje" class="block text-sm font-medium mb-2">Mensaje</label>
+              <textarea
+                id="mensaje" name="mensaje" rows="4" required
+                placeholder="Cuéntanos brevemente tu proyecto..."
+                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="btn-primary w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-ink-900 dark:bg-white text-white dark:text-ink-900 font-medium hover:-translate-y-0.5 transition-transform"
+            >
+              Enviar mensaje
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+
+            <p class="text-xs text-ink-500 dark:text-ink-400 text-center">
+              Al enviar aceptas que te contactemos por email para responder a tu consulta.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="border-t border-ink-100 dark:border-ink-800 px-6 lg:px-8 py-12">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-2.5 mb-4">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-accent via-violet-500 to-fuchsia-500 text-white font-display font-bold text-sm">N</span>
+            <span class="font-display font-semibold tracking-tight text-lg">NidusCode</span>
+          </div>
+          <p class="text-sm text-ink-600 dark:text-ink-300 max-w-sm">
+            Desde Chile y Argentina construimos productos digitales con IA, automatización y mucho criterio.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-display font-semibold text-sm mb-4">Navegación</h4>
+          <ul class="space-y-2 text-sm text-ink-600 dark:text-ink-300">
+            <li><a href="#servicios" class="hover:text-ink-900 dark:hover:text-white transition-colors">Servicios</a></li>
+            <li><a href="#kits" class="hover:text-ink-900 dark:hover:text-white transition-colors">Stack</a></li>
+            <li><a href="#portafolio" class="hover:text-ink-900 dark:hover:text-white transition-colors">Portafolio</a></li>
+            <li><a href="#proceso" class="hover:text-ink-900 dark:hover:text-white transition-colors">Proceso</a></li>
+            <li><a href="#faq" class="hover:text-ink-900 dark:hover:text-white transition-colors">FAQ</a></li>
+            <li><a href="#contacto" class="hover:text-ink-900 dark:hover:text-white transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-semibold text-sm mb-4">Contacto</h4>
+          <ul class="space-y-2 text-sm text-ink-600 dark:text-ink-300">
+            <li><a href="mailto:hola@niduscode.com" class="hover:text-ink-900 dark:hover:text-white transition-colors">hola@niduscode.com</a></li>
+            <li><a href="#" class="hover:text-ink-900 dark:hover:text-white transition-colors">LinkedIn</a></li>
+            <li><a href="#" class="hover:text-ink-900 dark:hover:text-white transition-colors">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-ink-100 dark:border-ink-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-xs font-mono text-ink-500 dark:text-ink-400">
+          © <span id="year"></span> NidusCode · Chile & Argentina. Hecho con código, café y un poco de IA.
+        </p>
+        <p class="text-xs font-mono text-ink-400 dark:text-ink-500">v1.1 </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
