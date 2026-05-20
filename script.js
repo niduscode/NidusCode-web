@@ -130,6 +130,57 @@
     });
   });
 
+  // ===== Lightbox / galería de portafolio =====
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    const lbImg = lightbox.querySelector('.lb-img');
+    const lbTitle = lightbox.querySelector('.lb-title');
+    const lbCounter = lightbox.querySelector('.lb-counter');
+    const lbClose = lightbox.querySelector('.lb-close');
+    const lbPrev = lightbox.querySelector('.lb-prev');
+    const lbNext = lightbox.querySelector('.lb-next');
+    let gallery = [];
+    let idx = 0;
+
+    const show = (i) => {
+      if (!gallery.length) return;
+      idx = (i + gallery.length) % gallery.length;
+      lbImg.src = gallery[idx];
+      lbCounter.textContent = (idx + 1) + ' / ' + gallery.length;
+    };
+    const openLb = (images, title) => {
+      gallery = images;
+      lbTitle.textContent = title;
+      lightbox.classList.toggle('single', gallery.length <= 1);
+      show(0);
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeLb = () => {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('.portfolio-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const imgs = (btn.dataset.images || '').split('|').filter(Boolean);
+        if (imgs.length) openLb(imgs, btn.dataset.title || '');
+      });
+    });
+    lbClose.addEventListener('click', closeLb);
+    lbPrev.addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
+    lbNext.addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+      else if (e.key === 'ArrowRight') show(idx + 1);
+    });
+  }
+
   // ===== Botón flotante WhatsApp =====
   const waFloat = document.getElementById('waFloat');
   const waToggle = document.getElementById('waToggle');

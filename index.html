@@ -499,25 +499,32 @@
           <div class="max-w-2xl">
             <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 04 — Portafolio</p>
             <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
-              Nuestros primeros<br/>4 proyectos.
+              Nuestros proyectos.
             </h2>
           </div>
           <p class="text-ink-600 dark:text-ink-300 max-w-md">
-            Somos un equipo nuevo y honesto: estos son los proyectos que ya hemos entregado. La calidad no se negocia.
+            Somos un equipo nuevo y honesto: estos son los proyectos que ya hemos entregado. Toca cualquiera para ver la galería completa.
           </p>
         </div>
 
-        <div class="grid sm:grid-cols-2 gap-6">
-          <!-- Proyecto 1 — La Arboleda (real) -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Proyecto 1 — La Arboleda -->
           <article class="reveal group">
-            <a href="#" class="block aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800">
-              <img src="assets/Arboleda.jpg" alt="Web del proyecto La Arboleda, laboratorio de biodiversidad"
+            <button type="button"
+              class="portfolio-trigger block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
+              data-title="La Arboleda"
+              data-images="assets/arboleda/Arboleda1.jpg|assets/arboleda/Arboleda2.jpg|assets/arboleda/Arboleda3.jpg">
+              <img src="assets/arboleda/Arboleda1.jpg" alt="Web del proyecto La Arboleda, laboratorio de biodiversidad"
                    loading="lazy" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
               <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+              <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur text-white text-[10px] font-mono">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                3 capturas
+              </span>
               <div class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/95 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all shadow-lg">
-                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10" stroke-linecap="round"/></svg>
+                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-            </a>
+            </button>
             <div class="mt-4">
               <div class="flex items-center gap-2 text-xs font-mono text-ink-400 dark:text-ink-500 mb-1">
                 <span>2025</span><span>·</span><span>Educación · Naturaleza</span>
@@ -527,16 +534,23 @@
             </div>
           </article>
 
-          <!-- Proyecto 2 — Grupo Scout Zenta (real) -->
+          <!-- Proyecto 2 — Grupo Scout Zenta -->
           <article class="reveal group">
-            <a href="#" class="block aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800">
-              <img src="assets/Zenta.PNG" alt="Web institucional del Grupo Scout Zenta"
+            <button type="button"
+              class="portfolio-trigger block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
+              data-title="Grupo Scout Zenta"
+              data-images="assets/zenta/Zenta1.jpg|assets/zenta/Zenta2.jpg|assets/zenta/Zenta3.jpg">
+              <img src="assets/zenta/Zenta1.jpg" alt="Web institucional del Grupo Scout Zenta"
                    loading="lazy" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
               <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+              <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur text-white text-[10px] font-mono">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                3 capturas
+              </span>
               <div class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/95 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all shadow-lg">
-                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10" stroke-linecap="round"/></svg>
+                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-            </a>
+            </button>
             <div class="mt-4">
               <div class="flex items-center gap-2 text-xs font-mono text-ink-400 dark:text-ink-500 mb-1">
                 <span>2026</span><span>·</span><span>Institucional</span>
@@ -546,24 +560,33 @@
             </div>
           </article>
 
-          <!-- Proyecto 3 — pendiente de captura -->
+          <!-- Proyecto 3 — Gregory Hernández -->
           <article class="reveal group">
-            <div class="aspect-[4/3] rounded-2xl overflow-hidden relative border border-dashed border-ink-200 dark:border-ink-700 bg-gradient-to-br from-ink-50 to-ink-100/50 dark:from-ink-800/40 dark:to-ink-900/40 flex flex-col items-center justify-center gap-3">
-              <div class="w-12 h-12 rounded-xl border border-ink-200 dark:border-ink-700 flex items-center justify-center">
-                <svg class="w-5 h-5 text-ink-400 dark:text-ink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <button type="button"
+              class="portfolio-trigger block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
+              data-title="Gregory Hernández"
+              data-images="assets/gregory/IG1.jpg|assets/gregory/IG2.jpg">
+              <img src="assets/gregory/IG1.jpg" alt="Landing de marca personal de Gregory Hernández"
+                   loading="lazy" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+              <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur text-white text-[10px] font-mono">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                2 capturas
+              </span>
+              <div class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/95 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all shadow-lg">
+                <svg class="w-4 h-4 text-ink-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <span class="text-xs font-mono uppercase tracking-widest text-ink-400 dark:text-ink-500">Próximamente</span>
-            </div>
+            </button>
             <div class="mt-4">
               <div class="flex items-center gap-2 text-xs font-mono text-ink-400 dark:text-ink-500 mb-1">
-                <span>Proyecto · En camino</span>
+                <span>2026</span><span>·</span><span>Marca personal</span>
               </div>
-              <h3 class="font-display text-xl font-semibold text-ink-400 dark:text-ink-500">Captura en preparación</h3>
-              <p class="text-sm text-ink-500 dark:text-ink-400 mt-1">Pronto sumamos este proyecto a la galería.</p>
+              <h3 class="font-display text-xl font-semibold">Gregory Hernández</h3>
+              <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">Landing de marca personal para un estilista y creador de contenido. Presenta su método de trabajo, su comunidad y sus formaciones.</p>
             </div>
           </article>
 
-          <!-- Proyecto 4 — pendiente de captura -->
+          <!-- Proyecto 4 — pendiente -->
           <article class="reveal group">
             <div class="aspect-[4/3] rounded-2xl overflow-hidden relative border border-dashed border-ink-200 dark:border-ink-700 bg-gradient-to-br from-ink-50 to-ink-100/50 dark:from-ink-800/40 dark:to-ink-900/40 flex flex-col items-center justify-center gap-3">
               <div class="w-12 h-12 rounded-xl border border-ink-200 dark:border-ink-700 flex items-center justify-center">
@@ -829,6 +852,26 @@
       </div>
     </div>
   </footer>
+
+  <!-- ============ LIGHTBOX / GALERÍA ============ -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galería del proyecto">
+    <button class="lb-btn lb-close" aria-label="Cerrar galería">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+    <button class="lb-btn lb-prev" aria-label="Imagen anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="lb-btn lb-next" aria-label="Imagen siguiente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <figure class="lb-stage">
+      <img class="lb-img" src="" alt="Captura del proyecto" />
+      <figcaption class="lb-cap">
+        <span class="lb-title"></span>
+        <span class="lb-counter"></span>
+      </figcaption>
+    </figure>
+  </div>
 
   <!-- ============ BOTÓN FLOTANTE WHATSAPP ============ -->
   <div id="waFloat" class="wa-float">
