@@ -130,6 +130,36 @@
     });
   });
 
+  // ===== Botón flotante WhatsApp =====
+  const waFloat = document.getElementById('waFloat');
+  const waToggle = document.getElementById('waToggle');
+  if (waFloat && waToggle) {
+    waToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = waFloat.classList.toggle('open');
+      waToggle.setAttribute('aria-expanded', String(isOpen));
+      waToggle.setAttribute('aria-label', isOpen ? 'Cerrar WhatsApp' : 'Contactar por WhatsApp');
+    });
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (!waFloat.contains(e.target)) {
+        waFloat.classList.remove('open');
+        waToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        waFloat.classList.remove('open');
+        waToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    // Cerrar al elegir un contacto
+    waFloat.querySelectorAll('.wa-option').forEach((opt) => {
+      opt.addEventListener('click', () => waFloat.classList.remove('open'));
+    });
+  }
+
   // ===== Parallax sutil en aurora del hero =====
   const aurora = document.querySelector('.aurora');
   if (aurora && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

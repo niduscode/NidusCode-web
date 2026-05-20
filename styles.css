@@ -578,6 +578,95 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 }
 .logo-mark:hover::after { transform: translateX(100%); }
 
+/* ===== Botón flotante WhatsApp ===== */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.wa-button {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px -4px rgba(37, 211, 102, 0.5);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wa-button:hover { transform: scale(1.08); }
+.wa-button svg { width: 32px; height: 32px; }
+.wa-icon-close { display: none; width: 26px; height: 26px; }
+.wa-float.open .wa-icon-open { display: none; }
+.wa-float.open .wa-icon-close { display: block; }
+
+/* Anillo de pulso */
+.wa-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #25d366;
+  animation: waPulse 2.6s ease-out infinite;
+}
+.wa-float.open .wa-button::after { animation: none; opacity: 0; }
+@keyframes waPulse {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* Opciones desplegables */
+.wa-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  transform-origin: bottom right;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wa-float.open .wa-options {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.wa-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--c-bg-elevated);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-lifted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--c-fg);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.wa-option:hover {
+  transform: translateX(-4px);
+  border-color: #25d366;
+}
+.wa-option-flag { font-size: 1rem; }
+
+@media (max-width: 640px) {
+  .wa-float { bottom: 18px; right: 18px; }
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
