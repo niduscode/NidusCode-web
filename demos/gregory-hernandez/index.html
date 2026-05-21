@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gregory Hernández | Formador de Barberos · Método Corte Óseo®</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variables ── */
+    :root {
+      --black:        #0A0A0A;
+      --surface:      #161310;
+      --surface-2:    #1F1B16;
+      --surface-3:    #2A2520;
+      --border:       rgba(255, 255, 255, 0.08);
+      --border-strong:rgba(255, 255, 255, 0.18);
+      --text:         #FFFFFF;
+      --text-muted:   rgba(255, 255, 255, 0.65);
+      --text-dim:     rgba(255, 255, 255, 0.4);
+      --gold:         #FBE696;
+      --gold-warm:    #F5E0A0;
+      --gold-dark:    #C9A85C;
+      --gold-glow:    rgba(251, 230, 150, 0.22);
+      --tiktok-pink:  #FE2C55;
+      --tiktok-cyan:  #25F4EE;
+      --shadow:       0 4px 30px rgba(0,0,0,0.6);
+      --shadow-lg:    0 24px 80px rgba(0,0,0,0.5);
+      --shadow-gold:  0 8px 40px rgba(251,230,150,0.18);
+      --radius:       16px;
+      --radius-lg:    24px;
+      --transition:   0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+    /* ── Utility ── */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 120px 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+    .section-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .gold-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 24px 0 36px;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--black);
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 24px var(--gold-glow);
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--gold-warm);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px var(--gold-glow);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1.5px solid var(--border-strong);
+      color: var(--text);
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      background: transparent;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--black) !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      transition: 0.3s !important;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: var(--gold-warm); transform: translateY(-1px); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    /* Mobile menu */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: color 0.3s;
+    }
+    .nav-mobile a:hover { color: var(--gold); }
+    .nav-mobile-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 80px;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -300px; right: -200px;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(251,230,150,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -200px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(251,230,150,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-headline {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(48px, 7vw, 92px);
+      font-weight: 800;
+      line-height: 0.95;
+      color: var(--text);
+      margin-bottom: 32px;
+      text-transform: uppercase;
+      letter-spacing: -1.5px;
+    }
+    .hero-headline span { color: var(--gold); }
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+    .hero-community {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 44px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .community-number {
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .community-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      line-height: 1.4;
+    }
+    .community-label strong { display: block; color: var(--text); font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .hero-separator { width: 1px; height: 50px; background: var(--border); }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ── Social Card (Instagram + TikTok shared base) ── */
+    .social-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .social-card-header { padding: 28px 28px 24px; }
+    .social-top {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .social-avatar-wrap { position: relative; flex-shrink: 0; }
+    .social-avatar-ring {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      padding: 3px;
+      animation: rotateRing 6s linear infinite;
+    }
+    .social-card.ig .social-avatar-ring {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+    .social-card.tt .social-avatar-ring {
+      background: linear-gradient(45deg, var(--tiktok-cyan), #fff, var(--tiktok-pink));
+    }
+    @keyframes rotateRing {
+      from { filter: hue-rotate(0deg); }
+      to   { filter: hue-rotate(360deg); }
+    }
+    .social-avatar-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid var(--surface);
+      object-fit: cover;
+    }
+    .social-profile-info { flex: 1; min-width: 0; }
+    .social-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .social-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .social-verified {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .social-card.ig .social-verified {
+      background: linear-gradient(135deg, #1877F2, #0D6EFD);
+      box-shadow: 0 2px 10px rgba(24, 119, 242, 0.4);
+    }
+    .social-card.tt .social-verified {
+      background: linear-gradient(135deg, var(--tiktok-cyan), var(--tiktok-pink));
+      box-shadow: 0 2px 10px rgba(254, 44, 85, 0.4);
+    }
+    .social-verified svg { width: 10px; height: 10px; fill: white; }
+    .social-handle {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+    .social-category {
+      font-size: 11px;
+      color: var(--gold);
+      margin-top: 6px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .social-platform-tag {
+      position: absolute;
+      top: 20px; right: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-3);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .social-platform-tag svg { width: 12px; height: 12px; }
+
+    .social-stats {
+      display: flex;
+      background: var(--surface-2);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+    }
+    .social-stat {
+      flex: 1;
+      text-align: center;
+      padding: 14px 8px;
+    }
+    .social-stat + .social-stat { border-left: 1px solid var(--border); }
+    .social-stat-num {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+      line-height: 1.2;
+    }
+    .social-stat-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .social-bio {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .social-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    .social-btn {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      border: none;
+    }
+    .social-btn-primary {
+      background: var(--gold);
+      color: var(--black);
+    }
+    .social-btn-primary:hover { background: var(--gold-warm); }
+    .social-btn-secondary {
+      background: var(--surface-3);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .social-btn-secondary:hover { background: var(--surface-2); border-color: var(--gold); }
+    .social-btn-tiktok {
+      background: var(--tiktok-pink);
+      color: var(--text);
+    }
+    .social-btn-tiktok:hover { background: #ff4769; }
+
+    /* Mini grid */
+    .social-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .social-mini-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      transition: 0.3s;
+    }
+    .social-mini-grid img:hover { opacity: 0.7; }
+
+    /* TikTok specific - video thumbnails grid with play icons */
+    .social-mini-grid.tiktok .grid-item {
+      position: relative;
+      aspect-ratio: 1;
+      background: var(--surface-3);
+      overflow: hidden;
+    }
+    .social-mini-grid.tiktok .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .social-mini-grid.tiktok .play-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.6));
+      color: white;
+      font-size: 22px;
+    }
+
+    /* ── TikTok Section ── */
+    #tiktok-section {
+      background: linear-gradient(180deg, var(--black) 0%, #0F0D0A 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #tiktok-section::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(254, 44, 85, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #tiktok-section::after {
+      content: '';
+      position: absolute;
+      bottom: -200px; left: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(37, 244, 238, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .tiktok-inner {
+      display: grid;
+      grid-template-columns: 440px 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .tiktok-text { max-width: 560px; }
+    .tt-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .tt-eyebrow svg { width: 14px; height: 14px; }
+    .tt-eyebrow .pink { color: var(--tiktok-pink); }
+
+    /* ── About ── */
+    #sobre {
+      background: var(--black);
+      position: relative;
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .about-img-main {
+      grid-column: 1 / -1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--border);
+    }
+    .about-img-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .about-img-main:hover img { transform: scale(1.05); }
+    .about-img-small {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 1;
+      border: 1px solid var(--border);
+    }
+    .about-img-small img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .about-img-small:hover img { transform: scale(1.05); }
+    .about-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 28px;
+    }
+    .about-text strong { color: var(--text); font-weight: 600; }
+    .expertise-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .expertise-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: 0.3s;
+    }
+    .expertise-pill:hover { border-color: var(--gold); background: var(--surface-2); }
+    .expertise-pill .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+    .about-highlight {
+      background: linear-gradient(135deg, var(--surface), var(--surface-2));
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 24px 28px;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .about-highlight::before {
+      content: '“';
+      font-size: 56px;
+      color: var(--gold);
+      line-height: 0;
+      position: relative;
+      top: 18px;
+      margin-right: 4px;
+      font-family: Georgia, serif;
+    }
+
+    /* ── Services ── */
+    #servicios {
+      background: linear-gradient(180deg, var(--black) 0%, #0E0C0A 100%);
+      position: relative;
+    }
+    .services-header { text-align: center; max-width: 700px; margin: 0 auto 72px; }
+    .services-header .gold-line { margin: 24px auto 36px; }
+    .services-header p { color: var(--text-muted); font-size: 16px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+      box-shadow: var(--shadow-gold);
+    }
+    .service-card.featured {
+      background: linear-gradient(180deg, #1E1A14 0%, #2A2418 100%);
+      border-color: var(--gold-dark);
+      box-shadow: var(--shadow-gold);
+    }
+    .service-card.featured::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(251,230,150,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .service-card-top {
+      padding: 36px 32px 28px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .service-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .service-card.featured .service-badge {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+    .service-name {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+    .service-card.featured .service-name { color: var(--gold); }
+    .service-tagline {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .service-card.featured .service-tagline { color: var(--text-muted); }
+    .service-icon {
+      position: absolute;
+      top: 32px; right: 32px;
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      border: 1px solid var(--border);
+    }
+    .service-card.featured .service-icon {
+      background: rgba(251,230,150,0.12);
+      border-color: rgba(251,230,150,0.25);
+    }
+    .service-card-body { padding: 28px 32px 32px; flex: 1; display: flex; flex-direction: column; }
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .service-features { list-style: none; margin-bottom: 32px; }
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .service-features li:last-child { border-bottom: none; }
+    .service-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+    .service-btn {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .service-btn:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+    .service-card.featured .service-btn {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+    .service-card.featured .service-btn:hover {
+      background: var(--gold-warm);
+    }
+    .services-cta {
+      text-align: center;
+      margin-top: 56px;
+    }
+    .services-cta p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Gallery ── */
+    #galeria { background: var(--black); }
+    .gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .gallery-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: gap 0.3s;
+    }
+    .gallery-link:hover { gap: 14px; }
+    .gallery-grid {
+      columns: 4;
+      column-gap: 12px;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid var(--border);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease, opacity 0.4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); opacity: 0.9; }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-corner {
+      position: absolute;
+      top: 12px; left: 12px;
+      width: 32px; height: 32px;
+      background: var(--gold);
+      color: var(--black);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-corner { opacity: 1; }
+    .gallery-note {
+      background: var(--surface);
+      border: 1px dashed var(--gold-dark);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      color: var(--text-muted);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .gallery-note span { color: var(--gold); font-weight: 700; }
+
+    /* ── Stats ── */
+    #estadisticas {
+      background: linear-gradient(135deg, #0F0D0A 0%, var(--black) 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    #estadisticas::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1000px; height: 400px;
+      background: radial-gradient(ellipse, rgba(251,230,150,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 32px 20px;
+      position: relative;
+    }
+    .stat-item + .stat-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 30%; bottom: 30%;
+      width: 1px;
+      background: var(--border);
+    }
+    .stat-number {
+      font-size: clamp(40px, 4vw, 56px);
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+    .stat-suffix { font-size: 0.5em; color: var(--gold); }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .stat-platform {
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    /* ── Method ── */
+    #metodo {
+      background: var(--black);
+      position: relative;
+    }
+    .method-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .method-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .method-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .method-image:hover img { transform: scale(1.05); }
+    .method-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.4) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .method-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--black);
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .method-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 32px;
+    }
+    .method-text strong { color: var(--text); font-weight: 600; }
+    .method-points {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .method-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: 0.3s;
+    }
+    .method-point:hover {
+      transform: translateX(8px);
+      border-color: var(--gold);
+      background: var(--surface-2);
+    }
+    .method-point-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+    .method-point-text h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .method-point-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Contact ── */
+    #contacto {
+      background: linear-gradient(180deg, var(--black) 0%, #0E0C0A 100%);
+    }
+    .contact-header {
+      max-width: 700px;
+      margin-bottom: 64px;
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      transition: 0.3s;
+    }
+    .contact-item:hover .contact-icon {
+      background: var(--gold);
+      border-color: var(--gold);
+      transform: scale(1.05);
+    }
+    .contact-item-text h4 {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .contact-item-text p, .contact-item-text a {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .contact-item-text a:hover { color: var(--gold); }
+    .contact-socials { margin-top: 36px; }
+    .contact-socials h3 {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .social-links { display: flex; gap: 12px; }
+    .social-link {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      color: var(--text);
+    }
+    .social-link:hover {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+    .contact-booking {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-booking::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(251,230,150,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-booking-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .contact-booking h3 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .contact-booking p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .booking-btn {
+      display: block;
+      text-align: center;
+      background: var(--gold);
+      color: var(--black);
+      padding: 18px 24px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 24px var(--gold-glow);
+    }
+    .booking-btn:hover {
+      background: var(--gold-warm);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px var(--gold-glow);
+    }
+    .booking-sub {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .courses-btn {
+      display: block;
+      text-align: center;
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      margin-top: 14px;
+    }
+    .courses-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--black);
+      padding: 50px 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-brand {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .footer-brand span { color: var(--gold); }
+    .footer-copy {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .footer-ig {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .footer-ig:hover { color: var(--gold); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 60px; }
+      .social-card { max-width: 440px; }
+      .tiktok-inner { grid-template-columns: 1fr; gap: 60px; }
+      .tiktok-inner .social-card { margin: 0 auto; }
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .services-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .stat-item:nth-child(4)::before { display: none; }
+      .method-inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .gallery-grid { columns: 3; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 80px 0; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-community { gap: 20px; }
+      .community-number { font-size: 36px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(3)::before { display: none; }
+      .gallery-grid { columns: 2; }
+      .gallery-header { flex-direction: column; align-items: flex-start; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-outline { justify-content: center; width: 100%; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .contact-booking { padding: 32px 22px; }
+      .hero-headline { font-size: 44px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Mobile Menu -->
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#sobre" onclick="toggleMenu()">Sobre mí</a>
+  <a href="#servicios" onclick="toggleMenu()">Servicios</a>
+  <a href="#galeria" onclick="toggleMenu()">Galería</a>
+  <a href="#metodo" onclick="toggleMenu()">Método</a>
+  <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#hero">Gregory <span>Hernández</span></a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre mí</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#metodo">Método</a></li>
+        <li><a href="#contacto" class="nav-cta">Agendar</a></li>
+      </ul>
+      <div class="nav-hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <p class="eyebrow reveal">Estilo y Excelencia · Chile</p>
+        <h1 class="hero-headline reveal reveal-delay-1">
+          Donde el corte<br>
+          se convierte<br>
+          en <span>autoestima.</span>
+        </h1>
+        <p class="hero-sub reveal reveal-delay-2">
+          Barbero profesional y formador con el <strong>Método Corte Óseo®</strong>. Certifico a los mejores profesionales del sector en grupos reducidos para garantizar una enseñanza 1:1.
+        </p>
+        <div class="hero-community reveal reveal-delay-3">
+          <div>
+            <div class="community-number">342K+</div>
+            <div class="community-label">
+              <strong>Comunidad total</strong>
+              Instagram + TikTok
+            </div>
+          </div>
+          <div class="hero-separator"></div>
+          <div>
+            <div class="community-number">12+</div>
+            <div class="community-label">
+              <strong>Grupos certificados</strong>
+              de formación
+            </div>
+          </div>
+        </div>
+        <div class="hero-actions reveal reveal-delay-4">
+          <a href="https://reservasbh.simplifies.net/?id=28&business=1&utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="btn-primary">
+            ✂️ Reservar Turno
+          </a>
+          <a href="https://barberiahernandez.com/cursos" target="_blank" class="btn-outline">
+            🎓 Ver Cursos
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Instagram Card -->
+      <div class="social-card ig reveal reveal-delay-2">
+        <div class="social-platform-tag">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </div>
+        <div class="social-card-header">
+          <div class="social-top">
+            <div class="social-avatar-wrap">
+              <div class="social-avatar-ring">
+                <img src="assets/instagram/profile.jpg" alt="Gregory Hernández" onerror="this.src='https://ui-avatars.com/api/?name=Gregory+Hernandez&background=FBE696&color=000&size=200'">
+              </div>
+            </div>
+            <div class="social-profile-info">
+              <div class="social-name-row">
+                <span class="social-name">Gregory Hernández</span>
+                <div class="social-verified">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                </div>
+              </div>
+              <div class="social-handle">@gregoryh.cl</div>
+              <div class="social-category">Estructura Capilar</div>
+            </div>
+          </div>
+
+          <div class="social-stats">
+            <div class="social-stat">
+              <span class="social-stat-num">132</span>
+              <span class="social-stat-label">Posts</span>
+            </div>
+            <div class="social-stat">
+              <span class="social-stat-num">5,638</span>
+              <span class="social-stat-label">Seguidores</span>
+            </div>
+            <div class="social-stat">
+              <span class="social-stat-num">322</span>
+              <span class="social-stat-label">Siguiendo</span>
+            </div>
+          </div>
+
+          <div class="social-bio">
+            🎓 Formador de Barberos<br>
+            ✂️ Método Corte Óseo®<br>
+            🧠 Auto Estima tú cabello<br>
+            📔 Agendemos tu espacio 👇🏻
+          </div>
+
+          <div class="social-buttons">
+            <a href="https://reservasbh.simplifies.net/?id=28&business=1&utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="social-btn social-btn-primary">Contactar</a>
+            <a href="https://instagram.com/gregoryh.cl" target="_blank" class="social-btn social-btn-secondary">Seguir</a>
+          </div>
+        </div>
+
+        <div class="social-mini-grid">
+          <img src="assets/instagram/post-1.jpg" alt="">
+          <img src="assets/instagram/post-2.jpg" alt="">
+          <img src="assets/instagram/post-3.jpg" alt="">
+          <img src="assets/instagram/post-9.jpg" alt="">
+          <img src="assets/instagram/post-7.jpg" alt="">
+          <img src="assets/instagram/post-8.jpg" alt="">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TikTok Section -->
+<section id="tiktok-section">
+  <div class="container">
+    <div class="tiktok-inner">
+
+      <!-- Left: TikTok Card -->
+      <div class="social-card tt reveal">
+        <div class="social-platform-tag">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.94a8.2 8.2 0 0 0 4.78 1.52V7.03a4.85 4.85 0 0 1-1.01-.34z"/></svg>
+          TikTok
+        </div>
+        <div class="social-card-header">
+          <div class="social-top">
+            <div class="social-avatar-wrap">
+              <div class="social-avatar-ring">
+                <img src="assets/instagram/tiktok-profile.jpg" alt="Gregory Hernández TikTok" onerror="this.src='assets/instagram/profile.jpg'">
+              </div>
+            </div>
+            <div class="social-profile-info">
+              <div class="social-name-row">
+                <span class="social-name">Gregory Hernández</span>
+                <div class="social-verified">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                </div>
+              </div>
+              <div class="social-handle">@gregory_hernandez_</div>
+              <div class="social-category">Barbero · Creador de contenido</div>
+            </div>
+          </div>
+
+          <div class="social-stats">
+            <div class="social-stat">
+              <span class="social-stat-num">90</span>
+              <span class="social-stat-label">Siguiendo</span>
+            </div>
+            <div class="social-stat">
+              <span class="social-stat-num">336.9K</span>
+              <span class="social-stat-label">Seguidores</span>
+            </div>
+            <div class="social-stat">
+              <span class="social-stat-num">6.9M</span>
+              <span class="social-stat-label">Likes</span>
+            </div>
+          </div>
+
+          <div class="social-bio">
+            ✂️ Barbero profesional · Formador<br>
+            🎬 Cortes virales y técnicas modernas<br>
+            🇨🇱 Chile · @gregoryh.cl en Instagram<br>
+            🔥 Más de 6.9M de me gusta
+          </div>
+
+          <div class="social-buttons">
+            <a href="https://tiktok.com/@gregory_hernandez_" target="_blank" class="social-btn social-btn-tiktok">Seguir</a>
+            <a href="https://tiktok.com/@gregory_hernandez_" target="_blank" class="social-btn social-btn-secondary">Ver videos</a>
+          </div>
+        </div>
+
+        <div class="social-mini-grid tiktok">
+          <div class="grid-item">
+            <img src="assets/instagram/post-8.jpg" alt="">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="grid-item">
+            <img src="assets/instagram/post-7.jpg" alt="">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="grid-item">
+            <img src="assets/instagram/post-11.jpg" alt="">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="grid-item">
+            <img src="assets/instagram/post-13.jpg" alt="">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="grid-item">
+            <img src="assets/instagram/post-10.jpg" alt="">
+            <div class="play-icon">▶</div>
+          </div>
+          <div class="grid-item">
+            <img src="assets/instagram/post-9.jpg" alt="">
+            <div class="play-icon">▶</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Text -->
+      <div class="tiktok-text">
+        <div class="tt-eyebrow">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path class="pink" fill="#FE2C55" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.94a8.2 8.2 0 0 0 4.78 1.52V7.03a4.85 4.85 0 0 1-1.01-.34z"/></svg>
+          Reach Viral
+        </div>
+        <h2 class="section-title reveal reveal-delay-1">
+          336K en TikTok.<br>
+          <em>6.9 millones</em><br>
+          de likes.
+        </h2>
+        <div class="gold-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2" style="color: var(--text-muted); font-size: 16px; line-height: 1.9; margin-bottom: 32px;">
+          Mi contenido en TikTok llega a cientos de miles de personas cada semana. Cortes, técnicas, transformaciones reales — y la prueba de que la barbería también se vive viral.
+        </p>
+        <div class="reveal reveal-delay-3" style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="https://tiktok.com/@gregory_hernandez_" target="_blank" class="btn-primary" style="background: var(--tiktok-pink); color: white;">
+            Ver en TikTok →
+          </a>
+          <a href="https://instagram.com/gregoryh.cl" target="_blank" class="btn-outline">
+            También en Instagram
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="sobre" class="section">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-images reveal">
+        <div class="about-img-main">
+          <img src="assets/instagram/post-2.jpg" alt="Gregory Hernández" onerror="this.style.background='var(--surface-2)'">
+        </div>
+        <div class="about-img-small">
+          <img src="assets/instagram/post-9.jpg" alt="Curso Junior" onerror="this.style.background='var(--surface-2)'">
+        </div>
+        <div class="about-img-small">
+          <img src="assets/instagram/post-3.jpg" alt="Grupo sabatino" onerror="this.style.background='var(--surface-2)'">
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="section-label reveal">Sobre mí</span>
+        <h2 class="section-title reveal reveal-delay-1">
+          Barbero.<br>Formador.<br>Creador de<br><em>profesionales.</em>
+        </h2>
+        <div class="gold-line reveal reveal-delay-2"></div>
+        <p class="about-text reveal reveal-delay-2">
+          Soy <strong>Gregory Hernández</strong>, barbero de tiempo completo en <strong>@barberiahernandez.cl</strong> y formador con el método propio <strong>Corte Óseo®</strong>. Trabajo desde <strong>Rudecindo Ortega 1505</strong>, en el corazón del norte de Temuco.
+        </p>
+        <p class="about-text reveal reveal-delay-3">
+          He certificado más de <strong>12 grupos de 11 personas</strong> cada uno. Hoy trabajo con grupos de <strong>3 personas máximo</strong> para ofrecer una experiencia 1:1 real, donde cada alumno sale siendo el mejor de su área.
+        </p>
+        <div class="expertise-grid reveal reveal-delay-3">
+          <span class="expertise-pill"><span class="dot"></span>Formador de Barberos</span>
+          <span class="expertise-pill"><span class="dot"></span>Método Corte Óseo®</span>
+          <span class="expertise-pill"><span class="dot"></span>Colorimetría</span>
+          <span class="expertise-pill"><span class="dot"></span>Rizos Permanentes</span>
+          <span class="expertise-pill"><span class="dot"></span>Estructura Capilar</span>
+          <span class="expertise-pill"><span class="dot"></span>Fades & Degradados</span>
+        </div>
+        <div class="about-highlight reveal reveal-delay-4">
+          Cada corte es una oportunidad de regalar autoestima.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="servicios" class="section">
+  <div class="container">
+    <div class="services-header">
+      <span class="section-label reveal">Formación profesional</span>
+      <h2 class="section-title reveal reveal-delay-1">Tres niveles.<br><em>Un solo objetivo.</em></h2>
+      <div class="gold-line reveal reveal-delay-2"></div>
+      <p class="reveal reveal-delay-2">
+        Grupos reducidos de máximo 3 personas para una formación 1:1 real. Cada nivel te lleva más lejos.
+      </p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Junior -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card-top">
+          <div class="service-icon">✂️</div>
+          <div class="service-badge">Nivel 1</div>
+          <div class="service-name">Junior</div>
+          <div class="service-tagline">Principiante en barbería</div>
+        </div>
+        <div class="service-card-body">
+          <p class="service-desc">
+            El punto de entrada para quienes quieren convertirse en barberos profesionales desde cero. Aprende las bases del corte con el Método Corte Óseo®.
+          </p>
+          <ul class="service-features">
+            <li>Fundamentos del corte masculino</li>
+            <li>Método Corte Óseo® base</li>
+            <li>Técnicas de degradado y fade</li>
+            <li>Grupos de máx. 3 personas</li>
+            <li>Certificación al completar</li>
+          </ul>
+          <a href="https://barberiahernandez.com/cursos" target="_blank" class="service-btn">Ver detalles</a>
+        </div>
+      </div>
+
+      <!-- Senior (featured) -->
+      <div class="service-card featured reveal reveal-delay-2">
+        <div class="service-card-top">
+          <div class="service-icon">🏆</div>
+          <div class="service-badge">Más elegido</div>
+          <div class="service-name">Senior</div>
+          <div class="service-tagline">Perfeccionamiento</div>
+        </div>
+        <div class="service-card-body">
+          <p class="service-desc">
+            Para barberos que ya tienen base y quieren llevar su técnica al siguiente nivel. Cortes complejos, detalles, y el refinamiento del método.
+          </p>
+          <ul class="service-features">
+            <li>Perfeccionamiento de técnica</li>
+            <li>Cortes de alta complejidad</li>
+            <li>Método Corte Óseo® avanzado</li>
+            <li>Grupos de máx. 3 personas</li>
+            <li>Certificación al completar</li>
+          </ul>
+          <a href="https://barberiahernandez.com/cursos" target="_blank" class="service-btn">Ver detalles</a>
+        </div>
+      </div>
+
+      <!-- Master -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-card-top">
+          <div class="service-icon">🎨</div>
+          <div class="service-badge">Nivel 3</div>
+          <div class="service-name">Master</div>
+          <div class="service-tagline">Colorimetría & Rizos</div>
+        </div>
+        <div class="service-card-body">
+          <p class="service-desc">
+            El nivel más alto de especialización: colorimetría profesional y rizos permanentes. Para los que quieren dominar todo el espectro capilar.
+          </p>
+          <ul class="service-features">
+            <li>Colorimetría profesional</li>
+            <li>Rizos permanentes</li>
+            <li>Ondas y texturas avanzadas</li>
+            <li>Grupos de máx. 3 personas</li>
+            <li>Certificación Master</li>
+          </ul>
+          <a href="https://barberiahernandez.com/cursos" target="_blank" class="service-btn">Ver detalles</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="services-cta reveal">
+      <p>¿Quieres más información sobre horarios y disponibilidad?</p>
+      <a href="https://barberiahernandez.com/cursos" target="_blank" class="btn-primary">Ver todos los cursos</a>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="galeria" class="section">
+  <div class="container">
+    <div class="gallery-header">
+      <div>
+        <span class="section-label reveal">Galería</span>
+        <h2 class="section-title reveal reveal-delay-1">El trabajo<br><em>habla solo.</em></h2>
+      </div>
+      <a href="https://instagram.com/gregoryh.cl" target="_blank" class="gallery-link reveal">
+        Ver en Instagram →
+      </a>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <img src="assets/instagram/post-1.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">01</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="assets/instagram/post-2.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">02</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="assets/instagram/post-3.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">03</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <img src="assets/instagram/post-4.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">04</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/instagram/post-5.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">05</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="assets/instagram/post-6.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">06</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="assets/instagram/post-7.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">07</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <img src="assets/instagram/post-8.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">08</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/instagram/post-9.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">09</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="assets/instagram/post-10.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">10</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="assets/instagram/post-11.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">11</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <img src="assets/instagram/post-13.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">12</div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/instagram/post-14.jpg" alt="" loading="lazy">
+        <div class="gallery-corner">13</div>
+        <div class="gallery-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section id="estadisticas">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <span class="stat-number"><span class="counter" data-target="5638">0</span></span>
+        <span class="stat-label">Seguidores<br>Instagram</span>
+        <span class="stat-platform">@gregoryh.cl</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <span class="stat-number"><span class="counter" data-target="337" data-suffix="K">0</span></span>
+        <span class="stat-label">Seguidores<br>TikTok</span>
+        <span class="stat-platform">@gregory_hernandez_</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <span class="stat-number"><span class="counter" data-target="6" data-suffix=".9M">0</span></span>
+        <span class="stat-label">Likes<br>TikTok</span>
+        <span class="stat-platform">Total acumulado</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <span class="stat-number"><span class="counter" data-target="12">0</span><span class="stat-suffix">+</span></span>
+        <span class="stat-label">Grupos<br>Certificados</span>
+        <span class="stat-platform">Formación completa</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-4">
+        <span class="stat-number"><span class="counter" data-target="132">0</span></span>
+        <span class="stat-label">Posts<br>Instagram</span>
+        <span class="stat-platform">Contenido profesional</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method -->
+<section id="metodo" class="section">
+  <div class="container">
+    <div class="method-inner">
+      <div class="method-image reveal">
+        <img src="assets/instagram/post-3.jpg" alt="Método Corte Óseo" onerror="this.style.background='var(--surface-2)'">
+      </div>
+      <div class="method-content">
+        <span class="section-label reveal">El método</span>
+        <h2 class="section-title reveal reveal-delay-1">Método<br><em>Corte Óseo®</em></h2>
+        <div class="gold-line reveal reveal-delay-2"></div>
+        <div class="method-badge reveal reveal-delay-2">
+          ® Marca registrada
+        </div>
+        <p class="method-text reveal reveal-delay-3">
+          El <strong>Método Corte Óseo®</strong> es mi metodología propia de enseñanza y ejecución del corte masculino, desarrollada durante años de práctica y formación. No es un curso más — es un sistema que garantiza resultados.
+        </p>
+        <div class="method-points">
+          <div class="method-point reveal reveal-delay-2">
+            <div class="method-point-icon">🦴</div>
+            <div class="method-point-text">
+              <h4>Estructura ósea</h4>
+              <p>El corte se adapta a la anatomía real de cada cliente, no a un molde genérico.</p>
+            </div>
+          </div>
+          <div class="method-point reveal reveal-delay-3">
+            <div class="method-point-icon">🧠</div>
+            <div class="method-point-text">
+              <h4>Vende autoestima</h4>
+              <p>Cada servicio es una oportunidad de transformar cómo se siente una persona consigo misma.</p>
+            </div>
+          </div>
+          <div class="method-point reveal reveal-delay-4">
+            <div class="method-point-icon">🎓</div>
+            <div class="method-point-text">
+              <h4>Enseñanza 1:1</h4>
+              <p>Grupos de máximo 3 personas para que cada alumno reciba atención personalizada real.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contacto" class="section">
+  <div class="container">
+    <div class="contact-header">
+      <span class="section-label reveal">Contacto</span>
+      <h2 class="section-title reveal reveal-delay-1">Agenda<br><em>tu espacio.</em></h2>
+      <div class="gold-line reveal reveal-delay-2"></div>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <h4>Dirección</h4>
+            <a href="https://maps.app.goo.gl/Zg1rH8ZMz7xsb3n8A" target="_blank">
+              Rudecindo Ortega 1505<br>Referencia: Líder salida norte, Chile
+            </a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-item-text">
+            <h4>Email</h4>
+            <a href="mailto:g43g04ygegory28@gmail.com">g43g04ygegory28@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🎓</div>
+          <div class="contact-item-text">
+            <h4>Cursos y formación</h4>
+            <a href="https://barberiahernandez.com/cursos" target="_blank">barberiahernandez.com/cursos</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🗺️</div>
+          <div class="contact-item-text">
+            <h4>Cómo llegar</h4>
+            <a href="https://maps.app.goo.gl/Zg1rH8ZMz7xsb3n8A" target="_blank">Ver en Google Maps →</a>
+          </div>
+        </div>
+        <div class="contact-socials">
+          <h3>Sígueme</h3>
+          <div class="social-links">
+            <a href="https://instagram.com/gregoryh.cl" target="_blank" class="social-link" title="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://tiktok.com/@gregory_hernandez_" target="_blank" class="social-link" title="TikTok">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.94a8.2 8.2 0 0 0 4.78 1.52V7.03a4.85 4.85 0 0 1-1.01-.34z"/></svg>
+            </a>
+            <a href="https://instagram.com/barberiahernandez.cl" target="_blank" class="social-link" title="Barbería Hernández">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-booking reveal reveal-delay-2">
+        <span class="contact-booking-eyebrow">Reserva online</span>
+        <h3>Reserva tu corte</h3>
+        <p>
+          Agenda tu cita directamente en línea. Elige fecha, hora y servicio en segundos.
+        </p>
+        <a href="https://reservasbh.simplifies.net/?id=28&business=1&utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="booking-btn">
+          📅 Reservar Ahora
+        </a>
+        <p class="booking-sub">Confirmación inmediata</p>
+        <a href="https://barberiahernandez.com/cursos" target="_blank" class="courses-btn">
+          🎓 Ver cursos de formación
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">Gregory <span>Hernández</span></div>
+      <p class="footer-copy">© 2026 · Estructura Capilar · Método Corte Óseo®</p>
+      <a href="https://instagram.com/gregoryh.cl" target="_blank" class="footer-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg>
+        @gregoryh.cl
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+
+  // Intersection Observer (reveal + counters)
+  const counters = new Map();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      const counter = entry.target.querySelector('.counter');
+      if (counter && !counters.get(counter)) {
+        counters.set(counter, true);
+        animateCounter(counter);
+      }
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal, .stat-item').forEach(el => observer.observe(el));
+
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 2000;
+    const start = performance.now();
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = target * ease;
+      let displayed;
+      if (Number.isInteger(target)) {
+        displayed = Math.round(current).toLocaleString('es-CL');
+      } else {
+        displayed = current.toFixed(1);
+      }
+      el.textContent = displayed + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+</script>
+<!-- Capa modo demo · NidusCode (compartida por todas las demos, ver demos/demo-mode.js) -->
+<script src="../demo-mode.js" defer></script>
+</body>
+</html>
