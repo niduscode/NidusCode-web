@@ -107,12 +107,14 @@
     }
   }, true);
 
-  // ---- Bloquear envío de formularios (las demos no tienen backend) ----
+  // ---- Bloquear solo envíos de formulario REALES (sin backend) ----
+  // Si la demo ya maneja el submit (llama a preventDefault), no tocamos nada:
+  // así los formularios internos de una demo (p. ej. un CRM) siguen funcionando.
   document.addEventListener('submit', function (e) {
+    if (e.defaultPrevented) return;
     e.preventDefault();
-    e.stopPropagation();
     flash();
-  }, true);
+  }, false);
 
   // ---- Por si algún botón abre ventanas externas con JS ----
   var _open = window.open;
