@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo completo de las 106 especies de La Arboleda: filtra por origen, tipo y zona del predio.">
+    <title>Especies · La Arboleda</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="images/arboleda-logo.png">
+</head>
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="images/arboleda-logo.png" alt="La Arboleda">
+                <span class="brand-text">La Arboleda</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#mision">Misión</a></li>
+                <li><a href="index.html#mapa">Mapa del predio</a></li>
+                <li><a href="especies.html" class="active">Especies</a></li>
+                <li><a href="reconocimientos.html">Reconocimientos</a></li>
+                <li><a href="index.html#ubicacion">Ubicación</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== HEADER ========== -->
+    <header style="margin-top:75px;padding:4rem 1.5rem 3rem;background:linear-gradient(135deg, var(--color-primary), var(--color-primary-light));color:white;text-align:center;">
+        <span style="display:inline-block;background:rgba(217,142,50,0.2);border:1px solid var(--color-accent);color:var(--color-accent);padding:0.4rem 1.2rem;border-radius:50px;font-size:0.85rem;font-weight:600;letter-spacing:0.5px;margin-bottom:1rem;text-transform:uppercase;">
+            🌿 Catálogo completo
+        </span>
+        <h1 style="color:white;font-size:clamp(2rem,5vw,3.5rem);margin:0 0 1rem;">Especies de La Arboleda</h1>
+        <p style="font-size:1.15rem;opacity:0.9;max-width:700px;margin:0 auto;">
+            Explora las <strong id="speciesCounter">106 especies</strong> que conforman este laboratorio vivo de biodiversidad.
+        </p>
+    </header>
+
+    <!-- ========== FILTROS Y GRID ========== -->
+    <section class="section">
+        <div class="filters-bar">
+            <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre común o científico...">
+            <select id="tipoFilter">
+                <option value="">Todos los tipos</option>
+                <option value="árbol">🌳 Árboles</option>
+                <option value="enredadera">🌿 Enredaderas</option>
+            </select>
+            <select id="origenFilter">
+                <option value="">Todos los orígenes</option>
+                <option value="nativa">🇦🇷 Nativas</option>
+                <option value="exotica">🌍 Exóticas</option>
+            </select>
+            <select id="zonaFilter">
+                <option value="">Todas las zonas</option>
+                <option value="norte">Sector Norte</option>
+                <option value="sur">Sector Sur</option>
+                <option value="este">Sector Este</option>
+                <option value="oeste">Sector Oeste</option>
+                <option value="patio">Patio Central</option>
+                <option value="pergola">Pérgolas</option>
+                <option value="vereda">Veredas</option>
+                <option value="maceta">Macetas</option>
+            </select>
+        </div>
+
+        <div class="species-grid" id="speciesGrid">
+            <p style="grid-column:1/-1;text-align:center;color:var(--color-text-light);padding:3rem;">
+                <i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i><br>
+                Cargando especies…
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== CTA ========== -->
+    <section class="section section-dark" style="text-align:center;">
+        <h2 style="font-size:2rem;">¿Querés conocer cada árbol en persona?</h2>
+        <p style="opacity:0.9;max-width:600px;margin:1rem auto 2rem;">
+            Agendá una visita guiada con el equipo de La Arboleda.
+        </p>
+        <a href="index.html#contacto" class="btn btn-cta">
+            <i class="fas fa-calendar-check"></i> Agendar visita
+        </a>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="images/arboleda-logo.png" alt="La Arboleda">
+                <p style="margin:1rem 0;">
+                    Un laboratorio vivo de biodiversidad en el corazón del NOA argentino.
+                </p>
+            </div>
+            <div>
+                <h4>Explorar</h4>
+                <ul>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#mapa">Mapa del predio</a></li>
+                    <li><a href="especies.html">Catálogo de especies</a></li>
+                    <li><a href="reconocimientos.html">Reconocimientos</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contacto</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Orán, Salta</li>
+                    <li><i class="fas fa-school"></i> En el I.E.S. N° 6023 "Dr. A. Loutaif"</li>
+                    <li><i class="fas fa-envelope"></i> info@laarboleda.org</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 La Arboleda · Recuperando la biodiversidad.</p>
+        </div>
+    </footer>
+
+    <!-- ========== MODAL DE DETALLE ========== -->
+    <div class="modal-overlay" id="treeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2>Nombre común</h2>
+                    <em>Nombre científico</em>
+                </div>
+                <button class="modal-close" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <img class="modal-image" src="" alt="">
+                <div class="modal-content-inner"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+<script src="/demos/demo-mode.js" defer></script></body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La Arboleda — Proyecto educativo y ecológico independiente con 106 especies nativas y exóticas, alojado en el predio del I.E.S. N° 6023 'Dr. Alfredo Loutaif' en Orán, Salta.">
+    <title>La Arboleda · Recuperando la biodiversidad</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="images/arboleda-logo.png">
+</head>
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="images/arboleda-logo.png" alt="La Arboleda">
+                <span class="brand-text">La Arboleda</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#mision">Misión</a></li>
+                <li><a href="#mapa">Mapa del predio</a></li>
+                <li><a href="especies.html">Especies</a></li>
+                <li><a href="reconocimientos.html">Reconocimientos</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <header class="hero" id="inicio">
+        <div class="hero-content">
+            <span class="hero-badge">🌳 Proyecto educativo y ecológico · Orán, Salta</span>
+            <h1>Recuperando la <span class="accent">biodiversidad</span><br>una lección de vida a la vez</h1>
+            <p>Un laboratorio vivo donde estudiantes y comunidad cuidan más de <strong>100 especies</strong> nativas y exóticas del NOA argentino.</p>
+            <div class="hero-cta-group">
+                <a href="#mapa" class="btn btn-cta"><i class="fas fa-map"></i> Explorar el predio</a>
+                <a href="especies.html" class="btn btn-outline" style="background:rgba(255,255,255,0.1);color:white;border-color:white;">
+                    <i class="fas fa-leaf"></i> Ver especies
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- ========== ESTADÍSTICAS RÁPIDAS ========== -->
+    <section class="section section-dark" id="quickStats">
+        <div class="stats-grid">
+            <div class="stat-card reveal">
+                <span class="stat-number" id="statEspecies" data-target="106">0</span>
+                <span class="stat-label">Especies</span>
+            </div>
+            <div class="stat-card reveal delay-1">
+                <span class="stat-number" id="statEjemplares" data-target="0">0</span>
+                <span class="stat-label">Ejemplares</span>
+            </div>
+            <div class="stat-card reveal delay-2">
+                <span class="stat-number" id="statNativas" data-target="0">0</span>
+                <span class="stat-label">Nativas</span>
+            </div>
+            <div class="stat-card reveal delay-3">
+                <span class="stat-number" id="statEnredaderas" data-target="0">0</span>
+                <span class="stat-label">Enredaderas</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MISIÓN, VISIÓN Y VALORES ========== -->
+    <section class="section" id="mision">
+        <span class="section-eyebrow reveal">Nuestra esencia</span>
+        <h2 class="section-title reveal">Misión, Visión y Valores</h2>
+        <p class="section-subtitle reveal">
+            Lo que nos mueve, hacia dónde vamos y los principios que sostienen el proyecto.
+        </p>
+
+        <!-- Bloque Misión + Visión (2 cards) -->
+        <div class="mv-grid reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;margin-top:2rem;">
+            <div style="background:linear-gradient(135deg, var(--color-primary), var(--color-primary-light));color:white;padding:2.5rem;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:-30px;right:-30px;font-size:8rem;opacity:0.08;color:white;">🎯</div>
+                <div style="position:relative;z-index:1;">
+                    <div style="width:60px;height:60px;border-radius:50%;background:rgba(217,142,50,0.25);border:2px solid var(--color-accent);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1.5rem;">
+                        <i class="fas fa-bullseye" style="color:var(--color-accent);"></i>
+                    </div>
+                    <h3 style="color:white;margin:0 0 1rem;font-size:1.6rem;">Misión</h3>
+                    <p style="opacity:0.95;font-size:1.05rem;line-height:1.7;">
+                        <strong style="color:var(--color-accent);">Recuperar la biodiversidad</strong>
+                        del Noroeste Argentino, una lección de vida a la vez. Educamos a estudiantes
+                        y comunidad mediante un laboratorio vivo de más de 100 especies nativas y
+                        exóticas, conservando saberes ancestrales y fomentando el vínculo con la
+                        naturaleza.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background:linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));color:white;padding:2.5rem;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:-30px;right:-30px;font-size:8rem;opacity:0.1;color:white;">🌅</div>
+                <div style="position:relative;z-index:1;">
+                    <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid white;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1.5rem;">
+                        <i class="fas fa-eye" style="color:white;"></i>
+                    </div>
+                    <h3 style="color:white;margin:0 0 1rem;font-size:1.6rem;">Visión</h3>
+                    <p style="opacity:0.97;font-size:1.05rem;line-height:1.7;">
+                        Ser el <strong>Epicentro de Educación Ambiental</strong> de referencia en
+                        el NOA, replicado en cada escuela de la región. Que cada estudiante egrese
+                        sabiendo identificar, plantar y cuidar las especies de su tierra, y que
+                        cada barrio tenga su propia arboleda.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Valores (4 chips) -->
+        <h3 class="reveal" style="text-align:center;margin-top:4rem;font-size:1.8rem;">Nuestros valores</h3>
+        <p class="reveal" style="text-align:center;color:var(--color-text-light);max-width:600px;margin:0.5rem auto 2.5rem;">
+            Los principios que sostienen cada decisión y cada plantación.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;">
+            <div class="reveal" style="background:white;padding:2rem 1.5rem;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);text-align:center;border-bottom:4px solid var(--color-primary);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-lg)';" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)';">
+                <div style="font-size:2.5rem;margin-bottom:0.75rem;">🌱</div>
+                <h4 style="color:var(--color-primary);margin:0 0 0.5rem;">Conservación</h4>
+                <p style="color:var(--color-text-light);font-size:0.9rem;margin:0;">Priorizamos las especies nativas del NOA y la biodiversidad local.</p>
+            </div>
+            <div class="reveal delay-1" style="background:white;padding:2rem 1.5rem;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);text-align:center;border-bottom:4px solid var(--color-accent);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-lg)';" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)';">
+                <div style="font-size:2.5rem;margin-bottom:0.75rem;">📚</div>
+                <h4 style="color:var(--color-primary);margin:0 0 0.5rem;">Educación</h4>
+                <p style="color:var(--color-text-light);font-size:0.9rem;margin:0;">El predio es un aula al aire libre abierta a todos.</p>
+            </div>
+            <div class="reveal delay-2" style="background:white;padding:2rem 1.5rem;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);text-align:center;border-bottom:4px solid var(--color-secondary);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-lg)';" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)';">
+                <div style="font-size:2.5rem;margin-bottom:0.75rem;">🤝</div>
+                <h4 style="color:var(--color-primary);margin:0 0 0.5rem;">Comunidad</h4>
+                <p style="color:var(--color-text-light);font-size:0.9rem;margin:0;">Trabajamos con vecinos, escuelas e instituciones.</p>
+            </div>
+            <div class="reveal delay-3" style="background:white;padding:2rem 1.5rem;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);text-align:center;border-bottom:4px solid #6a8a4a;transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-lg)';" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)';">
+                <div style="font-size:2.5rem;margin-bottom:0.75rem;">🪶</div>
+                <h4 style="color:var(--color-primary);margin:0 0 0.5rem;">Identidad</h4>
+                <p style="color:var(--color-text-light);font-size:0.9rem;margin:0;">Rescatamos coplas, nombres y saberes locales de cada especie.</p>
+            </div>
+        </div>
+
+        <!-- Objetivos estratégicos -->
+        <div class="mission-grid reveal" style="margin-top:4rem;">
+            <div class="mission-image reveal-left">
+                <img src="images/biodiversity.jpg" alt="Biodiversidad en La Arboleda">
+            </div>
+            <div class="mission-text reveal-right">
+                <h2>Objetivos estratégicos</h2>
+                <p style="color:var(--color-text-light);">
+                    En La Arboleda combinamos <strong>educación, conservación y comunidad</strong>.
+                    Es un proyecto con identidad propia, alojado en el predio del
+                    <strong>I.E.S. N° 6023 "Dr. Alfredo Loutaif"</strong>. Cada árbol fue plantado,
+                    identificado y registrado en colaboración con la comunidad educativa.
+                </p>
+                <ul class="feature-list">
+                    <li><strong>Catalogar y mantener</strong> las 106 especies del predio</li>
+                    <li><strong>Recuperar especies nativas</strong> en riesgo del NOA</li>
+                    <li><strong>Formar a estudiantes</strong> como guías ambientales</li>
+                    <li><strong>Replicar el modelo</strong> en escuelas de la región</li>
+                    <li><strong>Difundir coplas y saberes</strong> tradicionales de cada árbol</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MAPA INTERACTIVO SVG ========== -->
+    <section class="section section-alt" id="mapa">
+        <span class="section-eyebrow reveal">Explora el predio</span>
+        <h2 class="section-title reveal">Mapa interactivo del predio</h2>
+        <p class="section-subtitle reveal">
+            Cada sector del predio tiene su propio ecosistema. Haz clic en cualquier
+            zona para descubrir qué árboles viven allí.
+        </p>
+
+        <div class="map-wrapper reveal">
+            <!-- SVG MAP -->
+            <div class="map-svg-container">
+                <svg class="map-svg" viewBox="0 0 1000 1050" xmlns="http://www.w3.org/2000/svg" aria-label="Mapa del predio">
+                    <defs>
+                        <!-- Patrón de árbol pequeño para densidad -->
+                        <symbol id="treeIcon" viewBox="0 0 20 20">
+                            <circle cx="10" cy="8" r="6" fill="rgba(255,255,255,0.5)"/>
+                            <rect x="9" y="13" width="2" height="5" fill="rgba(255,255,255,0.6)"/>
+                        </symbol>
+                        <!-- Patrón de hojas para pérgola -->
+                        <pattern id="leafPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M10,2 Q15,8 10,14 Q5,8 10,2 Z" fill="rgba(255,255,255,0.25)"/>
+                        </pattern>
+                        <!-- Sombra para edificio -->
+                        <filter id="buildingShadow">
+                            <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.3"/>
+                        </filter>
+                        <!-- Gradiente sutil para zonas -->
+                        <linearGradient id="northGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#2E5948"/>
+                            <stop offset="100%" stop-color="#1f3b2e"/>
+                        </linearGradient>
+                        <linearGradient id="southGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#3A6B52"/>
+                            <stop offset="100%" stop-color="#2a4f3c"/>
+                        </linearGradient>
+                        <linearGradient id="westGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#5B7DB3"/>
+                            <stop offset="100%" stop-color="#3F5E8E"/>
+                        </linearGradient>
+                        <linearGradient id="eastGrad" x1="100%" y1="0%" x2="0%" y2="0%">
+                            <stop offset="0%" stop-color="#4A6FA5"/>
+                            <stop offset="100%" stop-color="#385785"/>
+                        </linearGradient>
+                        <linearGradient id="patioGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#E8A040"/>
+                            <stop offset="100%" stop-color="#C57B20"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Fondo terreno -->
+                    <rect x="0" y="0" width="1000" height="1050" fill="#e8e0c8"/>
+
+                    <!-- Calles externas (asfalto) -->
+                    <rect x="0" y="0" width="1000" height="50" fill="#3a3a3a"/>
+                    <rect x="0" y="1000" width="1000" height="50" fill="#3a3a3a"/>
+                    <rect x="0" y="0" width="50" height="1050" fill="#3a3a3a"/>
+                    <rect x="950" y="0" width="50" height="1050" fill="#3a3a3a"/>
+                    <!-- Líneas blancas de calle -->
+                    <line x1="0" y1="25" x2="1000" y2="25" stroke="white" stroke-width="1" stroke-dasharray="8,8" opacity="0.5"/>
+                    <line x1="0" y1="1025" x2="1000" y2="1025" stroke="white" stroke-width="1" stroke-dasharray="8,8" opacity="0.5"/>
+                    <line x1="25" y1="0" x2="25" y2="1050" stroke="white" stroke-width="1" stroke-dasharray="8,8" opacity="0.5"/>
+                    <line x1="975" y1="0" x2="975" y2="1050" stroke="white" stroke-width="1" stroke-dasharray="8,8" opacity="0.5"/>
+                    <!-- Nombres de calles (4 calles confirmadas) -->
+                    <text x="500" y="20" style="font-size:13px;fill:#FCBF49;text-anchor:middle;font-weight:700;letter-spacing:2px;">▲ Pje. RENÉ FAVALORO (norte)</text>
+                    <text x="500" y="1040" style="font-size:15px;fill:#D98E32;text-anchor:middle;font-weight:800;letter-spacing:3px;">▼ C. SALVADOR VALERI ▼</text>
+                    <text x="20" y="525" transform="rotate(-90 20 525)" style="font-size:14px;fill:#D98E32;text-anchor:middle;font-weight:800;letter-spacing:2px;">◀ AV. PALACIOS ◀</text>
+                    <text x="980" y="525" transform="rotate(90 980 525)" style="font-size:13px;fill:#FCBF49;text-anchor:middle;font-weight:700;letter-spacing:2px;">▶ C. O'HIGGINS ▶</text>
+
+                    <!-- Veredas perimetrales (clickeables) -->
+                    <rect class="zone" data-zone="vereda" x="50" y="50" width="900" height="32" fill="#a89478" rx="2"/>
+                    <rect class="zone" data-zone="vereda" x="50" y="968" width="900" height="32" fill="#a89478" rx="2"/>
+                    <rect class="zone" data-zone="vereda" x="50" y="82" width="32" height="886" fill="#a89478" rx="2"/>
+                    <rect class="zone" data-zone="vereda" x="918" y="82" width="32" height="886" fill="#a89478" rx="2"/>
+                    <text x="935" y="990" style="font-size:9px;fill:#5a4a30;text-anchor:end;font-weight:600;pointer-events:none;">VEREDAS PERIMETRALES</text>
+
+                    <!-- ============== ZONAS DEL PREDIO ============== -->
+                    <!-- Área interior: x=82..918, y=82..968 -->
+
+                    <!-- Área NO perteneciente al predio (franja superior entre vereda y línea real) -->
+                    <rect x="82" y="82" width="836" height="68" fill="#cdc4a8" stroke="#a39676" stroke-width="1" stroke-dasharray="6,4" opacity="0.45" rx="2" style="pointer-events:none"/>
+                    <text x="500" y="122" style="font-size:11px;fill:#7a6a3c;text-anchor:middle;pointer-events:none;font-style:italic;opacity:0.75;">— fuera del predio —</text>
+
+                    <!-- PATIO CENTRAL (cubre todo el interior — capa base) -->
+                    <rect class="zone" data-zone="patio" x="282" y="280" width="538" height="628" fill="#d4c884" opacity="0.85" rx="4"/>
+                    <text class="zone-label" x="551" y="320" style="font-size:18px;fill:#5a4d20;">☀️ PATIO CENTRAL</text>
+                    <text class="zone-count" data-zone="patio" x="551" y="348" style="font-size:12px;fill:#5a4d20;">cargando…</text>
+                    <text x="551" y="372" style="font-size:11px;fill:#7a6a3c;text-anchor:middle;pointer-events:none;font-style:italic;">campo abierto · plantaciones futuras</text>
+
+                    <!-- SECTOR NORTE (franja superior, ya dentro del predio) -->
+                    <rect class="zone" data-zone="norte" x="82" y="150" width="836" height="130" fill="url(#northGrad)" rx="6"/>
+                    <text class="zone-label" x="500" y="195" style="font-size:20px;">🌳 SECTOR NORTE</text>
+                    <text class="zone-count" data-zone="norte" x="500" y="222" style="font-size:12px;">cargando…</text>
+                    <text x="500" y="248" style="font-size:11px;fill:rgba(255,255,255,0.8);text-anchor:middle;pointer-events:none;font-style:italic;">Quebrachos · Algarrobos · Palo Santo</text>
+                    <use href="#treeIcon" x="130" y="160" width="14" height="14"/>
+                    <use href="#treeIcon" x="240" y="245" width="14" height="14"/>
+                    <use href="#treeIcon" x="780" y="245" width="14" height="14"/>
+
+                    <!-- SECTOR OESTE (franja izquierda — toca norte arriba y vereda sur abajo) -->
+                    <rect class="zone" data-zone="oeste" x="82" y="280" width="200" height="688" fill="url(#westGrad)" rx="6"/>
+                    <text class="zone-label" x="182" y="325" style="font-size:17px;">🌲 SECTOR</text>
+                    <text class="zone-label" x="182" y="350" style="font-size:17px;">OESTE</text>
+                    <text class="zone-count" data-zone="oeste" x="182" y="378" style="font-size:11px;">cargando…</text>
+                    <text x="182" y="408" style="font-size:10px;fill:rgba(255,255,255,0.85);text-anchor:middle;pointer-events:none;font-weight:600;">— El monte —</text>
+                    <text x="182" y="424" style="font-size:9px;fill:rgba(255,255,255,0.75);text-anchor:middle;pointer-events:none;font-style:italic;">línea de árboles</text>
+                    <text x="182" y="438" style="font-size:9px;fill:rgba(255,255,255,0.75);text-anchor:middle;pointer-events:none;font-style:italic;">junto a Av. Palacios</text>
+
+                    <!-- TINGLADO LONGITUDINAL (estructura larga delgada en oeste, hacia el sur) -->
+                    <g filter="url(#buildingShadow)" style="pointer-events:none;">
+                        <rect x="118" y="720" width="40" height="180" fill="#d4cfc5" stroke="#8a8175" stroke-width="1.5" rx="2"/>
+                        <rect x="114" y="716" width="48" height="8" fill="#7a8084" rx="1"/>
+                    </g>
+                    <text x="138" y="810" transform="rotate(-90 138 810)" style="font-size:9px;fill:#3a3a3a;text-anchor:middle;pointer-events:none;font-weight:600;">tinglado</text>
+
+                    <!-- Árboles densos sobre Av. Palacios (margen oeste) -->
+                    <use href="#treeIcon" x="170" y="295" width="18" height="18"/>
+                    <use href="#treeIcon" x="230" y="305" width="14" height="14"/>
+                    <use href="#treeIcon" x="170" y="450" width="18" height="18"/>
+                    <use href="#treeIcon" x="240" y="465" width="14" height="14"/>
+                    <use href="#treeIcon" x="170" y="700" width="18" height="18"/>
+                    <use href="#treeIcon" x="240" y="715" width="16" height="16"/>
+                    <use href="#treeIcon" x="170" y="755" width="18" height="18"/>
+                    <use href="#treeIcon" x="170" y="800" width="18" height="18"/>
+                    <use href="#treeIcon" x="240" y="820" width="16" height="16"/>
+                    <use href="#treeIcon" x="170" y="850" width="18" height="18"/>
+                    <use href="#treeIcon" x="240" y="870" width="16" height="16"/>
+                    <use href="#treeIcon" x="170" y="888" width="20" height="20"/>
+                    <use href="#treeIcon" x="210" y="895" width="18" height="18"/>
+
+                    <!-- SECTOR ESTE (franja derecha — toca norte arriba y vereda sur abajo) -->
+                    <rect class="zone" data-zone="este" x="820" y="280" width="98" height="688" fill="url(#eastGrad)" rx="6"/>
+                    <text class="zone-label" x="869" y="440" transform="rotate(90 869 440)" style="font-size:14px;">🌺 SECTOR ESTE</text>
+                    <text class="zone-count" data-zone="este" x="869" y="610" transform="rotate(90 869 610)" style="font-size:11px;">cargando…</text>
+                    <text x="869" y="800" transform="rotate(90 869 800)" style="font-size:9px;fill:rgba(255,255,255,0.7);text-anchor:middle;pointer-events:none;font-style:italic;">Ornamentales</text>
+                    <use href="#treeIcon" x="855" y="320" width="14" height="14"/>
+                    <use href="#treeIcon" x="855" y="710" width="14" height="14"/>
+                    <use href="#treeIcon" x="855" y="850" width="14" height="14"/>
+
+                    <!-- =========== PÉRGOLAS (3 en cruz, detrás del edificio, lado este del patio) =========== -->
+                    <g>
+                        <!-- Área de césped -->
+                        <rect class="zone" data-zone="pergola" x="540" y="580" width="270" height="170" fill="#5a7a3a" rx="6"/>
+                        <!-- Senderos en cruz -->
+                        <rect x="540" y="658" width="270" height="14" fill="#d4c884" style="pointer-events:none" rx="1"/>
+                        <rect x="668" y="580" width="14" height="170" fill="#d4c884" style="pointer-events:none" rx="1"/>
+                        <!-- 3 pérgolas en los brazos de la cruz: N, W, E -->
+                        <g style="pointer-events:none">
+                            <!-- Pérgola NORTE -->
+                            <rect x="650" y="592" width="50" height="50" fill="#B8731F" stroke="#5a3a10" stroke-width="1.2" rx="3"/>
+                            <rect x="650" y="592" width="50" height="50" fill="url(#leafPattern)" rx="3"/>
+                            <!-- Pérgola OESTE -->
+                            <rect x="552" y="685" width="50" height="50" fill="#B8731F" stroke="#5a3a10" stroke-width="1.2" rx="3"/>
+                            <rect x="552" y="685" width="50" height="50" fill="url(#leafPattern)" rx="3"/>
+                            <!-- Pérgola ESTE -->
+                            <rect x="748" y="685" width="50" height="50" fill="#B8731F" stroke="#5a3a10" stroke-width="1.2" rx="3"/>
+                            <rect x="748" y="685" width="50" height="50" fill="url(#leafPattern)" rx="3"/>
+                        </g>
+                        <!-- Etiquetas -->
+                        <text class="zone-label" x="675" y="612" style="font-size:11px;fill:white;">PÉRGOLAS</text>
+                        <text class="zone-count" data-zone="pergola" x="675" y="668" style="font-size:10px;fill:#1a3729;font-weight:700;">cargando…</text>
+                    </g>
+
+                    <!-- =========== EDIFICIO INSTITUCIONAL (forma de L, ala oeste + frente largo hasta el este) =========== -->
+                    <g filter="url(#buildingShadow)">
+                        <!-- Ala VERTICAL (oeste, extiende hacia el norte) -->
+                        <rect class="building" x="282" y="700" width="100" height="208" rx="4"/>
+                        <!-- Cuerpo PRINCIPAL horizontal — extendido hasta el lado este -->
+                        <rect class="building" x="282" y="820" width="538" height="88" rx="4"/>
+
+                        <!-- Techo del ala oeste (gris metálico) -->
+                        <polygon points="278,700 386,700 386,692 278,692" fill="#8a8a8a" stroke="#5a5a5a" stroke-width="0.8"/>
+                        <polygon points="278,692 386,692 332,680 278,680" fill="#a0a0a0" stroke="#5a5a5a" stroke-width="0.5"/>
+
+                        <!-- Techo del cuerpo principal: tercio oeste gris -->
+                        <polygon points="278,820 460,820 460,812 278,812" fill="#8a8a8a" stroke="#5a5a5a" stroke-width="0.8"/>
+                        <polygon points="278,812 460,812 369,800 278,800" fill="#a0a0a0" stroke="#5a5a5a" stroke-width="0.5"/>
+                        <!-- Techo del cuerpo principal: dos tercios este rojizo -->
+                        <polygon points="458,820 826,820 826,812 458,812" fill="#a05d3a" stroke="#5a3010" stroke-width="0.8"/>
+                        <polygon points="458,812 826,812 642,800 458,800" fill="#b8714a" stroke="#5a3010" stroke-width="0.5"/>
+
+                        <!-- Mástil con bandera Argentina (sobre el ala oeste) -->
+                        <line x1="332" y1="650" x2="332" y2="680" stroke="#5a4a30" stroke-width="2.5"/>
+                        <rect x="332" y="650" width="26" height="16" fill="#75AADB" stroke="#5a4a30" stroke-width="0.5"/>
+                        <rect x="332" y="658" width="26" height="3" fill="#FCBF49"/>
+
+                        <!-- Ventanas del ala oeste (vertical) -->
+                        <rect x="302" y="720" width="18" height="16" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="346" y="720" width="18" height="16" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="302" y="755" width="18" height="16" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="346" y="755" width="18" height="16" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="302" y="790" width="18" height="16" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="346" y="790" width="18" height="16" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+
+                        <!-- Ventanas del cuerpo principal (extendido hasta el este) -->
+                        <rect x="400" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="428" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="500" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="585" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="613" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="641" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="700" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="728" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="756" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+                        <rect x="784" y="845" width="20" height="18" fill="#7ba8c9" stroke="#5a6a75" stroke-width="0.5" rx="1"/>
+
+                        <!-- Cruz decorativa en ventanas extremos -->
+                        <line x1="311" y1="720" x2="311" y2="736" stroke="#5a6a75" stroke-width="0.4"/>
+                        <line x1="302" y1="728" x2="320" y2="728" stroke="#5a6a75" stroke-width="0.4"/>
+                        <line x1="794" y1="845" x2="794" y2="863" stroke="#5a6a75" stroke-width="0.4"/>
+                        <line x1="784" y1="854" x2="804" y2="854" stroke="#5a6a75" stroke-width="0.4"/>
+
+                        <!-- Puerta principal (centro del frente extendido) -->
+                        <rect x="535" y="876" width="32" height="32" fill="#5a3a1a" stroke="#3d2810" stroke-width="0.7" rx="1"/>
+                        <line x1="551" y1="876" x2="551" y2="908" stroke="#3d2810" stroke-width="0.5"/>
+                        <circle cx="561" cy="894" r="1.5" fill="#FCBF49"/>
+                    </g>
+
+                    <!-- Etiqueta del edificio (centrada en el cuerpo principal extendido) -->
+                    <text class="building-label" x="551" y="850" style="font-size:13px;font-weight:800;letter-spacing:1px;">🏫 I.E.S. N° 6023</text>
+                    <text class="building-label" x="551" y="867" style="font-size:11px;font-weight:600;font-style:italic;">"Dr. Alfredo Loutaif"</text>
+                    <!-- Etiqueta del ala oeste -->
+                    <text class="building-label" x="332" y="790" style="font-size:9px;font-weight:500;opacity:0.85;writing-mode:vertical-rl;">ala oeste</text>
+
+                    <!-- =========== PLAYÓN / SECTOR SUR (encaja entre Sector Oeste y Sector Este, debajo del edificio) =========== -->
+                    <rect class="zone" data-zone="sur" x="282" y="908" width="538" height="60" fill="url(#southGrad)" rx="4"/>
+                    <text class="zone-label" x="551" y="935" style="font-size:13px;">🌱 SECTOR SUR · playón de ingreso</text>
+                    <text x="551" y="954" style="font-size:9px;fill:rgba(255,255,255,0.85);text-anchor:middle;pointer-events:none;font-style:italic;">Medicinales · Aromáticas</text>
+
+                    <!-- Árboles dispersos en el playón -->
+                    <use href="#treeIcon" x="320" y="936" width="14" height="14"/>
+                    <use href="#treeIcon" x="395" y="940" width="14" height="14"/>
+                    <use href="#treeIcon" x="710" y="936" width="14" height="14"/>
+                    <use href="#treeIcon" x="790" y="940" width="14" height="14"/>
+
+                    <!-- Sendero del playón a la puerta del edificio -->
+                    <rect x="546" y="908" width="10" height="60" fill="#c9b896" stroke="none" style="pointer-events:none"/>
+
+                    <!-- =========== ENTRADA PRINCIPAL (point sobre Salvador Valeri, alineada con puerta) =========== -->
+                    <g>
+                        <!-- Halo exterior pulsante -->
+                        <circle cx="551" cy="984" r="22" fill="#28a745" opacity="0.25">
+                            <animate attributeName="r" values="22;30;22" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.25;0;0.25" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <!-- Point principal -->
+                        <circle cx="551" cy="984" r="11" fill="#28a745" stroke="white" stroke-width="2.5"/>
+                    </g>
+
+                    <!-- =========== BRÚJULA (dentro de Sector Norte, esquina derecha) =========== -->
+                    <g transform="translate(870, 200)" style="pointer-events:none;">
+                        <circle cx="0" cy="0" r="24" fill="white" stroke="#224738" stroke-width="2" opacity="0.97"/>
+                        <polygon points="0,-19 5,0 0,19 -5,0" fill="#D98E32"/>
+                        <polygon points="0,-19 5,0 0,0" fill="#224738"/>
+                        <text x="0" y="-28" style="font-size:11px;fill:white;stroke:#224738;stroke-width:0.5;font-weight:700;text-anchor:middle;">N</text>
+                    </g>
+                </svg>
+
+                <!-- Leyenda fuera del SVG, en HTML para mejor responsive -->
+                <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1rem;padding-top:1rem;border-top:1px solid #eee;font-size:0.8rem;">
+                    <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;background:#2E5948;border-radius:3px;display:inline-block;"></span> Bosque nativo</span>
+                    <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;background:#4A6FA5;border-radius:3px;display:inline-block;"></span> Ornamentales</span>
+                    <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;background:#D98E32;border-radius:3px;display:inline-block;"></span> Patio</span>
+                    <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;background:#B8731F;border-radius:3px;display:inline-block;"></span> Pérgolas</span>
+                    <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;background:#d4cfc5;border:1px solid #8a8175;border-radius:3px;display:inline-block;"></span> Edificio</span>
+                    <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;background:#a89478;border-radius:3px;display:inline-block;"></span> Veredas</span>
+                    <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;background:#28a745;border-radius:50%;display:inline-block;border:2px solid white;box-shadow:0 0 0 1px #28a745;"></span> Entrada</span>
+                </div>
+                <p style="text-align:center;color:var(--color-text-light);font-size:0.85rem;margin-top:1rem;margin-bottom:0;">
+                    <i class="fas fa-hand-pointer"></i> Haz clic en cualquier zona para ver sus especies
+                </p>
+            </div>
+
+            <!-- Panel lateral con info de la zona -->
+            <aside class="map-info-panel" id="mapInfoPanel">
+                <p>Cargando…</p>
+            </aside>
+        </div>
+
+        <div id="zoneMap" style="display:none;"></div>
+    </section>
+
+    <!-- ========== UBICACIÓN REAL (LEAFLET) ========== -->
+    <section class="section" id="ubicacion">
+        <span class="section-eyebrow reveal">¿Dónde estamos?</span>
+        <h2 class="section-title reveal">Encuéntranos en Orán</h2>
+        <p class="section-subtitle reveal">
+            La Arboleda funciona en el predio del <strong>I.E.S. N° 6023 "Dr. Alfredo Loutaif"</strong>, en San Ramón de la Nueva Orán, Salta — manteniendo siempre su identidad de proyecto independiente.
+        </p>
+
+        <div class="leaflet-map-container reveal">
+            <div id="realMap"></div>
+        </div>
+
+        <p style="text-align:center;margin-top:1rem;color:var(--color-text-light);font-size:0.9rem;">
+            <i class="fas fa-info-circle"></i> Haz clic sobre el mapa para activar el zoom con scroll.
+        </p>
+    </section>
+
+    <!-- ========== PROCESO ========== -->
+    <section class="section section-alt">
+        <span class="section-eyebrow reveal">¿Cómo trabajamos?</span>
+        <h2 class="section-title reveal">El viaje del héroe</h2>
+        <p class="section-subtitle reveal">
+            Tres pasos para que tu visita o proyecto se conecte con el bosque.
+        </p>
+
+        <div class="process-grid">
+            <div class="process-card reveal delay-1">
+                <span class="process-number">01</span>
+                <div class="process-icon"><i class="fas fa-binoculars"></i></div>
+                <h3>Conoce</h3>
+                <p>Recorre el predio con guías estudiantiles. Descubre cada especie, su origen y sus usos tradicionales.</p>
+            </div>
+            <div class="process-card reveal delay-2">
+                <span class="process-number">02</span>
+                <div class="process-icon"><i class="fas fa-book-open"></i></div>
+                <h3>Aprende</h3>
+                <p>Participa en talleres sobre biodiversidad, técnicas de plantación y conservación del bosque nativo.</p>
+            </div>
+            <div class="process-card reveal delay-3">
+                <span class="process-number">03</span>
+                <div class="process-icon"><i class="fas fa-seedling"></i></div>
+                <h3>Replica</h3>
+                <p>Llévate plantines, semillas y la metodología para crear tu propia arboleda en tu escuela o barrio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACTO ========== -->
+    <section class="section" id="contacto">
+        <span class="section-eyebrow reveal">Hablemos</span>
+        <h2 class="section-title reveal">Agendá una visita</h2>
+        <p class="section-subtitle reveal">
+            Recibimos escuelas, instituciones y curiosos. Coordinamos visitas guiadas
+            con estudiantes del IES como anfitriones.
+        </p>
+
+        <div class="contact-grid reveal">
+            <div class="contact-info-card">
+                <h3 style="margin-top:0;">Información de contacto</h3>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Dirección</strong><br>
+                        Salvador Valeri esq. O'Higgins<br>
+                        San Ramón de la Nueva Orán<br>
+                        Provincia de Salta, Argentina
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-school"></i>
+                    <div>
+                        <strong>Institución anfitriona</strong><br>
+                        I.E.S. N° 6023<br>
+                        <em style="font-size:0.9em;opacity:0.85;">"Dr. Alfredo Loutaif"</em>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Horarios</strong><br>
+                        Lunes a Viernes · 8:00 a 17:00 hs
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong><br>
+                        info@laarboleda.org
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Teléfono</strong><br>
+                        +54 (3878) XXX-XXXX
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-card">
+                <h3 style="margin-top:0;">Enviar mensaje</h3>
+                <!-- Para Netlify Forms: agregá name="contacto" data-netlify="true" -->
+                <form id="contactForm" name="contacto">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="motivo">Motivo</label>
+                        <select id="motivo" name="motivo" class="form-control">
+                            <option value="visita">Visita guiada</option>
+                            <option value="taller">Taller / capacitación</option>
+                            <option value="institucional">Consulta institucional</option>
+                            <option value="prensa">Prensa / difusión</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-cta" style="width:100%;">
+                        <i class="fas fa-paper-plane"></i> Enviar mensaje
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="images/arboleda-logo.png" alt="La Arboleda">
+                <p style="margin:1rem 0;">
+                    Un laboratorio vivo de biodiversidad en el corazón del NOA argentino.
+                    Conservación, educación y comunidad creciendo juntas.
+                </p>
+            </div>
+            <div>
+                <h4>Explorar</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#mapa">Mapa del predio</a></li>
+                    <li><a href="especies.html">Catálogo de especies</a></li>
+                    <li><a href="reconocimientos.html">Reconocimientos</a></li>
+                    <li><a href="#ubicacion">Ubicación</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contacto</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Orán, Salta</li>
+                    <li><i class="fas fa-school"></i> En el I.E.S. N° 6023 "Dr. A. Loutaif"</li>
+                    <li><i class="fas fa-envelope"></i> info@laarboleda.org</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 La Arboleda · Recuperando la biodiversidad, una lección de vida a la vez.</p>
+        </div>
+    </footer>
+
+    <!-- ========== MODAL DE DETALLE DE ESPECIE ========== -->
+    <div class="modal-overlay" id="treeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2>Nombre común</h2>
+                    <em>Nombre científico</em>
+                </div>
+                <button class="modal-close" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <img class="modal-image" src="" alt="">
+                <div class="modal-content-inner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+<script src="/demos/demo-mode.js" defer></script></body>
+</html>

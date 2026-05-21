@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reconocimientos institucionales recibidos por La Arboleda — proyecto educativo y ecológico alojado en el I.E.S. N° 6023 'Dr. Alfredo Loutaif', Orán, Salta.">
+    <title>Reconocimientos · La Arboleda</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="images/arboleda-logo.png">
+
+    <style>
+        /* Estilos específicos de Reconocimientos */
+        .recognition-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-align: center;
+            border-top: 5px solid var(--color-accent);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .recognition-card.future { border-top-color: #cbd5e0; opacity: 0.75; }
+        .recognition-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .recognition-card.future:hover { transform: none; opacity: 1; }
+
+        .medal-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 12px 24px rgba(217, 142, 50, 0.35);
+            position: relative;
+        }
+        .recognition-card.future .medal-icon {
+            background: linear-gradient(135deg, #cbd5e0, #a0aec0);
+            box-shadow: 0 8px 16px rgba(160, 174, 192, 0.3);
+        }
+        .medal-icon::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px dashed rgba(217, 142, 50, 0.4);
+            animation: spin 20s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .recognition-card.future .medal-icon::before { border-color: rgba(160, 174, 192, 0.3); }
+
+        .recognition-year {
+            display: inline-block;
+            background: var(--color-bg-cream);
+            color: var(--color-primary);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        .recognition-title { color: var(--color-primary); margin: 0 0 0.5rem; font-size: 1.3rem; }
+        .recognition-issuer {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+            margin: 0 0 1rem;
+            font-style: italic;
+        }
+        .recognition-ref {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            background: var(--color-bg-cream);
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius-sm);
+            margin-top: 1rem;
+            display: inline-block;
+        }
+        .recognition-ref strong { color: var(--color-primary); }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--color-accent), var(--color-primary));
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1.5rem 2rem;
+        }
+        .timeline-item:nth-child(odd) { margin-left: 0; padding-right: 3rem; text-align: right; }
+        .timeline-item:nth-child(even) { margin-left: 50%; padding-left: 3rem; text-align: left; }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--color-accent);
+            border: 4px solid white;
+            border-radius: 50%;
+            top: 1.8rem;
+            box-shadow: 0 0 0 3px var(--color-accent);
+            z-index: 1;
+        }
+        .timeline-item:nth-child(odd)::after { right: -10px; }
+        .timeline-item:nth-child(even)::after { left: -10px; }
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .timeline-content:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .timeline-date {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-content h4 {
+            color: var(--color-primary);
+            margin: 0.5rem 0;
+            font-size: 1.05rem;
+        }
+        .timeline-content p { margin: 0; color: var(--color-text-light); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                padding: 1rem 1rem 1rem 3rem;
+                text-align: left;
+            }
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after { left: 10px; right: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="images/arboleda-logo.png" alt="La Arboleda">
+                <span class="brand-text">La Arboleda</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#mision">Misión</a></li>
+                <li><a href="index.html#mapa">Mapa del predio</a></li>
+                <li><a href="especies.html">Especies</a></li>
+                <li><a href="reconocimientos.html" class="active">Reconocimientos</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== HEADER ========== -->
+    <header style="margin-top:75px;padding:5rem 1.5rem 4rem;background:linear-gradient(135deg, var(--color-primary), var(--color-primary-light));color:white;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%, rgba(217,142,50,0.2), transparent 60%);pointer-events:none;"></div>
+        <div style="position:relative;z-index:1;max-width:800px;margin:0 auto;">
+            <span style="display:inline-block;background:rgba(217,142,50,0.2);border:1px solid var(--color-accent);color:var(--color-accent);padding:0.4rem 1.2rem;border-radius:50px;font-size:0.85rem;font-weight:600;letter-spacing:0.5px;margin-bottom:1rem;text-transform:uppercase;">
+                🏛️ Impacto Institucional
+            </span>
+            <h1 style="color:white;font-size:clamp(2rem,5vw,3.5rem);margin:0 0 1rem;">Reconocimientos</h1>
+            <p style="font-size:1.15rem;opacity:0.9;">
+                La Arboleda está avalada por autoridades provinciales y municipales,
+                que reconocen su valor educativo, ambiental y social.
+            </p>
+        </div>
+    </header>
+
+    <!-- ========== RECONOCIMIENTOS RECIBIDOS ========== -->
+    <section class="section">
+        <span class="section-eyebrow reveal">Distinciones</span>
+        <h2 class="section-title reveal">Avales que respaldan el proyecto</h2>
+        <p class="section-subtitle reveal">
+            Cada reconocimiento es un compromiso renovado con la educación y la conservación.
+        </p>
+
+        <div class="process-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+
+            <!-- Reconocimiento #1 — Interés Municipal -->
+            <div class="recognition-card reveal">
+                <div class="medal-icon"><i class="fas fa-landmark"></i></div>
+                <span class="recognition-year">04/11/2022</span>
+                <h3 class="recognition-title">Declarado de Interés Municipal</h3>
+                <p class="recognition-issuer">Concejo Deliberante de San Ramón de la Nueva Orán</p>
+                <p style="color:var(--color-text-dark);font-size:0.95rem;">
+                    Proyecto Ecológico y Educativo declarado de Interés Municipal por el Concejo
+                    Deliberante de la ciudad de San Ramón de la Nva. Orán.
+                </p>
+                <div class="recognition-ref" style="text-align:left;">
+                    <div><strong>Expediente:</strong> Expte 436/22 — Res. 3452/22</div>
+                    <div style="margin-top:0.3rem;"><strong>Autoridad:</strong> Concejal Narda Salguero</div>
+                </div>
+            </div>
+
+            <!-- Reconocimiento #2 — Reserva de Especies Nativas -->
+            <div class="recognition-card reveal delay-1">
+                <div class="medal-icon"><i class="fas fa-tree"></i></div>
+                <span class="recognition-year">2023</span>
+                <h3 class="recognition-title">Reserva de Especies Arbóreas Nativas</h3>
+                <p class="recognition-issuer">Cámara de Senadores de la Provincia de Salta</p>
+                <p style="color:var(--color-text-dark);font-size:0.95rem;">
+                    Reserva de Especies Arbóreas Nativas declarada de Interés Provincial por
+                    la Cámara de Senadores de la Provincia de Salta.
+                </p>
+                <div class="recognition-ref" style="text-align:left;">
+                    <div><strong>Expediente:</strong> Nº 90-32.04623 — Dec 145/2023</div>
+                    <div style="margin-top:0.3rem;"><strong>Autoridad:</strong> Senador Manuel Oscar Pailler</div>
+                </div>
+            </div>
+
+            <!-- Reconocimiento #3 — Epicentro Educación Ambiental -->
+            <div class="recognition-card reveal delay-2">
+                <div class="medal-icon"><i class="fas fa-graduation-cap"></i></div>
+                <span class="recognition-year">06/09/2024</span>
+                <h3 class="recognition-title">Primer Epicentro de Educación Ambiental de Salta</h3>
+                <p class="recognition-issuer">Ministerio de Educación de la Provincia de Salta</p>
+                <p style="color:var(--color-text-dark);font-size:0.95rem;">
+                    Declarado de Interés Educativo por el Ministerio de Educación de la
+                    provincia de Salta, reconociendo su valor como espacio pionero en
+                    educación ambiental.
+                </p>
+                <div class="recognition-ref" style="text-align:left;">
+                    <div><strong>Expediente:</strong> 46-108528/2024 — Res 087</div>
+                    <div style="margin-top:0.3rem;"><strong>Autoridad:</strong> Ministerio de Educación de Salta</div>
+                </div>
+            </div>
+
+            <!-- Reconocimiento #4 — Sembrando Futuro -->
+            <div class="recognition-card reveal delay-3">
+                <div class="medal-icon"><i class="fas fa-seedling"></i></div>
+                <span class="recognition-year">01/04/2025</span>
+                <h3 class="recognition-title">Proyecto SEMBRANDO FUTURO</h3>
+                <p class="recognition-issuer">Cámara de Diputados de Salta</p>
+                <p style="color:var(--color-text-dark);font-size:0.95rem;">
+                    Proyecto Ecológico y Educativo SEMBRANDO FUTURO declarado de Interés
+                    Provincial por la Cámara de Diputados de Salta.
+                </p>
+                <div class="recognition-ref" style="text-align:left;">
+                    <div><strong>Expediente:</strong> 91-52.027/25 — Res. Nº 74/25</div>
+                    <div style="margin-top:0.3rem;"><strong>Autoridad:</strong> Dip. David Taranto</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TIMELINE / HITOS ========== -->
+    <section class="section section-alt">
+        <span class="section-eyebrow reveal">Línea de tiempo</span>
+        <h2 class="section-title reveal">Hitos del proyecto</h2>
+        <p class="section-subtitle reveal">
+            Un recorrido de los momentos que marcaron a La Arboleda.
+        </p>
+
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">04/11/2022</span>
+                    <h4>🏛️ Interés Municipal</h4>
+                    <p>El Concejo Deliberante de Orán declara al proyecto de Interés Municipal mediante Res. 3452/22, impulsado por la Concejal Narda Salguero.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">2023</span>
+                    <h4>🌳 Reserva de Especies Nativas</h4>
+                    <p>La Cámara de Senadores de Salta declara el espacio Reserva de Especies Arbóreas Nativas (Dec. 145/2023), por iniciativa del Senador Manuel Oscar Pailler.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">06/09/2024</span>
+                    <h4>🎓 Epicentro de Educación Ambiental</h4>
+                    <p>El Ministerio de Educación de la provincia de Salta lo declara <strong>Primer Epicentro de Educación Ambiental de Salta</strong> (Res. 087).</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">01/04/2025</span>
+                    <h4>🌱 Sembrando Futuro</h4>
+                    <p>La Cámara de Diputados de Salta declara de Interés Provincial al proyecto SEMBRANDO FUTURO (Res. 74/25), impulsado por el Dip. David Taranto.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Agosto 2025</span>
+                    <h4>🔍 Relevamiento botánico</h4>
+                    <p>Censo completo de las 106 especies presentes en el predio, con identificación científica, ubicación y cantidad de ejemplares.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">2026</span>
+                    <h4>🌐 Lanzamiento web</h4>
+                    <p>La Arboleda llega a internet con mapa interactivo del predio, catálogo de especies filtrable y visitas guiadas online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== IMPACTO ========== -->
+    <section class="section section-dark">
+        <span class="section-eyebrow reveal">Por qué importa</span>
+        <h2 class="section-title reveal" style="color:white;">Impacto del proyecto</h2>
+
+        <div class="stats-grid" style="margin-top:3rem;">
+            <div class="stat-card reveal">
+                <span class="stat-number" data-target="4" data-suffix="">0</span>
+                <span class="stat-label">Reconocimientos oficiales</span>
+            </div>
+            <div class="stat-card reveal delay-1">
+                <span class="stat-number" data-target="106" data-suffix="">0</span>
+                <span class="stat-label">Especies relevadas</span>
+            </div>
+            <div class="stat-card reveal delay-2">
+                <span class="stat-number" data-target="3" data-suffix="">0</span>
+                <span class="stat-label">Avales provinciales</span>
+            </div>
+            <div class="stat-card reveal delay-3">
+                <span class="stat-number" data-target="2022" data-suffix="">0</span>
+                <span class="stat-label">Año del primer aval</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA ========== -->
+    <section class="section" style="text-align:center;">
+        <h2 class="reveal" style="font-size:2rem;">¿Querés sumar tu reconocimiento?</h2>
+        <p class="reveal" style="color:var(--color-text-light);max-width:600px;margin:1rem auto 2rem;">
+            Si tu institución quiere acompañar el proyecto con un aval, escribinos.
+        </p>
+        <a href="index.html#contacto" class="btn btn-cta reveal">
+            <i class="fas fa-handshake"></i> Contactar al equipo
+        </a>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="images/arboleda-logo.png" alt="La Arboleda">
+                <p style="margin:1rem 0;">
+                    Un laboratorio vivo de biodiversidad en el corazón del NOA argentino.
+                </p>
+            </div>
+            <div>
+                <h4>Explorar</h4>
+                <ul>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#mapa">Mapa del predio</a></li>
+                    <li><a href="especies.html">Especies</a></li>
+                    <li><a href="reconocimientos.html">Reconocimientos</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contacto</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Orán, Salta</li>
+                    <li><i class="fas fa-school"></i> En el I.E.S. N° 6023 "Dr. A. Loutaif"</li>
+                    <li><i class="fas fa-envelope"></i> info@laarboleda.org</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 La Arboleda · Recuperando la biodiversidad.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+<script src="/demos/demo-mode.js" defer></script></body>
+</html>
