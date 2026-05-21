@@ -165,6 +165,11 @@
 
     document.querySelectorAll('.portfolio-trigger').forEach((btn) => {
       btn.addEventListener('click', () => {
+        // Tarjetas con demo navegable abren el modal; el resto, la galería.
+        if (btn.dataset.demo) {
+          openDemoModal(btn.dataset.demo, btn.dataset.title || 'Proyecto');
+          return;
+        }
         const imgs = (btn.dataset.images || '').split('|').filter(Boolean);
         if (imgs.length) openLb(imgs, btn.dataset.title || '');
       });
@@ -180,6 +185,90 @@
       else if (e.key === 'ArrowRight') show(idx + 1);
     });
   }
+
+  // ===== Carrusel de las tarjetas de portafolio =====
+  (function setupCarousels() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('.portfolio-trigger').forEach((btn, ci) => {
+      const carousel = btn.querySelector('.pf-carousel');
+      const dotsWrap = btn.querySelector('.pf-dots');
+      const imgs = (btn.dataset.images || '').split('|').filter(Boolean);
+      // Sin auto-rotación si hay una sola imagen o el usuario reduce el movimiento.
+      if (!carousel || imgs.length < 2 || reduce) {
+        if (dotsWrap) dotsWrap.remove();
+        return;
+      }
+      // El primer slide ya está en el HTML; añadimos el resto.
+      for (let i = 1; i < imgs.length; i++) {
+        const s = document.createElement('img');
+        s.className = 'pf-slide';
+        s.src = imgs[i];
+        s.alt = '';
+        s.loading = 'lazy';
+        carousel.appendChild(s);
+      }
+      const slides = carousel.querySelectorAll('.pf-slide');
+      const dots = [];
+      if (dotsWrap) {
+        slides.forEach((_, d) => {
+          const dot = document.createElement('span');
+          dot.className = 'pf-dot' + (d === 0 ? ' is-active' : '');
+          dotsWrap.appendChild(dot);
+          dots.push(dot);
+        });
+      }
+      let idx = 0;
+      const advance = () => {
+        slides[idx].classList.remove('is-active');
+        if (dots[idx]) dots[idx].classList.remove('is-active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('is-active');
+        if (dots[idx]) dots[idx].classList.add('is-active');
+      };
+      // Arranque escalonado: las tarjetas no cambian todas a la vez.
+      setTimeout(() => {
+        setInterval(() => { if (!document.hidden) advance(); }, 3600);
+      }, 600 + ci * 800);
+    });
+  })();
+
+  // ===== Modal de demo interactiva =====
+  function openDemoModal(src, title) {
+    const modal = document.getElementById('demoModal');
+    if (!modal) return;
+    const frame = document.getElementById('demoFrame');
+    const loader = document.getElementById('demoLoader');
+    document.getElementById('demoTitle').textContent = title;
+    document.getElementById('demoNewTab').href = src;
+    loader.classList.remove('hidden');
+    frame.src = src;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  (function setupDemoModal() {
+    const modal = document.getElementById('demoModal');
+    if (!modal) return;
+    const frame = document.getElementById('demoFrame');
+    const loader = document.getElementById('demoLoader');
+    const close = () => {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      // Liberamos el iframe: descarga la demo y detiene timers/sonidos.
+      setTimeout(() => {
+        if (!modal.classList.contains('open')) frame.src = 'about:blank';
+      }, 350);
+    };
+    frame.addEventListener('load', () => {
+      if (modal.classList.contains('open')) loader.classList.add('hidden');
+    });
+    document.getElementById('demoClose').addEventListener('click', close);
+    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) close();
+    });
+  })();
 
   // ===== Botón flotante WhatsApp =====
   const waFloat = document.getElementById('waFloat');

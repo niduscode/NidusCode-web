@@ -1,0 +1,2878 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mueblería Christami — Diseño y carpintería con alma artesanal</title>
+<meta name="description" content="Mueblería Christami en Puerto Montt. 6 años creando muebles a medida: cocinas, closets, dormitorios y más. Catálogo de proyectos reales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown-deep: #3A2614;
+    --brown: #6B4423;
+    --brown-warm: #8B5A2B;
+    --wood-light: #A67B5B;
+    --cream: #F5EBDC;
+    --cream-soft: #FAF5EE;
+    --olive: #7A8450;
+    --olive-deep: #5D6638;
+    --ink: #2A1F18;
+    --muted: #6F5E50;
+    --line: #E5D9C7;
+    --shadow-soft: 0 4px 24px rgba(58, 38, 20, 0.08);
+    --shadow-hover: 0 18px 50px rgba(58, 38, 20, 0.18);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--cream-soft);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--olive); color: var(--cream); }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--wood-light); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--brown); }
+
+  img, video { max-width: 100%; display: block; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    padding: 18px 0;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+  nav.topbar.scrolled {
+    background: rgba(250, 245, 238, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 rgba(58,38,20,0.08);
+    padding: 12px 0;
+  }
+  .nav-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--cream);
+    transition: color 0.4s ease;
+  }
+  nav.topbar.scrolled .brand { color: var(--brown-deep); }
+  .brand-logo {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid currentColor;
+    background: var(--cream);
+  }
+  .brand-text {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+  }
+  .brand-text small {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.75;
+    font-weight: 500;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    position: relative;
+    transition: color 0.3s;
+  }
+  nav.topbar.scrolled .nav-links a { color: var(--brown-deep); }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0; height: 2px;
+    background: var(--olive);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--olive);
+    color: var(--cream) !important;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--olive-deep); }
+  .nav-cta::after { display: none !important; }
+  .menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--cream);
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+  nav.topbar.scrolled .menu-toggle { color: var(--brown-deep); }
+
+  @media (max-width: 820px) {
+    .nav-links {
+      position: fixed;
+      top: 0; right: -100%;
+      height: 100vh;
+      width: 280px;
+      background: var(--cream-soft);
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+      box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+      transition: right 0.4s ease;
+    }
+    .nav-links.open { right: 0; }
+    .nav-links a { color: var(--brown-deep) !important; font-size: 1.1rem; }
+    .menu-toggle { display: block; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--cream);
+    text-align: center;
+  }
+  .hero-carousel {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    will-change: transform;
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+    animation-duration: 16s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  .hero-slide.kb-zoom-in   { animation-name: kbZoomIn; }
+  .hero-slide.kb-pan-left  { animation-name: kbPanLeft; }
+  .hero-slide.kb-pan-right { animation-name: kbPanRight; }
+  .hero-slide.kb-diagonal  { animation-name: kbDiagonal; }
+  .hero-slide.kb-zoom-out  { animation-name: kbZoomOut; }
+  .hero-slide.active { opacity: 1; }
+
+  /* Desfases para que cada slide esté en una posición distinta del ciclo */
+  .hero-slide:nth-child(2) { animation-delay: -3s; }
+  .hero-slide:nth-child(3) { animation-delay: -6s; }
+  .hero-slide:nth-child(4) { animation-delay: -9s; }
+  .hero-slide:nth-child(5) { animation-delay: -12s; }
+
+  @keyframes kbZoomIn {
+    0%   { transform: scale(1.06); }
+    100% { transform: scale(1.20); }
+  }
+  @keyframes kbPanLeft {
+    0%   { transform: scale(1.16) translateX(2.5%); }
+    100% { transform: scale(1.18) translateX(-2.5%); }
+  }
+  @keyframes kbPanRight {
+    0%   { transform: scale(1.16) translateX(-2.5%); }
+    100% { transform: scale(1.18) translateX(2.5%); }
+  }
+  @keyframes kbDiagonal {
+    0%   { transform: scale(1.10) translate(2%, 1.5%); }
+    100% { transform: scale(1.18) translate(-2%, -1.5%); }
+  }
+  @keyframes kbZoomOut {
+    0%   { transform: scale(1.22); }
+    100% { transform: scale(1.08); }
+  }
+
+  .hero-dots {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .hero-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: rgba(245,235,220,0.35);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  .hero-dot:hover { background: rgba(245,235,220,0.7); }
+  .hero-dot.active {
+    background: var(--cream);
+    transform: scale(1.5);
+    box-shadow: 0 0 0 4px rgba(245,235,220,0.15);
+  }
+
+  .hero-progress {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: rgba(245,235,220,0.12);
+    z-index: 3;
+  }
+  .hero-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cream), var(--olive));
+    width: 0%;
+    will-change: width;
+  }
+
+  @media (max-width: 768px) {
+    .hero-dots { right: 14px; gap: 10px; }
+    .hero-dot { width: 7px; height: 7px; }
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(58,38,20,0.78) 0%, rgba(42,31,24,0.65) 50%, rgba(122,132,80,0.55) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 140px 28px 80px;
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.78rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    color: var(--cream);
+    opacity: 0.92;
+    font-weight: 500;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: "";
+    width: 36px; height: 1px;
+    background: var(--cream);
+    opacity: 0.7;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6.5vw, 5rem);
+    line-height: 1.05;
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--cream);
+    font-weight: 400;
+    background: linear-gradient(120deg, #F5EBDC, #D4B996);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p.lead {
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    max-width: 620px;
+    margin: 0 auto 40px;
+    opacity: 0.95;
+    line-height: 1.7;
+  }
+  .hero-cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--cream);
+    color: var(--brown-deep);
+  }
+  .btn-primary:hover {
+    background: var(--olive);
+    color: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  }
+  .btn-ghost {
+    border-color: var(--cream);
+    color: var(--cream);
+  }
+  .btn-ghost:hover {
+    background: var(--cream);
+    color: var(--brown-deep);
+    transform: translateY(-2px);
+  }
+  .btn-whatsapp {
+    background: #25D366;
+    color: white;
+  }
+  .btn-whatsapp:hover { background: #1eaa53; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37,211,102,0.4); }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.85;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .scroll-indicator::after {
+    content: "";
+    width: 1px;
+    height: 50px;
+    background: var(--cream);
+    animation: scrollLine 2s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(0.3); opacity: 0.4; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  /* ---------- SECTION BASE ---------- */
+  section.block {
+    padding: 120px 0;
+    position: relative;
+  }
+  .section-header { text-align: center; margin-bottom: 70px; }
+  .section-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--olive);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .section-eyebrow::before, .section-eyebrow::after {
+    content: "—";
+    margin: 0 10px;
+    opacity: 0.7;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.15;
+    color: var(--brown-deep);
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+  }
+  .section-title em { font-style: italic; color: var(--brown-warm); }
+  .section-sub {
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about {
+    background: var(--cream);
+    position: relative;
+  }
+  .about::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 60px;
+    background: var(--cream-soft);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-text h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--brown-deep);
+    margin-bottom: 24px;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-size: 1.02rem;
+    line-height: 1.8;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--brown);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 8px;
+  }
+  .about-image {
+    position: relative;
+    height: 540px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  .about-image:hover img { transform: scale(1.05); }
+  .about-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255,255,255,0.2);
+    pointer-events: none;
+  }
+  .about-badge {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    background: var(--olive);
+    color: var(--cream);
+    padding: 28px;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(122,132,80,0.4);
+  }
+  .about-badge strong {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+  .about-badge span {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ---------- SERVICIOS ---------- */
+  .services {
+    background: var(--cream-soft);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: white;
+    padding: 38px 30px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--olive);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: transparent;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brown);
+    margin-bottom: 22px;
+    font-size: 1.6rem;
+  }
+  .service-card h3 {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--brown-deep);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .service-card p {
+    color: var(--muted);
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
+  /* ---------- CATÁLOGO DE PROYECTOS ---------- */
+  .catalog {
+    background: var(--cream);
+    position: relative;
+  }
+  .catalog::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+  }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 50px;
+  }
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .filter-btn:hover {
+    border-color: var(--olive);
+    color: var(--brown-deep);
+  }
+  .filter-btn.active {
+    background: var(--brown-deep);
+    border-color: var(--brown-deep);
+    color: var(--cream);
+  }
+  .filter-btn .count {
+    margin-left: 6px;
+    opacity: 0.6;
+    font-size: 0.75rem;
+  }
+
+  /* Card grid */
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 24px;
+  }
+  .catalog-card {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--brown-deep);
+    aspect-ratio: 4 / 3;
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.45s ease, opacity 0.4s ease;
+    box-shadow: 0 6px 18px rgba(58,38,20,0.08);
+  }
+  .catalog-card.hidden {
+    display: none;
+  }
+  .catalog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+  .catalog-card img,
+  .catalog-card video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease, filter 0.5s ease;
+  }
+  .catalog-card:hover img,
+  .catalog-card:hover video { transform: scale(1.07); filter: brightness(0.85); }
+  .catalog-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(58,38,20,0.92) 0%, rgba(58,38,20,0.4) 50%, rgba(58,38,20,0) 100%);
+    color: var(--cream);
+    pointer-events: none;
+  }
+  .card-tag {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--olive);
+    color: var(--cream);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .card-cta {
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .catalog-card:hover .card-cta {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+  .card-media-count {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(58,38,20,0.7);
+    color: var(--cream);
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .card-empty {
+    grid-column: 1 / -1;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Project Modal */
+  .project-modal {
+    position: fixed;
+    inset: 0;
+    background: var(--cream-soft);
+    z-index: 500;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+  .project-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .modal-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 28px 80px;
+  }
+  .modal-close {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: var(--brown-deep);
+    color: var(--cream);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 510;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    transition: background 0.3s, transform 0.3s;
+  }
+  .modal-close:hover { background: var(--olive); transform: scale(1.08); }
+  .modal-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    cursor: pointer;
+    margin-bottom: 28px;
+    padding: 8px 0;
+    transition: color 0.3s;
+  }
+  .modal-back:hover { color: var(--brown-deep); }
+  .modal-header {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--line);
+  }
+  .modal-tag {
+    display: inline-block;
+    background: var(--olive);
+    color: var(--cream);
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .modal-title {
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+    color: var(--brown-deep);
+    line-height: 1.2;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  .modal-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 800px;
+  }
+  .modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 200px;
+    gap: 14px;
+  }
+  .gallery-item {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--brown-deep);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .gallery-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+  .gallery-item img,
+  .gallery-item video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .gallery-item:hover img,
+  .gallery-item:hover video { transform: scale(1.06); }
+  .gallery-item.is-video::after {
+    content: "▶";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(58, 38, 20, 0.35);
+    color: var(--cream);
+    font-size: 2rem;
+    pointer-events: none;
+    transition: background 0.3s;
+  }
+  .gallery-item.is-video:hover::after { background: rgba(58, 38, 20, 0.15); }
+
+  /* layout dinámico — primer item destacado, resto uniforme */
+  .modal-gallery .gallery-item { grid-column: span 4; grid-row: span 1; }
+  .modal-gallery .gallery-item:first-child {
+    grid-column: span 8;
+    grid-row: span 2;
+  }
+
+  @media (max-width: 768px) {
+    .modal-gallery {
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 140px;
+    }
+    .modal-gallery .gallery-item { grid-column: span 4 !important; grid-row: span 1 !important; }
+    .modal-gallery .gallery-item:first-child { grid-row: span 2 !important; }
+    .modal-inner { padding: 80px 18px 60px; }
+  }
+
+  /* ---------- COTIZADOR ---------- */
+  .quote {
+    background: var(--cream-soft);
+    position: relative;
+  }
+  .quote::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+  }
+  .quote-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+  .quote-form {
+    background: white;
+    padding: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-soft);
+  }
+  .form-step {
+    margin-bottom: 36px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.4s ease, margin 0.4s ease;
+  }
+  .form-step.visible {
+    opacity: 1;
+    max-height: 1000px;
+  }
+  .form-step.always-visible {
+    opacity: 1;
+    max-height: 1000px;
+  }
+  .form-step:last-child { margin-bottom: 0; }
+  .form-label {
+    display: block;
+    font-family: var(--serif);
+    color: var(--brown-deep);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
+  }
+  .form-label .step-num {
+    display: inline-block;
+    background: var(--olive);
+    color: var(--cream);
+    font-family: var(--sans);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .form-hint {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* Type cards */
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .type-card {
+    background: var(--cream-soft);
+    border: 2px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-family: var(--sans);
+  }
+  .type-card:hover { border-color: var(--olive); transform: translateY(-2px); }
+  .type-card.selected {
+    background: var(--brown-deep);
+    border-color: var(--brown-deep);
+    color: var(--cream);
+  }
+  .type-icon {
+    display: block;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  .type-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  /* Inputs */
+  .field-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field-label-sm {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .field-input {
+    background: var(--cream-soft);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 1rem;
+    color: var(--brown-deep);
+    font-family: var(--sans);
+    transition: all 0.25s ease;
+    -moz-appearance: textfield;
+  }
+  .field-input::-webkit-outer-spin-button,
+  .field-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .field-input:focus {
+    outline: none;
+    border-color: var(--olive);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(122,132,80,0.15);
+  }
+
+  /* Pills */
+  .pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .pill {
+    background: var(--cream-soft);
+    border: 1.5px solid var(--line);
+    color: var(--brown-deep);
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: var(--sans);
+  }
+  .pill:hover { border-color: var(--olive); }
+  .pill.selected {
+    background: var(--olive);
+    border-color: var(--olive);
+    color: var(--cream);
+  }
+  .pill-stack {
+    display: grid;
+    gap: 10px;
+  }
+  .pill-block {
+    background: var(--cream-soft);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+    font-family: var(--sans);
+  }
+  .pill-block:hover { border-color: var(--olive); }
+  .pill-block.selected {
+    border-color: var(--olive);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(122,132,80,0.12);
+  }
+  .pill-block-title {
+    display: block;
+    font-weight: 600;
+    color: var(--brown-deep);
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+  .pill-block-desc {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* Toggles */
+  .toggle-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cream-soft);
+    padding: 12px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    transition: all 0.25s ease;
+  }
+  .toggle-row:hover { border-color: var(--olive); }
+  .toggle-row span { font-size: 0.92rem; color: var(--brown-deep); font-weight: 500; }
+  .toggle-row .toggle-switch {
+    width: 42px; height: 24px;
+    background: var(--line);
+    border-radius: 999px;
+    position: relative;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .toggle-row .toggle-switch::after {
+    content: "";
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .toggle-row.on .toggle-switch { background: var(--olive); }
+  .toggle-row.on .toggle-switch::after { transform: translateX(18px); }
+
+  /* Summary card */
+  .quote-summary { position: sticky; top: 100px; }
+  .summary-card {
+    background: var(--brown-deep);
+    color: var(--cream);
+    padding: 36px 32px;
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(58,38,20,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .summary-card::before {
+    content: "";
+    position: absolute;
+    top: -50%; right: -30%;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,132,80,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .summary-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--wood-light);
+    font-weight: 600;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .summary-amount {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 6px;
+    color: var(--cream);
+    position: relative;
+  }
+  .summary-amount.placeholder {
+    color: rgba(245,235,220,0.4);
+    font-size: 1.4rem;
+    font-style: italic;
+  }
+  .summary-detail {
+    font-size: 0.85rem;
+    color: rgba(245,235,220,0.7);
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .summary-breakdown {
+    border-top: 1px solid rgba(245,235,220,0.15);
+    border-bottom: 1px solid rgba(245,235,220,0.15);
+    padding: 16px 0;
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .summary-breakdown ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .summary-breakdown li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: rgba(245,235,220,0.85);
+    gap: 12px;
+  }
+  .summary-breakdown li span:last-child {
+    color: var(--cream);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .summary-disclaimer {
+    background: rgba(122,132,80,0.18);
+    border-left: 3px solid var(--olive);
+    padding: 12px 14px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    color: rgba(245,235,220,0.85);
+    line-height: 1.55;
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .summary-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: #25D366;
+    color: white;
+    padding: 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    position: relative;
+  }
+  .summary-cta:hover { background: #1eaa53; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37,211,102,0.4); }
+  .summary-cta.disabled {
+    background: rgba(245,235,220,0.15);
+    color: rgba(245,235,220,0.5);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .summary-cta svg { width: 20px; height: 20px; }
+
+  @media (max-width: 880px) {
+    .quote-grid { grid-template-columns: 1fr; gap: 28px; }
+    .quote-form { padding: 28px 22px; }
+    .quote-summary { position: static; }
+    .type-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---------- CONTACTO ---------- */
+  .contact {
+    background: var(--brown-deep);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at top, rgba(122,132,80,0.18) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .contact .section-title { color: var(--cream); }
+  .contact .section-title em { color: var(--wood-light); }
+  .contact .section-sub { color: rgba(245,235,220,0.7); }
+  .contact .section-eyebrow { color: var(--wood-light); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+  }
+  .contact-info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .contact-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 24px;
+    background: rgba(245,235,220,0.06);
+    border: 1px solid rgba(245,235,220,0.1);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  .contact-item:hover {
+    background: rgba(245,235,220,0.1);
+    border-color: var(--olive);
+    transform: translateX(6px);
+  }
+  .contact-item-icon {
+    width: 46px; height: 46px;
+    background: var(--olive);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+  }
+  .contact-item h4 {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+    color: var(--cream);
+  }
+  .contact-item p, .contact-item a {
+    color: rgba(245,235,220,0.85);
+    text-decoration: none;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+  .contact-item a:hover { color: var(--cream); }
+
+  .map-card {
+    border-radius: 6px;
+    overflow: hidden;
+    height: 100%;
+    min-height: 420px;
+    border: 1px solid rgba(245,235,220,0.15);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .map-card iframe { width: 100%; height: 100%; border: none; display: block; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #1F140A;
+    color: rgba(245,235,220,0.6);
+    padding: 50px 0 28px;
+    text-align: center;
+  }
+  .footer-brand {
+    font-family: var(--serif);
+    color: var(--cream);
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .footer-tag {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    margin-bottom: 28px;
+  }
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .footer-social a {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(245,235,220,0.08);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 1rem;
+  }
+  .footer-social a:hover {
+    background: var(--olive);
+    transform: translateY(-3px);
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(245,235,220,0.1);
+    padding-top: 22px;
+    font-size: 0.82rem;
+  }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 9, 4, 0.96);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    cursor: zoom-out;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .lightbox.active { display: flex; opacity: 1; }
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 88vh;
+    position: relative;
+    cursor: default;
+    animation: lbZoom 0.3s ease;
+  }
+  @keyframes lbZoom {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .lightbox-content img,
+  .lightbox-content video {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px; right: 24px;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(245,235,220,0.12);
+    color: var(--cream);
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    z-index: 10;
+  }
+  .lightbox-close:hover { background: var(--olive); }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: rgba(245,235,220,0.1);
+    border: none;
+    color: var(--cream);
+    cursor: pointer;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    z-index: 10;
+  }
+  .lightbox-nav:hover { background: var(--olive); }
+  .lightbox-nav.prev { left: 24px; }
+  .lightbox-nav.next { right: 24px; }
+  .lightbox-counter {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--cream);
+    font-size: 0.85rem;
+    background: rgba(0,0,0,0.5);
+    padding: 6px 14px;
+    border-radius: 999px;
+    z-index: 10;
+  }
+
+  @media (max-width: 768px) {
+    .lightbox { padding: 20px; }
+    .lightbox-content,
+    .lightbox-content img,
+    .lightbox-content video {
+      max-width: 100vw;
+      max-height: 78vh;
+    }
+    .lightbox-close {
+      top: 14px; right: 14px;
+      width: 44px; height: 44px;
+      background: rgba(58, 38, 20, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lightbox-nav {
+      width: 48px; height: 48px;
+      background: rgba(58, 38, 20, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lightbox-nav.prev { left: 10px; }
+    .lightbox-nav.next { right: 10px; }
+    .lightbox-counter { bottom: 18px; }
+  }
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    z-index: 90;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+    transition: transform 0.3s ease;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 30px rgba(37,211,102,0.4), 0 0 0 14px rgba(37,211,102,0); }
+  }
+  .whatsapp-float svg { width: 30px; height: 30px; }
+
+  /* ---------- REVEAL ANIMATIONS ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal-stagger.in-view > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-stagger.in-view > *:nth-child(1) { transition-delay: 0.05s; }
+  .reveal-stagger.in-view > *:nth-child(2) { transition-delay: 0.12s; }
+  .reveal-stagger.in-view > *:nth-child(3) { transition-delay: 0.19s; }
+  .reveal-stagger.in-view > *:nth-child(4) { transition-delay: 0.26s; }
+  .reveal-stagger.in-view > *:nth-child(5) { transition-delay: 0.33s; }
+  .reveal-stagger.in-view > *:nth-child(6) { transition-delay: 0.4s; }
+  .reveal-stagger.in-view > *:nth-child(7) { transition-delay: 0.47s; }
+  .reveal-stagger.in-view > *:nth-child(8) { transition-delay: 0.54s; }
+  .reveal-stagger.in-view > *:nth-child(n+9) { transition-delay: 0.6s; }
+
+  @media (max-width: 880px) {
+    .about-grid, .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    .about-image { height: 380px; }
+    .about-badge { width: 110px; height: 110px; right: 20px; bottom: -20px; }
+    section.block { padding: 80px 0; }
+    .project { margin-bottom: 80px; }
+    .map-card { min-height: 320px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    .hero-bg { animation: none; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="topbar" id="topbar">
+  <div class="nav-wrap">
+    <a href="#" class="brand">
+      <img src="assets/LOGO.jpg" alt="Logo Mueblería Christami" class="brand-logo">
+      <div class="brand-text">
+        Christami
+        <small>Mueblería</small>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#cotiza">Cotiza</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="https://api.whatsapp.com/send/?phone=56953041094&text&type=phone_number&app_absent=0&utm_source=ig" class="nav-cta" target="_blank" rel="noopener">WhatsApp</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="hero-carousel" id="heroCarousel">
+    <div class="hero-slide kb-pan-right" style="background-image:url('assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.jpeg')"></div>
+    <div class="hero-slide kb-zoom-in"   style="background-image:url('assets/PROTECTO%20%231%20COCINA/PROYECTO%20%231.jpeg')"></div>
+    <div class="hero-slide kb-pan-left"  style="background-image:url('assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-04.jpg')"></div>
+    <div class="hero-slide kb-diagonal"  style="background-image:url('assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-44.jpg')"></div>
+    <div class="hero-slide kb-zoom-out"  style="background-image:url('assets/PROTECTO%20%233%20COCINA/PROYECTO%20%233.jpg')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mueblería · Región de Los Lagos</div>
+    <h1>Diseño y carpintería <em>con alma artesanal</em></h1>
+    <p class="lead">Muebles a medida pensados para tu hogar. Cocinas, closets, dormitorios y más — cada proyecto único, fabricado por nosotros con materiales de primera.</p>
+    <div class="hero-cta-row">
+      <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
+      <a href="#cotiza" class="btn btn-ghost">Cotiza tu proyecto</a>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots" role="tablist" aria-label="Galería principal"></div>
+  <div class="hero-progress"><div class="hero-progress-bar" id="heroProgressBar"></div></div>
+  <div class="scroll-indicator">Desliza</div>
+</header>
+
+<!-- ========== NOSOTROS ========== -->
+<section class="block about" id="nosotros">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-eyebrow">Sobre nosotros</div>
+        <h2>Seis años fabricando los <em style="font-style:italic;color:var(--brown-warm);">muebles soñados</em> de la Región de Los Lagos</h2>
+        <p>En Mueblería Christami diseñamos y fabricamos cada mueble desde cero, escuchando lo que necesitas y adaptándolo a tu espacio. Cocinas, closets, vitrinas, islas, comedores — todo a medida.</p>
+        <p>Trabajamos con cubiertas Galaxy, Fintop, perfiles de aluminio, iluminación LED y los mejores acabados del mercado. Lo que sale del taller no es solo un mueble: es una pieza pensada para durar y para verse perfecta en tu casa.</p>
+        <p><strong style="color:var(--brown-deep);">Llegamos a toda la Región de Los Lagos:</strong> Puerto Montt, Puerto Varas, Osorno, Los Muermos, Isla de Chiloé y más ciudades. Diseñamos, fabricamos, trasladamos e instalamos donde estés.</p>
+        <div class="stats reveal">
+          <div>
+            <div class="stat-num" data-counter="6">0</div>
+            <div class="stat-label">Años de experiencia</div>
+          </div>
+          <div>
+            <div class="stat-num" data-counter="100">0</div>
+            <div class="stat-label">Proyectos entregados</div>
+          </div>
+          <div>
+            <div class="stat-num" data-counter="100" data-suffix="%">0</div>
+            <div class="stat-label">A medida</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-image reveal" style="position:relative;">
+        <img src="assets/PROTECTO%20%231%20COCINA/PROYECTO%20%231.jpeg" alt="Cocina diseñada por Mueblería Christami">
+        <div class="about-badge">
+          <strong>6</strong>
+          <span>Años</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SERVICIOS ========== -->
+<section class="block services" id="servicios">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Lo que hacemos</div>
+      <h2 class="section-title">Muebles a medida para <em>cada rincón</em> de tu hogar</h2>
+      <p class="section-sub">Diseñamos y fabricamos todo tipo de muebles. Cuéntanos qué necesitas — lo hacemos posible.</p>
+    </div>
+    <div class="services-grid reveal-stagger">
+      <div class="service-card">
+        <div class="service-icon">🍳</div>
+        <h3>Cocinas a medida</h3>
+        <p>Cocinas integrales con cubiertas premium, aéreos iluminados, islas y penínsulas diseñadas para tu espacio.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👔</div>
+        <h3>Closets y vestidores</h3>
+        <p>Closets que aprovechan cada centímetro. Sistemas modulares, espejos integrados y herrajes de calidad.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛏️</div>
+        <h3>Dormitorios</h3>
+        <p>Camas, respaldos, veladores y muebles de dormitorio coordinados con el estilo de tu habitación.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛋️</div>
+        <h3>Living &amp; Comedor</h3>
+        <p>Vitrinas, racks de TV, mesas y muebles para los espacios que comparte tu familia día a día.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Muebles de oficina</h3>
+        <p>Escritorios, estanterías y muebles funcionales para tu home office o espacio de trabajo.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛁</div>
+        <h3>Baños &amp; Logia</h3>
+        <p>Vanitorios, repisas y muebles funcionales con materiales resistentes a la humedad.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📐</div>
+        <h3>Diseño personalizado</h3>
+        <p>¿Tienes una idea distinta? Diseñamos cualquier mueble desde cero, adaptado a tus medidas y gustos.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚚</div>
+        <h3>Instalación incluida</h3>
+        <p>Nos encargamos de todo: medición, fabricación, traslado e instalación final en tu hogar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CATÁLOGO ========== -->
+<section class="block catalog" id="catalogo">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Catálogo</div>
+      <h2 class="section-title">Nuestros <em>proyectos</em></h2>
+      <p class="section-sub">Cada mueble es único. Filtra por categoría y haz click en un proyecto para ver todas las fotos y la descripción completa.</p>
+    </div>
+
+    <div class="filter-bar reveal" id="filterBar"></div>
+
+    <div class="catalog-grid" id="catalogGrid"></div>
+  </div>
+</section>
+
+<!-- ========== MODAL DE PROYECTO ========== -->
+<div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-label="Detalle de proyecto">
+  <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+  <div class="modal-inner">
+    <button class="modal-back" id="modalBack">← Volver al catálogo</button>
+    <div class="modal-header">
+      <span class="modal-tag" id="modalTag"></span>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+    </div>
+    <div class="modal-gallery" id="modalGallery"></div>
+  </div>
+</div>
+
+<!-- ========== COTIZADOR ========== -->
+<section class="block quote" id="cotiza">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Cotizador</div>
+      <h2 class="section-title">Cotiza tu mueble <em>en segundos</em></h2>
+      <p class="section-sub">Ingresa medidas y materiales para tener un valor referencial al instante. Después puedes enviarnos el detalle directo por WhatsApp.</p>
+    </div>
+
+    <div class="quote-grid">
+      <div class="quote-form reveal">
+
+        <!-- Paso 1: Tipo -->
+        <div class="form-step always-visible">
+          <label class="form-label"><span class="step-num">1</span>¿Qué mueble necesitas?</label>
+          <div class="type-grid" id="typeGrid"></div>
+        </div>
+
+        <!-- Paso 2: Medidas -->
+        <div class="form-step" id="stepMedidas">
+          <label class="form-label"><span class="step-num">2</span>Medidas aproximadas</label>
+          <div class="field-row" id="medidasRow"></div>
+          <p class="form-hint" id="medidasHint"></p>
+        </div>
+
+        <!-- Paso 3: Material -->
+        <div class="form-step" id="stepMaterial">
+          <label class="form-label"><span class="step-num">3</span>Material principal</label>
+          <div class="pill-stack" id="materialGroup"></div>
+        </div>
+
+        <!-- Paso 4: Acabado -->
+        <div class="form-step" id="stepAcabado">
+          <label class="form-label"><span class="step-num">4</span>Acabado</label>
+          <div class="pill-group" id="acabadoGroup"></div>
+        </div>
+
+        <!-- Paso 5: Cubierta (cocina/vanitorio) -->
+        <div class="form-step" id="stepCubierta">
+          <label class="form-label"><span class="step-num">5</span>Cubierta</label>
+          <div class="pill-group" id="cubiertaGroup"></div>
+        </div>
+
+        <!-- Paso 6: Detalles (cajones/puertas) -->
+        <div class="form-step" id="stepDetalles">
+          <label class="form-label"><span class="step-num">6</span>Cajones y puertas</label>
+          <div class="field-row" id="detallesRow"></div>
+        </div>
+
+        <!-- Paso 7: Extras (solo cocina) -->
+        <div class="form-step" id="stepExtras">
+          <label class="form-label"><span class="step-num">7</span>Extras</label>
+          <div class="toggle-group" id="extrasGroup"></div>
+        </div>
+
+      </div>
+
+      <aside class="quote-summary reveal">
+        <div class="summary-card">
+          <div class="summary-eyebrow">Cotización aproximada</div>
+          <div class="summary-amount placeholder" id="summaryAmount">Selecciona tu mueble</div>
+          <div class="summary-detail" id="summaryDetail">Empieza eligiendo el tipo y completa los pasos.</div>
+          <div class="summary-breakdown" id="summaryBreakdown" style="display:none;">
+            <ul id="breakdownList"></ul>
+          </div>
+          <div class="summary-disclaimer">
+            <strong>Valor referencial.</strong> El precio final depende del diseño, herrajes específicos e instalación. Lo confirmamos tras visita técnica sin costo.
+          </div>
+          <a href="#" class="summary-cta disabled" id="summaryCta" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+            Enviar por WhatsApp
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACTO ========== -->
+<section class="block contact" id="contacto">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Contacto</div>
+      <h2 class="section-title">Hagamos realidad <em>tu próximo mueble</em></h2>
+      <p class="section-sub">Cuéntanos qué necesitas — visita el taller o escríbenos por WhatsApp.</p>
+    </div>
+    <div class="contact-grid">
+      <ul class="contact-info-list reveal-stagger">
+        <li class="contact-item">
+          <div class="contact-item-icon">📱</div>
+          <div>
+            <h4>WhatsApp · Teléfono</h4>
+            <a href="https://api.whatsapp.com/send/?phone=56953041094&text&type=phone_number&app_absent=0&utm_source=ig" target="_blank" rel="noopener">+56 9 5304 1094</a>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:mueblechristami@gmail.com">mueblechristami@gmail.com</a>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <h4>Visita el taller</h4>
+            <a href="https://maps.app.goo.gl/MSEnir6LmJPcsJQ78" target="_blank" rel="noopener">Via Romana 1812, Parque Cardonal,<br>Los Lagos, Chile 5480000</a>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div>
+            <h4>Horario</h4>
+            <p>Lunes a viernes: 08:00 — 18:00<br>Sábado: 08:00 — 14:00<br>Domingo: cerrado</p>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="contact-item-icon">📷</div>
+          <div>
+            <h4>Síguenos en Instagram</h4>
+            <a href="https://www.instagram.com/muebleriachristami/" target="_blank" rel="noopener">@muebleriachristami</a>
+          </div>
+        </li>
+      </ul>
+      <div class="map-card reveal">
+        <iframe src="https://www.google.com/maps?q=Via%20Romana%201812%2C%20Parque%20Cardonal%2C%20Los%20Lagos%2C%20Chile&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación Mueblería Christami"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">Mueblería Christami</div>
+    <div class="footer-tag">Diseño y carpintería con alma artesanal · Región de Los Lagos</div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/muebleriachristami/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1zm0 2c-3.2 0-3.5 0-4.7.1-1.1.1-1.7.2-2 .4-.5.2-.9.4-1.2.7-.3.3-.5.7-.7 1.2-.2.3-.3.9-.4 2-.1 1.2-.1 1.5-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2 .2.5.4.9.7 1.2.3.3.7.5 1.2.7.3.2.9.3 2 .4 1.2.1 1.5.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2-.4.5-.2.9-.4 1.2-.7.3-.3.5-.7.7-1.2.2-.3.3-.9.4-2 .1-1.2.1-1.5.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2-.2-.5-.4-.9-.7-1.2-.3-.3-.7-.5-1.2-.7-.3-.2-.9-.3-2-.4-1.2-.1-1.5-.1-4.7-.1zm0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8zm0 7.3a2.9 2.9 0 1 0 0-5.8 2.9 2.9 0 0 0 0 5.8zm5.6-7.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+      </a>
+      <a href="https://api.whatsapp.com/send/?phone=56953041094" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3C4.4 14.9 4 13.5 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8z"/></svg>
+      </a>
+    </div>
+    <div class="footer-bottom">
+      © <span id="year"></span> Mueblería Christami · Todos los derechos reservados
+    </div>
+  </div>
+</footer>
+
+<!-- ========== WHATSAPP FLOAT ========== -->
+<a href="https://api.whatsapp.com/send/?phone=56953041094&text&type=phone_number&app_absent=0&utm_source=ig" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+</a>
+
+<!-- ========== LIGHTBOX ========== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
+  <button class="lightbox-close" id="lbClose" aria-label="Cerrar">✕</button>
+  <button class="lightbox-nav prev" id="lbPrev" aria-label="Anterior">‹</button>
+  <button class="lightbox-nav next" id="lbNext" aria-label="Siguiente">›</button>
+  <div class="lightbox-content" id="lbContent"></div>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
+
+<script>
+  // Año dinámico
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scrolled
+  const topbar = document.getElementById('topbar');
+  window.addEventListener('scroll', () => {
+    topbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle?.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal animations
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // Counters
+  const counters = document.querySelectorAll('[data-counter]');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.counter, 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1600;
+      const start = performance.now();
+      const tick = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(target * eased) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target + suffix;
+      };
+      requestAnimationFrame(tick);
+      counterIO.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterIO.observe(c));
+
+  // Parallax hero (sobre el contenedor del carrusel, no rompe la animación Ken Burns)
+  const heroCarousel = document.getElementById('heroCarousel');
+  if (heroCarousel) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroCarousel.style.transform = `translateY(${y * 0.3}px)`;
+      }
+    }, { passive: true });
+  }
+
+  // ============================================================
+  // HERO CAROUSEL — crossfade + Ken Burns
+  // ============================================================
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroDots = document.getElementById('heroDots');
+  const heroProgressBar = document.getElementById('heroProgressBar');
+  const SLIDE_DURATION = 6500; // ms cada foto activa
+  let currentSlide = 0;
+  let progressStart = 0;
+  let cycleTimer = null;
+
+  if (heroSlides.length > 0) {
+    // dots
+    heroSlides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Ir a foto ${i + 1}`);
+      dot.addEventListener('click', () => { goToSlide(i); restartCycle(); });
+      heroDots.appendChild(dot);
+    });
+
+    // primera slide
+    heroSlides[0].classList.add('active');
+    progressStart = performance.now();
+
+    function goToSlide(idx) {
+      if (idx === currentSlide) return;
+      heroSlides[currentSlide].classList.remove('active');
+      heroDots.children[currentSlide].classList.remove('active');
+      currentSlide = idx;
+      heroSlides[currentSlide].classList.add('active');
+      heroDots.children[currentSlide].classList.add('active');
+      progressStart = performance.now();
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % heroSlides.length;
+      goToSlide(next);
+    }
+
+    function startCycle() {
+      cycleTimer = setInterval(nextSlide, SLIDE_DURATION);
+    }
+    function restartCycle() {
+      if (cycleTimer) clearInterval(cycleTimer);
+      startCycle();
+    }
+
+    startCycle();
+
+    // barra de progreso
+    function tickProgress() {
+      const elapsed = performance.now() - progressStart;
+      const pct = Math.min(elapsed / SLIDE_DURATION, 1) * 100;
+      heroProgressBar.style.width = pct + '%';
+      requestAnimationFrame(tickProgress);
+    }
+    requestAnimationFrame(tickProgress);
+
+    // pausa al cambiar pestaña (ahorra batería)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
+      } else {
+        progressStart = performance.now();
+        if (!cycleTimer) startCycle();
+      }
+    });
+  }
+
+  // ============================================================
+  // DATOS DE PROYECTOS — para añadir un proyecto nuevo, copia un
+  // bloque y rellena los campos. category puede ser:
+  // 'cocinas', 'closets', 'dormitorios', 'living', 'oficina', 'banos'
+  // ============================================================
+  const projects = [
+    {
+      id: 'p1',
+      category: 'cocinas',
+      tag: 'Cocina Pacífico',
+      title: 'Cocina color Pacífico con isla en doble cascada',
+      description: 'Cocina color pacífico con repisa de esquina color valle, cubierta blanco Galaxy, aéreo pacífico con luz LED de calidad. Mueble isla con cubierta Balcón Galaxia en doble cascada — el corazón visual de la cocina, pensado para reunir y cocinar con estilo.',
+      cover: 'assets/PROTECTO%20%231%20COCINA/PROYECTO%20%231.jpeg',
+      media: [
+        { src: 'assets/PROTECTO%20%231%20COCINA/PROYECTO%20%231.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%231%20COCINA/PROYECTO%20%231.1.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%231%20COCINA/PROYECTO%20%231.2.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%231%20COCINA/PROYECTO%20%231.3.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%231%20COCINA/PROYECTO%20%231.4.jpeg', type: 'image' }
+      ]
+    },
+    {
+      id: 'p2',
+      category: 'cocinas',
+      tag: 'Cocina Azul Tuare',
+      title: 'Cocina azul Tuare con península y vitrina de aluminio',
+      description: 'Cocina color azul Tuare con Colina, cubierta blanco estelar, aéreo color colina con luz LED, vitrina con perfil de aluminio color negro, torre de enchufe push, península con cubierta de Fintop en el centro de cuarzo blanco estelar — un diseño contemporáneo donde cada detalle cuenta.',
+      cover: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.jpeg',
+      media: [
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.1.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.3.mp4', type: 'video' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.2.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.4.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.6.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.7.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.8.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.5.mp4', type: 'video' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYRCTO%20%232.10.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.11.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.12.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.13.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.14.jpeg', type: 'image' },
+        { src: 'assets/PROTECTO%20%232%20COCINA/PROYECTO%20%232.9.mp4', type: 'video' }
+      ]
+    },
+    {
+      id: 'p3',
+      category: 'cocinas',
+      tag: 'Cocina Roble Antracita',
+      title: 'Cocina roble Antracita con bandeja extraíble tipo riñón',
+      description: 'Cocina roble antracita con aéreo a juego y cubierta marfil color crema. Incorpora bandeja extraíble tipo riñón en el mueble esquinero para aprovechar al máximo el espacio que normalmente queda perdido — funcionalidad y elegancia en cada centímetro.',
+      cover: 'assets/PROTECTO%20%233%20COCINA/PROYECTO%20%233.jpg',
+      media: [
+        { src: 'assets/PROTECTO%20%233%20COCINA/PROYECTO%20%233.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%233%20COCINA/PROYECTO%20%233.1.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%233%20COCINA/PROYECTO%20%233.2.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%233%20COCINA/PROYECTO%20%233.3.mp4', type: 'video' }
+      ]
+    },
+    {
+      id: 'p4',
+      category: 'closets',
+      tag: 'Closet Esquinero Tokai',
+      title: 'Closet esquinero color Tokai diseñado a medida',
+      description: 'Closet esquinero personalizado en color Tokai, diseñado para aprovechar cada rincón del dormitorio. Distribución pensada al detalle con espacio para colgadores, repisas y cajonería integrada — un mueble único hecho exclusivamente para tu espacio.',
+      cover: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10.jpg',
+      media: [
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_1.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_2.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_3.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_4.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_5.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_6.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_7.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_8.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_9.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-10_10.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-11.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%234%20CLOSET/PHOTO-2026-05-04-20-06-11_1.jpg', type: 'image' }
+      ]
+    },
+    {
+      id: 'p5',
+      category: 'closets',
+      tag: 'Closet Taupe',
+      title: 'Closet color Taupe de líneas modernas',
+      description: 'Closet color taupe con un acabado sobrio y contemporáneo. Una pieza que combina almacenamiento amplio con un diseño elegante que se integra perfectamente al ambiente del dormitorio.',
+      cover: 'assets/PROTECTO%20%235%20CLOSET/PHOTO-2026-04-16-19-52-02.jpg',
+      media: [
+        { src: 'assets/PROTECTO%20%235%20CLOSET/PHOTO-2026-04-16-19-52-02.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%235%20CLOSET/PHOTO-2026-04-16-19-52-03.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%235%20CLOSET/PHOTO-2026-04-16-19-52-03_1.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%235%20CLOSET/PHOTO-2026-04-16-19-52-03_2.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%235%20CLOSET/PHOTO-2026-04-16-19-52-03_3.jpg', type: 'image' },
+        { src: 'assets/PROTECTO%20%235%20CLOSET/PHOTO-2026-04-16-19-52-03_4.jpg', type: 'image' }
+      ]
+    },
+    {
+      id: 'p6',
+      category: 'closets',
+      tag: 'Closet Taupe con LED',
+      title: 'Closet color Taupe con iluminación LED integrada',
+      description: 'Closet color taupe con iluminación LED de calidad integrada en su diseño. La luz indirecta resalta los acabados del frente y facilita encontrar cada prenda con un toque sofisticado.',
+      cover: 'assets/PROYECTO%20%246%20CLOSET/PHOTO-2026-03-10-11-11-15.jpg',
+      media: [
+        { src: 'assets/PROYECTO%20%246%20CLOSET/PHOTO-2026-03-10-11-11-15.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%246%20CLOSET/PHOTO-2026-03-10-11-11-16.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%246%20CLOSET/PHOTO-2026-03-10-11-11-16_1.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%246%20CLOSET/PHOTO-2026-03-10-11-11-16_2.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%246%20CLOSET/PHOTO-2026-03-10-11-11-17.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%246%20CLOSET/VIDEO-2026-03-10-11-11-32.mp4', type: 'video' },
+        { src: 'assets/PROYECTO%20%246%20CLOSET/VIDEO-2026-03-10-12-32-48.mp4', type: 'video' }
+      ]
+    },
+    {
+      id: 'p7',
+      category: 'closets',
+      tag: 'Walk-in Closet Taupe',
+      title: 'Walk-in closet color Taupe estilo vestidor',
+      description: 'Walk-in closet color taupe diseñado como un espacio independiente. Distribución amplia que combina colgadores, cajoneras y repisas en una experiencia tipo boutique — un vestidor de hotel dentro de tu propia casa.',
+      cover: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-04.jpg',
+      media: [
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-04.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-04_1.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-06.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-07.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-07_1.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-07_2.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-08.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-08_1.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-08_2.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/PHOTO-2026-01-15-18-13-08_3.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/VIDEO-2026-01-15-18-13-17.mp4', type: 'video' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/VIDEO-2026-01-15-18-13-27.mp4', type: 'video' },
+        { src: 'assets/PROYECTO%20%237%20CLOSET/VIDEO-2026-01-15-18-13-36.mp4', type: 'video' }
+      ]
+    },
+    {
+      id: 'p8',
+      category: 'living',
+      tag: 'Mueble Living Gris y Blanco',
+      title: 'Mueble de living gris y blanco con luz LED',
+      description: 'Mueble de living en combinación de gris y blanco con iluminación LED de calidad integrada. Líneas equilibradas y un diseño moderno que convierte al mueble en el centro visual del espacio principal del hogar.',
+      cover: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-44.jpg',
+      media: [
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-44.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-45.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-45_1.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-45_2.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-46.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-46_1.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-46_2.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-46_3.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-47.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-47_1.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/PHOTO-2026-03-10-14-45-47_2.jpg', type: 'image' },
+        { src: 'assets/PROYECTO%20%238%20MUEBLE%20LIVING/VIDEO-2026-03-10-14-45-54.mp4', type: 'video' }
+      ]
+    }
+  ];
+
+  const categoryLabels = {
+    cocinas: 'Cocinas',
+    closets: 'Closets',
+    dormitorios: 'Dormitorios',
+    living: 'Living & Comedor',
+    oficina: 'Oficina',
+    banos: 'Baños',
+    otros: 'Otros'
+  };
+
+  const filterBar = document.getElementById('filterBar');
+  const catalogGrid = document.getElementById('catalogGrid');
+
+  // Render filter buttons (solo categorías con proyectos)
+  const counts = projects.reduce((acc, p) => {
+    acc[p.category] = (acc[p.category] || 0) + 1;
+    return acc;
+  }, {});
+  const usedCats = Object.keys(counts);
+
+  function renderFilters() {
+    const buttons = [
+      `<button class="filter-btn active" data-filter="all">Todos <span class="count">${projects.length}</span></button>`
+    ];
+    usedCats.forEach(cat => {
+      buttons.push(
+        `<button class="filter-btn" data-filter="${cat}">${categoryLabels[cat] || cat} <span class="count">${counts[cat]}</span></button>`
+      );
+    });
+    filterBar.innerHTML = buttons.join('');
+  }
+
+  function renderCatalog() {
+    catalogGrid.innerHTML = projects.map(p => `
+      <article class="catalog-card" data-category="${p.category}" data-id="${p.id}">
+        <img src="${p.cover}" alt="${p.tag}" loading="lazy">
+        <div class="card-media-count">${p.media.length} ${p.media.length === 1 ? 'archivo' : 'archivos'}</div>
+        <div class="catalog-card-overlay">
+          <span class="card-tag">${p.tag}</span>
+          <h3 class="card-title">${p.title}</h3>
+          <span class="card-cta">Ver proyecto →</span>
+        </div>
+      </article>
+    `).join('');
+
+    // Re-observe new cards for stagger reveal
+    catalogGrid.classList.add('reveal-stagger');
+    io.observe(catalogGrid);
+
+    catalogGrid.querySelectorAll('.catalog-card').forEach(card => {
+      card.addEventListener('click', () => openProject(card.dataset.id));
+    });
+  }
+
+  // Filtering
+  filterBar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    const cards = catalogGrid.querySelectorAll('.catalog-card');
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const show = filter === 'all' || card.dataset.category === filter;
+      card.classList.toggle('hidden', !show);
+      if (show) visibleCount++;
+    });
+    // empty state
+    const existingEmpty = catalogGrid.querySelector('.card-empty');
+    if (visibleCount === 0 && !existingEmpty) {
+      const empty = document.createElement('div');
+      empty.className = 'card-empty';
+      empty.textContent = 'Aún no hay proyectos en esta categoría.';
+      catalogGrid.appendChild(empty);
+    } else if (visibleCount > 0 && existingEmpty) {
+      existingEmpty.remove();
+    }
+  });
+
+  // ============================================================
+  // PROJECT MODAL
+  // ============================================================
+  const projectModal = document.getElementById('projectModal');
+  const modalTag = document.getElementById('modalTag');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalGallery = document.getElementById('modalGallery');
+  const modalClose = document.getElementById('modalClose');
+  const modalBack = document.getElementById('modalBack');
+
+  let currentProject = null;
+  let currentMedia = [];
+
+  function openProject(id) {
+    const p = projects.find(x => x.id === id);
+    if (!p) return;
+    currentProject = p;
+    currentMedia = p.media;
+    modalTag.textContent = p.tag;
+    modalTitle.textContent = p.title;
+    modalDesc.textContent = p.description;
+    modalGallery.innerHTML = p.media.map((m, idx) => {
+      if (m.type === 'video') {
+        return `<div class="gallery-item is-video" data-idx="${idx}"><video src="${m.src}" muted playsinline preload="metadata"></video></div>`;
+      }
+      return `<div class="gallery-item" data-idx="${idx}"><img src="${m.src}" alt="" loading="lazy"></div>`;
+    }).join('');
+
+    modalGallery.querySelectorAll('.gallery-item').forEach(el => {
+      el.addEventListener('click', () => openLightbox(currentMedia, parseInt(el.dataset.idx, 10)));
+    });
+
+    // Auto-play videos in modal viewport
+    modalGallery.querySelectorAll('video').forEach(v => modalVideoIO.observe(v));
+
+    projectModal.classList.add('active');
+    projectModal.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProject() {
+    projectModal.classList.remove('active');
+    document.body.style.overflow = '';
+    // Pause all videos in modal
+    modalGallery.querySelectorAll('video').forEach(v => v.pause());
+    setTimeout(() => { modalGallery.innerHTML = ''; }, 400);
+  }
+
+  modalClose.addEventListener('click', closeProject);
+  modalBack.addEventListener('click', closeProject);
+
+  const modalVideoIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      const v = e.target;
+      if (e.isIntersecting) {
+        v.play().catch(() => {});
+        v.loop = true;
+      } else {
+        v.pause();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  // ============================================================
+  // LIGHTBOX
+  // ============================================================
+  const lightbox = document.getElementById('lightbox');
+  const lbContent = document.getElementById('lbContent');
+  const lbCounter = document.getElementById('lbCounter');
+  const lbClose = document.getElementById('lbClose');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+
+  let currentGallery = [];
+  let currentIndex = 0;
+
+  function openLightbox(items, index) {
+    currentGallery = items;
+    currentIndex = index;
+    renderLightbox();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function renderLightbox() {
+    const item = currentGallery[currentIndex];
+    lbContent.innerHTML = '';
+    if (item.type === 'video') {
+      const v = document.createElement('video');
+      v.src = item.src;
+      v.controls = true;
+      v.autoplay = true;
+      v.playsInline = true;
+      lbContent.appendChild(v);
+    } else {
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = '';
+      lbContent.appendChild(img);
+    }
+    lbCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    lbContent.innerHTML = '';
+    // Si el modal del proyecto está abierto, mantén su scroll bloqueado
+    if (!projectModal.classList.contains('active')) {
+      document.body.style.overflow = '';
+    }
+  }
+  function navLb(dir) {
+    currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+    renderLightbox();
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => navLb(-1));
+  lbNext.addEventListener('click', () => navLb(1));
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Swipe para móvil
+  let touchStartX = 0, touchStartY = 0, touchActive = false;
+  lightbox.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchActive = true;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    if (!touchActive) return;
+    touchActive = false;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    // Solo navegar si el movimiento horizontal es claro (>50px) y mayor que el vertical
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      navLb(dx > 0 ? -1 : 1);
+    }
+  }, { passive: true });
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('active')) {
+      if (e.key === 'Escape') { closeLightbox(); return; }
+      if (e.key === 'ArrowLeft') navLb(-1);
+      if (e.key === 'ArrowRight') navLb(1);
+      return;
+    }
+    if (projectModal.classList.contains('active') && e.key === 'Escape') {
+      closeProject();
+    }
+  });
+
+  // Init catálogo
+  renderFilters();
+  renderCatalog();
+
+  // ============================================================
+  // COTIZADOR
+  // PRECIOS FICTICIOS — reemplazar con valores reales del taller
+  // ============================================================
+  const TYPES = [
+    { id: 'cocina',     label: 'Cocina',         icon: '🍳' },
+    { id: 'closet',     label: 'Closet',         icon: '👔' },
+    { id: 'dormitorio', label: 'Dormitorio',     icon: '🛏️' },
+    { id: 'vitrina',    label: 'Vitrina/Living', icon: '🛋️' },
+    { id: 'vanitorio',  label: 'Vanitorio',      icon: '🛁' },
+    { id: 'otro',       label: 'Otro',           icon: '📐' }
+  ];
+
+  const PRICING = {
+    base: {
+      cocina:     { rate: 320000, unit: 'metro lineal' },
+      closet:     { rate: 185000, unit: 'm² de frente' },
+      dormitorio: { rate: 185000, unit: 'm² de frente' },
+      vitrina:    { rate: 210000, unit: 'm² de frente' },
+      vanitorio:  { rate: 420000, unit: 'unidad base' },
+      otro:       { rate: 190000, unit: 'm² de frente' }
+    },
+    materials: [
+      { id: 'estandar',   label: 'Melamina estándar',   desc: 'Blanco, madera clara, beige', mult: 1.0 },
+      { id: 'intermedio', label: 'Melamina texturada',  desc: 'Roble, Tuare, Pacífico, Colina', mult: 1.15 },
+      { id: 'premium',    label: 'Melamina premium',    desc: 'Roble Antracita, mates exclusivos', mult: 1.30 }
+    ],
+    finishes: [
+      { id: 'mate',       label: 'Mate',       mult: 1.0 },
+      { id: 'brillante',  label: 'Brillante',  mult: 1.18 }
+    ],
+    cubiertas: [
+      { id: 'postformada', label: 'Postformada',         rate: 42000 },
+      { id: 'granito',     label: 'Granito',             rate: 135000 },
+      { id: 'fintop',      label: 'Fintop',              rate: 158000 },
+      { id: 'cuarzo',      label: 'Cuarzo (Galaxy/Estelar)', rate: 195000 }
+    ],
+    extras: {
+      cajon: 28000,
+      puerta: 22000,
+      led: 52000,        // por metro lineal
+      aluminio: 32000    // por metro lineal
+    }
+  };
+
+  // Estado
+  const Q = {
+    tipo: null,
+    largo: '', ancho: '', alto: '', profundidad: '',
+    material: 'estandar',
+    acabado: 'mate',
+    cubierta: null,
+    cajones: 0,
+    puertas: 0,
+    led: false,
+    aluminio: false
+  };
+
+  const fmtCLP = (n) => '$' + Math.round(n).toLocaleString('es-CL');
+
+  // ---- Render Tipo cards
+  const typeGrid = document.getElementById('typeGrid');
+  typeGrid.innerHTML = TYPES.map(t => `
+    <button class="type-card" data-tipo="${t.id}" type="button">
+      <span class="type-icon">${t.icon}</span>
+      <span class="type-label">${t.label}</span>
+    </button>
+  `).join('');
+  typeGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('.type-card');
+    if (!card) return;
+    Q.tipo = card.dataset.tipo;
+    typeGrid.querySelectorAll('.type-card').forEach(c => c.classList.toggle('selected', c.dataset.tipo === Q.tipo));
+    // reset
+    Q.largo = ''; Q.ancho = ''; Q.alto = ''; Q.profundidad = '';
+    Q.cubierta = null; Q.cajones = 0; Q.puertas = 0; Q.led = false; Q.aluminio = false;
+    renderForm();
+    update();
+  });
+
+  // ---- Render dinámico del formulario según tipo
+  function renderForm() {
+    const tipo = Q.tipo;
+    const stepMedidas = document.getElementById('stepMedidas');
+    const stepMaterial = document.getElementById('stepMaterial');
+    const stepAcabado = document.getElementById('stepAcabado');
+    const stepCubierta = document.getElementById('stepCubierta');
+    const stepDetalles = document.getElementById('stepDetalles');
+    const stepExtras = document.getElementById('stepExtras');
+    const medidasRow = document.getElementById('medidasRow');
+    const medidasHint = document.getElementById('medidasHint');
+    const detallesRow = document.getElementById('detallesRow');
+
+    if (!tipo) {
+      [stepMedidas, stepMaterial, stepAcabado, stepCubierta, stepDetalles, stepExtras].forEach(s => s.classList.remove('visible'));
+      return;
+    }
+
+    // Medidas según tipo
+    if (tipo === 'cocina') {
+      medidasRow.innerHTML = `
+        <div class="field"><span class="field-label-sm">Largo total (metros lineales)</span><input class="field-input" type="number" min="0" step="0.1" data-q="largo" placeholder="Ej: 4" value="${Q.largo}"></div>
+      `;
+      medidasHint.textContent = 'Medida total del frente de cocina contra muros y/o isla.';
+    } else if (tipo === 'vanitorio') {
+      medidasRow.innerHTML = `
+        <div class="field"><span class="field-label-sm">Ancho (m)</span><input class="field-input" type="number" min="0" step="0.1" data-q="ancho" placeholder="Ej: 1.2" value="${Q.ancho}"></div>
+      `;
+      medidasHint.textContent = 'Ancho aproximado del vanitorio.';
+    } else {
+      medidasRow.innerHTML = `
+        <div class="field"><span class="field-label-sm">Ancho (m)</span><input class="field-input" type="number" min="0" step="0.1" data-q="ancho" placeholder="Ej: 2.5" value="${Q.ancho}"></div>
+        <div class="field"><span class="field-label-sm">Alto (m)</span><input class="field-input" type="number" min="0" step="0.1" data-q="alto" placeholder="Ej: 2.4" value="${Q.alto}"></div>
+        <div class="field"><span class="field-label-sm">Profundidad (m)</span><input class="field-input" type="number" min="0" step="0.1" data-q="profundidad" placeholder="Ej: 0.6" value="${Q.profundidad}"></div>
+      `;
+      medidasHint.textContent = 'Medidas aproximadas del frente y profundidad del mueble.';
+    }
+    stepMedidas.classList.add('visible');
+
+    // Material
+    document.getElementById('materialGroup').innerHTML = PRICING.materials.map(m => `
+      <button type="button" class="pill-block ${Q.material === m.id ? 'selected' : ''}" data-material="${m.id}">
+        <span class="pill-block-title">${m.label}</span>
+        <span class="pill-block-desc">${m.desc}</span>
+      </button>
+    `).join('');
+    stepMaterial.classList.add('visible');
+
+    // Acabado
+    document.getElementById('acabadoGroup').innerHTML = PRICING.finishes.map(f => `
+      <button type="button" class="pill ${Q.acabado === f.id ? 'selected' : ''}" data-acabado="${f.id}">${f.label}</button>
+    `).join('');
+    stepAcabado.classList.add('visible');
+
+    // Cubierta (solo cocina y vanitorio)
+    if (tipo === 'cocina' || tipo === 'vanitorio') {
+      document.getElementById('cubiertaGroup').innerHTML = PRICING.cubiertas.map(c => `
+        <button type="button" class="pill ${Q.cubierta === c.id ? 'selected' : ''}" data-cubierta="${c.id}">${c.label}</button>
+      `).join('');
+      stepCubierta.classList.add('visible');
+    } else {
+      stepCubierta.classList.remove('visible');
+    }
+
+    // Detalles (cajones/puertas) — todos menos cocina
+    if (tipo !== 'cocina') {
+      detallesRow.innerHTML = `
+        <div class="field"><span class="field-label-sm">N° de cajones</span><input class="field-input" type="number" min="0" step="1" data-q="cajones" placeholder="0" value="${Q.cajones || ''}"></div>
+        <div class="field"><span class="field-label-sm">N° de puertas</span><input class="field-input" type="number" min="0" step="1" data-q="puertas" placeholder="0" value="${Q.puertas || ''}"></div>
+      `;
+      stepDetalles.classList.add('visible');
+    } else {
+      stepDetalles.classList.remove('visible');
+    }
+
+    // Extras (solo cocina)
+    if (tipo === 'cocina') {
+      document.getElementById('extrasGroup').innerHTML = `
+        <div class="toggle-row ${Q.led ? 'on' : ''}" data-toggle="led">
+          <span>Iluminación LED en aéreo</span>
+          <div class="toggle-switch"></div>
+        </div>
+        <div class="toggle-row ${Q.aluminio ? 'on' : ''}" data-toggle="aluminio">
+          <span>Perfil de aluminio negro</span>
+          <div class="toggle-switch"></div>
+        </div>
+      `;
+      stepExtras.classList.add('visible');
+    } else {
+      stepExtras.classList.remove('visible');
+    }
+  }
+
+  // Delegación de eventos del formulario
+  document.querySelector('.quote-form').addEventListener('input', (e) => {
+    const t = e.target;
+    if (t.dataset.q) {
+      const key = t.dataset.q;
+      Q[key] = (key === 'cajones' || key === 'puertas') ? (parseInt(t.value, 10) || 0) : t.value;
+      update();
+    }
+  });
+  document.querySelector('.quote-form').addEventListener('click', (e) => {
+    const matBtn = e.target.closest('[data-material]');
+    if (matBtn) {
+      Q.material = matBtn.dataset.material;
+      document.querySelectorAll('[data-material]').forEach(b => b.classList.toggle('selected', b.dataset.material === Q.material));
+      update();
+      return;
+    }
+    const finBtn = e.target.closest('[data-acabado]');
+    if (finBtn) {
+      Q.acabado = finBtn.dataset.acabado;
+      document.querySelectorAll('[data-acabado]').forEach(b => b.classList.toggle('selected', b.dataset.acabado === Q.acabado));
+      update();
+      return;
+    }
+    const cubBtn = e.target.closest('[data-cubierta]');
+    if (cubBtn) {
+      Q.cubierta = (Q.cubierta === cubBtn.dataset.cubierta) ? null : cubBtn.dataset.cubierta;
+      document.querySelectorAll('[data-cubierta]').forEach(b => b.classList.toggle('selected', b.dataset.cubierta === Q.cubierta));
+      update();
+      return;
+    }
+    const togBtn = e.target.closest('[data-toggle]');
+    if (togBtn) {
+      const key = togBtn.dataset.toggle;
+      Q[key] = !Q[key];
+      togBtn.classList.toggle('on', Q[key]);
+      update();
+      return;
+    }
+  });
+
+  // Cálculo
+  function calcular() {
+    if (!Q.tipo) return null;
+    const matMult = (PRICING.materials.find(m => m.id === Q.material) || PRICING.materials[0]).mult;
+    const finMult = (PRICING.finishes.find(f => f.id === Q.acabado) || PRICING.finishes[0]).mult;
+    const baseRate = PRICING.base[Q.tipo].rate;
+    let total = 0;
+    const breakdown = [];
+
+    if (Q.tipo === 'cocina') {
+      const largo = parseFloat(Q.largo) || 0;
+      if (largo <= 0) return null;
+      const body = baseRate * largo * matMult * finMult;
+      total += body;
+      breakdown.push({ label: `Mueblería · ${largo} m lineal`, value: body });
+      if (Q.cubierta) {
+        const c = PRICING.cubiertas.find(x => x.id === Q.cubierta);
+        const v = c.rate * largo;
+        total += v;
+        breakdown.push({ label: `Cubierta ${c.label}`, value: v });
+      }
+      if (Q.led) {
+        const v = PRICING.extras.led * largo;
+        total += v;
+        breakdown.push({ label: 'Iluminación LED', value: v });
+      }
+      if (Q.aluminio) {
+        const v = PRICING.extras.aluminio * largo;
+        total += v;
+        breakdown.push({ label: 'Perfil aluminio', value: v });
+      }
+    } else if (Q.tipo === 'vanitorio') {
+      const ancho = parseFloat(Q.ancho) || 0;
+      if (ancho <= 0) return null;
+      const body = baseRate * matMult * finMult * Math.max(ancho / 1.0, 0.7);
+      total += body;
+      breakdown.push({ label: `Vanitorio · ${ancho} m`, value: body });
+      if (Q.cubierta) {
+        const c = PRICING.cubiertas.find(x => x.id === Q.cubierta);
+        const v = c.rate * ancho;
+        total += v;
+        breakdown.push({ label: `Cubierta ${c.label}`, value: v });
+      }
+      if (Q.cajones > 0) {
+        const v = Q.cajones * PRICING.extras.cajon;
+        total += v;
+        breakdown.push({ label: `${Q.cajones} cajones`, value: v });
+      }
+      if (Q.puertas > 0) {
+        const v = Q.puertas * PRICING.extras.puerta;
+        total += v;
+        breakdown.push({ label: `${Q.puertas} puertas`, value: v });
+      }
+    } else {
+      const ancho = parseFloat(Q.ancho) || 0;
+      const alto = parseFloat(Q.alto) || 0;
+      if (ancho <= 0 || alto <= 0) return null;
+      const m2 = ancho * alto;
+      const body = baseRate * m2 * matMult * finMult;
+      total += body;
+      breakdown.push({ label: `Frente ${m2.toFixed(2)} m²`, value: body });
+      if (Q.cajones > 0) {
+        const v = Q.cajones * PRICING.extras.cajon;
+        total += v;
+        breakdown.push({ label: `${Q.cajones} cajones`, value: v });
+      }
+      if (Q.puertas > 0) {
+        const v = Q.puertas * PRICING.extras.puerta;
+        total += v;
+        breakdown.push({ label: `${Q.puertas} puertas`, value: v });
+      }
+    }
+    return { total, breakdown };
+  }
+
+  // Update UI summary
+  const summaryAmount = document.getElementById('summaryAmount');
+  const summaryDetail = document.getElementById('summaryDetail');
+  const summaryBreakdown = document.getElementById('summaryBreakdown');
+  const breakdownList = document.getElementById('breakdownList');
+  const summaryCta = document.getElementById('summaryCta');
+
+  function update() {
+    const result = calcular();
+    if (!result) {
+      summaryAmount.textContent = Q.tipo ? 'Ingresa las medidas' : 'Selecciona tu mueble';
+      summaryAmount.classList.add('placeholder');
+      const tipoLabel = Q.tipo ? TYPES.find(t => t.id === Q.tipo).label : null;
+      summaryDetail.textContent = tipoLabel
+        ? `${tipoLabel} — completa los campos para ver el valor.`
+        : 'Empieza eligiendo el tipo y completa los pasos.';
+      summaryBreakdown.style.display = 'none';
+      summaryCta.classList.add('disabled');
+      summaryCta.href = '#';
+      return;
+    }
+    summaryAmount.textContent = fmtCLP(result.total);
+    summaryAmount.classList.remove('placeholder');
+    const tipoLabel = TYPES.find(t => t.id === Q.tipo).label;
+    summaryDetail.textContent = `${tipoLabel} · valor estimado`;
+    breakdownList.innerHTML = result.breakdown.map(b => `<li><span>${b.label}</span><span>${fmtCLP(b.value)}</span></li>`).join('');
+    summaryBreakdown.style.display = 'block';
+    summaryCta.classList.remove('disabled');
+    summaryCta.href = buildWaLink(result);
+  }
+
+  function buildWaLink(result) {
+    const tipoLabel = TYPES.find(t => t.id === Q.tipo).label;
+    const matLabel = PRICING.materials.find(m => m.id === Q.material).label;
+    const finLabel = PRICING.finishes.find(f => f.id === Q.acabado).label;
+
+    const lines = [
+      'Hola Mueblería Christami!',
+      'Vengo de la web y quiero cotizar un proyecto:',
+      '',
+      `• Tipo: ${tipoLabel}`,
+    ];
+
+    if (Q.tipo === 'cocina') {
+      lines.push(`• Largo: ${Q.largo} m lineal`);
+    } else if (Q.tipo === 'vanitorio') {
+      lines.push(`• Ancho: ${Q.ancho} m`);
+    } else {
+      lines.push(`• Medidas: ${Q.ancho}m ancho × ${Q.alto}m alto${Q.profundidad ? ' × ' + Q.profundidad + 'm fondo' : ''}`);
+    }
+
+    lines.push(`• Material: ${matLabel}`);
+    lines.push(`• Acabado: ${finLabel}`);
+
+    if (Q.cubierta) {
+      const cub = PRICING.cubiertas.find(c => c.id === Q.cubierta);
+      lines.push(`• Cubierta: ${cub.label}`);
+    }
+    if (Q.cajones > 0) lines.push(`• Cajones: ${Q.cajones}`);
+    if (Q.puertas > 0) lines.push(`• Puertas: ${Q.puertas}`);
+    if (Q.led) lines.push('• Con iluminación LED');
+    if (Q.aluminio) lines.push('• Con perfil de aluminio');
+
+    lines.push('');
+    lines.push(`Estimación referencial web: ${fmtCLP(result.total)}`);
+    lines.push('Quedo atento para coordinar visita técnica. Gracias!');
+
+    return 'https://api.whatsapp.com/send?phone=56953041094&text=' + encodeURIComponent(lines.join('\n'));
+  }
+
+  // Init cotizador
+  update();
+</script>
+
+<!-- ============================================================
+     CAPA MODO DEMO · NidusCode  (inyectada — no es del sitio original)
+     Convierte el sitio en un sandbox: se puede ver y pulsar todo,
+     pero los contactos reales (WhatsApp, correo) quedan neutralizados.
+     ============================================================ -->
+<style>
+  .ndc-demo-pill{
+    position:fixed; left:16px; bottom:16px; z-index:2147482000;
+    display:flex; align-items:center; gap:8px;
+    padding:8px 14px; border-radius:999px;
+    background:rgba(26,18,12,.88); color:#F5EBDC;
+    font:600 12px/1 'Inter',system-ui,sans-serif;
+    box-shadow:0 8px 28px rgba(0,0,0,.28);
+    pointer-events:none; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  }
+  .ndc-demo-pill .dot{
+    width:8px; height:8px; border-radius:50%; background:#A6C36F;
+    animation:ndc-pulse 2.2s infinite;
+  }
+  @keyframes ndc-pulse{
+    0%{box-shadow:0 0 0 0 rgba(166,195,111,.6)}
+    70%{box-shadow:0 0 0 9px rgba(166,195,111,0)}
+    100%{box-shadow:0 0 0 0 rgba(166,195,111,0)}
+  }
+  .ndc-demo-toast{
+    position:fixed; left:50%; bottom:24px; transform:translate(-50%,150%);
+    z-index:2147483000; max-width:min(440px,90vw);
+    display:flex; align-items:flex-start; gap:10px;
+    padding:14px 18px; border-radius:14px;
+    background:#1A120C; color:#F5EBDC;
+    font:500 13.5px/1.5 'Inter',system-ui,sans-serif;
+    box-shadow:0 16px 48px rgba(0,0,0,.4);
+    opacity:0; transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s;
+  }
+  .ndc-demo-toast.show{ transform:translate(-50%,0); opacity:1; }
+  .ndc-demo-toast svg{ flex:0 0 auto; width:18px; height:18px; margin-top:1px; color:#A6C36F; }
+  @media (prefers-reduced-motion:reduce){
+    .ndc-demo-pill .dot{ animation:none }
+    .ndc-demo-toast{ transition:opacity .2s }
+  }
+</style>
+
+<div class="ndc-demo-pill" aria-hidden="true">
+  <span class="dot"></span>Demo interactiva · NidusCode
+</div>
+<div class="ndc-demo-toast" id="ndcDemoToast" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/>
+  </svg>
+  <span>Estás viendo una <strong>demo</strong>. En el sitio real este botón conecta con la mueblería; aquí no se envía nada.</span>
+</div>
+
+<script>
+/* Modo demo NidusCode: neutraliza contactos reales (no es código del sitio). */
+(function(){
+  var toast = document.getElementById('ndcDemoToast'), t;
+  function flash(){
+    toast.classList.add('show');
+    clearTimeout(t);
+    t = setTimeout(function(){ toast.classList.remove('show'); }, 3800);
+  }
+  // Intercepta clics en enlaces de contacto directo (WhatsApp, correo, teléfono).
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]');
+    if(!a) return;
+    var href = (a.getAttribute('href') || '').toLowerCase();
+    if(href.indexOf('whatsapp') > -1 || href.indexOf('wa.me') > -1 ||
+       href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0){
+      e.preventDefault();
+      flash();
+    }
+  }, true);
+  // Por si algún botón intentara abrir una ventana externa de contacto.
+  var _open = window.open;
+  window.open = function(url){
+    if(typeof url === 'string' && /whatsapp|wa\.me|mailto:|tel:/i.test(url)){ flash(); return null; }
+    return _open.apply(window, arguments);
+  };
+})();
+</script>
+
+</body>
+</html>

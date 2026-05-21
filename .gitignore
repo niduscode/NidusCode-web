@@ -15,3 +15,6 @@ node_modules/
 
 # Netlify
 .netlify/
+
+# Código fuente crudo de proyectos cliente: vive en ../niduscode-fuentes/
+# (fuera de este repo). Nunca debe entrar aquí: contiene .env y claves privadas.
