@@ -106,22 +106,68 @@
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             CL · AR
           </span>
-          <button id="menuToggle" aria-label="Abrir menú" class="md:hidden p-2 rounded-md hover:bg-ink-100 dark:hover:bg-ink-800 transition-colors">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+          <button id="menuToggle" aria-label="Abrir menú" aria-expanded="false" class="menu-toggle md:hidden">
+            <svg class="menu-icon menu-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+            <svg class="menu-icon menu-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
           </button>
         </div>
       </nav>
     </div>
 
-    <!-- Menú móvil -->
-    <div id="mobileMenu" class="hidden md:hidden mt-2 mx-4 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white/95 dark:bg-ink-900/95 backdrop-blur-xl">
-      <ul class="px-6 py-4 space-y-1 text-base font-medium">
-        <li><a href="#servicios" class="block py-2">Servicios</a></li>
-        <li><a href="#kits" class="block py-2">Stack</a></li>
-        <li><a href="#portafolio" class="block py-2">Portafolio</a></li>
-        <li><a href="#faq" class="block py-2">FAQ</a></li>
-        <li><a href="#contacto" class="block py-2">Contacto</a></li>
-      </ul>
+    <!-- Menú móvil · panel grande con icono, descripción y CTA -->
+    <div id="mobileMenu" class="mobile-menu" hidden>
+      <div class="mobile-menu-panel">
+        <nav>
+          <a href="#servicios" class="mobile-menu-link">
+            <span class="mobile-menu-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="mobile-menu-text">
+              <span class="mobile-menu-title">Servicios</span>
+              <span class="mobile-menu-hint">Qué hacemos</span>
+            </span>
+            <svg class="mobile-menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#kits" class="mobile-menu-link">
+            <span class="mobile-menu-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke-linecap="round"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke-linecap="round"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke-linecap="round"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke-linecap="round"/></svg>
+            </span>
+            <span class="mobile-menu-text">
+              <span class="mobile-menu-title">Stack</span>
+              <span class="mobile-menu-hint">Con qué herramientas</span>
+            </span>
+            <svg class="mobile-menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#portafolio" class="mobile-menu-link">
+            <span class="mobile-menu-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h12" stroke-linecap="round"/></svg>
+            </span>
+            <span class="mobile-menu-text">
+              <span class="mobile-menu-title">Portafolio</span>
+              <span class="mobile-menu-hint">Proyectos entregados</span>
+            </span>
+            <svg class="mobile-menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#faq" class="mobile-menu-link">
+            <span class="mobile-menu-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-2.5 2-2.5 4M12 17.5h.01" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="mobile-menu-text">
+              <span class="mobile-menu-title">FAQ</span>
+              <span class="mobile-menu-hint">Preguntas frecuentes</span>
+            </span>
+            <svg class="mobile-menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </nav>
+        <a href="#contacto" class="mobile-menu-cta">
+          Habla con nosotros
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="mobile-menu-status">
+          <span class="mobile-menu-dot"></span>
+          <span>Disponibles en Chile · Argentina</span>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -505,38 +551,46 @@
     </section>
 
     <!-- ============ PROCESO ============ -->
-    <section id="proceso" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
+    <section id="proceso" class="py-16 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
       <div class="max-w-6xl mx-auto">
-        <div class="reveal max-w-2xl mb-16">
+        <div class="reveal max-w-2xl mb-10 sm:mb-16">
           <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 03 — Proceso</p>
           <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
             Cómo trabajamos.
           </h2>
         </div>
 
-        <div class="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="proceso-grid relative grid lg:grid-cols-4">
           <!-- Línea conectora horizontal en desktop -->
           <div aria-hidden="true" class="hidden lg:block absolute top-7 left-12 right-12 h-px bg-gradient-to-r from-transparent via-ink-200 dark:via-ink-700 to-transparent"></div>
 
-          <div class="reveal relative">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-violet-100 to-violet-50 dark:from-ink-800 dark:to-ink-900 border border-violet-200 dark:border-ink-700 flex items-center justify-center mb-5 relative z-10 font-mono text-sm font-bold text-violet-600 dark:text-ink-300 shadow-md shadow-violet-500/10">01</div>
-            <h3 class="font-display text-xl font-bold mb-2">Descubrimos</h3>
-            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Una llamada corta para entender qué necesitas y qué resuelve realmente tu problema.</p>
+          <div class="reveal proceso-step">
+            <div class="proceso-num proceso-num--violet">01</div>
+            <div class="proceso-text">
+              <h3 class="font-display proceso-title">Descubrimos</h3>
+              <p class="proceso-desc">Una llamada corta para entender qué necesitas y qué resuelve realmente tu problema.</p>
+            </div>
           </div>
-          <div class="reveal relative">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-violet-100 to-violet-50 dark:from-ink-800 dark:to-ink-900 border border-violet-200 dark:border-ink-700 flex items-center justify-center mb-5 relative z-10 font-mono text-sm font-bold text-violet-600 dark:text-ink-300 shadow-md shadow-violet-500/10">02</div>
-            <h3 class="font-display text-xl font-bold mb-2">Diseñamos</h3>
-            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Prototipo navegable en menos de una semana. Iteramos hasta que encaje.</p>
+          <div class="reveal proceso-step">
+            <div class="proceso-num proceso-num--violet">02</div>
+            <div class="proceso-text">
+              <h3 class="font-display proceso-title">Diseñamos</h3>
+              <p class="proceso-desc">Prototipo navegable en menos de una semana. Iteramos hasta que encaje.</p>
+            </div>
           </div>
-          <div class="reveal relative">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-fuchsia-100 to-fuchsia-50 dark:from-ink-800 dark:to-ink-900 border border-fuchsia-200 dark:border-ink-700 flex items-center justify-center mb-5 relative z-10 font-mono text-sm font-bold text-fuchsia-600 dark:text-ink-300 shadow-md shadow-fuchsia-500/10">03</div>
-            <h3 class="font-display text-xl font-bold mb-2">Construimos</h3>
-            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Código limpio, rápido y mantenible. Sin dependencias innecesarias.</p>
+          <div class="reveal proceso-step">
+            <div class="proceso-num proceso-num--fuchsia">03</div>
+            <div class="proceso-text">
+              <h3 class="font-display proceso-title">Construimos</h3>
+              <p class="proceso-desc">Código limpio, rápido y mantenible. Sin dependencias innecesarias.</p>
+            </div>
           </div>
-          <div class="reveal relative">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-accent via-accent-2 to-accent-3 flex items-center justify-center mb-5 relative z-10 font-mono text-sm font-bold text-white shadow-lg shadow-fuchsia-500/40">04</div>
-            <h3 class="font-display text-xl font-bold mb-2">Lanzamos</h3>
-            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Desplegamos, medimos y seguimos contigo si necesitas evolucionar el producto.</p>
+          <div class="reveal proceso-step">
+            <div class="proceso-num proceso-num--accent">04</div>
+            <div class="proceso-text">
+              <h3 class="font-display proceso-title">Lanzamos</h3>
+              <p class="proceso-desc">Desplegamos, medimos y seguimos contigo si necesitas evolucionar el producto.</p>
+            </div>
           </div>
         </div>
       </div>

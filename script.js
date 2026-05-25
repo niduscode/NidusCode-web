@@ -27,13 +27,38 @@
   const menuToggle = document.getElementById('menuToggle');
   const mobileMenu = document.getElementById('mobileMenu');
   if (menuToggle && mobileMenu) {
+    const openMenu = () => {
+      mobileMenu.hidden = false;
+      // forzar reflow para que la animación de entrada se aplique
+      void mobileMenu.offsetWidth;
+      mobileMenu.classList.add('is-open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeMenu = () => {
+      mobileMenu.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.classList.remove('is-active');
+      document.body.style.overflow = '';
+      // esperar a que termine la transición antes de ocultar
+      setTimeout(() => { mobileMenu.hidden = true; }, 280);
+    };
     menuToggle.addEventListener('click', () => {
-      const isOpen = !mobileMenu.classList.contains('hidden');
-      mobileMenu.classList.toggle('hidden');
-      menuToggle.setAttribute('aria-expanded', String(!isOpen));
+      if (mobileMenu.classList.contains('is-open')) closeMenu();
+      else openMenu();
     });
+    // Click en un link → cierra
     mobileMenu.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      a.addEventListener('click', closeMenu);
+    });
+    // Click en el backdrop (afuera del panel) → cierra
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) closeMenu();
+    });
+    // Escape → cierra
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) closeMenu();
     });
   }
 
