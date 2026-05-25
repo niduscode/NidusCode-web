@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Administración — OperoEducator</title>
+<script src="tailwind.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  .brand-text { color: #f97316; }
+  .brand-bg { background: #f97316; }
+  .brand-grad { background: linear-gradient(135deg, #f97316, #fbbf24); }
+  .border-brand-t { border-top: 4px solid #f97316; }
+  .card { background: #fff; border-radius: 1.25rem; box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px -8px rgba(15,23,42,.05); border: 1px solid #f1f5f9; padding: 1.25rem; }
+  .btn-prim { background: #f97316; color: #fff; padding: .65rem 1rem; border-radius: 999px; font-weight: 600; font-size: .85rem; box-shadow: 0 8px 16px -6px rgba(249,115,22,.5); }
+  .btn-prim:hover { background: #ea580c; }
+  .btn-out { background: #fff; border: 1px solid #e2e8f0; color: #334155; padding: .65rem 1rem; border-radius: 999px; font-weight: 600; font-size: .85rem; }
+  .btn-out:hover { border-color: #94a3b8; }
+</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+<div class="max-w-7xl mx-auto p-4 md:p-8">
+
+  <div class="flex justify-between items-center mb-4 gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 brand-grad rounded-xl flex items-center justify-center shadow-md">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-slate-900">
+          <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="text-sm font-bold text-slate-900"><span class="font-light">Opero</span>Educator</div>
+        <div class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Admin · finanzas</div>
+      </div>
+    </div>
+    <a href="index.html" class="btn-out">Cerrar sesión</a>
+  </div>
+
+  <div class="space-y-6 md:space-y-8">
+
+    <div class="flex justify-between items-center flex-wrap gap-4">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-light tracking-tight text-slate-900">Panel de Administración 💰</h1>
+        <p class="text-slate-500 mt-1 text-xs md:text-sm">Pagos de alumnos y conciliación bancaria</p>
+      </div>
+      <div class="flex gap-2 flex-wrap">
+        <a href="#" class="btn-out">Ver alumnos</a>
+        <a href="#" class="btn-out">Ver Instructores</a>
+        <a href="#" class="btn-prim">Pagos de Alumnos</a>
+        <a href="#" class="btn-out">Pagos del Mes</a>
+      </div>
+    </div>
+
+    <div class="card border-brand-t">
+      <div class="flex items-start gap-3 flex-wrap">
+        <div class="w-10 h-10 brand-grad rounded-xl flex-shrink-0 flex items-center justify-center text-white text-xl">🎓</div>
+        <div class="flex-1 min-w-[200px]">
+          <div class="text-[10px] font-bold text-orange-600 uppercase tracking-widest">Certificaciones</div>
+          <div class="text-sm font-bold text-slate-900 mt-1">3 alumnos terminan curso este mes</div>
+          <div class="text-xs text-slate-500 mt-1">Útil para anticipar cierres de pago.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+      <div class="card">
+        <div class="flex justify-between items-baseline mb-1">
+          <h3 class="text-base font-bold text-slate-900">Estado Financiero Global</h3>
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Mayo 2026</span>
+        </div>
+        <p class="text-xs text-slate-500">Recaudación del mes en curso</p>
+        <div class="space-y-3 mt-4">
+          <div class="bg-slate-900 text-white p-4 rounded-2xl">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Total recaudado este mes</p>
+            <p class="text-3xl font-light mt-1">$7.420.000 CLP</p>
+            <p class="text-[10px] text-slate-400 mt-1">Esperado: $9.100.000 CLP · <b class="text-white">81%</b> cobrado</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-emerald-50 p-3 rounded-2xl border border-emerald-100 text-emerald-700">
+              <p class="text-[10px] font-bold uppercase tracking-widest">Alumnos al día</p>
+              <p class="text-2xl font-light">74</p>
+            </div>
+            <div class="bg-rose-50 p-3 rounded-2xl border border-rose-100 text-rose-700">
+              <p class="text-[10px] font-bold uppercase tracking-widest">Con deuda</p>
+              <p class="text-2xl font-light">13</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="text-base font-bold text-slate-900">Alumnos con deuda</h3>
+        <p class="text-xs text-slate-500">Pendientes este mes</p>
+        <div class="space-y-2 mt-4 max-h-72 overflow-y-auto pr-2">
+          <div class="p-3 rounded-xl text-sm flex justify-between items-center border bg-rose-50 text-rose-700 border-rose-100">
+            <div class="flex flex-col truncate pr-2"><b>Camila Aravena</b><span class="text-[10px] uppercase tracking-widest text-rose-400">Junior · Muermos</span></div>
+            <a href="#" class="flex-shrink-0"><span class="bg-white border border-rose-200 text-rose-700 px-3 py-1.5 rounded-lg text-[11px] font-bold">Registrar pago</span></a>
+          </div>
+          <div class="p-3 rounded-xl text-sm flex justify-between items-center border bg-rose-50 text-rose-700 border-rose-100">
+            <div class="flex flex-col truncate pr-2"><b>Diego Sandoval</b><span class="text-[10px] uppercase tracking-widest text-rose-400">Senior · Puerto Montt</span></div>
+            <a href="#" class="flex-shrink-0"><span class="bg-white border border-rose-200 text-rose-700 px-3 py-1.5 rounded-lg text-[11px] font-bold">Registrar pago</span></a>
+          </div>
+          <div class="p-3 rounded-xl text-sm flex justify-between items-center border bg-rose-50 text-rose-700 border-rose-100">
+            <div class="flex flex-col truncate pr-2"><b>Vicente Ríos</b><span class="text-[10px] uppercase tracking-widest text-rose-400">Master · Osorno</span></div>
+            <a href="#" class="flex-shrink-0"><span class="bg-white border border-rose-200 text-rose-700 px-3 py-1.5 rounded-lg text-[11px] font-bold">Registrar pago</span></a>
+          </div>
+          <div class="p-3 rounded-xl text-sm flex justify-between items-center border bg-rose-50 text-rose-700 border-rose-100">
+            <div class="flex flex-col truncate pr-2"><b>Antonia Mella</b><span class="text-[10px] uppercase tracking-widest text-rose-400">Junior · Valdivia</span></div>
+            <a href="#" class="flex-shrink-0"><span class="bg-white border border-rose-200 text-rose-700 px-3 py-1.5 rounded-lg text-[11px] font-bold">Registrar pago</span></a>
+          </div>
+          <div class="p-3 rounded-xl text-sm flex justify-between items-center border bg-rose-50 text-rose-700 border-rose-100">
+            <div class="flex flex-col truncate pr-2"><b>Joaquín Bravo</b><span class="text-[10px] uppercase tracking-widest text-rose-400">Senior · Temuco</span></div>
+            <a href="#" class="flex-shrink-0"><span class="bg-white border border-rose-200 text-rose-700 px-3 py-1.5 rounded-lg text-[11px] font-bold">Registrar pago</span></a>
+          </div>
+          <div class="p-3 rounded-xl text-sm flex justify-between items-center border bg-rose-50 text-rose-700 border-rose-100">
+            <div class="flex flex-col truncate pr-2"><b>Florencia Pino</b><span class="text-[10px] uppercase tracking-widest text-rose-400">Master · Puerto Montt</span></div>
+            <a href="#" class="flex-shrink-0"><span class="bg-white border border-rose-200 text-rose-700 px-3 py-1.5 rounded-lg text-[11px] font-bold">Registrar pago</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex justify-between items-center flex-wrap gap-2">
+        <div>
+          <h3 class="text-base font-bold text-slate-900">Ausencias del Mes</h3>
+          <p class="text-xs text-slate-500">14 ausencias · justifica por qué un profesional cobra menos</p>
+        </div>
+        <a href="#" class="btn-out !px-3 !py-2 text-xs">Ver todas</a>
+      </div>
+      <div class="mt-4 overflow-x-auto">
+        <table class="w-full text-sm min-w-[640px]">
+          <thead>
+            <tr class="text-left text-[10px] text-slate-400 uppercase tracking-widest border-b border-slate-100">
+              <th class="pb-3 pr-3">Fecha</th><th class="pb-3 pr-3">Alumno</th><th class="pb-3 pr-3">Sucursal · Curso</th><th class="pb-3 pr-3">Profesional a cargo</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-700">
+            <tr class="border-b border-slate-50"><td class="py-3 pr-3 font-mono text-xs text-slate-700">2026-05-21</td><td class="py-3 pr-3"><b>Renata Soto</b></td><td class="py-3 pr-3 text-xs text-slate-500">Puerto Montt · Junior</td><td class="py-3 pr-3 text-xs"><span class="font-bold">Gregory Delgado</span> <span class="ml-1 text-[10px] uppercase tracking-widest text-slate-400 font-bold">· instructor</span></td></tr>
+            <tr class="border-b border-slate-50"><td class="py-3 pr-3 font-mono text-xs text-slate-700">2026-05-20</td><td class="py-3 pr-3"><b>Mateo González</b></td><td class="py-3 pr-3 text-xs text-slate-500">Osorno · Senior</td><td class="py-3 pr-3 text-xs"><span class="font-bold">Lucía Henríquez</span> <span class="ml-1 text-[10px] uppercase tracking-widest text-slate-400 font-bold">· profe guía</span></td></tr>
+            <tr class="border-b border-slate-50"><td class="py-3 pr-3 font-mono text-xs text-slate-700">2026-05-19</td><td class="py-3 pr-3"><b>Camila Aravena</b></td><td class="py-3 pr-3 text-xs text-slate-500">Muermos · Junior</td><td class="py-3 pr-3 text-xs"><span class="font-bold">Felipe Cárcamo</span> <span class="ml-1 text-[10px] uppercase tracking-widest text-slate-400 font-bold">· instructor</span></td></tr>
+            <tr class="border-b border-slate-50"><td class="py-3 pr-3 font-mono text-xs text-slate-700">2026-05-19</td><td class="py-3 pr-3"><b>Vicente Ríos</b></td><td class="py-3 pr-3 text-xs text-slate-500">Osorno · Master</td><td class="py-3 pr-3 text-xs"><span class="font-bold">Lucía Henríquez</span> <span class="ml-1 text-[10px] uppercase tracking-widest text-slate-400 font-bold">· profe guía</span></td></tr>
+            <tr class="border-b border-slate-50"><td class="py-3 pr-3 font-mono text-xs text-slate-700">2026-05-15</td><td class="py-3 pr-3"><b>Joaquín Bravo</b></td><td class="py-3 pr-3 text-xs text-slate-500">Temuco · Senior</td><td class="py-3 pr-3 text-xs"><span class="font-bold">Ignacio Vidal</span> <span class="ml-1 text-[10px] uppercase tracking-widest text-slate-400 font-bold">· instructor</span></td></tr>
+            <tr class="border-b border-slate-50"><td class="py-3 pr-3 font-mono text-xs text-slate-700">2026-05-13</td><td class="py-3 pr-3"><b>Antonia Mella</b></td><td class="py-3 pr-3 text-xs text-slate-500">Valdivia · Junior</td><td class="py-3 pr-3 text-xs"><span class="font-bold">Diego Vásquez</span> <span class="ml-1 text-[10px] uppercase tracking-widest text-slate-400 font-bold">· instructor</span></td></tr>
+            <tr><td class="py-3 pr-3 font-mono text-xs text-slate-700">2026-05-12</td><td class="py-3 pr-3"><b>Florencia Pino</b></td><td class="py-3 pr-3 text-xs text-slate-500">Puerto Montt · Master</td><td class="py-3 pr-3 text-xs"><span class="font-bold">Gregory Delgado</span> <span class="ml-1 text-[10px] uppercase tracking-widest text-slate-400 font-bold">· instructor</span></td></tr>
+          </tbody>
+        </table>
+        <p class="text-[11px] text-slate-400 mt-2 text-center">Mostrando las 7 más recientes de 14.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+      <div class="card">
+        <h3 class="text-base font-bold text-slate-900">Pagos a Profes Guías</h3>
+        <p class="text-xs text-slate-500">Días trabajados por liquidar</p>
+        <div class="mt-4 p-4 bg-slate-50 rounded-2xl border border-slate-200 text-sm text-slate-500">
+          Entra a <a href="#" class="brand-text font-bold underline">Pagos del Mes</a> para ver el detalle por profe guía con monto a pagar.
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="text-base font-bold text-slate-900">Conciliación bancaria</h3>
+        <p class="text-xs text-slate-500">Resumen del mes</p>
+        <div class="mt-4 space-y-2 text-xs text-slate-600">
+          <div class="flex justify-between"><span>Total recaudado</span><b class="text-emerald-600">$7.420.000 CLP</b></div>
+          <div class="flex justify-between"><span>Total esperado</span><b class="text-slate-900">$9.100.000 CLP</b></div>
+          <div class="flex justify-between"><span>Diferencia</span><b class="text-rose-600">$1.680.000 CLP</b></div>
+          <p class="pt-2 text-[11px] text-slate-400 border-t border-slate-100">
+            Para el detalle banco-por-pago entra a <a href="#" class="brand-text font-bold underline">Pagos de Alumnos</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../demo-mode.js" defer></script>
+</body>
+</html>

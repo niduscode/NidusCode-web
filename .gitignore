@@ -16,5 +16,8 @@ node_modules/
 # Netlify
 .netlify/
 
+# Claude Code (estado interno de la sesión)
+.claude/
+
 # Código fuente crudo de proyectos cliente: vive en ../niduscode-fuentes/
 # (fuera de este repo). Nunca debe entrar aquí: contiene .env y claves privadas.

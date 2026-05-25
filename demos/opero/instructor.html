@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula del Instructor — OperoEducator</title>
+<script src="tailwind.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  .brand-text { color: #f97316; }
+  .brand-bg { background: #f97316; }
+  .brand-grad { background: linear-gradient(135deg, #f97316, #fbbf24); }
+  .border-brand-t { border-top: 4px solid #f97316; }
+  .card { background: #fff; border-radius: 1.25rem; box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px -8px rgba(15,23,42,.05); border: 1px solid #f1f5f9; padding: 1.25rem; }
+  .btn-prim { background: #f97316; color: #fff; padding: .65rem 1rem; border-radius: 999px; font-weight: 600; font-size: .85rem; box-shadow: 0 8px 16px -6px rgba(249,115,22,.5); }
+  .btn-prim:hover { background: #ea580c; }
+  .btn-out { background: #fff; border: 1px solid #e2e8f0; color: #334155; padding: .65rem 1rem; border-radius: 999px; font-weight: 600; font-size: .85rem; }
+  .btn-out:hover { border-color: #94a3b8; }
+</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+<div class="max-w-7xl mx-auto p-4 md:p-8">
+
+  <div class="flex justify-between items-center mb-4 gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 brand-grad rounded-xl flex items-center justify-center shadow-md">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-slate-900">
+          <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="text-sm font-bold text-slate-900"><span class="font-light">Opero</span>Educator</div>
+        <div class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Instructor · gregory</div>
+      </div>
+    </div>
+    <a href="index.html" class="btn-out">Cerrar sesión</a>
+  </div>
+
+  <div class="space-y-6 md:space-y-8">
+
+    <div class="flex justify-between items-center flex-wrap gap-4">
+      <div class="w-full">
+        <h1 class="text-2xl md:text-3xl font-light tracking-tight text-slate-900">Hola, Gregory Delgado 👋</h1>
+        <p class="text-slate-500 mt-1 text-xs md:text-sm">lunes, 24 de mayo</p>
+      </div>
+    </div>
+
+    <div class="card border-brand-t">
+      <div class="flex items-start gap-3 flex-wrap">
+        <div class="w-10 h-10 brand-grad rounded-xl flex-shrink-0 flex items-center justify-center text-white text-xl">🎓</div>
+        <div class="flex-1 min-w-[200px]">
+          <div class="text-[10px] font-bold text-orange-600 uppercase tracking-widest">Certificación cercana</div>
+          <div class="text-sm font-bold text-slate-900 mt-1">Tomás G. (Senior · Puerto Montt) termina en 2 semanas</div>
+          <div class="text-xs text-slate-500 mt-1">Coordina con el Director la fecha de su evaluación final.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-slate-900 text-white border-none shadow-2xl shadow-slate-900/20">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div>
+          <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Sucursal asignada</label>
+          <div class="w-full bg-slate-800 p-3 rounded-2xl border border-slate-700 text-white text-sm font-semibold flex items-center justify-between">
+            <span>Puerto Montt</span>
+            <span class="text-[9px] uppercase tracking-widest text-slate-400 font-bold">Fija</span>
+          </div>
+        </div>
+        <button type="button" class="text-left bg-slate-800 hover:bg-slate-700 p-3 rounded-2xl border border-slate-700 cursor-pointer">
+          <p class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Alumnos en Puerto Montt</p>
+          <p class="text-3xl font-light">24</p>
+          <p class="text-[10px] text-slate-400 mt-1 underline">Ver y asignarme alumnos</p>
+        </button>
+        <button type="button" class="text-left bg-slate-800 hover:bg-slate-700 p-3 rounded-2xl border border-slate-700 cursor-pointer">
+          <p class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Profes guías activos</p>
+          <p class="text-3xl font-light">6</p>
+          <p class="text-[10px] text-slate-400 mt-1 underline">Asignar alumnos a profes</p>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
+        <a href="#" class="block">
+          <button class="w-full btn-prim !py-3 text-base">Ir al Aula Virtual</button>
+        </a>
+        <a href="#" class="block">
+          <button class="w-full !py-3 text-base bg-transparent border border-slate-700 text-white rounded-full font-semibold hover:bg-slate-800">Mi Pago del Mes</button>
+        </a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4">
+      <div class="card">
+        <h3 class="text-base font-bold text-slate-900">Estado Académico</h3>
+        <p class="text-xs text-slate-500">Tema sugerido de hoy por curso</p>
+        <div class="space-y-3 mt-4">
+
+          <div class="p-3 rounded-2xl border border-slate-100 bg-slate-50/60">
+            <div class="flex justify-between items-baseline">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase tracking-widest">Junior</span>
+                <b class="text-slate-900 text-sm">Semana 3 · Cortes básicos</b>
+              </div>
+              <span class="text-xs text-slate-500">11 alumnos</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Práctica de control de pinza y sujeción. PDF de clase disponible en <a href="#" class="brand-text font-bold underline">Aula Virtual</a>.</p>
+          </div>
+
+          <div class="p-3 rounded-2xl border border-slate-100 bg-slate-50/60">
+            <div class="flex justify-between items-baseline">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-[10px] font-bold uppercase tracking-widest">Senior</span>
+                <b class="text-slate-900 text-sm">Semana 7 · Degradados largos</b>
+              </div>
+              <span class="text-xs text-slate-500">8 alumnos</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Repaso de fade clásico + variantes con peine. Recordar evaluar la simetría.</p>
+          </div>
+
+          <div class="p-3 rounded-2xl border border-slate-100 bg-slate-50/60">
+            <div class="flex justify-between items-baseline">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-full bg-purple-100 text-purple-700 text-[10px] font-bold uppercase tracking-widest">Master</span>
+                <b class="text-slate-900 text-sm">Semana 4 · Barba escultural</b>
+              </div>
+              <span class="text-xs text-slate-500">5 alumnos</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Diseño de líneas + acabado con navaja. Solo alumnos con asistencia ≥80%.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../demo-mode.js" defer></script>
+</body>
+</html>

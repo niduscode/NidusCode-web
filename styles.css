@@ -6,9 +6,9 @@
   --c-bg-elevated: #ffffff;
   --c-fg: #0a0a0f;
   --c-muted: #71717f;
-  --c-accent: #5b8cff;
-  --c-accent-2: #a855f7;
-  --c-accent-3: #ec4899;
+  --c-accent: #7c5cfc;
+  --c-accent-2: #8b5cf6;
+  --c-accent-3: #ff3db4;
   --scrollbar-bg: #f0f0f3;
   --scrollbar-thumb: #c4c4cc;
   --grid-line: rgba(10, 10, 15, 0.08);
@@ -125,12 +125,12 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   animation: auroraMove 22s ease-in-out infinite alternate;
 }
 .aurora::before {
-  background: radial-gradient(circle, #5b8cff 0%, transparent 70%);
+  background: radial-gradient(circle, #7c5cfc 0%, transparent 70%);
   top: -15%;
   left: -10%;
 }
 .aurora::after {
-  background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+  background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
   bottom: -20%;
   right: -10%;
   animation-delay: -11s;
@@ -140,7 +140,7 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   width: 50vw;
   height: 50vw;
   border-radius: 50%;
-  background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+  background: radial-gradient(circle, #ff3db4 0%, transparent 70%);
   filter: blur(90px);
   opacity: 0.32;
   top: 30%;
@@ -218,7 +218,7 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 
 /* ===== Gradient text shimmer ===== */
 .gradient-text {
-  background: linear-gradient(110deg, #5b8cff 0%, #a855f7 35%, #ec4899 70%, #5b8cff 100%);
+  background: linear-gradient(110deg, #7c5cfc 0%, #8b5cf6 35%, #ff3db4 70%, #7c5cfc 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -381,7 +381,7 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   gap: 1rem;
   padding: 1.5rem 0;
   text-align: left;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
   cursor: pointer;
@@ -493,8 +493,10 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 }
 
 /* ===== Cards: depth en light mode ===== */
+/* NOTA: article.group ya NO se incluye aquí — las tarjetas del portafolio
+   manejan su propio fondo (la imagen tiene el suyo y el panel .pf-info también),
+   sin envolverlas en una "hoja blanca" con esquinas rectas que se notaba al hover. */
 @media (prefers-color-scheme: light) {
-  article.group,
   form.reveal,
   .bento-item {
     background-color: rgba(255, 255, 255, 0.85) !important;
@@ -503,7 +505,6 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
     border-color: rgba(10, 10, 15, 0.06) !important;
     box-shadow: 0 1px 2px rgba(10, 10, 15, 0.04), 0 4px 16px -4px rgba(10, 10, 15, 0.06);
   }
-  article.group:hover,
   .bento-item:hover {
     box-shadow:
       0 4px 6px rgba(10, 10, 15, 0.04),
@@ -526,7 +527,7 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 
   /* === Section labels coloridos === */
   .text-accent {
-    background: linear-gradient(90deg, #5b8cff, #a855f7, #ec4899);
+    background: linear-gradient(90deg, #7c5cfc, #8b5cf6, #ff3db4);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -548,7 +549,6 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 }
 
 @media (prefers-color-scheme: dark) {
-  article.group:hover,
   .bento-item:hover {
     box-shadow:
       0 1px 2px rgba(255, 255, 255, 0.04),
@@ -894,6 +894,95 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   transform: translateY(0);
 }
 
+/* ===== Panel info debajo de cada tarjeta del portafolio ===== */
+/* Glass + aurora gradient stripe en el borde superior — efecto dinámico coloreado */
+.pf-info {
+  position: relative;
+  margin-top: 14px;
+  padding: 18px 20px 18px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--c-accent) 6%, transparent),
+                            color-mix(in srgb, var(--c-accent-3) 5%, transparent)),
+    var(--c-bg-elevated);
+  border: 1px solid color-mix(in srgb, var(--c-accent) 14%, var(--border-soft));
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+.pf-info::before {
+  /* franja con degradado de marca arriba */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2), var(--c-accent-3), var(--c-accent));
+  background-size: 200% 100%;
+  animation: pfInfoShift 6s linear infinite;
+  border-radius: 18px 18px 0 0;
+}
+.pf-info::after {
+  /* glow desenfocado que aparece en hover */
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--c-accent) 35%, transparent),
+    color-mix(in srgb, var(--c-accent-3) 35%, transparent));
+  opacity: 0;
+  filter: blur(20px);
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+.pf-info > * { position: relative; z-index: 1; }
+@keyframes pfInfoShift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.group:hover .pf-info {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--c-accent) 35%, transparent);
+  box-shadow: 0 14px 38px -14px color-mix(in srgb, var(--c-accent) 35%, transparent);
+}
+.group:hover .pf-info::after { opacity: 0.55; }
+.pf-info .pf-meta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--c-accent); font-weight: 600;
+  padding: 4px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--c-accent) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-accent) 22%, transparent);
+  margin-bottom: 10px;
+}
+.pf-info .pf-meta .pf-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-accent) 55%, transparent);
+  animation: pfDot 2.2s infinite;
+}
+@keyframes pfDot {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-accent) 50%, transparent); }
+  70%{ box-shadow: 0 0 0 6px color-mix(in srgb, var(--c-accent) 0%, transparent); }
+  100%{box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-accent) 0%, transparent); }
+}
+.pf-info h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600; font-size: 1.25rem; letter-spacing: -0.018em;
+  color: var(--c-fg);
+}
+.pf-info p {
+  font-size: 0.875rem; line-height: 1.6;
+  color: var(--c-muted);
+  margin-top: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pf-info::before, .pf-info .pf-meta .pf-dot { animation: none; }
+  .group:hover .pf-info { transform: none; }
+}
+
 /* ===== Modal de demo interactiva ===== */
 .demo-modal {
   position: fixed;
@@ -1073,4 +1162,140 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   .demo-tag-dot { animation: none; }
   .demo-spinner { animation-duration: 1.6s; }
   .demo-close:hover { transform: none; }
+}
+
+/* =========================================================
+   Iconos de contacto con logos de marca reales
+   ========================================================= */
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+.contact-icon svg { width: 22px; height: 22px; }
+
+/* Email / Ubicación → outline neutro coherente con el resto */
+.contact-icon--mail {
+  background: transparent;
+  border: 1px solid var(--border-soft, rgba(10,10,15,.12));
+  color: currentColor;
+}
+.group:hover .contact-icon--mail {
+  border-color: var(--c-accent, #7c5cfc);
+  color: var(--c-accent, #7c5cfc);
+  transform: translateY(-1px);
+}
+
+/* WhatsApp brand */
+.contact-icon--wa {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #fff;
+  box-shadow: 0 6px 18px -8px rgba(37, 211, 102, 0.55);
+}
+.group:hover .contact-icon--wa {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 10px 24px -8px rgba(37, 211, 102, 0.7);
+}
+
+/* Instagram brand: gradiente oficial */
+.contact-icon--ig {
+  background: radial-gradient(circle at 30% 110%,
+              #FFDB2C 0%, #F58529 18%, #DD2A7B 45%, #8134AF 75%, #515BD4 100%);
+  color: #fff;
+  box-shadow: 0 6px 18px -8px rgba(221, 42, 123, 0.55);
+}
+.group:hover .contact-icon--ig {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 10px 24px -8px rgba(221, 42, 123, 0.7);
+}
+
+/* Icono IG en footer con gradiente (usando mask para que el fill sea gradiente) */
+.ig-brand-fill {
+  color: transparent;
+  background: radial-gradient(circle at 30% 110%,
+              #FFDB2C 0%, #F58529 20%, #DD2A7B 50%, #8134AF 78%, #515BD4 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  /* fallback simple si el navegador no entiende: queda violeta */
+}
+/* SVG no hereda background-clip de texto; usamos fill via currentColor + gradient inline no es trivial — caemos a un magenta cercano */
+.ig-brand-fill { color: #DD2A7B; }
+
+/* =========================================================
+   Tarjeta QR de Instagram
+   ========================================================= */
+.qr-card {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 18px;
+  border-radius: 20px;
+  background: var(--c-bg-elevated, #fff);
+  border: 1px solid color-mix(in srgb, var(--c-accent, #7c5cfc) 18%, var(--border-soft, rgba(10,10,15,.12)));
+  box-shadow: 0 1px 2px rgba(10,10,15,.04), 0 8px 28px -14px color-mix(in srgb, var(--c-accent, #7c5cfc) 35%, transparent);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.qr-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+              #FFDB2C, #F58529, #DD2A7B, #8134AF, #515BD4, #DD2A7B);
+  background-size: 200% 100%;
+  animation: pfInfoShift 6s linear infinite;
+}
+.qr-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--c-accent, #7c5cfc) 40%, transparent);
+  box-shadow: 0 2px 4px rgba(10,10,15,.05), 0 18px 44px -16px color-mix(in srgb, #DD2A7B 50%, transparent);
+}
+.qr-card__img {
+  background: #fff;
+  border-radius: 14px;
+  padding: 8px;
+  border: 1px solid color-mix(in srgb, var(--c-accent, #7c5cfc) 12%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qr-card__img img {
+  width: 116px;
+  height: 116px;
+  display: block;
+}
+.qr-card__body { min-width: 0; }
+.qr-card__cta {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--c-accent, #7c5cfc);
+  transition: transform 0.2s ease;
+}
+.qr-card:hover .qr-card__cta { transform: translateX(3px); }
+
+@media (max-width: 480px) {
+  .qr-card { grid-template-columns: 1fr; text-align: center; }
+  .qr-card__img { justify-self: center; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .qr-card {
+    background: rgba(30, 30, 38, 0.5);
+    border-color: rgba(124, 92, 252, 0.25);
+  }
+  .qr-card__img { background: #fff; }
 }
