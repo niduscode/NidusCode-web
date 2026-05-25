@@ -59,9 +59,56 @@ const countrySearch = document.getElementById('phone-country-search');
 const flagEl       = countryBtn?.querySelector('.phone-flag');
 const codeEl       = countryBtn?.querySelector('.phone-code');
 const phoneInput   = document.getElementById('telefono');
+const empresaWrap  = document.getElementById('empresa-wrap');
+const empresaInput = document.getElementById('empresa');
+const nombreInput  = document.getElementById('nombre');
+const emailInput   = document.getElementById('email');
+const clientCards  = document.querySelectorAll('.client-type-card');
+
+// Estado: tipo de cliente actual
+let clientType = 'persona';
 
 // País seleccionado actual
 let selectedCountry = COUNTRIES.find(c => c.iso === 'CL') || COUNTRIES[0];
+
+// =====================================================================
+// Toggle Persona / Empresa
+// =====================================================================
+function setClientType(type) {
+  if (type !== 'persona' && type !== 'empresa') return;
+  clientType = type;
+
+  // Botones (cards)
+  clientCards.forEach(c => {
+    const active = c.dataset.clientType === type;
+    c.classList.toggle('is-active', active);
+    c.setAttribute('aria-checked', String(active));
+  });
+
+  // Campo Empresa: visible solo en modo empresa
+  if (empresaWrap) {
+    empresaWrap.hidden = type !== 'empresa';
+    if (empresaInput) {
+      empresaInput.required = type === 'empresa';
+      // Si volvemos a persona, limpiamos el valor para no enviar basura
+      if (type !== 'empresa') empresaInput.value = '';
+    }
+  }
+
+  // Labels y placeholders que cambian con el modo
+  document.querySelectorAll('[data-label-for]').forEach(el => {
+    el.hidden = el.dataset.labelFor !== type;
+  });
+  [nombreInput, emailInput].forEach(inp => {
+    if (!inp) return;
+    const ph = inp.dataset[`placeholder${type[0].toUpperCase() + type.slice(1)}`];
+    if (ph) inp.placeholder = ph;
+  });
+}
+
+clientCards.forEach(c => {
+  c.addEventListener('click', () => setClientType(c.dataset.clientType));
+});
 
 // =====================================================================
 // Dropdown de países
@@ -189,20 +236,28 @@ if (form && button && feedback) {
     const rawPhone = (form.telefono?.value || '').replace(/\D/g, '');
     const fullPhone = rawPhone ? `${selectedCountry.code}${rawPhone}` : '';
 
+    const empresaValue = (empresaInput?.value || '').trim();
     const payload = {
-      nombre:     form.nombre.value.trim(),
-      email:      form.email.value.trim(),
-      telefono:   fullPhone,
-      pais:       selectedCountry.name,
-      servicio:   form.servicio.value,
-      mensaje:    form.mensaje.value.trim(),
-      user_agent: navigator.userAgent.slice(0, 280),
-      origen:     location.hostname || 'local'
+      tipo_cliente: clientType,
+      empresa:      clientType === 'empresa' ? empresaValue : null,
+      nombre:       form.nombre.value.trim(),
+      email:        form.email.value.trim(),
+      telefono:     fullPhone,
+      pais:         selectedCountry.name,
+      servicio:     form.servicio.value,
+      mensaje:      form.mensaje.value.trim(),
+      user_agent:   navigator.userAgent.slice(0, 280),
+      origen:       location.hostname || 'local'
     };
 
     // Validaciones
     if (!payload.nombre || !payload.email || !payload.mensaje) {
       showFeedback('error', 'Por favor completá nombre, email y mensaje.');
+      return;
+    }
+    if (clientType === 'empresa' && !empresaValue) {
+      showFeedback('error', 'Por favor ingresá el nombre de la empresa.');
+      empresaInput?.focus();
       return;
     }
     if (rawPhone.length < 6) {

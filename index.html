@@ -926,11 +926,55 @@
               <label>No rellenar: <input name="website" tabindex="-1" autocomplete="off" /></label>
             </p>
 
+            <!-- Tipo de cliente: Persona / Empresa -->
             <div>
-              <label for="nombre" class="block text-sm font-medium mb-2">Nombre</label>
+              <label class="block text-sm font-medium mb-2">¿Sos persona o empresa?</label>
+              <div class="client-type-grid" role="radiogroup" aria-label="Tipo de cliente">
+                <button type="button"
+                        class="client-type-card is-active"
+                        data-client-type="persona"
+                        role="radio" aria-checked="true">
+                  <svg class="client-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <circle cx="12" cy="8" r="4" stroke-linecap="round"/>
+                    <path d="M4 21c0-4.42 3.58-8 8-8s8 3.58 8 8" stroke-linecap="round"/>
+                  </svg>
+                  <span class="client-type-label">Persona</span>
+                  <span class="client-type-hint">Para vos</span>
+                </button>
+                <button type="button"
+                        class="client-type-card"
+                        data-client-type="empresa"
+                        role="radio" aria-checked="false">
+                  <svg class="client-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M3 21h18M5 21V7l7-4 7 4v14" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 21v-6h6v6M9 11h.01M15 11h.01M9 15h.01M15 15h.01" stroke-linecap="round"/>
+                  </svg>
+                  <span class="client-type-label">Empresa</span>
+                  <span class="client-type-hint">Para tu negocio</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label for="nombre" class="block text-sm font-medium mb-2" id="nombre-label">
+                <span data-label-for="persona">Nombre</span>
+                <span data-label-for="empresa" hidden>Nombre del representante</span>
+              </label>
               <input
                 type="text" id="nombre" name="nombre" required
                 placeholder="Tu nombre"
+                data-placeholder-persona="Tu nombre"
+                data-placeholder-empresa="Quien nos contacta"
+                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+              />
+            </div>
+
+            <!-- Solo en modo Empresa -->
+            <div id="empresa-wrap" hidden>
+              <label for="empresa" class="block text-sm font-medium mb-2">Nombre de la empresa</label>
+              <input
+                type="text" id="empresa" name="empresa"
+                placeholder="Nombre de tu empresa"
                 class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
               />
             </div>
@@ -940,6 +984,8 @@
               <input
                 type="email" id="email" name="email" required
                 placeholder="tu@email.com"
+                data-placeholder-persona="tu@email.com"
+                data-placeholder-empresa="empresa@email.com"
                 class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
               />
             </div>

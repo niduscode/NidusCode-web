@@ -1338,6 +1338,100 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 }
 
 /* =========================================================
+   Selector de tipo de cliente · Persona / Empresa
+   ========================================================= */
+.client-type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.client-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 14px;
+  border: 1.5px solid rgba(10, 10, 15, 0.12);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease,
+              transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.client-type-card:hover {
+  border-color: color-mix(in srgb, var(--c-accent, #7c5cfc) 35%, rgba(10,10,15,0.12));
+  transform: translateY(-1px);
+}
+.client-type-card.is-active {
+  border-color: var(--c-accent, #7c5cfc);
+  background: linear-gradient(135deg,
+              color-mix(in srgb, var(--c-accent, #7c5cfc) 8%, transparent),
+              color-mix(in srgb, var(--c-accent-3, #ff3db4) 5%, transparent)),
+              #fff;
+  box-shadow: 0 6px 20px -8px color-mix(in srgb, var(--c-accent, #7c5cfc) 45%, transparent);
+}
+.client-type-card.is-active::after {
+  /* checkmark sutil arriba a la derecha cuando está seleccionado */
+  content: "✓";
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--c-accent, #7c5cfc);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.client-type-icon {
+  width: 26px;
+  height: 26px;
+  color: rgba(10, 10, 15, 0.55);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.client-type-card.is-active .client-type-icon {
+  color: var(--c-accent, #7c5cfc);
+  transform: scale(1.08);
+}
+.client-type-label {
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 2px;
+}
+.client-type-hint {
+  font-size: 12px;
+  color: rgba(10, 10, 15, 0.5);
+  font-family: var(--font-mono, ui-monospace, monospace);
+}
+
+@media (prefers-color-scheme: dark) {
+  .client-type-card {
+    background: rgba(10, 10, 15, 0.4);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .client-type-card.is-active {
+    background: linear-gradient(135deg,
+                rgba(124, 92, 252, 0.18),
+                rgba(255, 61, 180, 0.10)),
+                rgba(10, 10, 15, 0.4);
+  }
+  .client-type-icon { color: rgba(255, 255, 255, 0.6); }
+  .client-type-hint { color: rgba(255, 255, 255, 0.5); }
+}
+
+/* =========================================================
    Input de teléfono combinado: selector de país + número
    ========================================================= */
 .phone-input-wrap {
