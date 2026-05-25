@@ -4,6 +4,7 @@ module.exports = {
     './index.html',
     './script.js',
     './contact-form.js',
+    './demos/opero/*.html',
   ],
   darkMode: 'media',
   theme: {
