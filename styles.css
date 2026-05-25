@@ -1299,3 +1299,40 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   }
   .qr-card__img { background: #fff; }
 }
+
+/* =========================================================
+   Formulario de contacto · feedback + loading
+   ========================================================= */
+#contact-submit.is-loading {
+  opacity: 0.7;
+  cursor: progress;
+}
+#contact-submit:disabled { pointer-events: none; }
+
+.contact-feedback {
+  margin-top: 4px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  border: 1px solid transparent;
+  animation: contactFeedbackIn 0.3s ease;
+}
+@keyframes contactFeedbackIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.contact-feedback[data-kind="ok"] {
+  background: color-mix(in srgb, #10b981 12%, transparent);
+  border-color: color-mix(in srgb, #10b981 30%, transparent);
+  color: #047857;
+}
+.contact-feedback[data-kind="error"] {
+  background: color-mix(in srgb, #ef4444 10%, transparent);
+  border-color: color-mix(in srgb, #ef4444 30%, transparent);
+  color: #b91c1c;
+}
+@media (prefers-color-scheme: dark) {
+  .contact-feedback[data-kind="ok"]    { color: #6ee7b7; }
+  .contact-feedback[data-kind="error"] { color: #fca5a5; }
+}

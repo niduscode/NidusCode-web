@@ -914,17 +914,16 @@
             </a>
           </div>
 
-          <!-- Formulario Netlify -->
+          <!-- Formulario de contacto · backend: Supabase -->
           <form
+            id="contact-form"
             name="contact"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
             class="reveal p-6 sm:p-8 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 space-y-5"
+            novalidate
           >
-            <input type="hidden" name="form-name" value="contact" />
-            <p class="hidden">
-              <label>No rellenar: <input name="bot-field" /></label>
+            <!-- Honeypot: si un bot lo rellena, descartamos el envío -->
+            <p class="hidden" aria-hidden="true">
+              <label>No rellenar: <input name="website" tabindex="-1" autocomplete="off" /></label>
             </p>
 
             <div>
@@ -970,12 +969,16 @@
             </div>
 
             <button
+              id="contact-submit"
               type="submit"
               class="btn-primary w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-ink-900 dark:bg-white text-white dark:text-ink-900 font-medium hover:-translate-y-0.5 transition-transform"
             >
-              Enviar mensaje
+              <span class="contact-btn-label">Enviar mensaje</span>
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
+
+            <!-- Feedback inline tras envío (éxito / error) -->
+            <div id="contact-feedback" class="contact-feedback" role="status" aria-live="polite" hidden></div>
 
             <p class="text-xs text-ink-500 dark:text-ink-400 text-center">
               Al enviar aceptas que te contactemos por email para responder a tu consulta.
@@ -1103,5 +1106,6 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="contact-form.js" defer></script>
 </body>
 </html>
