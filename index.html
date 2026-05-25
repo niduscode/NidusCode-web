@@ -173,7 +173,7 @@
 
   <main>
     <!-- ============ HERO ============ -->
-    <section id="hero" class="relative min-h-screen flex items-center pt-28 pb-20 px-6 lg:px-8 overflow-hidden">
+    <section id="hero" class="relative min-h-[88vh] sm:min-h-screen flex items-center pt-24 pb-12 sm:pt-28 sm:pb-20 px-6 lg:px-8 overflow-hidden">
 
       <!-- Aurora gradient animada -->
       <div class="aurora" aria-hidden="true">
@@ -265,7 +265,7 @@
     </section>
 
     <!-- ============ SERVICIOS (bento) ============ -->
-    <section id="servicios" class="py-24 sm:py-32 px-6 lg:px-8">
+    <section id="servicios" class="py-14 sm:py-32 px-6 lg:px-8">
       <div class="max-w-6xl mx-auto">
         <div class="reveal max-w-2xl mb-16">
           <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 01 — Servicios</p>
@@ -361,7 +361,7 @@
     </section>
 
     <!-- ============ STACK ============ -->
-    <section id="kits" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800 relative overflow-hidden">
+    <section id="kits" class="py-14 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800 relative overflow-hidden">
       <div class="max-w-6xl mx-auto">
         <div class="reveal max-w-2xl mb-16">
           <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 02 — Stack</p>
@@ -597,7 +597,7 @@
     </section>
 
     <!-- ============ PORTAFOLIO ============ -->
-    <section id="portafolio" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
+    <section id="portafolio" class="py-14 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
       <div class="max-w-6xl mx-auto">
         <div class="reveal flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
           <div class="max-w-2xl">
@@ -812,7 +812,7 @@
     </section>
 
     <!-- ============ FAQ ============ -->
-    <section id="faq" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
+    <section id="faq" class="py-14 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
       <div class="max-w-4xl mx-auto">
         <div class="reveal max-w-2xl mb-12">
           <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 05 — FAQ</p>
@@ -886,7 +886,7 @@
     </section>
 
     <!-- ============ CONTACTO ============ -->
-    <section id="contacto" class="py-24 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
+    <section id="contacto" class="py-14 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
       <div class="max-w-6xl mx-auto">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
           <div class="reveal">
@@ -1191,6 +1191,10 @@
 
   <!-- ============ MODAL DE DEMO INTERACTIVA ============ -->
   <div id="demoModal" class="demo-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Demo interactiva del proyecto">
+    <!-- Botón X flotante: visible solo en mobile, siempre por encima del iframe -->
+    <button class="demo-close-float" id="demoCloseFloat" aria-label="Cerrar demo" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
     <div class="demo-shell">
       <header class="demo-bar">
         <div class="demo-bar-id">
@@ -1202,7 +1206,7 @@
             <span class="demo-newtab-txt">Abrir en pestaña</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M19 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <button class="demo-close" id="demoClose" aria-label="Cerrar demo">
+          <button class="demo-close" id="demoClose" aria-label="Cerrar demo" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
           </button>
         </div>

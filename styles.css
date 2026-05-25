@@ -1085,8 +1085,8 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 .demo-newtab:hover { color: var(--c-fg); border-color: var(--c-fg); }
 .demo-newtab svg { width: 14px; height: 14px; }
 .demo-close {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid var(--border-soft);
   background: transparent;
@@ -1096,8 +1096,11 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   align-items: center;
   justify-content: center;
   transition: background 0.2s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .demo-close:hover { background: var(--c-bg); transform: rotate(90deg); }
+.demo-close:active { background: var(--c-bg); transform: scale(0.92); }
 .demo-close svg { width: 18px; height: 18px; }
 
 .demo-stage {
@@ -1112,6 +1115,43 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   border: 0;
   display: block;
 }
+
+/* Header del modal por encima del iframe siempre — evita que iOS Safari
+   le mande los touches del borde al iframe en vez de a la barra */
+.demo-bar { position: relative; z-index: 2; }
+.demo-stage { z-index: 1; }
+
+/* ====== Botón X flotante para mobile ======
+   Visible solo en mobile, posicionado encima del modal con z-index alto.
+   Garantiza una vía de escape aunque el iframe esté capturando los touches. */
+.demo-close-float {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(20, 20, 26, 0.92);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  display: none;                /* solo en mobile */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 200;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.45),
+              0 0 0 4px rgba(255, 255, 255, 0.06);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 0.18s ease, background 0.2s ease;
+}
+.demo-close-float:active {
+  transform: scale(0.9);
+  background: rgba(220, 38, 38, 0.95);
+}
+.demo-close-float svg { width: 22px; height: 22px; }
 .demo-loader {
   position: absolute;
   inset: 0;
@@ -1154,6 +1194,10 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   .demo-newtab-txt { display: none; }
   .demo-newtab { padding: 9px; }
   .demo-foot { font-size: 0.72rem; }
+  /* En mobile, escondemos el X de la barra y mostramos el flotante
+     (más grande, más visible, siempre encima del iframe) */
+  .demo-close { display: none; }
+  .demo-close-float { display: inline-flex; }
 }
 
 @media (prefers-reduced-motion: reduce) {

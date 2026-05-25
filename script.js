@@ -288,7 +288,16 @@
     frame.addEventListener('load', () => {
       if (modal.classList.contains('open')) loader.classList.add('hidden');
     });
-    document.getElementById('demoClose').addEventListener('click', close);
+    // Wireamos AMBOS botones — el del header (desktop/tablet) y el flotante (mobile)
+    const btnHeader = document.getElementById('demoClose');
+    const btnFloat  = document.getElementById('demoCloseFloat');
+    [btnHeader, btnFloat].forEach(btn => {
+      if (!btn) return;
+      btn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+      // touchstart adicional en mobile — evita que un click "muerto" sobre un iframe
+      // que captura el touch nos deje sin forma de salir
+      btn.addEventListener('touchstart', (e) => { e.stopPropagation(); e.preventDefault(); close(); }, { passive: false });
+    });
     modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('open')) close();
