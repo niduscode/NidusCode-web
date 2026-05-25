@@ -1336,3 +1336,153 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   .contact-feedback[data-kind="ok"]    { color: #6ee7b7; }
   .contact-feedback[data-kind="error"] { color: #fca5a5; }
 }
+
+/* =========================================================
+   Input de teléfono combinado: selector de país + número
+   ========================================================= */
+.phone-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid rgba(10, 10, 15, 0.12);
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: visible;
+}
+.phone-input-wrap:focus-within {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px var(--c-accent, #7c5cfc);
+}
+
+.phone-country-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px 0 14px;
+  border: none;
+  background: transparent;
+  border-right: 1px solid rgba(10, 10, 15, 0.08);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: inherit;
+  border-radius: 8px 0 0 8px;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.phone-country-btn:hover { background: rgba(124, 92, 252, 0.05); }
+.phone-country-btn:focus-visible { outline: none; background: rgba(124, 92, 252, 0.08); }
+.phone-flag { font-size: 18px; line-height: 1; }
+.phone-code { font-variant-numeric: tabular-nums; opacity: 0.85; }
+.phone-chevron {
+  opacity: 0.5;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.phone-country-btn[aria-expanded="true"] .phone-chevron { transform: rotate(180deg); }
+
+.phone-number-input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  color: inherit;
+  border-radius: 0 8px 8px 0;
+  outline: none;
+}
+.phone-number-input::placeholder { color: rgba(10, 10, 15, 0.4); }
+
+/* Panel desplegable */
+.phone-country-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-width: 360px;
+  background: #fff;
+  border: 1px solid rgba(10, 10, 15, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 18px 38px -12px rgba(10, 10, 15, 0.18),
+              0 4px 10px -4px rgba(10, 10, 15, 0.08);
+  z-index: 50;
+  overflow: hidden;
+  animation: phonePanelIn 0.18s ease;
+}
+@keyframes phonePanelIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.phone-country-search {
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  border-bottom: 1px solid rgba(10, 10, 15, 0.08);
+  background: transparent;
+  font-size: 14px;
+  outline: none;
+  color: inherit;
+}
+.phone-country-search::placeholder { color: rgba(10, 10, 15, 0.4); }
+
+.phone-country-list {
+  max-height: 260px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+}
+.phone-country-item {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.12s ease;
+}
+.phone-country-item:hover { background: rgba(124, 92, 252, 0.08); }
+.phone-country-item.is-selected {
+  background: rgba(124, 92, 252, 0.12);
+  font-weight: 600;
+}
+.phone-country-flag { font-size: 20px; line-height: 1; }
+.phone-country-name { color: inherit; }
+.phone-country-code {
+  color: rgba(10, 10, 15, 0.5);
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+}
+.phone-country-empty {
+  padding: 16px;
+  text-align: center;
+  color: rgba(10, 10, 15, 0.5);
+  font-size: 13px;
+  list-style: none;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .phone-input-wrap {
+    background: rgba(10, 10, 15, 0.4);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .phone-country-btn { border-right-color: rgba(255, 255, 255, 0.08); }
+  .phone-country-btn:hover { background: rgba(124, 92, 252, 0.12); }
+  .phone-number-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+  .phone-country-panel {
+    background: #1e1e26;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .phone-country-search {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  .phone-country-search::placeholder { color: rgba(255, 255, 255, 0.4); }
+  .phone-country-item:hover { background: rgba(124, 92, 252, 0.18); }
+  .phone-country-code { color: rgba(255, 255, 255, 0.5); }
+}

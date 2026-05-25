@@ -945,6 +945,31 @@
             </div>
 
             <div>
+              <label for="telefono" class="block text-sm font-medium mb-2">Teléfono / WhatsApp</label>
+              <div class="phone-input-wrap" data-default-code="+56" data-default-flag="🇨🇱" data-default-iso="CL">
+                <button type="button" class="phone-country-btn" id="phone-country-btn"
+                        aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar país">
+                  <span class="phone-flag" aria-hidden="true">🇨🇱</span>
+                  <span class="phone-code">+56</span>
+                  <svg class="phone-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <input
+                  type="tel" id="telefono" name="telefono" required
+                  inputmode="tel" autocomplete="tel-national"
+                  placeholder="9 1234 5678"
+                  class="phone-number-input"
+                />
+                <div class="phone-country-panel" id="phone-country-panel" role="listbox" hidden>
+                  <input type="search" class="phone-country-search" id="phone-country-search"
+                         placeholder="Buscar país…" autocomplete="off" aria-label="Buscar país" />
+                  <ul class="phone-country-list" id="phone-country-list" role="presentation">
+                    <!-- Inyectado por contact-form.js para mantener el HTML liviano -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div>
               <label for="servicio" class="block text-sm font-medium mb-2">¿Qué te interesa?</label>
               <select
                 id="servicio" name="servicio"
