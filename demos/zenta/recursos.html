@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recursos · Grupo Scout Zenta</title>
+  <meta name="description" content="Documentación oficial del Grupo Scout Zenta. Los formularios están reservados a las familias afiliadas — requiere iniciar sesión." />
+  <meta name="theme-color" content="#0b2b5d" />
+  <link rel="icon" href="assets/logosf.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/zenta.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 18px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .doc {
+      display: flex; gap: 18px; align-items: center;
+      padding: 22px 24px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      backdrop-filter: blur(20px);
+      transition: all 0.35s;
+      text-decoration: none;
+      color: var(--text);
+      border-left: 4px solid var(--accent);
+    }
+    .doc:hover {
+      transform: translateX(8px);
+      background: var(--glass-strong);
+      box-shadow: 0 18px 40px -10px color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+    .doc-ico {
+      width: 54px; height: 54px; flex-shrink: 0;
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--accent) 18%, transparent);
+      color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .doc-body { flex: 1; min-width: 0; }
+    .doc-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .doc-body p {
+      color: var(--text-mute);
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .doc-arrow {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-soft);
+      transition: all 0.25s;
+    }
+    .doc:hover .doc-arrow {
+      background: var(--accent);
+      color: var(--navy-deep);
+      border-color: var(--accent);
+    }
+    .d-blue { --accent: #60a5fa; }
+    .d-green { --accent: #34d399; }
+    .d-red { --accent: #f87171; }
+    .d-cyan { --accent: #22d3ee; }
+    .d-yellow { --accent: #fbbf24; }
+    .d-purple { --accent: #c084fc; }
+
+    .access-card {
+      max-width: 980px; margin: 0 auto 26px;
+      display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+      padding: 22px 26px;
+      background: var(--glass-strong);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      backdrop-filter: blur(20px);
+    }
+    .access-ico {
+      width: 52px; height: 52px; flex-shrink: 0;
+      border-radius: 14px;
+      background: rgba(247, 168, 11, 0.15);
+      color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .access-body { flex: 1; min-width: 220px; }
+    .access-body h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 4px; }
+    .access-body p { color: var(--text-mute); font-size: 0.9rem; margin: 0; line-height: 1.55; }
+    .access-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy-deep);
+      border-radius: 10px;
+      text-decoration: none; font-weight: 700; font-size: 0.9rem;
+      white-space: nowrap;
+      transition: transform 0.2s ease;
+    }
+    .access-btn:hover { transform: translateY(-2px); }
+    .doc.is-locked { opacity: 0.96; }
+    .doc.is-locked .doc-arrow { background: rgba(247, 168, 11, 0.12); color: var(--gold); border-color: rgba(247, 168, 11, 0.3); }
+    .doc.is-locked:hover .doc-arrow { background: var(--gold); color: var(--navy-deep); border-color: var(--gold); }
+
+    .info-card {
+      max-width: 720px; margin: 60px auto 0;
+      padding: 28px 32px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius);
+      backdrop-filter: blur(20px);
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+    .info-card i {
+      width: 42px; height: 42px;
+      background: rgba(247, 168, 11, 0.15);
+      color: var(--gold);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .info-card h4 {
+      font-family: var(--font-display);
+      margin-bottom: 6px;
+    }
+    .info-card p {
+      color: var(--text-mute);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-aurora"></div>
+  <div class="bg-grid"></div>
+
+  <nav class="nav always-scrolled" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logosf.png" alt="Logo Grupo Scout Zenta" class="brand-logo" />
+        <span class="brand-text">Grupo Scout <span>Zenta</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#nosotros">Nosotros</a></li>
+        <li><a href="historia.html">Historia</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a href="acceso-demo.html" class="nav-cta"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a>
+        <button class="nav-toggle" id="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <aside class="mobile-panel" id="mobile-panel">
+    <button class="mobile-close" id="mobile-close"><i class="fa-solid fa-xmark"></i></button>
+    <ul>
+      <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+      <li><a href="historia.html"><i class="fa-solid fa-book-open"></i> Historia</a></li>
+      <li><a href="galeria.html"><i class="fa-solid fa-images"></i> Galería</a></li>
+      <li><a href="eventos.html"><i class="fa-solid fa-calendar-days"></i> Eventos</a></li>
+      <li><a href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a></li>
+      <li><a href="glosas.html"><i class="fa-solid fa-feather-pointed"></i> Glosas</a></li>
+      <li><a href="recursos.html"><i class="fa-solid fa-file-pdf"></i> Recursos</a></li>
+    </ul>
+    <a href="acceso-demo.html" class="mobile-cta"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a>
+  </aside>
+
+  <header class="page-hero">
+    <div class="container">
+      <img src="assets/logosf.png" alt="Logo Zenta" class="page-hero-logo reveal scale" />
+      <div class="section-tag reveal delay-1">#ÁreaDeSocios</div>
+      <h1 class="reveal delay-2">Documentación <span class="gold">Zenta</span></h1>
+      <p class="lead reveal delay-3">Los formularios oficiales del grupo contienen información sensible. Para descargarlos necesitás iniciar sesión como familia afiliada.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="access-card reveal">
+        <div class="access-ico"><i class="fa-solid fa-lock"></i></div>
+        <div class="access-body">
+          <h3>Documentación reservada a socios</h3>
+          <p>Las fichas médicas, autorizaciones y declaraciones contienen datos personales sensibles. Solo las familias afiliadas al grupo pueden descargarlas ingresando con su cuenta.</p>
+        </div>
+        <a href="acceso-demo.html" class="access-btn">
+          <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
+        </a>
+      </div>
+
+      <div class="docs-grid">
+        <a href="acceso-demo.html" class="doc d-blue reveal is-locked">
+          <div class="doc-ico"><i class="fa-solid fa-file-signature"></i></div>
+          <div class="doc-body">
+            <h3>Autorización de Ingreso</h3>
+            <p>Afiliación anual a Scouts de Argentina.</p>
+          </div>
+          <div class="doc-arrow"><i class="fa-solid fa-lock"></i></div>
+        </a>
+
+        <a href="acceso-demo.html" class="doc d-green reveal delay-1 is-locked">
+          <div class="doc-ico"><i class="fa-solid fa-tent"></i></div>
+          <div class="doc-body">
+            <h3>Salidas y Campamentos</h3>
+            <p>Obligatoria para actividades externas.</p>
+          </div>
+          <div class="doc-arrow"><i class="fa-solid fa-lock"></i></div>
+        </a>
+
+        <a href="acceso-demo.html" class="doc d-red reveal delay-2 is-locked">
+          <div class="doc-ico"><i class="fa-solid fa-file-medical"></i></div>
+          <div class="doc-body">
+            <h3>Ficha Médica Anual</h3>
+            <p>Debe estar firmada por un médico.</p>
+          </div>
+          <div class="doc-arrow"><i class="fa-solid fa-lock"></i></div>
+        </a>
+
+        <a href="acceso-demo.html" class="doc d-cyan reveal is-locked">
+          <div class="doc-ico"><i class="fa-solid fa-notes-medical"></i></div>
+          <div class="doc-body">
+            <h3>Historia Clínica</h3>
+            <p>Información de salud para campamentos.</p>
+          </div>
+          <div class="doc-arrow"><i class="fa-solid fa-lock"></i></div>
+        </a>
+
+        <a href="acceso-demo.html" class="doc d-yellow reveal delay-1 is-locked">
+          <div class="doc-ico"><i class="fa-solid fa-user-check"></i></div>
+          <div class="doc-body">
+            <h3>Declaración Jurada</h3>
+            <p>Para colaboradores mayores de 18 años.</p>
+          </div>
+          <div class="doc-arrow"><i class="fa-solid fa-lock"></i></div>
+        </a>
+
+        <a href="acceso-demo.html" class="doc d-purple reveal delay-2 is-locked">
+          <div class="doc-ico"><i class="fa-solid fa-map-location-dot"></i></div>
+          <div class="doc-body">
+            <h3>Salidas Cercanas (Anual)</h3>
+            <p>Autorización para actividades en un radio de 5 km.</p>
+          </div>
+          <div class="doc-arrow"><i class="fa-solid fa-lock"></i></div>
+        </a>
+      </div>
+
+      <div class="info-card reveal">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+          <h4>¿No podés ingresar?</h4>
+          <p>El acceso al área de socios se habilita al afiliar a tu hijo/a al grupo. Si ya sos parte y tenés problemas para entrar, escribinos por WhatsApp y te ayudamos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <img src="assets/logosf.png" alt="Logo Zenta" class="brand-logo" />
+            <span class="brand-text">Grupo Scout <span>Zenta</span></span>
+          </a>
+          <p>Construyendo un mundo mejor a través de la educación de los jóvenes basada en los valores scouts.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/5493878359312" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://instagram.com/gscoutzenta" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1HpJdo8r63/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="historia.html">Historia</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="glosas.html">Glosas</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <ul>
+            <li><i class="fa-brands fa-whatsapp" style="color:var(--gold); margin-right:6px;"></i> +54 9 3878 35-9312</li>
+            <li><i class="fa-solid fa-envelope" style="color:var(--gold); margin-right:6px;"></i> scout.zenta@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Grupo Scout Zenta · Desarrollado por Valentina Baudino</p>
+        <p class="motto">Siempre Listos <i class="fa-solid fa-fire"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/zenta.js"></script>
+<script src="/demos/demo-mode.js" defer></script>
+</body>
+</html>

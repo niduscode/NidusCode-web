@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Área de socios · Grupo Scout Zenta</title>
+  <meta name="theme-color" content="#0b2b5d" />
+  <link rel="icon" href="assets/logosf.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/zenta.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    .access-wrap {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 20px 60px;
+    }
+    .access-panel {
+      max-width: 540px; width: 100%;
+      text-align: center;
+      background: var(--glass-strong);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      backdrop-filter: blur(22px);
+      padding: 46px 40px 42px;
+      box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85);
+    }
+    .access-brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 30px;
+      text-decoration: none; color: var(--text);
+    }
+    .access-brand img {
+      width: 40px; height: 40px; object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+    }
+    .access-brand span {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 1.05rem;
+    }
+    .access-brand span b { color: var(--gold); font-weight: 800; }
+    .access-lock {
+      width: 78px; height: 78px; margin: 0 auto 20px;
+      border-radius: 50%;
+      background: rgba(247, 168, 11, 0.13);
+      border: 1px solid rgba(247, 168, 11, 0.35);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 1.8rem;
+      box-shadow: 0 0 0 8px rgba(247, 168, 11, 0.05);
+    }
+    .demo-flag {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 14px; border-radius: 999px;
+      background: rgba(247, 168, 11, 0.12);
+      border: 1px solid rgba(247, 168, 11, 0.3);
+      color: var(--gold-light);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 1.3px; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .demo-flag .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold);
+    }
+    .access-panel h1 {
+      font-family: var(--font-display);
+      font-size: 1.95rem; font-weight: 800;
+      margin-bottom: 14px; line-height: 1.15;
+    }
+    .access-panel p {
+      color: var(--text-mute);
+      line-height: 1.7; font-size: 0.97rem;
+      margin-bottom: 14px;
+    }
+    .access-panel p.credit {
+      font-size: 0.88rem;
+      padding-top: 14px; margin-top: 4px;
+      border-top: 1px solid var(--line);
+    }
+    .access-panel p.credit b { color: var(--gold-light); }
+    .access-back {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 22px; padding: 13px 28px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy-deep);
+      border-radius: 12px; text-decoration: none;
+      font-weight: 700; font-size: 0.95rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .access-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(247, 168, 11, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-aurora"></div>
+  <div class="bg-grid"></div>
+
+  <main class="access-wrap">
+    <div class="access-panel">
+      <a href="index.html" class="access-brand">
+        <img src="assets/logosf.png" alt="Logo Grupo Scout Zenta" />
+        <span>Grupo Scout <b>Zenta</b></span>
+      </a>
+
+      <div class="access-lock"><i class="fa-solid fa-lock"></i></div>
+      <div class="demo-flag"><span class="dot"></span> Demo interactiva</div>
+
+      <h1>Área de socios</h1>
+      <p>
+        Esta es la entrada al <strong>portal privado del Grupo Scout Zenta</strong>,
+        donde las familias afiliadas gestionan inscripciones, pagos y la
+        documentación oficial del grupo.
+      </p>
+      <p>
+        Por seguridad, el acceso está reservado a socios con cuenta activa.
+      </p>
+      <p class="credit">
+        Estás explorando una <b>demo interactiva</b> creada por NidusCode, así que
+        el ingreso real no está habilitado aquí — pero así luciría la puerta de
+        entrada que usarían los socios en el sitio final.
+      </p>
+
+      <a href="index.html" class="access-back">
+        <i class="fa-solid fa-arrow-left"></i> Volver al sitio
+      </a>
+    </div>
+  </main>
+
+  <script src="/demos/demo-mode.js" defer></script>
+</body>
+</html>

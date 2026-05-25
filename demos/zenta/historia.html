@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestra Historia · Grupo Scout Zenta</title>
+  <meta name="description" content="Desde 1966 en el corazón de Orán. Conocé la historia, los fundadores y los 11 jefes que condujeron al Grupo Scout Zenta." />
+  <meta name="theme-color" content="#0b2b5d" />
+  <link rel="icon" href="assets/logosf.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/zenta.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* Datos clave */
+    .key-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 980px;
+      margin: 0 auto 80px;
+    }
+    .fact {
+      display: flex; align-items: center; gap: 18px;
+      padding: 22px 26px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      backdrop-filter: blur(20px);
+      transition: all 0.3s;
+    }
+    .fact:hover { transform: translateY(-4px); border-color: var(--gold); }
+    .fact-icon {
+      width: 50px; height: 50px;
+      flex-shrink: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .fact strong { display: block; color: var(--text); font-size: 1.05rem; margin-bottom: 2px; }
+    .fact span { color: var(--text-mute); font-size: 0.88rem; }
+
+    /* Intro */
+    .intro {
+      max-width: 780px; margin: 0 auto 80px;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .intro h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+      margin-bottom: 22px;
+    }
+    .intro h2 .gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .intro p {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    .intro strong { color: var(--gold-light); }
+
+    /* Fundadores */
+    .founders {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 980px;
+      margin: 0 auto 80px;
+    }
+    .founder {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+    .founder::before {
+      content: ""; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+    .founder:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      box-shadow: 0 24px 50px -10px rgba(247, 168, 11, 0.2);
+    }
+    .founder-ico {
+      width: 70px; height: 70px;
+      border-radius: 50%; margin: 0 auto 16px;
+      background: linear-gradient(135deg, var(--gold), #d97706);
+      color: var(--navy-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem;
+      box-shadow: 0 10px 24px -6px rgba(247, 168, 11, 0.4);
+    }
+    .founder h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+    .founder small {
+      color: var(--text-mute);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      display: block;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative; max-width: 900px; margin: 0 auto; padding: 20px 0;
+    }
+    .timeline::before {
+      content: ""; position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--gold), var(--navy-glow), transparent);
+      transform: translateX(-50%);
+    }
+    .tl-item { position: relative; width: 50%; padding: 24px 50px 24px 0; }
+    .tl-item:nth-child(even) { margin-left: 50%; padding: 24px 0 24px 50px; }
+    .tl-dot {
+      position: absolute; top: 36px;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px var(--navy-deep), 0 0 0 6px rgba(247, 168, 11, 0.3);
+      z-index: 2;
+    }
+    .tl-item:nth-child(odd) .tl-dot { right: -9px; }
+    .tl-item:nth-child(even) .tl-dot { left: -9px; }
+    .tl-card {
+      background: var(--glass-strong);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      padding: 26px 28px;
+      transition: all 0.4s;
+    }
+    .tl-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+    .tl-year {
+      display: inline-block;
+      padding: 4px 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy-deep);
+      font-weight: 800; border-radius: 999px;
+      font-size: 0.85rem; letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .tl-year.now { background: linear-gradient(135deg, var(--green-accent), #34d399); color: white; }
+    .tl-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem; margin-bottom: 10px;
+      display: flex; gap: 10px; align-items: center;
+    }
+    .tl-card h3 i { color: var(--gold); }
+    .tl-card p { color: var(--text-mute); font-size: 0.94rem; line-height: 1.7; }
+    .tl-card strong { color: var(--text); }
+    .tl-card em { color: var(--gold-soft); font-style: normal; }
+
+    /* Jefes list */
+    .jefes-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .jefe {
+      display: flex; gap: 14px; align-items: center;
+      padding: 14px 18px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+    .jefe:hover {
+      background: var(--glass-strong);
+      transform: translateX(6px);
+      border-left-color: var(--gold-light);
+    }
+    .jefe-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy-glow), var(--navy));
+      color: var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .jefe.actual { border-left-color: var(--green-accent); }
+    .jefe.actual .jefe-num {
+      background: linear-gradient(135deg, var(--green-accent), #34d399);
+      color: white;
+    }
+    .jefe strong {
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .jefe small {
+      color: var(--text-mute);
+      font-size: 0.78rem;
+    }
+
+    /* Sub-jefes (placeholder mientras se compila la lista) */
+    .subjefes-card {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .subjefes-empty {
+      text-align: center;
+      padding: 50px 36px;
+      background: var(--glass);
+      border: 1.5px dashed var(--line);
+      border-radius: var(--radius);
+      backdrop-filter: blur(20px);
+      transition: all 0.4s;
+    }
+    .subjefes-empty:hover {
+      border-color: var(--gold);
+      background: var(--glass-strong);
+    }
+    .subjefes-empty i {
+      font-size: 2.6rem;
+      color: var(--gold);
+      margin-bottom: 18px;
+      opacity: 0.75;
+    }
+    .subjefes-empty h3 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      margin-bottom: 14px;
+    }
+    .subjefes-empty p {
+      color: var(--text-soft);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+    .subjefes-empty strong { color: var(--gold-light); }
+
+    /* Cierre */
+    .closing-box {
+      max-width: 760px; margin: 80px auto 0;
+      text-align: center;
+      padding: 60px 32px;
+      background: linear-gradient(135deg, rgba(247, 168, 11, 0.08), rgba(27, 75, 155, 0.18));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+    .closing-box::before {
+      content: ""; position: absolute;
+      top: -150px; right: -150px; width: 400px; height: 400px;
+      border-radius: 50%;
+      background: var(--gold); opacity: 0.15; filter: blur(80px);
+    }
+    .closing-box i.flame {
+      font-size: 2.5rem; color: var(--gold);
+      margin-bottom: 16px;
+      animation: flicker 2.5s ease-in-out infinite;
+    }
+    @keyframes flicker {
+      0%,100% { transform: scale(1) rotate(-2deg); }
+      50% { transform: scale(1.08) rotate(3deg); }
+    }
+    .closing-box h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .closing-box p {
+      color: var(--text-soft);
+      max-width: 540px;
+      margin: 0 auto 26px;
+      position: relative;
+    }
+    .closing-actions {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      position: relative;
+    }
+
+    .note {
+      text-align: center;
+      color: var(--text-mute);
+      font-size: 0.82rem;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 920px) {
+      .timeline::before { left: 18px; }
+      .tl-item, .tl-item:nth-child(even) {
+        width: 100%; margin-left: 0;
+        padding: 24px 0 24px 50px;
+      }
+      .tl-item:nth-child(odd) .tl-dot,
+      .tl-item:nth-child(even) .tl-dot { left: 8px; right: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-aurora"></div>
+  <div class="bg-grid"></div>
+
+  <!-- NAV -->
+  <nav class="nav always-scrolled" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logosf.png" alt="Logo Grupo Scout Zenta" class="brand-logo" />
+        <span class="brand-text">Grupo Scout <span>Zenta</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#nosotros">Nosotros</a></li>
+        <li><a href="historia.html" class="active">Historia</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a href="acceso-demo.html" class="nav-cta"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <aside class="mobile-panel" id="mobile-panel" aria-hidden="true">
+    <button class="mobile-close" id="mobile-close" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <ul>
+      <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+      <li><a href="historia.html"><i class="fa-solid fa-book-open"></i> Historia</a></li>
+      <li><a href="galeria.html"><i class="fa-solid fa-images"></i> Galería</a></li>
+      <li><a href="eventos.html"><i class="fa-solid fa-calendar-days"></i> Eventos</a></li>
+      <li><a href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a></li>
+      <li><a href="glosas.html"><i class="fa-solid fa-feather-pointed"></i> Glosas</a></li>
+      <li><a href="recursos.html"><i class="fa-solid fa-file-pdf"></i> Recursos</a></li>
+    </ul>
+    <a href="acceso-demo.html" class="mobile-cta"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a>
+  </aside>
+
+  <!-- HERO -->
+  <header class="page-hero">
+    <div class="container">
+      <img src="assets/logosf.png" alt="Logo Zenta" class="page-hero-logo reveal scale" />
+      <div class="section-tag reveal delay-1">#NuestraHistoria</div>
+      <h1 class="reveal delay-2">Más de medio siglo <span class="gold">de aventura</span></h1>
+      <p class="lead reveal delay-3">Desde 1966, formando ciudadanos comprometidos con el método scout en el corazón de Orán.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Datos clave -->
+      <div class="key-facts">
+        <div class="fact reveal">
+          <div class="fact-icon"><i class="fa-solid fa-cake-candles"></i></div>
+          <div><strong>22 de mayo de 1966</strong><span>Fecha de fundación oficial</span></div>
+        </div>
+        <div class="fact reveal delay-1">
+          <div class="fact-icon"><i class="fa-solid fa-hashtag"></i></div>
+          <div><strong>Grupo N° 654</strong><span>Reconocidos por INSA / SAAC</span></div>
+        </div>
+        <div class="fact reveal delay-2">
+          <div class="fact-icon"><i class="fa-solid fa-users"></i></div>
+          <div><strong>~60 beneficiarios</strong><span>Niños y jóvenes activos</span></div>
+        </div>
+      </div>
+
+      <!-- Intro -->
+      <div class="intro reveal">
+        <h2>El <span class="gold">comienzo</span></h2>
+        <p>
+          El escultismo llegó a Orán en <strong>1966</strong> de la mano del entonces <strong>Rotary Club</strong>, presidido por el Dr. Germán Bernad. La iniciativa contó con el apoyo del Sr. <strong>Alberto Nayar</strong>, profesor de educación física de la Escuela Técnica, el <strong>Comandante Toyo</strong>, jefe del Escuadrón 20 de Gendarmería Nacional, y el Obispo de la Diócesis de la Nueva Orán, <strong>Monseñor Fray Francisco de la Cruz Muguerza</strong>.
+        </p>
+      </div>
+
+      <!-- Fundadores -->
+      <div class="section-head">
+        <div class="section-tag reveal">#Fundadores</div>
+        <h2 class="reveal delay-1">Quienes <span class="gold">lo hicieron posible</span></h2>
+        <p class="reveal delay-2">Las cuatro figuras que impulsaron el escultismo en Orán.</p>
+      </div>
+      <div class="founders">
+        <div class="founder reveal">
+          <div class="founder-ico"><i class="fa-solid fa-user-tie"></i></div>
+          <h4>Dr. Germán Bernad</h4>
+          <small>Presidente del Rotary Club</small>
+        </div>
+        <div class="founder reveal delay-1">
+          <div class="founder-ico"><i class="fa-solid fa-person-running"></i></div>
+          <h4>Sr. Alberto Nayar</h4>
+          <small>Profesor de Ed. Física · Escuela Técnica</small>
+        </div>
+        <div class="founder reveal delay-2">
+          <div class="founder-ico"><i class="fa-solid fa-shield"></i></div>
+          <h4>Comandante Toyo</h4>
+          <small>Jefe del Escuadrón 20 · Gendarmería Nacional</small>
+        </div>
+        <div class="founder reveal delay-3">
+          <div class="founder-ico"><i class="fa-solid fa-cross"></i></div>
+          <h4>Mons. Fray Francisco de la Cruz Muguerza</h4>
+          <small>Obispo de la Diócesis de la Nueva Orán</small>
+        </div>
+      </div>
+
+      <!-- Timeline completa -->
+      <div class="section-head">
+        <div class="section-tag reveal">#LíneaDeTiempo</div>
+        <h2 class="reveal delay-1">Los hitos que <span class="gold">nos marcaron</span></h2>
+        <p class="reveal delay-2">Casi 60 años de aventura scout en Orán.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-year">1966</span>
+            <h3><i class="fa-solid fa-flag"></i> Fundación</h3>
+            <p>El 22 de mayo nace la <strong>Agrupación Scout Zenta</strong>, reconocida oficialmente por la Institución Nacional de Scoutismo Argentino (INSA). Sus actividades comienzan en un predio ubicado en <em>H. Irigoyen al 100</em>, donde hoy se encuentra la Casa Municipal de la Cultura.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-year">···</span>
+            <h3><i class="fa-solid fa-people-arrows"></i> Unión nacional</h3>
+            <p>La INSA se une con la <strong>Unión de Scout Católicos (USCa)</strong>, formando la actual <strong>Scouts de Argentina Asociación Civil (SAAC)</strong>. La Agrupación Scout Zenta cambia su denominación a <strong>"Grupo Scout Zenta"</strong>.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-year">2016</span>
+            <h3><i class="fa-solid fa-medal"></i> Bodas de Oro</h3>
+            <p>El 22 de mayo el grupo cumple <strong>50 años</strong>. En ese momento las actividades se desarrollaban en el <em>predio del Aeroclub Orán</em>, los sábados de 15 a 18 hs., con aproximadamente <strong>55 niños y jóvenes</strong>. Jefe de Grupo: <strong>MS Juan Ángel Lemir</strong>.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-year">2019</span>
+            <h3><i class="fa-solid fa-house-chimney"></i> Nueva sede</h3>
+            <p>El grupo se traslada al <strong>Complejo Municipal de Deportes</strong>, manteniendo los sábados de 15 a 18 hs. y creciendo a unos <strong>60 beneficiarios</strong>. En ese año asume como Jefe de Grupo <strong>Juan José Medrano</strong>.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-year now">Hoy</span>
+            <h3><i class="fa-solid fa-fire"></i> Siempre Listos</h3>
+            <p>Bajo la conducción de <strong>Carlos Cristhian Galarza</strong> como Jefe de Grupo, el Scout Zenta sigue activo formando jóvenes ciudadanos con valores scouts en cada rama: <strong>Lobatos y Lobeznas, Unidad, Caminantes y Rovers</strong>. Acompañados por un equipo de educadores voluntarios que se capacitan constantemente en SAAC.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jefes de grupo -->
+      <div class="section-head" style="margin-top:90px;">
+        <div class="section-tag reveal">#JefesDeGrupo</div>
+        <h2 class="reveal delay-1">Once <span class="gold">conducciones</span></h2>
+        <p class="reveal delay-2">Quienes condujeron al Grupo Scout Zenta a lo largo de su historia.</p>
+      </div>
+      <div class="jefes-list">
+        <div class="jefe reveal"><div class="jefe-num">1</div><div><strong>Alberto Nayar</strong><small>Fundador</small></div></div>
+        <div class="jefe reveal"><div class="jefe-num">2</div><div><strong>José Daniel Daher</strong></div></div>
+        <div class="jefe reveal"><div class="jefe-num">3</div><div><strong>Juan Ángel Lemir</strong></div></div>
+        <div class="jefe reveal"><div class="jefe-num">4</div><div><strong>José Abelardo Pacheco Abraham</strong></div></div>
+        <div class="jefe reveal"><div class="jefe-num">5</div><div><strong>Pedro Bernaldez</strong></div></div>
+        <div class="jefe reveal"><div class="jefe-num">6</div><div><strong>Julio Martínez</strong></div></div>
+        <div class="jefe reveal"><div class="jefe-num">7</div><div><strong>Mirta Yuliani</strong></div></div>
+        <div class="jefe reveal"><div class="jefe-num">8</div><div><strong>Juan Ángel Lemir</strong><small>2do mandato</small></div></div>
+        <div class="jefe reveal"><div class="jefe-num">9</div><div><strong>Federico Rodríguez Lascano</strong></div></div>
+        <div class="jefe reveal"><div class="jefe-num">10</div><div><strong>Juan José Medrano</strong></div></div>
+        <div class="jefe actual reveal"><div class="jefe-num">11</div><div><strong>Carlos Cristhian Galarza</strong><small>Jefe actual</small></div></div>
+      </div>
+
+      <!-- Sub-jefes de grupo -->
+      <div class="section-head" style="margin-top:90px;">
+        <div class="section-tag reveal">#SubJefesDeGrupo</div>
+        <h2 class="reveal delay-1">Quienes <span class="gold">acompañaron</span></h2>
+        <p class="reveal delay-2">Los sub-jefes de grupo que estuvieron junto a cada conducción.</p>
+      </div>
+      <div class="subjefes-card reveal">
+        <div class="subjefes-empty">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <h3>Lista en construcción</h3>
+          <p>Estamos compilando el registro histórico completo de quienes acompañaron como <strong>sub-jefes de grupo</strong> a lo largo de los años. Si conocés nombres, fechas o información para aportar al archivo del grupo, escribinos.</p>
+          <a href="https://wa.me/5493878359312?text=Quiero%20aportar%20info%20sobre%20Sub-Jefes%20del%20Grupo%20Scout%20Zenta" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 22px;">
+            <i class="fa-brands fa-whatsapp"></i> Aportar información
+          </a>
+        </div>
+      </div>
+
+      <!-- Cierre -->
+      <div class="closing-box reveal">
+        <i class="fa-solid fa-fire flame"></i>
+        <h3>Sumate a esta <span style="background: linear-gradient(135deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">historia</span></h3>
+        <p>Más de medio siglo de aventura no se construyen sin gente como vos. Si querés ser parte del Grupo Scout Zenta, te esperamos cada sábado.</p>
+        <div class="closing-actions">
+          <a href="acceso-demo.html" class="btn btn-primary"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a>
+          <a href="index.html#contacto" class="btn btn-ghost"><i class="fa-solid fa-envelope"></i> Hacer una consulta</a>
+        </div>
+      </div>
+
+      <p class="note"><i class="fa-solid fa-circle-info"></i> Información compilada de los documentos oficiales del grupo (2016 / 2019).</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <img src="assets/logosf.png" alt="Logo Zenta" class="brand-logo" />
+            <span class="brand-text">Grupo Scout <span>Zenta</span></span>
+          </a>
+          <p>Construyendo un mundo mejor a través de la educación de los jóvenes basada en el método y los valores scouts. Grupo N° 654, reconocido por SAAC.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/5493878359312" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://instagram.com/gscoutzenta" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1HpJdo8r63/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="glosas.html">Glosas</a></li>
+            <li><a href="recursos.html">Recursos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Donde estamos</h4>
+          <ul>
+            <li><i class="fa-solid fa-location-dot" style="color:var(--gold); margin-right:6px;"></i> Complejo Municipal de Deportes</li>
+            <li><i class="fa-solid fa-city" style="color:var(--gold); margin-right:6px;"></i> Orán, Salta</li>
+            <li><i class="fa-regular fa-clock" style="color:var(--gold); margin-right:6px;"></i> Sábados 16:00 a 19:00 hs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Grupo Scout Zenta · Desarrollado por Valentina Baudino</p>
+        <p class="motto">Siempre Listos <i class="fa-solid fa-fire"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/zenta.js"></script>
+<script src="/demos/demo-mode.js" defer></script>
+</body>
+</html>
