@@ -52,7 +52,15 @@ body {
 
 html {
   scroll-padding-top: 6rem;
+  /* Bloquea el scroll horizontal — si algún elemento crece más que el viewport
+     (típico en Android), lo recortamos en vez de mostrar barra lateral. */
+  overflow-x: clip;
 }
+body {
+  overflow-x: clip;
+}
+/* Cualquier descendiente que use width:100% no debe sobrepasar el viewport */
+img, video, iframe, svg { max-width: 100%; }
 
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -379,9 +387,14 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 
 /* Desktop md+: 4 columnas con layout asimétrico */
 @media (min-width: 768px) {
-  .bento { grid-template-columns: repeat(4, 1fr); }
+  .bento {
+    grid-template-columns: repeat(4, 1fr);
+    align-items: stretch;            /* todas las cards llenan su fila — sin huecos */
+  }
   .bento-item                  { grid-column: span 2; }
-  .bento-item.large            { grid-column: span 2; }   /* Desarrollo */
+  /* Desarrollo (large): 2 columnas Y 2 filas — así Automatizaciones queda
+     arriba a la derecha y Optimizaciones justo debajo. */
+  .bento-item.large            { grid-column: span 2; grid-row: span 2; }
   .bento-item.wide             { grid-column: span 4; }   /* Mantenimiento */
 }
 
@@ -1298,24 +1311,34 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   padding: 18px;
   border-radius: 20px;
   background: var(--c-bg-elevated, #fff);
-  border: 1px solid color-mix(in srgb, var(--c-accent, #7c5cfc) 18%, var(--border-soft, rgba(10,10,15,.12)));
-  box-shadow: 0 1px 2px rgba(10,10,15,.04), 0 8px 28px -14px color-mix(in srgb, var(--c-accent, #7c5cfc) 35%, transparent);
+  /* Sin borde solido: el "marco" lo dibuja ::before como gradiente */
+  border: none;
+  box-shadow: 0 2px 6px -2px rgba(10,10,15,.06),
+              0 14px 32px -14px rgba(124, 92, 252, 0.35);
   position: relative;
-  overflow: hidden;
   isolation: isolate;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/* Marco con gradiente Instagram en los 4 lados (simetrico, sin artifacts) */
 .qr-card::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg,
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg,
               #FFDB2C, #F58529, #DD2A7B, #8134AF, #515BD4, #DD2A7B);
-  background-size: 200% 100%;
+  background-size: 200% 200%;
   animation: pfInfoShift 6s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
 }
 .qr-card:hover {
   transform: translateY(-3px);
