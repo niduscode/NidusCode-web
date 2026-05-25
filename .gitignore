@@ -20,5 +20,8 @@ package-lock.json
 # Claude Code (estado interno de la sesión)
 .claude/
 
+# Carpeta interna de capturas para review (no va al repo público)
+cap de pruebas*/
+
 # Código fuente crudo de proyectos cliente: vive en ../niduscode-fuentes/
 # (fuera de este repo). Nunca debe entrar aquí: contiene .env y claves privadas.
