@@ -1382,6 +1382,78 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 }
 
 /* =========================================================
+   Stack compacto en mobile · icono lateral + título + desc
+   (En sm+ vuelve al layout vertical original sin cambios)
+   ========================================================= */
+@media (max-width: 639.98px) {
+  /* Cada tarjeta: layout horizontal con icono a la izquierda */
+  #kits .spotlight-card {
+    padding: 14px !important;
+    display: grid !important;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "icon title"
+      "icon desc";
+    column-gap: 14px;
+    row-gap: 2px;
+    align-items: start;
+    border-radius: 14px;
+  }
+  /* El bloque "icono + número" original — lo aplastamos a solo icono */
+  #kits .spotlight-card > div:first-child {
+    grid-area: icon;
+    margin: 0 !important;
+    align-self: start;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  #kits .spotlight-card > div:first-child > div {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 10px !important;
+  }
+  #kits .spotlight-card > div:first-child > div > svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  /* El número 01/02/03... lo ocultamos en mobile — el orden visual ya lo deja claro */
+  #kits .spotlight-card > div:first-child > span {
+    display: none !important;
+  }
+  #kits .spotlight-card > h3 {
+    grid-area: title;
+    margin: 0 !important;
+    font-size: 15px !important;
+    line-height: 1.25;
+  }
+  #kits .spotlight-card > p {
+    grid-area: desc;
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+    margin: 2px 0 0 !important;
+  }
+  /* Espacio entre cards dentro de una categoría */
+  #kits .grid.sm\:grid-cols-2 {
+    gap: 8px !important;
+  }
+  /* Espacio entre categorías */
+  #kits .space-y-14 > * + * {
+    margin-top: 32px !important;
+  }
+  /* Header del bloque "Categoría" más compacto */
+  #kits .space-y-14 > div > .reveal.flex.items-center {
+    margin-bottom: 12px !important;
+  }
+  /* Tarjeta "¿Tu caso es diferente?" — aplica el mismo patrón si tiene la clase
+     spotlight-card; si no, no la tocamos */
+  #kits .border-dashed {
+    padding: 14px !important;
+  }
+}
+
+/* =========================================================
    Sección Proceso · timeline compacto en mobile, grid en desktop
    ========================================================= */
 .proceso-grid { gap: 14px; }

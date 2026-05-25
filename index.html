@@ -35,44 +35,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Inter 400+600 (body) · Poppins 600+800 (display) · JetBrains Mono 400 (mono) -->
+  <!-- Reducido de 10 weights a 5 — ahorra ~400KB de fonts en mobile -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'media',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-          },
-          colors: {
-            ink: {
-              50:  '#f7f7f8',
-              100: '#ececef',
-              200: '#d4d4da',
-              300: '#a8a8b3',
-              400: '#71717f',
-              500: '#52525e',
-              600: '#3f3f48',
-              700: '#2a2a32',
-              800: '#16161c',
-              900: '#0a0a0f',
-            },
-            accent: {
-              DEFAULT: '#7c5cfc',
-              hover:   '#6a47f0',
-              2:       '#8b5cf6',
-              3:       '#ff3db4',
-            }
-          }
-        }
-      }
-    }
-  </script>
-
+  <!-- Tailwind: CSS estático pre-buildeado (npx tailwindcss -i tailwind.input.css -o tailwind.build.css --minify)
+       Reemplaza al CDN runtime (~300 KB JS + JIT bloqueante) por 26 KB de CSS comprimido. -->
+  <link rel="stylesheet" href="tailwind.build.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 

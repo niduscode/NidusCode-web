@@ -12,6 +12,7 @@ desktop.ini
 # Logs y temporales
 *.log
 node_modules/
+package-lock.json
 
 # Netlify
 .netlify/
