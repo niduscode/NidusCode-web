@@ -15,34 +15,34 @@ const ENDPOINT     = `${SUPABASE_URL}/rest/v1/contact_messages`;
 // Países para el dropdown del teléfono — orden: default + LATAM + resto
 // =====================================================================
 const COUNTRIES = [
-  { iso: 'CL', name: 'Chile',             flag: '🇨🇱', code: '+56'  },
-  { iso: 'AR', name: 'Argentina',         flag: '🇦🇷', code: '+54'  },
-  { iso: 'MX', name: 'México',            flag: '🇲🇽', code: '+52'  },
-  { iso: 'CO', name: 'Colombia',          flag: '🇨🇴', code: '+57'  },
-  { iso: 'PE', name: 'Perú',              flag: '🇵🇪', code: '+51'  },
-  { iso: 'UY', name: 'Uruguay',           flag: '🇺🇾', code: '+598' },
-  { iso: 'EC', name: 'Ecuador',           flag: '🇪🇨', code: '+593' },
-  { iso: 'BO', name: 'Bolivia',           flag: '🇧🇴', code: '+591' },
-  { iso: 'PY', name: 'Paraguay',          flag: '🇵🇾', code: '+595' },
-  { iso: 'VE', name: 'Venezuela',         flag: '🇻🇪', code: '+58'  },
-  { iso: 'BR', name: 'Brasil',            flag: '🇧🇷', code: '+55'  },
-  { iso: 'CR', name: 'Costa Rica',        flag: '🇨🇷', code: '+506' },
-  { iso: 'PA', name: 'Panamá',            flag: '🇵🇦', code: '+507' },
-  { iso: 'DO', name: 'R. Dominicana',     flag: '🇩🇴', code: '+1'   },
-  { iso: 'GT', name: 'Guatemala',         flag: '🇬🇹', code: '+502' },
-  { iso: 'HN', name: 'Honduras',          flag: '🇭🇳', code: '+504' },
-  { iso: 'SV', name: 'El Salvador',       flag: '🇸🇻', code: '+503' },
-  { iso: 'NI', name: 'Nicaragua',         flag: '🇳🇮', code: '+505' },
-  { iso: 'CU', name: 'Cuba',              flag: '🇨🇺', code: '+53'  },
-  { iso: 'PR', name: 'Puerto Rico',       flag: '🇵🇷', code: '+1'   },
-  { iso: 'ES', name: 'España',            flag: '🇪🇸', code: '+34'  },
-  { iso: 'US', name: 'Estados Unidos',    flag: '🇺🇸', code: '+1'   },
-  { iso: 'CA', name: 'Canadá',            flag: '🇨🇦', code: '+1'   },
-  { iso: 'GB', name: 'Reino Unido',       flag: '🇬🇧', code: '+44'  },
-  { iso: 'FR', name: 'Francia',           flag: '🇫🇷', code: '+33'  },
-  { iso: 'DE', name: 'Alemania',          flag: '🇩🇪', code: '+49'  },
-  { iso: 'IT', name: 'Italia',            flag: '🇮🇹', code: '+39'  },
-  { iso: 'PT', name: 'Portugal',          flag: '🇵🇹', code: '+351' },
+  { iso: 'CL', name: 'Chile',             flag: '🇨🇱', code: '+56',  example: '9 1234 5678'    },
+  { iso: 'AR', name: 'Argentina',         flag: '🇦🇷', code: '+54',  example: '11 2345 6789'   },
+  { iso: 'MX', name: 'México',            flag: '🇲🇽', code: '+52',  example: '55 1234 5678'   },
+  { iso: 'CO', name: 'Colombia',          flag: '🇨🇴', code: '+57',  example: '320 123 4567'   },
+  { iso: 'PE', name: 'Perú',              flag: '🇵🇪', code: '+51',  example: '912 345 678'    },
+  { iso: 'UY', name: 'Uruguay',           flag: '🇺🇾', code: '+598', example: '94 123 456'     },
+  { iso: 'EC', name: 'Ecuador',           flag: '🇪🇨', code: '+593', example: '99 123 4567'    },
+  { iso: 'BO', name: 'Bolivia',           flag: '🇧🇴', code: '+591', example: '71 234 567'     },
+  { iso: 'PY', name: 'Paraguay',          flag: '🇵🇾', code: '+595', example: '981 123 456'    },
+  { iso: 'VE', name: 'Venezuela',         flag: '🇻🇪', code: '+58',  example: '412 123 4567'   },
+  { iso: 'BR', name: 'Brasil',            flag: '🇧🇷', code: '+55',  example: '11 91234 5678'  },
+  { iso: 'CR', name: 'Costa Rica',        flag: '🇨🇷', code: '+506', example: '8123 4567'      },
+  { iso: 'PA', name: 'Panamá',            flag: '🇵🇦', code: '+507', example: '6123 4567'      },
+  { iso: 'DO', name: 'R. Dominicana',     flag: '🇩🇴', code: '+1',   example: '809 123 4567'   },
+  { iso: 'GT', name: 'Guatemala',         flag: '🇬🇹', code: '+502', example: '5123 4567'      },
+  { iso: 'HN', name: 'Honduras',          flag: '🇭🇳', code: '+504', example: '9123 4567'      },
+  { iso: 'SV', name: 'El Salvador',       flag: '🇸🇻', code: '+503', example: '7123 4567'      },
+  { iso: 'NI', name: 'Nicaragua',         flag: '🇳🇮', code: '+505', example: '8123 4567'      },
+  { iso: 'CU', name: 'Cuba',              flag: '🇨🇺', code: '+53',  example: '5 1234567'      },
+  { iso: 'PR', name: 'Puerto Rico',       flag: '🇵🇷', code: '+1',   example: '787 123 4567'   },
+  { iso: 'ES', name: 'España',            flag: '🇪🇸', code: '+34',  example: '612 34 56 78'   },
+  { iso: 'US', name: 'Estados Unidos',    flag: '🇺🇸', code: '+1',   example: '415 555 1234'   },
+  { iso: 'CA', name: 'Canadá',            flag: '🇨🇦', code: '+1',   example: '416 555 1234'   },
+  { iso: 'GB', name: 'Reino Unido',       flag: '🇬🇧', code: '+44',  example: '7700 900123'    },
+  { iso: 'FR', name: 'Francia',           flag: '🇫🇷', code: '+33',  example: '6 12 34 56 78'  },
+  { iso: 'DE', name: 'Alemania',          flag: '🇩🇪', code: '+49',  example: '1512 3456789'   },
+  { iso: 'IT', name: 'Italia',            flag: '🇮🇹', code: '+39',  example: '312 345 6789'   },
+  { iso: 'PT', name: 'Portugal',          flag: '🇵🇹', code: '+351', example: '912 345 678'    },
 ];
 
 // =====================================================================
@@ -115,8 +115,14 @@ function selectCountry(iso) {
   selectedCountry = c;
   if (flagEl) flagEl.textContent = c.flag;
   if (codeEl) codeEl.textContent = c.code;
+  if (phoneInput && c.example) phoneInput.placeholder = c.example;
   closeCountryPanel();
   phoneInput?.focus();
+}
+
+// Setea el placeholder inicial según el país por defecto
+if (phoneInput && selectedCountry.example) {
+  phoneInput.placeholder = selectedCountry.example;
 }
 
 if (countryBtn) {
