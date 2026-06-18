@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Página no encontrada — NidusCode</title>
+  <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tailwind.build.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="font-sans antialiased text-ink-900 dark:text-ink-50">
+  <div aria-hidden="true" class="dot-pattern pointer-events-none fixed inset-0 -z-10"></div>
+
+  <main class="min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="max-w-lg w-full text-center">
+      <a href="/" class="inline-flex items-center gap-2.5 mb-12">
+        <img src="assets/nidus-logo.png" alt="NidusCode" class="h-8 w-auto" />
+        <span class="font-display font-semibold tracking-tight text-lg">NidusCode</span>
+      </a>
+
+      <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">Error 404</p>
+      <h1 class="font-display text-6xl sm:text-7xl font-bold tracking-tighter leading-[0.95] mb-5">
+        Esta página <span class="gradient-text">no existe.</span>
+      </h1>
+      <p class="text-lg text-ink-600 dark:text-ink-300 mb-10">
+        El enlace puede estar roto o la página se movió. Volvé al inicio y seguimos desde ahí.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-ink-900 dark:bg-white text-white dark:text-ink-900 font-medium hover:-translate-y-0.5 transition-transform">
+          Volver al inicio
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="/#contacto" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-ink-200 dark:border-ink-700 hover:border-ink-900 dark:hover:border-white font-medium transition-colors">
+          Contactarnos
+        </a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

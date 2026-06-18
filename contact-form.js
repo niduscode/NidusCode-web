@@ -108,6 +108,19 @@ function setClientType(type) {
 
 clientCards.forEach(c => {
   c.addEventListener('click', () => setClientType(c.dataset.clientType));
+  // Accesibilidad: flechas para moverse entre Persona/Empresa como un radiogroup real
+  c.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' &&
+        e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    e.preventDefault();
+    const cards = Array.from(clientCards);
+    const i = cards.indexOf(c);
+    const next = (e.key === 'ArrowRight' || e.key === 'ArrowDown')
+      ? cards[(i + 1) % cards.length]
+      : cards[(i - 1 + cards.length) % cards.length];
+    setClientType(next.dataset.clientType);
+    next.focus();
+  });
 });
 
 // =====================================================================

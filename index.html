@@ -4,34 +4,68 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="NidusCode — Desarrollo web profesional por developers. Webs a medida, automatizaciones y optimización para tu negocio. Chile y Argentina." />
+  <meta name="author" content="NidusCode" />
+  <meta name="keywords" content="desarrollo web, diseño web, páginas web a medida, automatizaciones, n8n, optimización SEO, Chile, Argentina, agencia web, aplicaciones web" />
   <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   <title>NidusCode — Desarrollo Web Profesional · Chile y Argentina</title>
 
+  <!-- URL canónica del sitio -->
+  <link rel="canonical" href="https://niduscode-web.vercel.app/" />
+
   <!-- Favicons -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
   <!-- ====================================================================
        Open Graph / vista previa al compartir el enlace.
-       IMPORTANTE: cuando despliegues en Netlify, reemplaza
-       "https://niduscode.netlify.app" por la URL REAL de tu sitio
-       en las 3 etiquetas de abajo (og:url, og:image, twitter:image).
+       Dominio centralizado: si tu subdominio de Vercel exacto es otro,
+       reemplaza "https://niduscode-web.vercel.app" en este bloque, en el
+       <link rel="canonical"> de arriba, en el JSON-LD y en sitemap.xml.
        ==================================================================== -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NidusCode" />
   <meta property="og:title" content="NidusCode — Desarrollo Web Profesional" />
   <meta property="og:description" content="Webs a medida hechas por developers. Desarrollo, automatización y optimización. Chile y Argentina." />
-  <meta property="og:image" content="https://niduscode.netlify.app/assets/og-image.jpg" />
+  <meta property="og:image" content="https://niduscode-web.vercel.app/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="https://niduscode.netlify.app/" />
-  <meta property="og:locale" content="es_ES" />
+  <meta property="og:url" content="https://niduscode-web.vercel.app/" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:locale:alternate" content="es_AR" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="NidusCode — Desarrollo Web Profesional" />
   <meta name="twitter:description" content="Webs a medida hechas por developers. Chile y Argentina." />
-  <meta name="twitter:image" content="https://niduscode.netlify.app/assets/og-image.jpg" />
+  <meta name="twitter:image" content="https://niduscode-web.vercel.app/assets/og-image.jpg" />
+
+  <!-- Datos estructurados · Organización (rich results en Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NidusCode",
+    "url": "https://niduscode-web.vercel.app/",
+    "logo": "https://niduscode-web.vercel.app/assets/nidus-logo.png",
+    "image": "https://niduscode-web.vercel.app/assets/og-image.jpg",
+    "description": "Desarrollo web profesional, automatizaciones y optimización para negocios. Chile y Argentina, 100% remoto.",
+    "email": "niduscode@gmail.com",
+    "areaServed": ["CL", "AR"],
+    "knowsLanguage": "es",
+    "sameAs": [
+      "https://www.instagram.com/niduscode",
+      "https://wa.me/56977521515"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "telephone": "+56977521515",
+      "email": "niduscode@gmail.com",
+      "availableLanguage": "Spanish"
+    }
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1223,5 +1257,9 @@
   <script src="script.js"></script>
   <script src="contact-form.js" defer></script>
   <script src="offline-game.js" defer></script>
+
+  <!-- Vercel Web Analytics · visitas y fuentes de tráfico (gratis, sin cookies) -->
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
