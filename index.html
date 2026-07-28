@@ -15,6 +15,7 @@
 
   <!-- Favicons -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -89,14 +90,14 @@
 
   <!-- ============ NAVBAR (pill flotante) ============ -->
   <header id="navbar" class="fixed top-0 inset-x-0 z-50">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="nav-shell max-w-5xl mx-auto px-4 sm:px-6">
       <nav class="flex items-center justify-between h-14 px-4 sm:px-6">
         <a href="#hero" class="flex items-center gap-2.5 group">
           <img src="assets/nidus-logo.png" alt="NidusCode" class="logo-mark h-8 w-auto" />
           <span class="font-display font-semibold tracking-tight">NidusCode</span>
         </a>
 
-        <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-ink-600 dark:text-ink-300">
+        <ul class="desktop-nav hidden md:flex items-center gap-7 text-sm font-medium text-ink-600 dark:text-ink-300">
           <li><a href="#servicios" class="hover:text-ink-900 dark:hover:text-white transition-colors">Servicios</a></li>
           <li><a href="#kits" class="hover:text-ink-900 dark:hover:text-white transition-colors">Stack</a></li>
           <li><a href="#portafolio" class="hover:text-ink-900 dark:hover:text-white transition-colors">Portafolio</a></li>
@@ -105,11 +106,11 @@
         </ul>
 
         <div class="flex items-center gap-3">
-          <span class="hidden sm:inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-ink-200 dark:border-ink-700 text-[10px] font-mono uppercase tracking-wider text-ink-600 dark:text-ink-300">
+          <span class="nav-status hidden sm:inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-ink-200 dark:border-ink-700 text-[10px] font-mono uppercase tracking-wider text-ink-600 dark:text-ink-300">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             CL · AR
           </span>
-          <button id="menuToggle" aria-label="Abrir menú" aria-expanded="false" class="menu-toggle md:hidden">
+          <button id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" class="menu-toggle md:hidden">
             <svg class="menu-icon menu-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
             <svg class="menu-icon menu-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
           </button>
@@ -117,59 +118,31 @@
       </nav>
     </div>
 
-    <!-- Menú móvil · panel grande con icono, descripción y CTA -->
+    <!-- Menú móvil · tarjeta compacta, sin bloquear la página -->
     <div id="mobileMenu" class="mobile-menu" hidden>
       <div class="mobile-menu-panel">
-        <nav>
+        <nav class="mobile-menu-nav" aria-label="Navegación móvil">
           <a href="#servicios" class="mobile-menu-link">
-            <span class="mobile-menu-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="mobile-menu-text">
-              <span class="mobile-menu-title">Servicios</span>
-              <span class="mobile-menu-hint">Qué hacemos</span>
-            </span>
-            <svg class="mobile-menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="mobile-menu-title">Servicios</span>
+            <span class="mobile-menu-index" aria-hidden="true">01</span>
           </a>
           <a href="#kits" class="mobile-menu-link">
-            <span class="mobile-menu-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke-linecap="round"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke-linecap="round"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke-linecap="round"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke-linecap="round"/></svg>
-            </span>
-            <span class="mobile-menu-text">
-              <span class="mobile-menu-title">Stack</span>
-              <span class="mobile-menu-hint">Con qué herramientas</span>
-            </span>
-            <svg class="mobile-menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="mobile-menu-title">Stack</span>
+            <span class="mobile-menu-index" aria-hidden="true">02</span>
           </a>
           <a href="#portafolio" class="mobile-menu-link">
-            <span class="mobile-menu-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h12" stroke-linecap="round"/></svg>
-            </span>
-            <span class="mobile-menu-text">
-              <span class="mobile-menu-title">Portafolio</span>
-              <span class="mobile-menu-hint">Proyectos entregados</span>
-            </span>
-            <svg class="mobile-menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="mobile-menu-title">Portafolio</span>
+            <span class="mobile-menu-index" aria-hidden="true">03</span>
           </a>
           <a href="#faq" class="mobile-menu-link">
-            <span class="mobile-menu-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-2.5 2-2.5 4M12 17.5h.01" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="mobile-menu-text">
-              <span class="mobile-menu-title">FAQ</span>
-              <span class="mobile-menu-hint">Preguntas frecuentes</span>
-            </span>
-            <svg class="mobile-menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="mobile-menu-title">FAQ</span>
+            <span class="mobile-menu-index" aria-hidden="true">04</span>
           </a>
         </nav>
         <a href="#contacto" class="mobile-menu-cta">
           Habla con nosotros
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <div class="mobile-menu-status">
-          <span class="mobile-menu-dot"></span>
-          <span>Disponibles en Chile · Argentina</span>
-        </div>
       </div>
     </div>
   </header>
@@ -630,7 +603,13 @@
           </p>
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="portfolio-swipe-hint" aria-hidden="true">
+          <span>Desliza para explorar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M14 7l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="portfolio-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+             role="region" aria-label="Proyectos destacados; desplázate horizontalmente en móvil" tabindex="0">
           <!-- Proyecto 1 — La Arboleda -->
           <article class="reveal group">
             <button type="button"
@@ -1201,7 +1180,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <figure class="lb-stage">
-      <img class="lb-img" src="" alt="Captura del proyecto" />
+      <img class="lb-img" alt="Captura del proyecto" hidden />
       <figcaption class="lb-cap">
         <span class="lb-title"></span>
         <span class="lb-counter"></span>

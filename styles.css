@@ -89,14 +89,29 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 
 /* ===== Navbar — pill flotante ===== */
 #navbar {
-  padding-top: 1rem;
+  padding-top: 10px;
+  transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
 }
-#navbar > div {
+#navbar.nav-hidden {
+  transform: translateY(calc(-100% - 12px));
+}
+#navbar .nav-shell {
+  width: calc(100% - 24px);
+  max-width: 1024px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  border: 1px solid rgba(10, 10, 15, 0.05);
+  box-shadow: 0 8px 28px -22px rgba(10, 10, 15, 0.35);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-#navbar.scrolled > div {
-  background: rgba(255, 255, 255, 0.92);
+#navbar .nav-shell > nav { height: 52px; }
+#navbar.scrolled .nav-shell {
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border: 1px solid rgba(10, 10, 15, 0.06);
@@ -108,18 +123,22 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 /* Fallback Android (Chrome viejo / Samsung Internet sin backdrop-filter):
    sin el blur el bg semi-transparente dejaba ver el contenido detrás del pill. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  #navbar.scrolled > div {
+  #navbar.scrolled .nav-shell {
     background: rgba(255, 255, 255, 0.98);
   }
 }
 @media (prefers-color-scheme: dark) {
-  #navbar.scrolled > div {
+  #navbar .nav-shell {
+    background: rgba(15, 15, 22, 0.7);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+  #navbar.scrolled .nav-shell {
     background: rgba(15, 15, 22, 0.9);
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    #navbar.scrolled > div {
+    #navbar.scrolled .nav-shell {
       background: rgba(15, 15, 22, 0.98);
     }
   }
@@ -222,6 +241,13 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 }
 .hero-title-2 {
   animation: blurIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+@media (max-width: 420px) {
+  #hero h1 {
+    font-size: clamp(2.35rem, 10.9vw, 2.65rem);
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
 }
 @keyframes blurIn {
   from {
@@ -1011,6 +1037,59 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   color: var(--c-muted);
   margin-top: 6px;
 }
+.portfolio-swipe-hint { display: none; }
+
+/* En móvil los proyectos se exploran lateralmente: una sola altura de
+   sección en lugar de siete tarjetas apiladas verticalmente. */
+@media (max-width: 639.98px) {
+  #portafolio .reveal.mb-16 { margin-bottom: 28px; }
+  .portfolio-swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+    margin: -10px 0 12px;
+    color: var(--c-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .portfolio-swipe-hint svg {
+    width: 16px;
+    height: 16px;
+    color: var(--c-accent);
+  }
+  .portfolio-grid {
+    display: flex !important;
+    gap: 14px !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-right: -24px;
+    padding: 4px 24px 18px 0;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .portfolio-grid::-webkit-scrollbar { display: none; }
+  .portfolio-grid > article {
+    flex: 0 0 calc(100% - 34px);
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .portfolio-grid .pf-info {
+    padding: 16px;
+  }
+  .portfolio-grid .pf-info p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .pf-info::before, .pf-info .pf-meta .pf-dot { animation: none; }
   .group:hover .pf-info { transform: none; }
@@ -1603,7 +1682,7 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 }
 
 /* =========================================================
-   Menú móvil · panel grande con CTA
+   Menú móvil · tarjeta compacta, sin backdrop de pantalla completa
    ========================================================= */
 .menu-toggle {
   position: relative;
@@ -1638,108 +1717,78 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   color: var(--c-accent, #7c5cfc);
 }
 
+/* styles.css se carga después de Tailwind: este breakpoint evita que
+   display:inline-flex vuelva a mostrar el botón móvil en escritorio. */
+@media (min-width: 768px) {
+  .menu-toggle { display: none; }
+}
+
 /* Backdrop + panel */
 .mobile-menu {
   position: fixed;
-  top: 64px;   /* debajo del navbar pill */
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 70px;
+  left: 12px;
+  right: 12px;
   z-index: 49;
-  background: rgba(10, 10, 15, 0.35);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transform: translateY(-8px) scale(0.985);
+  transform-origin: top center;
+  transition: opacity 0.2s ease, transform 0.24s cubic-bezier(.22,.61,.36,1);
 }
 .mobile-menu.is-open {
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
 .mobile-menu-panel {
   position: relative;
-  margin: 12px 16px 0;
-  padding: 18px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.98);
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: saturate(170%) blur(18px);
+          backdrop-filter: saturate(170%) blur(18px);
   border: 1px solid rgba(10, 10, 15, 0.08);
-  box-shadow: 0 24px 60px -20px rgba(10, 10, 15, 0.25),
-              0 8px 24px -8px rgba(10, 10, 15, 0.12);
-  transform: translateY(-12px);
-  opacity: 0;
-  transition: transform 0.3s cubic-bezier(.22,.61,.36,1),
-              opacity 0.25s ease;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-}
-.mobile-menu.is-open .mobile-menu-panel {
-  transform: translateY(0);
-  opacity: 1;
+  box-shadow: 0 20px 50px -24px rgba(10, 10, 15, 0.35),
+              0 6px 18px -10px rgba(10, 10, 15, 0.16);
 }
 
-/* Cada link grande */
-.mobile-menu-link {
+.mobile-menu-nav {
   display: grid;
-  grid-template-columns: 40px 1fr 16px;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.mobile-menu-link {
+  display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 12px 6px;
-  border-radius: 14px;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 11px;
+  border: 1px solid rgba(10, 10, 15, 0.055);
+  background: rgba(255, 255, 255, 0.46);
   color: inherit;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
 }
 .mobile-menu-link:hover,
 .mobile-menu-link:active {
-  background: rgba(124, 92, 252, 0.07);
-  transform: translateX(2px);
-}
-.mobile-menu-link + .mobile-menu-link {
-  border-top: 1px solid rgba(10, 10, 15, 0.06);
-  border-radius: 0 0 14px 14px;
-  margin-top: 0;
-}
-.mobile-menu-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg,
-              color-mix(in srgb, var(--c-accent, #7c5cfc) 14%, transparent),
-              color-mix(in srgb, var(--c-accent-3, #ff3db4) 10%, transparent));
-  color: var(--c-accent, #7c5cfc);
-  flex-shrink: 0;
-}
-.mobile-menu-icon svg { width: 20px; height: 20px; }
-.mobile-menu-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
+  background: rgba(124, 92, 252, 0.08);
+  border-color: rgba(124, 92, 252, 0.16);
+  transform: translateY(-1px);
 }
 .mobile-menu-title {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.2;
 }
-.mobile-menu-hint {
-  font-size: 12px;
-  color: rgba(10, 10, 15, 0.5);
-  font-family: var(--font-mono, ui-monospace, monospace);
-  line-height: 1.2;
-}
-.mobile-menu-arrow {
-  width: 16px;
-  height: 16px;
-  color: rgba(10, 10, 15, 0.3);
-  flex-shrink: 0;
-}
-.mobile-menu-link:hover .mobile-menu-arrow,
-.mobile-menu-link:active .mobile-menu-arrow {
+.mobile-menu-index {
   color: var(--c-accent, #7c5cfc);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  opacity: 0.72;
 }
 
 /* CTA destacado */
@@ -1748,8 +1797,8 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 14px;
-  padding: 14px 18px;
+  margin-top: 8px;
+  padding: 12px 18px;
   border-radius: 999px;
   background: linear-gradient(135deg, #18181b, #27272a);
   color: #fff;
@@ -1766,53 +1815,21 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 }
 .mobile-menu-cta svg { width: 16px; height: 16px; }
 
-/* Status footer */
-.mobile-menu-status {
-  margin-top: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(10, 10, 15, 0.04);
-  font-size: 11px;
-  font-family: var(--font-mono, ui-monospace, monospace);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(10, 10, 15, 0.6);
-}
-.mobile-menu-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
-  animation: pulseGreen 2.4s ease-in-out infinite;
-}
-@keyframes pulseGreen {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18); }
-  50%      { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.05); }
-}
-
 @media (prefers-color-scheme: dark) {
   .menu-toggle:hover { background: rgba(255, 255, 255, 0.06); }
-  .mobile-menu { background: rgba(0, 0, 0, 0.55); }
   .mobile-menu-panel {
-    background: rgba(20, 20, 26, 0.96);
+    background: rgba(20, 20, 26, 0.9);
     border-color: rgba(255, 255, 255, 0.08);
   }
   .mobile-menu-link:hover,
   .mobile-menu-link:active { background: rgba(124, 92, 252, 0.14); }
-  .mobile-menu-link + .mobile-menu-link { border-top-color: rgba(255, 255, 255, 0.06); }
-  .mobile-menu-hint { color: rgba(255, 255, 255, 0.5); }
-  .mobile-menu-arrow { color: rgba(255, 255, 255, 0.3); }
+  .mobile-menu-link {
+    background: rgba(255, 255, 255, 0.035);
+    border-color: rgba(255, 255, 255, 0.055);
+  }
   .mobile-menu-cta {
     background: linear-gradient(135deg, #fff, #e5e5e5);
     color: #18181b;
-  }
-  .mobile-menu-status {
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.6);
   }
 }
 

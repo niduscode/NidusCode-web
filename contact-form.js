@@ -268,6 +268,11 @@ if (form && button && feedback) {
       showFeedback('error', 'Por favor completá nombre, email y mensaje.');
       return;
     }
+    if (emailInput && !emailInput.checkValidity()) {
+      showFeedback('error', 'Por favor ingresá un email válido.');
+      emailInput.focus();
+      return;
+    }
     if (clientType === 'empresa' && !empresaValue) {
       showFeedback('error', 'Por favor ingresá el nombre de la empresa.');
       empresaInput?.focus();

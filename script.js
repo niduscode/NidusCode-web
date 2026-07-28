@@ -9,6 +9,7 @@
   // ===== Scroll progress bar =====
   const progressEl = document.getElementById('scrollProgress');
   const navbar = document.getElementById('navbar');
+  let lastScrollTop = window.scrollY;
 
   const onScroll = () => {
     const scrollTop = window.scrollY;
@@ -18,7 +19,16 @@
     if (navbar) {
       if (scrollTop > 12) navbar.classList.add('scrolled');
       else navbar.classList.remove('scrolled');
+
+      const scrollingDown = scrollTop > lastScrollTop + 4;
+      const scrollingUp = scrollTop < lastScrollTop - 4;
+      if (scrollTop > 140 && scrollingDown && !navbar.classList.contains('menu-open')) {
+        navbar.classList.add('nav-hidden');
+      } else if (scrollingUp || scrollTop <= 140) {
+        navbar.classList.remove('nav-hidden');
+      }
     }
+    lastScrollTop = Math.max(scrollTop, 0);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -27,22 +37,40 @@
   const menuToggle = document.getElementById('menuToggle');
   const mobileMenu = document.getElementById('mobileMenu');
   if (menuToggle && mobileMenu) {
+    let closeTimer = null;
+
     const openMenu = () => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
       mobileMenu.hidden = false;
       // forzar reflow para que la animación de entrada se aplique
       void mobileMenu.offsetWidth;
       mobileMenu.classList.add('is-open');
       menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.setAttribute('aria-label', 'Cerrar menú');
       menuToggle.classList.add('is-active');
-      document.body.style.overflow = 'hidden';
+      navbar?.classList.add('menu-open');
+      navbar?.classList.remove('nav-hidden');
     };
-    const closeMenu = () => {
+    const closeMenu = (immediate = false) => {
+      if (closeTimer) clearTimeout(closeTimer);
       mobileMenu.classList.remove('is-open');
       menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Abrir menú');
       menuToggle.classList.remove('is-active');
-      document.body.style.overflow = '';
+      navbar?.classList.remove('menu-open');
       // esperar a que termine la transición antes de ocultar
-      setTimeout(() => { mobileMenu.hidden = true; }, 280);
+      if (immediate) {
+        mobileMenu.hidden = true;
+        closeTimer = null;
+      } else {
+        closeTimer = setTimeout(() => {
+          if (!mobileMenu.classList.contains('is-open')) mobileMenu.hidden = true;
+          closeTimer = null;
+        }, 280);
+      }
     };
     menuToggle.addEventListener('click', () => {
       if (mobileMenu.classList.contains('is-open')) closeMenu();
@@ -52,14 +80,23 @@
     mobileMenu.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', closeMenu);
     });
-    // Click en el backdrop (afuera del panel) → cierra
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) closeMenu();
+    // Click fuera de la tarjeta → cierra sin cubrir ni bloquear la página.
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.classList.contains('is-open')) return;
+      if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) closeMenu();
     });
     // Escape → cierra
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) closeMenu();
     });
+    // Evita dejar el body bloqueado si el viewport cambia a escritorio.
+    const desktopQuery = window.matchMedia('(min-width: 768px)');
+    desktopQuery.addEventListener('change', (e) => {
+      if (e.matches && mobileMenu.classList.contains('is-open')) closeMenu(true);
+    });
+    window.addEventListener('scroll', () => {
+      if (mobileMenu.classList.contains('is-open')) closeMenu(true);
+    }, { passive: true });
   }
 
   // ===== Reveal animations =====
@@ -141,17 +178,28 @@
   });
 
   // ===== FAQ accordion =====
-  document.querySelectorAll('.faq-item').forEach((item) => {
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach((item, index) => {
     const btn = item.querySelector('.faq-question');
-    if (!btn) return;
+    const answer = item.querySelector('.faq-answer');
+    if (!btn || !answer) return;
+    const answerId = `faq-answer-${index + 1}`;
+    answer.id = answerId;
+    answer.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-controls', answerId);
+
     btn.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
       // Cerrar todos los demás
-      document.querySelectorAll('.faq-item.open').forEach((i) => {
-        if (i !== item) i.classList.remove('open');
+      faqItems.forEach((otherItem) => {
+        if (otherItem === item) return;
+        otherItem.classList.remove('open');
+        otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+        otherItem.querySelector('.faq-answer')?.setAttribute('aria-hidden', 'true');
       });
       item.classList.toggle('open', !isOpen);
       btn.setAttribute('aria-expanded', String(!isOpen));
+      answer.setAttribute('aria-hidden', String(isOpen));
     });
   });
 
@@ -166,14 +214,19 @@
     const lbNext = lightbox.querySelector('.lb-next');
     let gallery = [];
     let idx = 0;
+    let returnFocus = null;
 
     const show = (i) => {
       if (!gallery.length) return;
       idx = (i + gallery.length) % gallery.length;
+      lbImg.hidden = false;
       lbImg.src = gallery[idx];
       lbCounter.textContent = (idx + 1) + ' / ' + gallery.length;
     };
     const openLb = (images, title) => {
+      returnFocus = document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
       gallery = images;
       lbTitle.textContent = title;
       lightbox.classList.toggle('single', gallery.length <= 1);
@@ -181,11 +234,20 @@
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => lbClose.focus());
     };
     const closeLb = () => {
       lightbox.classList.remove('open');
       lightbox.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      if (returnFocus?.isConnected) returnFocus.focus();
+      returnFocus = null;
+      setTimeout(() => {
+        if (!lightbox.classList.contains('open')) {
+          lbImg.hidden = true;
+          lbImg.removeAttribute('src');
+        }
+      }, 300);
     };
 
     document.querySelectorAll('.portfolio-trigger').forEach((btn) => {
@@ -258,9 +320,14 @@
   })();
 
   // ===== Modal de demo interactiva =====
+  let demoReturnFocus = null;
+
   function openDemoModal(src, title) {
     const modal = document.getElementById('demoModal');
     if (!modal) return;
+    demoReturnFocus = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
     const frame = document.getElementById('demoFrame');
     const loader = document.getElementById('demoLoader');
     document.getElementById('demoTitle').textContent = title;
@@ -270,6 +337,17 @@
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      const closeButtons = [
+        document.getElementById('demoCloseFloat'),
+        document.getElementById('demoClose')
+      ];
+      closeButtons.find((btn) => {
+        if (!btn) return false;
+        const style = window.getComputedStyle(btn);
+        return style.display !== 'none' && style.visibility !== 'hidden';
+      })?.focus();
+    });
   }
   (function setupDemoModal() {
     const modal = document.getElementById('demoModal');
@@ -284,6 +362,8 @@
       setTimeout(() => {
         if (!modal.classList.contains('open')) frame.src = 'about:blank';
       }, 350);
+      if (demoReturnFocus?.isConnected) demoReturnFocus.focus();
+      demoReturnFocus = null;
     };
     frame.addEventListener('load', () => {
       if (modal.classList.contains('open')) loader.classList.add('hidden');
