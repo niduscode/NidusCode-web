@@ -9,6 +9,8 @@
   // ===== Scroll progress bar =====
   const progressEl = document.getElementById('scrollProgress');
   const navbar = document.getElementById('navbar');
+  const hero = document.getElementById('hero');
+  const whatsappFloat = document.querySelector('.wa-float');
   let lastScrollTop = window.scrollY;
 
   const onScroll = () => {
@@ -16,6 +18,9 @@
     const docH = document.documentElement.scrollHeight - window.innerHeight;
     const pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
     if (progressEl) progressEl.style.width = pct + '%';
+    if (hero && whatsappFloat) {
+      whatsappFloat.classList.toggle('is-visible', scrollTop > hero.offsetHeight - window.innerHeight * 0.45);
+    }
     if (navbar) {
       if (scrollTop > 12) navbar.classList.add('scrolled');
       else navbar.classList.remove('scrolled');
@@ -252,6 +257,10 @@
 
     document.querySelectorAll('.portfolio-trigger').forEach((btn) => {
       btn.addEventListener('click', () => {
+        if (btn.dataset.live) {
+          window.open(btn.dataset.live, '_blank', 'noopener,noreferrer');
+          return;
+        }
         // Tarjetas con demo navegable abren el modal; el resto, la galería.
         if (btn.dataset.demo) {
           openDemoModal(btn.dataset.demo, btn.dataset.title || 'Proyecto');
@@ -276,12 +285,25 @@
   // ===== Carrusel de las tarjetas de portafolio =====
   (function setupCarousels() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.querySelectorAll('.portfolio-trigger').forEach((btn, ci) => {
+    const mobile = window.matchMedia('(max-width: 639.98px)').matches;
+    const carouselObserver = 'IntersectionObserver' in window && !mobile && !reduce
+      ? new IntersectionObserver((entries) => {
+          entries.forEach(({ target, isIntersecting }) => {
+            if (isIntersecting && !target._carouselTimer) {
+              target._carouselTimer = setInterval(target._advanceCarousel, 3600);
+            } else if (!isIntersecting && target._carouselTimer) {
+              clearInterval(target._carouselTimer);
+              target._carouselTimer = null;
+            }
+          });
+        }, { rootMargin: '120px 0px' })
+      : null;
+    document.querySelectorAll('.portfolio-trigger').forEach((btn) => {
       const carousel = btn.querySelector('.pf-carousel');
       const dotsWrap = btn.querySelector('.pf-dots');
       const imgs = (btn.dataset.images || '').split('|').filter(Boolean);
-      // Sin auto-rotación si hay una sola imagen o el usuario reduce el movimiento.
-      if (!carousel || imgs.length < 2 || reduce) {
+      // En móvil una sola imagen por tarjeta reduce descargas y movimiento.
+      if (!carousel || imgs.length < 2 || reduce || mobile) {
         if (dotsWrap) dotsWrap.remove();
         return;
       }
@@ -312,10 +334,8 @@
         slides[idx].classList.add('is-active');
         if (dots[idx]) dots[idx].classList.add('is-active');
       };
-      // Arranque escalonado: las tarjetas no cambian todas a la vez.
-      setTimeout(() => {
-        setInterval(() => { if (!document.hidden) advance(); }, 3600);
-      }, 600 + ci * 800);
+      btn._advanceCarousel = () => { if (!document.hidden) advance(); };
+      if (carouselObserver) carouselObserver.observe(btn);
     });
   })();
 
@@ -386,7 +406,7 @@
 
   // ===== Parallax sutil en aurora del hero =====
   const aurora = document.querySelector('.aurora');
-  if (aurora && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (aurora && !window.matchMedia('(max-width: 639.98px), (prefers-reduced-motion: reduce)').matches) {
     let ticking = false;
     window.addEventListener(
       'scroll',

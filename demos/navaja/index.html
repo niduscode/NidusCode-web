@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f1eb">
+  <title>Navaja · Demo interactiva</title>
+  <style>
+    :root{font-family:Inter,system-ui,-apple-system,sans-serif;color:#1a1a1a;background:#f3f1eb;font-synthesis:none}
+    *{box-sizing:border-box}body{margin:0}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #a8bf58;outline-offset:3px}
+    .app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100dvh}.sidebar{padding:26px 16px;background:#fff;border-right:1px solid #e6e5de;display:flex;flex-direction:column;gap:32px}
+    .brand{display:flex;align-items:center;gap:10px;padding:0 8px;font-size:21px;font-weight:800;letter-spacing:-.04em}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#c7dd66;font-weight:900}
+    .nav{display:grid;gap:5px}.nav button{width:100%;border:0;background:none;text-align:left;padding:13px 14px;border-radius:12px;color:#656760;font-weight:600}.nav button[aria-current="page"]{color:#212318;background:#e9efcf}.nav button:hover{background:#f2f3ec}
+    .sidebar-foot{margin-top:auto;padding:14px;border:1px solid #e8e8e2;border-radius:16px;font-size:12px;line-height:1.5;color:#666761}.sidebar-foot strong{display:block;color:#272920;margin-bottom:4px}
+    .main{padding:22px clamp(18px,4vw,58px) 64px;max-width:1480px;width:100%;margin:0 auto}.demo-note{padding:11px 15px;border-radius:14px;background:#1c2114;color:#e5efbb;font-size:12px;line-height:1.45;letter-spacing:.015em}
+    .top{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:38px 0 24px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#6c7845}.top h1{font-size:clamp(31px,4vw,48px);line-height:1.08;letter-spacing:-.055em;margin:8px 0 5px}.top p{color:#6a6b65;margin:0}.chip{background:#fff;border:1px solid #e7e7e0;border-radius:999px;padding:10px 14px;font-size:12px;font-weight:700;white-space:nowrap}
+    .view[hidden]{display:none}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card,.panel{background:#fff;border:1px solid #e7e7e0;border-radius:20px;box-shadow:0 18px 55px rgba(24,26,19,.045)}.card{padding:20px}.card span{display:block;color:#6c6e68;font-size:12px;font-weight:700}.card strong{display:block;font-size:clamp(22px,2.5vw,31px);letter-spacing:-.045em;margin-top:15px}.card small{display:block;color:#6f7c47;margin-top:8px;font-weight:700}.cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(250px,1fr);gap:16px;margin-top:16px}.panel{padding:24px}.panel h2{font-size:17px;margin:0 0 17px;letter-spacing:-.025em}.panel p{color:#686963;line-height:1.6}.bars{display:flex;align-items:end;gap:14px;height:195px;border-bottom:1px solid #ecece6;padding:0 6px}.bar{flex:1;min-width:0;height:var(--h);border-radius:9px 9px 0 0;background:linear-gradient(#d5e590,#9bb34c)}.bar:nth-child(even){background:linear-gradient(#d9d9d1,#bfc2af)}.axis{display:flex;justify-content:space-around;color:#92938b;font-size:11px;margin-top:10px}.ring{width:150px;height:150px;border-radius:50%;margin:24px auto;background:conic-gradient(#aabd61 0 58%,#e9ebdf 58% 83%,#c6d79a 83%);display:grid;place-items:center}.ring:after{content:"58%\A servicios";white-space:pre;text-align:center;background:#fff;width:102px;height:102px;border-radius:50%;display:grid;place-items:center;font-weight:800;line-height:1.35;font-size:16px}.list{width:100%;border-collapse:collapse}.list th,.list td{text-align:left;padding:14px 10px;border-bottom:1px solid #edeee8;font-size:13px}.list th{font-size:11px;text-transform:uppercase;color:#83857d;letter-spacing:.08em}.list tr:last-child td{border-bottom:0}.pill{display:inline-block;background:#edf2d9;color:#5c6b31;border-radius:99px;padding:5px 9px;font-size:11px;font-weight:700}.empty{color:#72746a;text-align:center;padding:38px 18px!important}
+    .quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.quick div{background:#f6f7f0;border-radius:12px;padding:13px}.quick strong,.quick span{display:block}.quick strong{font-size:13px}.quick span{font-size:12px;color:#6d7065;margin-top:4px}
+    @media(max-width:760px){.app{display:block}.sidebar{padding:14px 16px;gap:12px;position:sticky;top:0;z-index:2;box-shadow:0 6px 20px #00000008}.brand{font-size:19px}.brand-mark{width:32px;height:32px}.nav{display:flex;overflow-x:auto;gap:5px;margin:0 -16px;padding:0 16px 3px;scrollbar-width:none}.nav button{white-space:nowrap;width:auto;padding:10px 13px;font-size:12px}.sidebar-foot{display:none}.main{padding:15px 16px 45px}.top{margin:29px 0 18px;align-items:start}.top h1{font-size:31px}.chip{display:none}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{padding:16px}.card strong{margin-top:12px}.cols{grid-template-columns:1fr;gap:10px;margin-top:10px}.panel{padding:18px}.bars{height:150px}.list th,.list td{padding:11px 5px;font-size:11px}.list td:nth-child(3),.list th:nth-child(3){display:none}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegación de la demo">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">N</span>Navaja</div>
+      <nav class="nav" aria-label="Secciones">
+        <button type="button" data-view="resumen" aria-current="page">◫ &nbsp;Resumen</button>
+        <button type="button" data-view="agenda">▦ &nbsp;Agenda</button>
+        <button type="button" data-view="clientes">♧ &nbsp;Clientes</button>
+        <button type="button" data-view="reportes">▥ &nbsp;Reportes</button>
+      </nav>
+      <div class="sidebar-foot"><strong>Vista de demostración</strong>Esta maqueta usa datos ficticios. No está conectada con cuentas, Supabase ni servicios de pago.</div>
+    </aside>
+    <main class="main">
+      <div class="demo-note" role="note">DEMO NAVEGABLE · Datos de ejemplo. Las funciones de registro, pagos e integraciones están desactivadas.</div>
+      <div class="top"><div><div class="eyebrow">Control profesional</div><h1 id="view-title">Tu negocio, bajo control.</h1><p id="view-description">Una vista clara de tu trabajo y tus números.</p></div><span class="chip">Ejemplo · Chile</span></div>
+      <section class="view" id="resumen" aria-label="Resumen">
+        <div class="stats">
+          <div class="card"><span>Total recibido</span><strong>$842.000</strong><small>Este mes · ejemplo</small></div>
+          <div class="card"><span>Disponible operativo</span><strong>$631.500</strong><small>Después de reserva</small></div>
+          <div class="card"><span>Reserva tributaria</span><strong>$167.000</strong><small>Configuración de ejemplo</small></div>
+          <div class="card"><span>Atenciones</span><strong>42</strong><small>Ticket promedio $20.048</small></div>
+        </div>
+        <div class="cols"><div class="panel"><h2>Evolución semanal</h2><div class="bars" aria-label="Ingresos semanales de ejemplo"><div class="bar" style="--h:46%"></div><div class="bar" style="--h:67%"></div><div class="bar" style="--h:54%"></div><div class="bar" style="--h:81%"></div><div class="bar" style="--h:69%"></div><div class="bar" style="--h:94%"></div><div class="bar" style="--h:76%"></div></div><div class="axis"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div></div><div class="panel"><h2>Distribución</h2><div class="ring" aria-label="58 por ciento servicios"></div><p>Servicios, propinas y productos se muestran por separado para entender cuánto entra y cuánto queda disponible.</p></div></div>
+      </section>
+      <section class="view" id="agenda" aria-label="Agenda" hidden><div class="panel"><h2>Agenda de muestra</h2><p>Las reservas están separadas de la contabilidad hasta que confirmas la atención.</p><table class="list"><thead><tr><th>Hora</th><th>Servicio</th><th>Cliente</th><th>Estado</th></tr></thead><tbody><tr><td>10:00</td><td>Corte clásico</td><td>Cliente de ejemplo A</td><td><span class="pill">Confirmada</span></td></tr><tr><td>12:30</td><td>Corte y barba</td><td>Cliente de ejemplo B</td><td><span class="pill">Pendiente</span></td></tr><tr><td>16:00</td><td>Perfilado</td><td>Cliente de ejemplo C</td><td><span class="pill">Confirmada</span></td></tr></tbody></table></div></section>
+      <section class="view" id="clientes" aria-label="Clientes" hidden><div class="panel"><h2>Fichas de clientes</h2><p>Historial de visitas, gasto acumulado y notas para una atención más personalizada.</p><table class="list"><thead><tr><th>Cliente</th><th>Visitas</th><th>Última atención</th><th>Nota</th></tr></thead><tbody><tr><td>Cliente de ejemplo A</td><td>8</td><td>Esta semana</td><td>Prefiere corte clásico</td></tr><tr><td>Cliente de ejemplo B</td><td>5</td><td>La semana pasada</td><td>Consultar largo antes de cortar</td></tr><tr><td>Cliente de ejemplo C</td><td>3</td><td>Este mes</td><td>Sin observaciones</td></tr></tbody></table></div></section>
+      <section class="view" id="reportes" aria-label="Reportes" hidden><div class="stats"><div class="card"><span>Servicios</span><strong>$702.000</strong><small>Ejemplo mensual</small></div><div class="card"><span>Propinas</span><strong>$98.000</strong><small>Fuera de reserva</small></div><div class="card"><span>Productos</span><strong>$42.000</strong><small>Registrados aparte</small></div><div class="card"><span>Documentos pendientes</span><strong>3</strong><small>Para revisar</small></div></div><div class="cols"><div class="panel"><h2>Un control más preciso</h2><p>Navaja separa honorarios, propinas, productos y reserva tributaria. Los reportes permiten reconocer tendencias sin mezclar categorías.</p><div class="quick"><div><strong>Boletas</strong><span>Seguimiento independiente</span></div><div><strong>Respaldo</strong><span>Exportación de datos</span></div></div></div><div class="panel"><h2>Hecho para móvil</h2><p>La aplicación real incluye sesiones privadas, modo claro y oscuro, catálogo configurable e integración opcional de agenda. Esta demo no almacena información.</p></div></div></section>
+    </main>
+  </div>
+  <script>
+    const titles={resumen:['Tu negocio, bajo control.','Una vista clara de tu trabajo y tus números.'],agenda:['Cada cita en su lugar.','Confirma atenciones sin mezclar reservas con ingresos.'],clientes:['Conoce a tus clientes.','Historial y notas útiles en una sola ficha.'],reportes:['Números que se entienden.','Servicios, propinas, productos y reserva por separado.']};
+    document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{
+      const id=button.dataset.view;
+      document.querySelectorAll('.view').forEach(view=>view.hidden=view.id!==id);
+      document.querySelectorAll('[data-view]').forEach(item=>item.removeAttribute('aria-current'));
+      button.setAttribute('aria-current','page');
+      document.getElementById('view-title').textContent=titles[id][0];
+      document.getElementById('view-description').textContent=titles[id][1];
+    }));
+  </script>
+</body>
+</html>

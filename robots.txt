@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://niduscode-web.vercel.app/sitemap.xml
+Sitemap: https://nidus-code-web.vercel.app/sitemap.xml

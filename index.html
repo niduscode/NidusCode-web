@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="NidusCode — Desarrollo web profesional por developers. Webs a medida, automatizaciones y optimización para tu negocio. Chile y Argentina." />
+  <meta name="description" content="NidusCode — Desarrollo web profesional en Chile. Webs a medida, automatizaciones y optimización para tu negocio." />
   <meta name="author" content="NidusCode" />
-  <meta name="keywords" content="desarrollo web, diseño web, páginas web a medida, automatizaciones, n8n, optimización SEO, Chile, Argentina, agencia web, aplicaciones web" />
+  <meta name="keywords" content="desarrollo web, diseño web, páginas web a medida, automatizaciones, n8n, optimización SEO, Chile, agencia web, aplicaciones web" />
   <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-  <title>NidusCode — Desarrollo Web Profesional · Chile y Argentina</title>
+  <title>NidusCode — Desarrollo Web Profesional · Chile</title>
 
   <!-- URL canónica del sitio -->
-  <link rel="canonical" href="https://niduscode-web.vercel.app/" />
+  <link rel="canonical" href="https://nidus-code-web.vercel.app/" />
 
   <!-- Favicons -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -23,23 +23,22 @@
   <!-- ====================================================================
        Open Graph / vista previa al compartir el enlace.
        Dominio centralizado: si tu subdominio de Vercel exacto es otro,
-       reemplaza "https://niduscode-web.vercel.app" en este bloque, en el
+       reemplaza "https://nidus-code-web.vercel.app" en este bloque, en el
        <link rel="canonical"> de arriba, en el JSON-LD y en sitemap.xml.
        ==================================================================== -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NidusCode" />
   <meta property="og:title" content="NidusCode — Desarrollo Web Profesional" />
-  <meta property="og:description" content="Webs a medida hechas por developers. Desarrollo, automatización y optimización. Chile y Argentina." />
-  <meta property="og:image" content="https://niduscode-web.vercel.app/assets/og-image.jpg" />
+  <meta property="og:description" content="Webs a medida hechas por developers en Chile. Desarrollo, automatización y optimización." />
+  <meta property="og:image" content="https://nidus-code-web.vercel.app/assets/og-image-chile.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="https://niduscode-web.vercel.app/" />
+  <meta property="og:url" content="https://nidus-code-web.vercel.app/" />
   <meta property="og:locale" content="es_CL" />
-  <meta property="og:locale:alternate" content="es_AR" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="NidusCode — Desarrollo Web Profesional" />
-  <meta name="twitter:description" content="Webs a medida hechas por developers. Chile y Argentina." />
-  <meta name="twitter:image" content="https://niduscode-web.vercel.app/assets/og-image.jpg" />
+  <meta name="twitter:description" content="Webs a medida hechas por developers en Chile." />
+  <meta name="twitter:image" content="https://nidus-code-web.vercel.app/assets/og-image-chile.jpg" />
 
   <!-- Datos estructurados · Organización (rich results en Google) -->
   <script type="application/ld+json">
@@ -47,12 +46,12 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "NidusCode",
-    "url": "https://niduscode-web.vercel.app/",
-    "logo": "https://niduscode-web.vercel.app/assets/nidus-logo.png",
-    "image": "https://niduscode-web.vercel.app/assets/og-image.jpg",
-    "description": "Desarrollo web profesional, automatizaciones y optimización para negocios. Chile y Argentina, 100% remoto.",
+    "url": "https://nidus-code-web.vercel.app/",
+    "logo": "https://nidus-code-web.vercel.app/assets/nidus-logo.png",
+    "image": "https://nidus-code-web.vercel.app/assets/og-image-chile.jpg",
+    "description": "Desarrollo web profesional, automatizaciones y optimización para negocios en Chile, 100% remoto.",
     "email": "niduscode@gmail.com",
-    "areaServed": ["CL", "AR"],
+    "areaServed": "CL",
     "knowsLanguage": "es",
     "sameAs": [
       "https://www.instagram.com/niduscode",
@@ -77,7 +76,7 @@
   <!-- Tailwind: CSS estático pre-buildeado (npx tailwindcss -i tailwind.input.css -o tailwind.build.css --minify)
        Reemplaza al CDN runtime (~300 KB JS + JIT bloqueante) por 26 KB de CSS comprimido. -->
   <link rel="stylesheet" href="tailwind.build.css" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260929" />
 </head>
 
 <body class="font-sans antialiased text-ink-900 dark:text-ink-50 selection:bg-accent/30 selection:text-ink-900 dark:selection:text-white">
@@ -108,7 +107,7 @@
         <div class="flex items-center gap-3">
           <span class="nav-status hidden sm:inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-ink-200 dark:border-ink-700 text-[10px] font-mono uppercase tracking-wider text-ink-600 dark:text-ink-300">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            CL · AR
+            CL
           </span>
           <button id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" class="menu-toggle md:hidden">
             <svg class="menu-icon menu-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
@@ -169,7 +168,7 @@
           </h1>
 
           <p class="hero-title-2 mt-8 text-lg sm:text-xl text-ink-600 dark:text-ink-300 max-w-2xl leading-relaxed">
-            Desde Chile y Argentina diseñamos sitios web a medida, automatizaciones y optimizaciones para que tu negocio funcione más rápido, gaste menos y venda más.
+            Desde Chile diseñamos sitios web a medida, automatizaciones y optimizaciones para que tu negocio funcione más rápido, gaste menos y venda más.
           </p>
 
           <div class="hero-title-2 mt-10 flex flex-col sm:flex-row gap-3">
@@ -185,7 +184,7 @@
           <!-- Stats -->
           <div class="mt-20 grid grid-cols-3 gap-6 sm:gap-12 max-w-xl">
             <div class="reveal">
-              <div class="font-display text-4xl sm:text-5xl font-bold counter tracking-tight gradient-text" data-target="7">0</div>
+              <div class="font-display text-4xl sm:text-5xl font-bold counter tracking-tight gradient-text" data-target="9">0</div>
               <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">PROYECTOS</div>
             </div>
             <div class="reveal">
@@ -193,8 +192,8 @@
               <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">A MEDIDA</div>
             </div>
             <div class="reveal">
-              <div class="font-display text-4xl sm:text-5xl font-bold tracking-tight gradient-text">CL·AR</div>
-              <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">PAÍSES</div>
+              <div class="font-display text-4xl sm:text-5xl font-bold tracking-tight gradient-text">CL</div>
+              <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">CHILE</div>
             </div>
           </div>
         </div>
@@ -599,7 +598,7 @@
             </h2>
           </div>
           <p class="text-ink-600 dark:text-ink-300 max-w-md">
-            Somos un equipo nuevo y honesto: estos son los proyectos que ya hemos entregado. Toca cualquiera para abrir su demo navegable o su galería.
+            Estos son los proyectos que hemos desarrollado. Explora las demos navegables y visita los sitios que ya están publicados.
           </p>
         </div>
 
@@ -694,21 +693,22 @@
             </div>
           </article>
 
-          <!-- Proyecto 4 — Mueblería Christami (DEMO NAVEGABLE) -->
+          <!-- Proyecto 4 — Mueblería Christami (SITIO ACTUAL) -->
           <article class="reveal group">
             <button type="button"
               class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
               data-title="Mueblería Christami"
-              data-demo="demos/muebleria-christami/index.html"
-              data-images="assets/muebleria/cover1.jpg|assets/muebleria/cover2.jpg|assets/muebleria/cover3.jpg|assets/muebleria/cover4.jpg|assets/muebleria/cover5.jpg">
+              data-live="https://muebleriachristami.cl/"
+              aria-label="Abrir sitio actual de Mueblería Christami en una pestaña nueva"
+              data-images="assets/muebleria/actual.jpg">
               <span class="pf-carousel">
-                <img src="assets/muebleria/cover1.jpg" alt="Captura de la web de Mueblería Christami"
-                     loading="lazy" class="pf-slide is-active" />
+                <img src="assets/muebleria/actual.jpg" alt="Portada actual de Mueblería Christami"
+                     loading="lazy" decoding="async" width="960" height="720" class="pf-slide is-active" />
               </span>
               <span class="pf-shade"></span>
               <span class="pf-badge pf-badge--demo">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
+                Sitio actual
               </span>
               <span class="pf-dots" aria-hidden="true"></span>
               <span class="pf-cta pf-cta--demo">
@@ -716,9 +716,9 @@
               </span>
             </button>
             <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · Catálogo · Carpintería</span>
+              <span class="pf-meta"><span class="pf-dot"></span>2026 · Catálogo · Cotizador</span>
               <h3>Mueblería Christami</h3>
-              <p>Catálogo de muebles a medida en Puerto Montt: proyectos reales, cotizador instantáneo y contacto directo. Ábrelo y pruébalo entero — es una demo navegable.</p>
+              <p>Sitio actual para muebles a medida en Los Lagos: catálogo de proyectos, cuarzos, presupuesto orientativo y cotización. Ábrelo para ver su versión vigente.</p>
             </div>
           </article>
 
@@ -806,6 +806,62 @@
             </div>
           </article>
 
+          <!-- Proyecto 8 — Navaja (DEMO CON DATOS FICTICIOS) -->
+          <article class="reveal group">
+            <button type="button"
+              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
+              data-title="Navaja"
+              data-demo="demos/navaja/index.html"
+              data-images="assets/navaja/cover.jpg">
+              <span class="pf-carousel">
+                <img src="assets/navaja/cover.jpg" alt="Vista de Navaja, sistema de gestión para profesionales independientes"
+                     loading="lazy" decoding="async" width="960" height="640" class="pf-slide is-active" />
+              </span>
+              <span class="pf-shade"></span>
+              <span class="pf-badge pf-badge--demo">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                Demo navegable
+              </span>
+              <span class="pf-dots" aria-hidden="true"></span>
+              <span class="pf-cta pf-cta--demo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <div class="pf-info">
+              <span class="pf-meta"><span class="pf-dot"></span>2026 · Gestión · App web</span>
+              <h3>Navaja</h3>
+              <p>Control de ingresos, clientes, agenda, boletas y reserva tributaria para profesionales independientes. Recorre una demo con datos ficticios.</p>
+            </div>
+          </article>
+
+          <!-- Proyecto 9 — Cursos Gregory Hernández (DEMO CONCEPTUAL) -->
+          <article class="reveal group">
+            <button type="button"
+              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
+              data-title="Cursos Gregory Hernández"
+              data-demo="demos/cursos-gregory/index.html"
+              data-images="assets/gregory-cursos/cover.svg">
+              <span class="pf-carousel">
+                <img src="assets/gregory-cursos/cover.svg" alt="Portada de la demo de cursos de Gregory Hernández"
+                     loading="lazy" decoding="async" width="960" height="720" class="pf-slide is-active" />
+              </span>
+              <span class="pf-shade"></span>
+              <span class="pf-badge pf-badge--demo">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                Demo navegable
+              </span>
+              <span class="pf-dots" aria-hidden="true"></span>
+              <span class="pf-cta pf-cta--demo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <div class="pf-info">
+              <span class="pf-meta"><span class="pf-dot"></span>2026 · Formación · Barbería</span>
+              <h3>Cursos Gregory Hernández</h3>
+              <p>Demo de la experiencia de formación: niveles Junior, Senior y Master del método Corte Óseo®. Información de muestra, sin inscripciones activas.</p>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -833,11 +889,21 @@
 
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false">
-              <span>¿Trabajan con clientes fuera de Chile y Argentina?</span>
+              <span>¿Trabajan con clientes en todo Chile?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
             <div class="faq-answer"><div class="faq-answer-inner"><div>
-              Sí. Trabajamos 100% remoto. Aceptamos pagos en pesos chilenos, pesos argentinos, dólares y transferencia internacional. La diferencia horaria con la mayoría de Latam y España no genera fricción.
+              Sí. Trabajamos de forma remota con clientes en todo Chile y coordinamos reuniones en horario chileno. Aceptamos pagos en pesos chilenos.
+            </div></div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Con qué rubros trabajan?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner"><div>
+              Trabajamos con cualquier rubro. Primero entendemos lo que necesitas y evaluamos si podemos resolverlo bien con nuestros servicios. Si tu proyecto requiere algo fuera de nuestro alcance, te lo diremos con claridad desde el comienzo.
             </div></div></div>
           </div>
 
@@ -948,7 +1014,7 @@
                 </div>
                 <div>
                   <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400">Ubicación</div>
-                  <div class="font-medium">Chile · Argentina · 100% remoto</div>
+                  <div class="font-medium">Chile · 100% remoto</div>
                 </div>
               </div>
             </div>
@@ -1123,7 +1189,7 @@
             <span class="font-display font-semibold tracking-tight text-lg">NidusCode</span>
           </div>
           <p class="text-sm text-ink-600 dark:text-ink-300 max-w-sm">
-            Desde Chile y Argentina construimos productos digitales a medida, con código de calidad y mucho criterio.
+            Desde Chile construimos productos digitales a medida, con código de calidad y mucho criterio.
           </p>
         </div>
 
@@ -1233,7 +1299,7 @@
     </a>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260929"></script>
   <script src="contact-form.js" defer></script>
   <script src="offline-game.js" defer></script>
 

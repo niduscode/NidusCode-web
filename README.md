@@ -1,6 +1,6 @@
 # NidusCode — Landing Page
 
-Landing de NidusCode (desarrollo web a medida, automatizaciones y optimización · Chile y Argentina), con portafolio de demos navegables embebidas.
+Landing de NidusCode (desarrollo web a medida, automatizaciones y optimización · Chile), con portafolio de demos navegables embebidas.
 
 ## Estructura
 

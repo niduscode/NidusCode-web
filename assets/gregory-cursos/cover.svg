@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Cursos Gregory Hernández</title>
+  <desc id="desc">Portada oscura y dorada de la demo de formación en barbería</desc>
+  <defs>
+    <radialGradient id="glow"><stop stop-color="#7a6229"/><stop offset="1" stop-color="#101012"/></radialGradient>
+    <linearGradient id="gold" x2="1" y2="1"><stop stop-color="#b99750"/><stop offset=".55" stop-color="#f2df9d"/><stop offset="1" stop-color="#a48137"/></linearGradient>
+  </defs>
+  <rect width="960" height="720" fill="#101012"/>
+  <circle cx="740" cy="214" r="380" fill="url(#glow)" opacity=".65"/>
+  <path d="M68 70h824M68 649h824" stroke="#8c7544" opacity=".42"/>
+  <text x="68" y="126" font-size="20" fill="url(#gold)" font-family="Arial,sans-serif" letter-spacing="6">GREGORY HERNÁNDEZ</text>
+  <text x="68" y="275" font-size="32" fill="url(#gold)" font-family="Arial,sans-serif" letter-spacing="7">FORMACIÓN EN BARBERÍA</text>
+  <text x="64" y="380" font-size="79" fill="#fff" font-family="Arial,sans-serif" font-weight="700">Aprende el</text>
+  <text x="64" y="475" font-size="79" fill="url(#gold)" font-family="Arial,sans-serif" font-weight="700">arte del corte.</text>
+  <rect x="68" y="555" width="550" height="2" fill="url(#gold)" opacity=".8"/>
+  <text x="68" y="608" font-size="25" fill="#ddd4bd" font-family="Arial,sans-serif">JUNIOR  ·  SENIOR  ·  MASTER</text>
+  <circle cx="812" cy="560" r="70" fill="none" stroke="url(#gold)" stroke-width="2" opacity=".8"/>
+  <path d="M783 534l58 52m0-52l-58 52" stroke="url(#gold)" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="780" cy="531" r="9" fill="none" stroke="url(#gold)" stroke-width="5"/>
+  <circle cx="844" cy="531" r="9" fill="none" stroke="url(#gold)" stroke-width="5"/>
+</svg>

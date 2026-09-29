@@ -249,6 +249,22 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
     line-height: 0.98;
   }
 }
+@media (max-width: 640px) {
+  body { background-attachment: scroll; }
+  .wa-float:not(.is-visible) {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+  }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: no-preference) {
+  .hero-title { animation: mobileHeroIn .55s ease-out both; }
+  .hero-title-2 { animation: mobileHeroIn .55s ease-out .1s both; }
+}
+@keyframes mobileHeroIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @keyframes blurIn {
   from {
     opacity: 0;
@@ -809,7 +825,10 @@ html { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); scrollbar-wi
 .wa-option-flag { font-size: 1rem; }
 
 @media (max-width: 640px) {
-  .wa-float { bottom: 18px; right: 18px; }
+  .wa-float { bottom: 14px; right: 14px; }
+  .wa-button { width: 48px; height: 48px; }
+  .wa-button svg { width: 27px; height: 27px; }
+  .wa-button::after { animation: none; }
 }
 
 /* ===== Reduced motion ===== */
