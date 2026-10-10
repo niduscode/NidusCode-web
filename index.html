@@ -1,31 +1,18 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<!doctype html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="index, follow">
   <meta name="description" content="NidusCode — Desarrollo web profesional en Chile. Webs a medida, automatizaciones y optimización para tu negocio." />
   <meta name="author" content="NidusCode" />
   <meta name="keywords" content="desarrollo web, diseño web, páginas web a medida, automatizaciones, n8n, optimización SEO, Chile, agencia web, aplicaciones web" />
-  <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-  <title>NidusCode — Desarrollo Web Profesional · Chile</title>
-
-  <!-- URL canónica del sitio -->
   <link rel="canonical" href="https://nidus-code-web.vercel.app/" />
-
-  <!-- Favicons -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-
-  <!-- ====================================================================
-       Open Graph / vista previa al compartir el enlace.
-       Dominio centralizado: si tu subdominio de Vercel exacto es otro,
-       reemplaza "https://nidus-code-web.vercel.app" en este bloque, en el
-       <link rel="canonical"> de arriba, en el JSON-LD y en sitemap.xml.
-       ==================================================================== -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NidusCode" />
   <meta property="og:title" content="NidusCode — Desarrollo Web Profesional" />
@@ -39,8 +26,6 @@
   <meta name="twitter:title" content="NidusCode — Desarrollo Web Profesional" />
   <meta name="twitter:description" content="Webs a medida hechas por developers en Chile." />
   <meta name="twitter:image" content="https://nidus-code-web.vercel.app/assets/og-image-chile.jpg" />
-
-  <!-- Datos estructurados · Organización (rich results en Google) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -66,1244 +51,189 @@
     }
   }
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Inter 400+600 (body) · Poppins 600+800 (display) · JetBrains Mono 400 (mono) -->
-  <!-- Reducido de 10 weights a 5 — ahorra ~400KB de fonts en mobile -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind: CSS estático pre-buildeado (npx tailwindcss -i tailwind.input.css -o tailwind.build.css --minify)
-       Reemplaza al CDN runtime (~300 KB JS + JIT bloqueante) por 26 KB de CSS comprimido. -->
-  <link rel="stylesheet" href="tailwind.build.css" />
-  <link rel="stylesheet" href="styles.css?v=20260929" />
+  <meta name="theme-color" content="#fafafb">
+  <title>NidusCode · Gasta menos. Vende más. · Chile</title>
+  <script>
+    (() => {
+      let theme;
+      try { theme = localStorage.getItem('nidus-preview-theme'); } catch {}
+      if (theme !== 'light' && theme !== 'dark') theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261010">
+  <link rel="stylesheet" href="refinement.css?v=8.3">
+  <link rel="stylesheet" href="portfolio-preview.css?v=8.2">
+  <link rel="stylesheet" href="hero-04.css">
+  <link rel="stylesheet" href="hero-05.css">
+  <link rel="stylesheet" href="hero-06.css?v=8.3">
+  <link rel="stylesheet" href="hero-world.css?v=8.3">
+  <link rel="stylesheet" href="contact-layout.css?v=20261010">
 </head>
-
-<body class="font-sans antialiased text-ink-900 dark:text-ink-50 selection:bg-accent/30 selection:text-ink-900 dark:selection:text-white">
-
-  <!-- Scroll progress bar -->
-  <div id="scrollProgress" aria-hidden="true"></div>
-
-  <!-- Fondo decorativo: dot pattern -->
-  <div aria-hidden="true" class="dot-pattern pointer-events-none fixed inset-0 -z-10"></div>
-
-  <!-- ============ NAVBAR (pill flotante) ============ -->
-  <header id="navbar" class="fixed top-0 inset-x-0 z-50">
-    <div class="nav-shell max-w-5xl mx-auto px-4 sm:px-6">
-      <nav class="flex items-center justify-between h-14 px-4 sm:px-6">
-        <a href="#hero" class="flex items-center gap-2.5 group">
-          <img src="assets/nidus-logo.png" alt="NidusCode" class="logo-mark h-8 w-auto" />
-          <span class="font-display font-semibold tracking-tight">NidusCode</span>
-        </a>
-
-        <ul class="desktop-nav hidden md:flex items-center gap-7 text-sm font-medium text-ink-600 dark:text-ink-300">
-          <li><a href="#servicios" class="hover:text-ink-900 dark:hover:text-white transition-colors">Servicios</a></li>
-          <li><a href="#kits" class="hover:text-ink-900 dark:hover:text-white transition-colors">Stack</a></li>
-          <li><a href="#portafolio" class="hover:text-ink-900 dark:hover:text-white transition-colors">Portafolio</a></li>
-          <li><a href="#faq" class="hover:text-ink-900 dark:hover:text-white transition-colors">FAQ</a></li>
-          <li><a href="#contacto" class="hover:text-ink-900 dark:hover:text-white transition-colors">Contacto</a></li>
-        </ul>
-
-        <div class="flex items-center gap-3">
-          <span class="nav-status hidden sm:inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-ink-200 dark:border-ink-700 text-[10px] font-mono uppercase tracking-wider text-ink-600 dark:text-ink-300">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            CL
-          </span>
-          <button id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" class="menu-toggle md:hidden">
-            <svg class="menu-icon menu-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
-            <svg class="menu-icon menu-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
-          </button>
-        </div>
-      </nav>
-    </div>
-
-    <!-- Menú móvil · tarjeta compacta, sin bloquear la página -->
-    <div id="mobileMenu" class="mobile-menu" hidden>
-      <div class="mobile-menu-panel">
-        <nav class="mobile-menu-nav" aria-label="Navegación móvil">
-          <a href="#servicios" class="mobile-menu-link">
-            <span class="mobile-menu-title">Servicios</span>
-            <span class="mobile-menu-index" aria-hidden="true">01</span>
-          </a>
-          <a href="#kits" class="mobile-menu-link">
-            <span class="mobile-menu-title">Stack</span>
-            <span class="mobile-menu-index" aria-hidden="true">02</span>
-          </a>
-          <a href="#portafolio" class="mobile-menu-link">
-            <span class="mobile-menu-title">Portafolio</span>
-            <span class="mobile-menu-index" aria-hidden="true">03</span>
-          </a>
-          <a href="#faq" class="mobile-menu-link">
-            <span class="mobile-menu-title">FAQ</span>
-            <span class="mobile-menu-index" aria-hidden="true">04</span>
-          </a>
-        </nav>
-        <a href="#contacto" class="mobile-menu-cta">
-          Habla con nosotros
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="NidusCode, inicio"><img src="assets/nidus-logo.png" width="30" height="36" alt=""><span>NidusCode</span></a>
+    <nav class="desktop-nav" aria-label="Principal"><a href="#proyectos">Proyectos</a><a href="#servicios">Servicios</a><a href="#estudio">Cómo trabajamos</a><a href="#faq">FAQ</a></nav>
+    <div class="header-actions"><span class="location"><i class="status-dot" aria-hidden="true"></i>Desde Chile</span><button id="theme-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false"><span class="theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon-light" aria-hidden="true">☀</span></button><a class="button button-dark header-contact" href="#contacto">Hablemos <span aria-hidden="true">↗</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menú <span aria-hidden="true">+</span></button></div>
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Navegación móvil" hidden><a href="#proyectos">Proyectos <span>01</span></a><a href="#servicios">Servicios <span>02</span></a><a href="#estudio">Cómo trabajamos <span>03</span></a><a href="#faq">FAQ <span>04</span></a><a href="#contacto">Hablemos <span>↗</span></a></nav>
   </header>
-
-  <main>
-    <!-- ============ HERO ============ -->
-    <section id="hero" class="relative min-h-[88vh] sm:min-h-screen flex items-center pt-24 pb-12 sm:pt-28 sm:pb-20 px-6 lg:px-8 overflow-hidden">
-
-      <!-- Aurora gradient animada -->
-      <div class="aurora" aria-hidden="true">
-        <div class="aurora-3"></div>
-      </div>
-
-      <div class="max-w-6xl mx-auto w-full relative">
-        <div class="max-w-4xl">
-          <div class="hero-title inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-ink-200/80 dark:border-ink-700/80 bg-white/60 dark:bg-ink-800/40 backdrop-blur-md text-xs font-mono text-ink-600 dark:text-ink-300 mb-10">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Disponibles para nuevos proyectos · 2026
-          </div>
-
-          <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95]">
-            <span class="hero-title block">Construimos, automatizamos</span>
-            <span class="hero-title-2 block">y optimizamos <span class="gradient-text">tu negocio.</span></span>
-          </h1>
-
-          <p class="hero-title-2 mt-8 text-lg sm:text-xl text-ink-600 dark:text-ink-300 max-w-2xl leading-relaxed">
-            Desde Chile diseñamos sitios web a medida, automatizaciones y optimizaciones para que tu negocio funcione más rápido, gaste menos y venda más.
-          </p>
-
-          <div class="hero-title-2 mt-10 flex flex-col sm:flex-row gap-3">
-            <a href="#contacto" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-ink-900 dark:bg-white text-white dark:text-ink-900 font-medium hover:-translate-y-0.5 transition-transform">
-              Habla con nosotros
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="#servicios" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-ink-200 dark:border-ink-700 hover:border-ink-900 dark:hover:border-white font-medium transition-colors backdrop-blur-sm">
-              Ver servicios
-            </a>
-          </div>
-
-          <!-- Stats -->
-          <div class="mt-20 grid grid-cols-3 gap-6 sm:gap-12 max-w-xl">
-            <div class="reveal">
-              <div class="font-display text-4xl sm:text-5xl font-bold counter tracking-tight gradient-text" data-target="9">0</div>
-              <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">PROYECTOS</div>
-            </div>
-            <div class="reveal">
-              <div class="font-display text-4xl sm:text-5xl font-bold counter tracking-tight gradient-text" data-target="100">0<span>%</span></div>
-              <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">A MEDIDA</div>
-            </div>
-            <div class="reveal">
-              <div class="font-display text-4xl sm:text-5xl font-bold tracking-tight gradient-text">CL</div>
-              <div class="text-xs sm:text-sm text-ink-500 dark:text-ink-400 mt-2 font-mono">CHILE</div>
-            </div>
-          </div>
+  <main id="contenido">
+    <span class="anchor-alias" id="hero" aria-hidden="true"></span>
+    <div class="hero-journey" id="inicio">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="ambient hero-ambient" aria-hidden="true"><div class="aurora aurora-blue"></div><div class="aurora aurora-pink"></div><div class="aurora aurora-violet"></div></div>
+      <div class="hero-stage">
+        <div class="journey-world" aria-hidden="true" hidden><img width="1920" height="420" alt="" decoding="async"><video muted playsinline preload="none" width="1920" height="420" tabindex="-1" aria-hidden="true"></video></div>
+        <div class="hero-actions"><a class="button button-dark" href="#proyectos"><span class="button-surface"><span class="button-label">Ver proyectos</span><span class="button-arrow" aria-hidden="true">↘</span></span></a><a class="button button-glass" href="#contacto"><span class="button-surface"><span class="button-label">Hablemos de tu negocio</span><span class="button-arrow" aria-hidden="true">↗</span></span></a></div>
+        <div class="hero-art" aria-hidden="true">
+        <svg class="orbits" viewBox="0 0 600 600" fill="none"><ellipse cx="300" cy="300" rx="265" ry="125" transform="rotate(-32 300 300)"/><ellipse cx="300" cy="300" rx="265" ry="125" transform="rotate(32 300 300)"/><circle cx="300" cy="300" r="245"/><path d="M55 300H545M300 55V545"/><circle class="orbit-point" cx="473" cy="127" r="6"/><circle class="orbit-point point-secondary" cx="87" cy="402" r="4"/></svg>
+        <div class="monogram-wrap"><div class="metal-hover"><div class="metal-object"><div class="metal-layer metal-depth"></div><div class="metal-layer metal-front"></div><svg class="logo-trace" viewBox="0 0 217 256" fill="none" focusable="false"><path class="logo-trace-path" pathLength="1" d="M108.00,15.55 C100.06,18.63 87.96,26.09 89.08,36.00 C93.43,40.27 99.81,42.52 104.95,45.77 C116.72,53.20 128.69,60.46 140.75,67.42 C147.17,71.12 159.42,77.86 162.90,84.25 C167.63,92.92 166.33,119.88 166.16,130.66 C166.02,139.52 166.13,148.36 165.94,157.22 C165.91,159.04 166.22,160.87 166.07,162.69 C165.67,167.31 162.69,171.11 157.92,171.57 C153.34,172.01 136.45,160.22 132.10,156.99 C127.60,153.66 122.61,150.94 117.91,147.90 C111.69,143.87 105.62,139.78 99.34,135.83 C91.82,131.09 84.26,124.70 76.00,121.43 C75.63,121.58 75.26,121.74 74.90,121.89 C74.62,122.18 74.72,122.72 74.44,123.00 C74.51,130.67 74.51,138.35 74.51,146.02 C74.51,149.60 74.10,153.46 74.65,157.00 C74.87,158.42 75.52,159.78 76.20,161.03 C79.61,167.23 100.71,177.82 107.70,182.37 C118.30,189.28 129.40,195.48 139.87,202.59 C143.71,205.20 152.54,211.79 156.82,212.46 C158.94,212.79 161.63,212.83 163.70,212.23 C168.14,210.93 185.53,201.26 189.58,198.35 C191.33,197.10 192.82,195.47 194.31,193.93 C197.99,190.14 200.42,184.18 201.46,179.05 C202.33,174.79 201.72,169.91 201.72,165.58 C201.73,155.90 201.72,146.22 201.72,136.54 C201.72,123.02 201.72,109.51 201.72,95.99 C201.72,88.14 202.65,79.89 199.84,72.41 C197.81,67.03 194.51,62.18 190.20,58.38 C185.65,54.38 179.51,51.70 174.28,48.69 C162.59,41.97 150.37,35.62 139.07,28.29 C133.95,24.96 122.02,16.96 116.46,15.79 C113.77,15.22 110.74,15.57 108.00,15.55 Z"/><path class="logo-trace-path" pathLength="1" d="M57.00,43.74 C51.79,44.50 46.97,47.47 42.30,49.82 C33.61,54.20 25.63,58.09 20.33,66.59 C15.01,75.12 15.56,85.28 15.56,94.89 C15.56,109.94 15.56,124.99 15.56,140.04 C15.56,154.27 13.22,176.81 20.22,189.09 C26.65,200.35 40.02,204.81 50.64,211.11 C65.04,219.64 79.62,228.15 94.40,236.01 C97.04,237.42 107.72,243.61 110.33,239.96 C110.52,239.69 110.42,239.26 110.63,239.00 C110.68,231.92 111.80,215.36 110.00,209.44 C98.12,200.45 84.34,193.83 71.65,186.07 C64.97,181.98 57.40,178.23 53.88,170.81 C52.93,168.80 52.02,166.02 51.79,163.80 C51.33,159.37 51.70,154.72 51.70,150.27 C51.70,141.41 51.70,132.54 51.70,123.68 C51.70,114.30 50.76,101.58 51.79,92.60 C52.21,88.96 55.22,85.98 58.82,85.47 C66.45,84.39 76.22,93.57 82.55,97.46 C92.38,103.52 101.47,110.63 111.13,116.89 C116.05,120.09 121.28,122.83 126.23,125.99 C131.31,129.24 136.45,133.59 142.00,135.86 C143.46,132.03 142.79,127.17 142.79,123.01 C142.79,114.44 145.64,103.72 140.84,95.96 C137.67,90.83 119.37,80.59 113.41,77.23 C108.71,74.57 104.28,71.28 99.69,68.42 C90.90,62.94 82.02,57.59 73.09,52.34 C67.79,49.21 62.79,45.82 57.00,43.74 Z"/></svg></div></div></div>
         </div>
       </div>
+      <div class="journey-scenes">
+        <article class="journey-panel journey-intro is-current" data-scene="0" aria-labelledby="hero-title">
+          <h1 id="hero-title" aria-label="Gasta menos. Vende más."><span class="hero-line hero-line-one" aria-hidden="true"><span class="hero-ink" data-text="Gasta menos.">Gasta menos.</span></span><span class="hero-line hero-line-two" aria-hidden="true"><span class="hero-ink" data-text="Vende más.">Vende más.</span></span></h1>
+          <div class="hero-bottom"><div class="hero-description"><p>Automatización, construcción web y optimización.<br><strong>Todo a medida para tu negocio.</strong></p></div><div class="hero-proof"><span><strong>09</strong>Proyectos para explorar</span><span><strong>100%</strong>A medida</span></div></div>
+        </article>
+        <article class="journey-panel journey-create" data-scene="1" aria-labelledby="journey-create-title">
+          <h2 class="journey-title" id="journey-create-title"><span class="journey-line"><span class="journey-ink">Creamos</span></span><span class="journey-line"><span class="journey-ink">tu web.</span></span></h2>
+          <div class="journey-bottom">
+            <p class="journey-description">Una web a medida para presentar tu negocio y facilitar el contacto.<strong>Tu identidad. Tu forma de trabajar.</strong></p>
+            <div class="journey-diagram journey-build" aria-hidden="true"><div class="build-sheet sheet-back"><i></i><i></i></div><div class="build-sheet sheet-mid"><i></i><i></i></div><div class="build-sheet sheet-front"><span>&lt;tu negocio /&gt;</span><div><i></i><i></i><i></i></div></div></div>
+          </div>
+        </article>
+        <article class="journey-panel journey-automate" data-scene="2" aria-labelledby="journey-automate-title">
+          <h2 class="journey-title" id="journey-automate-title"><span class="journey-line"><span class="journey-ink">Automatizamos</span></span><span class="journey-line"><span class="journey-ink">tareas.</span></span></h2>
+          <div class="journey-bottom">
+            <p class="journey-description">Conectamos tus herramientas para reducir el trabajo repetitivo.<strong>Menos tareas manuales. Más tiempo para tu negocio.</strong></p>
+            <div class="journey-diagram journey-flow" aria-hidden="true"><span class="journey-node">✉</span><span class="journey-connection"><i></i></span><span class="journey-node node-center">ϟ</span><span class="journey-connection"><i></i></span><span class="journey-node">✓</span></div>
+          </div>
+        </article>
+        <article class="journey-panel journey-optimize" data-scene="3" aria-labelledby="journey-optimize-title">
+          <h2 class="journey-title" id="journey-optimize-title"><span class="journey-line"><span class="journey-ink">Optimizamos</span></span><span class="journey-line"><span class="journey-ink">tu experiencia.</span></span></h2>
+          <div class="journey-bottom">
+            <p class="journey-description">Velocidad, claridad y un camino más directo hacia la consulta o la compra.<strong>Una experiencia que facilita el siguiente paso.</strong></p>
+            <div class="journey-diagram journey-opt" aria-hidden="true"><div class="opt-row"><i></i><span></span></div><div class="opt-row"><i></i><span></span></div><div class="opt-row"><i></i><span></span></div><div class="opt-track"><i></i><span>Un camino más claro ↗</span></div></div>
+          </div>
+        </article>
+      </div>
+      <div class="journey-controls">
+        <p class="journey-hint"><span aria-hidden="true">↓</span> Desplázate y descubre cómo</p>
+        <button class="journey-motion-toggle" type="button" data-journey-toggle aria-pressed="false">Pausar movimiento</button>
+      </div>
+    </section>
+    </div>
 
-      <!-- Indicador de scroll -->
-      <div class="scroll-hint absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-ink-400 dark:text-ink-500">
-        <span>scroll</span>
-        <div class="w-px h-10 bg-gradient-to-b from-ink-300 dark:from-ink-600 to-transparent"></div>
+    <span class="anchor-alias" id="portafolio" aria-hidden="true"></span>
+    <section class="work" id="proyectos" aria-labelledby="work-title">
+      <div class="work-heading reveal"><div><span class="eyebrow">01 / De la idea a la pantalla</span><h2 id="work-title">Menos promesas. <em class="gradient-text">Más proyectos.</em></h2></div><p>Nueve formas de construir. <br>Entra y explora su experiencia original.</p></div>
+      <div class="project-grid" id="project-grid">
+        <article class="project-card project-featured tilt-card reveal" style="--card-tint:#e7d5b7;--card-accent:#a27a35;--delay:0ms"><a class="project-link" href="https://muebleriachristami.cl/" target="_blank" rel="noopener noreferrer" aria-label="Visitar Mueblería Christami, sitio actual, en una pestaña nueva"><div class="featured-top"><span class="project-status">Sitio actual</span><span aria-hidden="true">01 / 09</span></div><div class="project-media"><div class="mini-browser"><div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>muebleriachristami.cl</span></div><img nopin="nopin" src="assets/christami.jpg" width="960" height="720" alt="Captura del sitio de Mueblería Christami" loading="lazy" decoding="async"></div></div><div class="project-info"><div><h3>Mueblería Christami</h3><p>El oficio artesanal, llevado a la web.</p><span class="project-kind">Catálogo · Cuarzos · Cotizador</span></div><span class="project-arrow" aria-hidden="true">↗</span></div><span class="featured-action">Visitar el sitio <span aria-hidden="true">→</span></span></a></article>
+        <article class="project-card tilt-card reveal" style="--card-tint:#d5e2b5;--card-accent:#637a36;--delay:45ms"><a class="project-link" href="https://nidus-code-web.vercel.app/demos/navaja/index.html" target="_blank" rel="noopener noreferrer" aria-label="Explorar Navaja, demo con datos ficticios, en una pestaña nueva"><div class="project-media"><div class="mini-browser"><img nopin="nopin" src="assets/navaja-real.jpg" width="1280" height="960" alt="Captura fiel de la demo de Navaja" loading="lazy" decoding="async"></div><span class="project-number" aria-hidden="true">02</span></div><div class="project-info"><div><h3>Navaja</h3><span class="project-kind">Gestión · Datos ficticios</span></div><span class="project-arrow" aria-hidden="true">↗</span></div></a></article>
+        <article class="project-card tilt-card reveal" style="--card-tint:#eadbbc;--card-accent:#967843;--delay:90ms"><a class="project-link" href="https://nidus-code-web.vercel.app/demos/gregory-hernandez/index.html" target="_blank" rel="noopener noreferrer" aria-label="Explorar Gregory Hernández, demo de marca personal, en una pestaña nueva"><div class="project-media"><div class="mini-browser"><img nopin="nopin" src="assets/gregory.jpg" width="1280" height="960" alt="Captura de la demo de Gregory Hernández" loading="lazy" decoding="async"></div><span class="project-number" aria-hidden="true">03</span></div><div class="project-info"><div><h3>Gregory Hernández</h3><span class="project-kind">Marca personal · Demo</span></div><span class="project-arrow" aria-hidden="true">↗</span></div></a></article>
+        <article class="project-card tilt-card reveal" style="--card-tint:#d8ccef;--card-accent:#7853bb;--delay:135ms"><a class="project-link" href="https://nidus-code-web.vercel.app/demos/estudio-creativo/" target="_blank" rel="noopener noreferrer" aria-label="Explorar Estudio Creativo, demo web y CRM, en una pestaña nueva"><div class="project-media"><div class="mini-browser"><img nopin="nopin" src="assets/estudio.jpg" width="1280" height="960" alt="Captura de la demo de Estudio Creativo" loading="lazy" decoding="async"></div><span class="project-number" aria-hidden="true">04</span></div><div class="project-info"><div><h3>Estudio Creativo</h3><span class="project-kind">Web + CRM · Demo</span></div><span class="project-arrow" aria-hidden="true">↗</span></div></a></article>
+        <article class="project-card tilt-card reveal" style="--card-tint:#bfe0eb;--card-accent:#377b96;--delay:180ms"><a class="project-link" href="https://nidus-code-web.vercel.app/demos/opero/index.html" target="_blank" rel="noopener noreferrer" aria-label="Explorar OperoEducator, demo de plataforma educativa, en una pestaña nueva"><div class="project-media"><div class="mini-browser"><img nopin="nopin" src="assets/opero.jpg" width="1280" height="960" alt="Captura de la demo de OperoEducator" loading="lazy" decoding="async"></div><span class="project-number" aria-hidden="true">05</span></div><div class="project-info"><div><h3>OperoEducator</h3><span class="project-kind">Educación · Demo</span></div><span class="project-arrow" aria-hidden="true">↗</span></div></a></article>
+        <article class="project-card tilt-card reveal" style="--card-tint:#caddc6;--card-accent:#567953;--delay:225ms"><a class="project-link" href="https://nidus-code-web.vercel.app/demos/arboleda/index.html" target="_blank" rel="noopener noreferrer" aria-label="Explorar La Arboleda, demo de catálogo educativo, en una pestaña nueva"><div class="project-media"><div class="mini-browser"><img nopin="nopin" src="assets/arboleda.jpg" width="1280" height="960" alt="Captura de la demo de La Arboleda" loading="lazy" decoding="async"></div><span class="project-number" aria-hidden="true">06</span></div><div class="project-info"><div><h3>La Arboleda</h3><span class="project-kind">Biodiversidad · Demo</span></div><span class="project-arrow" aria-hidden="true">↗</span></div></a></article>
+        <article class="project-card tilt-card reveal" style="--card-tint:#e4d2ed;--card-accent:#8e5baa;--delay:270ms"><a class="project-link" href="https://nidus-code-web.vercel.app/demos/zenta/index.html" target="_blank" rel="noopener noreferrer" aria-label="Explorar Grupo Scout Zenta, demo institucional, en una pestaña nueva"><div class="project-media"><div class="mini-browser"><img nopin="nopin" src="assets/zenta.jpg" width="1280" height="960" alt="Captura de la demo de Grupo Scout Zenta" loading="lazy" decoding="async"></div><span class="project-number" aria-hidden="true">07</span></div><div class="project-info"><div><h3>Grupo Scout Zenta</h3><span class="project-kind">Institucional · Demo</span></div><span class="project-arrow" aria-hidden="true">↗</span></div></a></article>
+        <article class="project-card tilt-card reveal" style="--card-tint:#c8d8ee;--card-accent:#4c6aa7;--delay:315ms"><a class="project-link" href="https://nidus-code-web.vercel.app/demos/administracion-personal/" target="_blank" rel="noopener noreferrer" aria-label="Explorar Administración Personal, demo de aplicación, en una pestaña nueva"><div class="project-media"><div class="mini-browser"><img nopin="nopin" src="assets/finanzas.jpg" width="1280" height="960" alt="Captura de la demo de Administración Personal" loading="lazy" decoding="async"></div><span class="project-number" aria-hidden="true">08</span></div><div class="project-info"><div><h3>Administración Personal</h3><span class="project-kind">Finanzas · Demo</span></div><span class="project-arrow" aria-hidden="true">↗</span></div></a></article>
+        <article class="project-card tilt-card reveal" style="--card-tint:#f0cfc6;--card-accent:#a96450;--delay:360ms"><a class="project-link" href="https://nidus-code-web.vercel.app/demos/cursos-gregory/index.html" target="_blank" rel="noopener noreferrer" aria-label="Explorar Cursos Gregory, muestra conceptual sin inscripciones activas, en una pestaña nueva"><div class="project-media"><div class="mini-browser"><img nopin="nopin" src="assets/cursos.jpg" width="1280" height="960" alt="Captura de la muestra conceptual de Cursos Gregory" loading="lazy" decoding="async"></div><span class="project-number" aria-hidden="true">09</span></div><div class="project-info"><div><h3>Cursos Gregory</h3><span class="project-kind">Concepto · Sin inscripciones</span></div><span class="project-arrow" aria-hidden="true">↗</span></div></a></article>
+      </div>
+      <div class="work-note"><span><i aria-hidden="true">✦</i> Capturas fieles. Demos intactas.</span><span class="mobile-swipe">Desliza para ver los 9 proyectos <span aria-hidden="true">→</span></span><a href="#contacto">Hablemos de tu proyecto <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="services" id="servicios" aria-labelledby="services-title">
+      <div class="section-heading reveal"><span class="eyebrow">02 / Mucho más que una web bonita</span><h2 id="services-title">Tu negocio.<br><em class="gradient-text">En otro nivel.</em></h2><p>Desarrollo, automatización, optimización y soporte. <br>Soluciones reales con tecnología actual.</p></div>
+      <div class="service-grid">
+        <article class="service-card service-development tilt-card reveal" style="--card-accent:#7c5cfc;--delay:0ms"><div class="service-top"><span class="service-icon" aria-hidden="true">⌘</span><span class="pill">De cero. A tu medida.</span></div><div class="interface-scene" aria-hidden="true"><div class="interface-layer layer-back"><i></i><i></i><i></i></div><div class="interface-layer layer-mid"><span></span><span></span></div><div class="interface-layer layer-front"><span>&lt;tu idea /&gt;</span><div><i></i><i></i><i></i></div></div></div><div class="service-copy"><h3>Desarrollo<br>web a medida.</h3><p>Webs y aplicaciones diseñadas y programadas para tu negocio. Una experiencia propia, no otra plantilla.</p><ul><li>Landing pages</li><li>Tiendas online</li><li>Dashboards</li><li>Integraciones de IA</li></ul></div><a class="service-link" href="#contacto">Hagamos realidad tu idea <span aria-hidden="true">↗</span></a></article>
+        <article class="service-card service-automation tilt-card reveal" style="--card-accent:#e32793;--delay:80ms"><div class="service-top"><span class="service-icon" aria-hidden="true">ϟ</span><span class="pill">Menos tareas. Más tiempo.</span></div><div class="automation-scene" aria-hidden="true"><span class="flow-node">✉</span><span class="flow-connection"><i></i></span><span class="flow-node flow-center">ϟ</span><span class="flow-connection"><i></i></span><span class="flow-node">✓</span></div><div class="service-copy"><h3>Automatizaciones.</h3><p>Conectamos tus herramientas para que los procesos repetitivos se ejecuten solos.</p></div><a class="service-link" href="#contacto">Conecta tu negocio <span aria-hidden="true">↗</span></a></article>
+        <article class="service-card service-performance tilt-card reveal" style="--card-accent:#087c6b;--delay:160ms"><div class="service-top"><span class="service-icon" aria-hidden="true">↗</span><span class="pill">Ligera por dentro.</span></div><div class="performance-scene" aria-hidden="true"><div class="speed-ring"><span>↗</span></div><div class="speed-lines"><i></i><i></i><i></i></div><span>Rapidez + accesibilidad + SEO</span></div><div class="service-copy"><h3>Optimizaciones.</h3><p>Una web rápida, accesible y fácil de encontrar. Mejoramos la experiencia, no solo la apariencia.</p></div><a class="service-link" href="#contacto">Afina tu experiencia <span aria-hidden="true">↗</span></a></article>
+        <article class="service-card service-support tilt-card reveal" style="--card-accent:#b76a19;--delay:80ms"><div class="support-orbit" aria-hidden="true"><span>✦</span><i></i><i></i><i></i></div><div class="service-copy"><span class="eyebrow">Siempre en evolución</span><h3>Mantenimiento mensual.</h3><p>Actualizaciones, respaldos, cambios y soporte. Tu web no termina el día del lanzamiento.</p></div><a class="button button-dark" href="#contacto">Cuida tu proyecto <span aria-hidden="true">↗</span></a></article>
       </div>
     </section>
 
-    <!-- ============ MARQUEE de tecnologías ============ -->
-    <section aria-label="Tecnologías que usamos" class="py-8 border-y border-ink-200/60 dark:border-ink-800 bg-white/60 dark:bg-ink-900/50 backdrop-blur-sm">
-      <div class="marquee">
-        <div class="marquee-track">
-          <span class="marquee-chip">⚡ Claude API</span>
-          <span class="marquee-chip">✦ GitHub</span>
-          <span class="marquee-chip">◆ n8n</span>
-          <span class="marquee-chip">▲ Next.js</span>
-          <span class="marquee-chip">⬣ React</span>
-          <span class="marquee-chip">◇ Tailwind</span>
-          <span class="marquee-chip">⬢ Supabase</span>
-          <span class="marquee-chip">◈ TypeScript</span>
-          <span class="marquee-chip">⬡ Vercel</span>
-          <span class="marquee-chip">▶ Netlify</span>
-          <span class="marquee-chip">★ OpenAI</span>
-          <span class="marquee-chip">▼ Node.js</span>
-          <span class="marquee-chip">◉ Make</span>
-          <span class="marquee-chip">⚙ Zapier</span>
-          <span class="marquee-chip">◐ Figma</span>
-          <span class="marquee-chip">☁ Cloudflare</span>
-          <span class="marquee-chip">✉ Resend</span>
-          <span class="marquee-chip">◆ Stripe</span>
-          <span class="marquee-chip">▌ .com</span>
-          <span class="marquee-chip">▎ .cl</span>
-          <!-- duplicado para loop continuo -->
-          <span class="marquee-chip">⚡ Claude API</span>
-          <span class="marquee-chip">✦ GitHub</span>
-          <span class="marquee-chip">◆ n8n</span>
-          <span class="marquee-chip">▲ Next.js</span>
-          <span class="marquee-chip">⬣ React</span>
-          <span class="marquee-chip">◇ Tailwind</span>
-          <span class="marquee-chip">⬢ Supabase</span>
-          <span class="marquee-chip">◈ TypeScript</span>
-          <span class="marquee-chip">⬡ Vercel</span>
-          <span class="marquee-chip">▶ Netlify</span>
-          <span class="marquee-chip">★ OpenAI</span>
-          <span class="marquee-chip">▼ Node.js</span>
-          <span class="marquee-chip">◉ Make</span>
-          <span class="marquee-chip">⚙ Zapier</span>
-          <span class="marquee-chip">◐ Figma</span>
-          <span class="marquee-chip">☁ Cloudflare</span>
-          <span class="marquee-chip">✉ Resend</span>
-          <span class="marquee-chip">◆ Stripe</span>
-          <span class="marquee-chip">▌ .com</span>
-          <span class="marquee-chip">▎ .cl</span>
-        </div>
+    <span class="anchor-alias" id="proceso" aria-hidden="true"></span>
+    <section class="studio" id="estudio" aria-labelledby="studio-title"><div class="section-heading reveal"><span class="eyebrow">03 / Una idea no se construye sola</span><h2 id="studio-title">Contigo.<br><em class="gradient-text">De principio a fin.</em></h2></div><div class="process-grid"><article class="process-card tilt-card reveal" style="--card-accent:#7c5cfc;--delay:0ms"><span class="process-number" aria-hidden="true">01</span><h3>Entendemos.</h3><p>Tu negocio, tu idea y lo que necesitas resolver. Primero las preguntas correctas.</p></article><article class="process-card tilt-card reveal" style="--card-accent:#e32793;--delay:80ms"><span class="process-number" aria-hidden="true">02</span><h3>Diseñamos.</h3><p>Una experiencia que puedes ver, probar y ajustar antes de darla por terminada.</p></article><article class="process-card tilt-card reveal" style="--card-accent:#326cce;--delay:160ms"><span class="process-number" aria-hidden="true">03</span><h3>Construimos.</h3><p>Código, pruebas y lanzamiento. Y una base que pueda seguir creciendo contigo.</p></article></div><div class="stack-line reveal" id="kits"><span>Las herramientas cambian.<br><strong>El criterio importa.</strong></span><div><span>React</span><span>Next.js</span><span>Supabase</span><span>n8n</span><span>TypeScript</span><span>IA</span></div></div></section>
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="section-heading reveal"><span class="eyebrow">04 / Antes de dar el siguiente paso</span><h2 id="faq-title">Preguntas claras.<br><em class="gradient-text">Respuestas también.</em></h2></div>
+      <div class="faq-list reveal">
+        <details><summary>¿Cuánto tarda un proyecto desde cero?<span aria-hidden="true">+</span></summary><p>Depende del alcance. Una landing como esta toma entre 1 y 2 semanas. Una web con catálogo o dashboard 3–5 semanas. En la llamada inicial te damos un plazo concreto y lo cumplimos.</p></details>
+        <details><summary>¿Trabajan con clientes en todo Chile?<span aria-hidden="true">+</span></summary><p>Sí. Trabajamos de forma remota con clientes en todo Chile y coordinamos reuniones en horario chileno. Aceptamos pagos en pesos chilenos.</p></details>
+        <details><summary>¿Con qué rubros trabajan?<span aria-hidden="true">+</span></summary><p>Trabajamos con cualquier rubro. Primero entendemos lo que necesitas y evaluamos si podemos resolverlo bien con nuestros servicios. Si tu proyecto requiere algo fuera de nuestro alcance, te lo diremos con claridad desde el comienzo.</p></details>
+        <details><summary>¿Qué incluye el mantenimiento mensual?<span aria-hidden="true">+</span></summary><p>Backups semanales, actualizaciones de seguridad, cambios menores de texto e imágenes, monitoreo de uptime y soporte prioritario por WhatsApp. Pensado para que no tengas que preocuparte por tu web después del lanzamiento.</p></details>
+        <details><summary>¿Pueden integrar IA en mi web o producto?<span aria-hidden="true">+</span></summary><p>Sí. La IA es una capa opcional que añadimos cuando aporta valor real: un chatbot que atiende a tus clientes, un buscador que entiende lenguaje natural, recomendaciones personalizadas o análisis automático de datos. No es obligatoria — primero construimos una web sólida y bien programada, y la IA se suma encima si tu caso lo pide.</p></details>
+        <details><summary>¿La web es mía al 100%?<span aria-hidden="true">+</span></summary><p>Totalmente. Te entregamos el código, las cuentas (dominio, hosting, analítica) y la documentación. Si en algún momento decides trabajar con otra persona, no hay ataduras.</p></details>
+        <details><summary>¿Y si después necesito agregar algo nuevo?<span aria-hidden="true">+</span></summary><p>Lo hablamos. Si está cubierto por tu plan de mantenimiento, va incluido. Si es algo más grande (una sección nueva, una integración), te pasamos presupuesto fijo antes de empezar.</p></details>
+        <details><summary>¿Las demos muestran cómo se ven los proyectos?<span aria-hidden="true">+</span></summary><p>Sí. Las capturas muestran las experiencias originales y los enlaces te permiten explorarlas. Navaja utiliza datos ficticios; Cursos Gregory es una muestra conceptual sin inscripciones activas.</p></details>
       </div>
     </section>
-
-    <!-- ============ SERVICIOS (bento) ============ -->
-    <section id="servicios" class="py-14 sm:py-32 px-6 lg:px-8">
-      <div class="max-w-6xl mx-auto">
-        <div class="reveal max-w-2xl mb-16">
-          <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 01 — Servicios</p>
-          <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
-            Cuatro formas <br/>de impulsar tu negocio.
-          </h2>
-          <p class="mt-5 text-lg text-ink-600 dark:text-ink-300">
-            Soluciones reales con tecnología actual. Sin humo, sin plantillas genéricas.
-          </p>
+    <section class="contact" id="contacto" aria-labelledby="contact-title">
+      <div class="ambient contact-ambient" aria-hidden="true"><div class="aurora aurora-pink"></div><div class="aurora aurora-blue"></div></div>
+      <div class="reveal"><span class="eyebrow">05 / Tu próximo proyecto empieza aquí</span><h2 id="contact-title">¿Y si lo<br><em class="gradient-text">hacemos real?</em></h2></div>
+      <div class="contact-layout">
+        <div class="contact-info reveal">
+          <h3>Tú traes la idea.<br>Nosotros, el diseño y el código.</h3>
+          <p>Cuéntanos qué quieres construir, automatizar u optimizar. Te respondemos por email para entender tu proyecto y definir el siguiente paso.</p>
+          <div class="contact-links">
+            <a href="mailto:niduscode@gmail.com"><span>Email</span><strong>niduscode@gmail.com</strong><i aria-hidden="true">↗</i></a>
+            <a href="https://wa.me/56977521515" target="_blank" rel="noopener noreferrer"><span>WhatsApp · Gregory</span><strong>+56 9 7752 1515</strong><i aria-hidden="true">↗</i></a>
+            <a href="https://www.instagram.com/niduscode?utm_source=qr" target="_blank" rel="noopener noreferrer"><span>Instagram</span><strong>@niduscode</strong><i aria-hidden="true">↗</i></a>
+          </div>
+          <p class="contact-location"><i class="status-dot" aria-hidden="true"></i> Desde Chile · 100% remoto</p>
+          <a class="contact-qr" href="https://www.instagram.com/niduscode?utm_source=qr" target="_blank" rel="noopener noreferrer">
+            <img src="assets/qr-instagram.png" width="200" height="200" loading="lazy" decoding="async" alt="Código QR de NidusCode en Instagram">
+            <span><strong>El trabajo también se vive detrás de escena.</strong><span>Demos, procesos y novedades en @niduscode ↗</span></span>
+          </a>
         </div>
-
-        <div class="bento">
-
-          <!-- LARGE — Desarrollo con IA (2x2) -->
-          <article class="bento-item large reveal spotlight-card group p-8 rounded-3xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:-translate-y-1 transition-transform relative overflow-hidden">
-            <div class="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-accent/20 to-accent-3/20 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
-            <div class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-accent mb-6">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-              SERVICIO INSIGNIA
-            </div>
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent via-accent-2 to-accent-3 flex items-center justify-center mb-6 transition-transform group-hover:rotate-6 shadow-lg shadow-accent/20">
-              <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3 class="font-display text-3xl sm:text-4xl font-bold mb-4 tracking-tight">Desarrollo<br/>web a medida</h3>
-            <p class="text-ink-600 dark:text-ink-300 leading-relaxed max-w-md">
-              Webs y aplicaciones diseñadas y programadas a mano por developers. Código limpio, rápido y pensado para durar — nada de plantillas.
-            </p>
-            <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-ink-500 dark:text-ink-400 max-w-md">
-              <li class="flex items-center gap-2"><span class="text-accent">→</span> Landing pages</li>
-              <li class="flex items-center gap-2"><span class="text-accent">→</span> Tiendas online</li>
-              <li class="flex items-center gap-2"><span class="text-accent">→</span> Dashboards</li>
-              <li class="flex items-center gap-2"><span class="text-accent">→</span> Integraciones de IA</li>
-            </ul>
-          </article>
-
-          <!-- Automatizaciones -->
-          <article class="bento-item reveal spotlight-card group p-7 rounded-3xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:-translate-y-1 transition-transform">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-fuchsia-500 to-rose-500 flex items-center justify-center mb-5 shadow-lg shadow-fuchsia-500/20">
-              <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3 class="font-display text-xl font-bold mb-2">Automatizaciones</h3>
-            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Conectamos tus herramientas para que los procesos repetitivos se ejecuten solos.</p>
-          </article>
-
-          <!-- Optimizaciones -->
-          <article class="bento-item reveal spotlight-card group p-7 rounded-3xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:-translate-y-1 transition-transform">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-5 shadow-lg shadow-emerald-500/20">
-              <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M7 14l4-4 4 4 5-5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3 class="font-display text-xl font-bold mb-2">Optimizaciones</h3>
-            <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">Web rápida, accesible y bien posicionada. Core Web Vitals + SEO técnico.</p>
-          </article>
-
-          <!-- WIDE — Mantenimiento mensual -->
-          <article class="bento-item wide reveal spotlight-card group p-8 rounded-3xl border border-ink-100 dark:border-ink-800 bg-gradient-to-br from-ink-50 to-white dark:from-ink-800/40 dark:to-ink-900/40 hover:-translate-y-1 transition-transform relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-amber-500/10 to-transparent pointer-events-none"></div>
-            <div class="grid sm:grid-cols-[auto_1fr_auto] gap-6 items-center relative">
-              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20 flex-shrink-0">
-                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <div>
-                <div class="flex items-center gap-2 mb-2">
-                  <h3 class="font-display text-2xl font-bold tracking-tight">Mantenimiento mensual</h3>
-                  <span class="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20">NUEVO</span>
-                </div>
-                <p class="text-ink-600 dark:text-ink-300 leading-relaxed">
-                  Tu web siempre actualizada, segura y respaldada. Cambios pequeños, soporte prioritario y mejoras cada mes.
-                </p>
-                <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-500 dark:text-ink-400">
-                  <span class="flex items-center gap-1.5"><span class="text-accent">→</span>Backups</span>
-                  <span class="flex items-center gap-1.5"><span class="text-accent">→</span>Cambios y textos</span>
-                  <span class="flex items-center gap-1.5"><span class="text-accent">→</span>Soporte prioritario</span>
-                </div>
-              </div>
-              <a href="#contacto" class="hidden sm:inline-flex items-center justify-center w-12 h-12 rounded-full bg-ink-900 dark:bg-white text-white dark:text-ink-900 hover:scale-110 transition-transform flex-shrink-0">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ STACK ============ -->
-    <section id="kits" class="py-14 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800 relative overflow-hidden">
-      <div class="max-w-6xl mx-auto">
-        <div class="reveal max-w-2xl mb-16">
-          <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 02 — Stack</p>
-          <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
-            Las herramientas <br/>con las que trabajamos.
-          </h2>
-          <p class="mt-5 text-lg text-ink-600 dark:text-ink-300">
-            Estas son las áreas que dominamos para entregarte un servicio completo. No vendemos las herramientas: las usamos para resolver tu problema.
-          </p>
-        </div>
-
-        <div class="space-y-14">
-
-          <!-- ===== Categoría · Desarrollo web & producto ===== -->
-          <div>
-            <div class="reveal flex items-center gap-4 mb-6">
-              <span class="font-mono text-xs uppercase tracking-widest text-accent">Desarrollo web &amp; producto</span>
-              <span class="h-px flex-1 bg-ink-100 dark:bg-ink-800"></span>
-              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">04</span>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-
-              <!-- Webs con scroll premium -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-accent-2 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z M3 9h18 M9 3v18" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">01</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Webs con scroll premium</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Sitios animados con efecto Apple, parallax y reveals. Listos para impresionar.</p>
-              </article>
-
-              <!-- Desarrollo de apps -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 18h2" stroke-linecap="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">02</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Desarrollo de apps</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Apps móviles y web responsive con flujo de login, dashboards por rol y notificaciones.</p>
-              </article>
-
-              <!-- Dashboard de facturas -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round"/><path d="M7 8h10M7 12h10M7 16h6" stroke-linecap="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">03</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Dashboard de facturas</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Panel para visualizar, filtrar y exportar tus facturas. Adiós a las hojas de cálculo.</p>
-              </article>
-
-              <!-- Extensiones de Chrome -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke-linecap="round"/><path d="M21.17 8H12M3.95 6.06l4.07 7.03M10.88 21.94l4.07-7.03" stroke-linecap="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">04</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Extensiones de Chrome</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Plugins a medida que automatizan tareas dentro del navegador de tu equipo.</p>
-              </article>
-
-              <!-- Instagram → Web -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 via-rose-500 to-orange-400 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke-linecap="round"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">05</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Instagram → Web</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Convertimos tu feed de Instagram en una web con catálogo y contacto directo.</p>
-              </article>
-
+        <form id="contact-form" name="contact" class="contact-form reveal" aria-label="Cuéntanos tu proyecto" novalidate>
+          <p hidden aria-hidden="true"><label>No rellenar: <input name="website" tabindex="-1" autocomplete="off"></label></p>
+          <div class="contact-field">
+            <span class="field-label" id="client-type-label">Tu proyecto es para…</span>
+            <div class="client-type-grid" role="radiogroup" aria-labelledby="client-type-label">
+              <button type="button" class="client-type-card is-active" data-client-type="persona" role="radio" aria-checked="true"><span class="client-type-label">Persona</span><span class="client-type-hint">Para ti</span></button>
+              <button type="button" class="client-type-card" data-client-type="empresa" role="radio" aria-checked="false"><span class="client-type-label">Empresa</span><span class="client-type-hint">Para tu negocio</span></button>
             </div>
           </div>
-
-          <!-- ===== Categoría · Automatización & IA ===== -->
-          <div>
-            <div class="reveal flex items-center gap-4 mb-6">
-              <span class="font-mono text-xs uppercase tracking-widest text-accent">Automatización &amp; IA</span>
-              <span class="h-px flex-1 bg-ink-100 dark:bg-ink-800"></span>
-              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">02</span>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-
-              <!-- Automatizaciones n8n -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-fuchsia-500 to-rose-500 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">01</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Automatizaciones n8n</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Workflows visuales que conectan tus apps y ejecutan tareas sin intervención.</p>
-              </article>
-
-              <!-- Prospección automática -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">02</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Prospección automática</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Encontramos, calificamos y contactamos a tus leads ideales mientras duermes.</p>
-              </article>
-
-            </div>
+          <div class="contact-field">
+            <label for="nombre" id="nombre-label"><span data-label-for="persona">Nombre</span><span data-label-for="empresa" hidden>Nombre del representante</span></label>
+            <input type="text" id="nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre" data-placeholder-persona="Tu nombre" data-placeholder-empresa="Quien nos contacta">
           </div>
-
-          <!-- ===== Categoría · Auditorías & estrategia ===== -->
-          <div>
-            <div class="reveal flex items-center gap-4 mb-6">
-              <span class="font-mono text-xs uppercase tracking-widest text-accent">Auditorías &amp; estrategia</span>
-              <span class="h-px flex-1 bg-ink-100 dark:bg-ink-800"></span>
-              <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">03</span>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-
-              <!-- Auditoría Meta Ads -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2" stroke-linecap="round"/><path d="M16 8l-4 4-2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">01</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Auditoría Meta Ads</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Revisamos tus campañas en Facebook e Instagram y detectamos dónde se quema el presupuesto.</p>
-              </article>
-
-              <!-- Auditoría SEO -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8" stroke-linecap="round"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">02</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Auditoría SEO</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Análisis técnico, palabras clave y plan de acción para subir en Google.</p>
-              </article>
-
-              <!-- Auditoría de negocio -->
-              <article class="reveal spotlight-card group p-6 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 hover:border-ink-900 dark:hover:border-white transition-all hover:-translate-y-1">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14l4-4 4 4 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </div>
-                  <span class="font-mono text-[10px] text-ink-400 dark:text-ink-500">03</span>
-                </div>
-                <h3 class="font-display text-lg font-semibold mb-2">Auditoría de negocio</h3>
-                <p class="text-sm text-ink-600 dark:text-ink-300">Diagnóstico integral: qué funciona, qué frena el crecimiento y por dónde empezar.</p>
-              </article>
-
-            </div>
+          <div class="contact-field" id="empresa-wrap" hidden>
+            <label for="empresa">Nombre de la empresa</label><input type="text" id="empresa" name="empresa" autocomplete="organization" placeholder="Nombre de tu empresa">
           </div>
-
-          <!-- ===== CTA ===== -->
-          <article class="reveal group p-6 sm:p-8 rounded-2xl border-2 border-dashed border-ink-200 dark:border-ink-700 hover:border-accent dark:hover:border-accent transition-colors flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-7">
-            <div class="w-12 h-12 rounded-xl border border-ink-200 dark:border-ink-700 flex items-center justify-center flex-shrink-0">
-              <svg class="w-5 h-5 text-ink-600 dark:text-ink-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
-            </div>
-            <div class="flex-1">
-              <h3 class="font-display text-lg font-semibold mb-1">¿Tu caso es diferente?</h3>
-              <p class="text-sm text-ink-600 dark:text-ink-300">Cuéntanos qué problema quieres resolver y vemos cómo aplicar estas herramientas a tu proyecto.</p>
-            </div>
-            <a href="#contacto" class="text-sm font-medium text-accent inline-flex items-center gap-1 group/link flex-shrink-0">
-              Hablar con nosotros
-              <svg class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PROCESO ============ -->
-    <section id="proceso" class="py-16 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
-      <div class="max-w-6xl mx-auto">
-        <div class="reveal max-w-2xl mb-10 sm:mb-16">
-          <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 03 — Proceso</p>
-          <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
-            Cómo trabajamos.
-          </h2>
-        </div>
-
-        <div class="proceso-grid relative grid lg:grid-cols-4">
-          <!-- Línea conectora horizontal en desktop -->
-          <div aria-hidden="true" class="hidden lg:block absolute top-7 left-12 right-12 h-px bg-gradient-to-r from-transparent via-ink-200 dark:via-ink-700 to-transparent"></div>
-
-          <div class="reveal proceso-step">
-            <div class="proceso-num proceso-num--violet">01</div>
-            <div class="proceso-text">
-              <h3 class="font-display proceso-title">Descubrimos</h3>
-              <p class="proceso-desc">Una llamada corta para entender qué necesitas y qué resuelve realmente tu problema.</p>
-            </div>
-          </div>
-          <div class="reveal proceso-step">
-            <div class="proceso-num proceso-num--violet">02</div>
-            <div class="proceso-text">
-              <h3 class="font-display proceso-title">Diseñamos</h3>
-              <p class="proceso-desc">Prototipo navegable en menos de una semana. Iteramos hasta que encaje.</p>
-            </div>
-          </div>
-          <div class="reveal proceso-step">
-            <div class="proceso-num proceso-num--fuchsia">03</div>
-            <div class="proceso-text">
-              <h3 class="font-display proceso-title">Construimos</h3>
-              <p class="proceso-desc">Código limpio, rápido y mantenible. Sin dependencias innecesarias.</p>
-            </div>
-          </div>
-          <div class="reveal proceso-step">
-            <div class="proceso-num proceso-num--accent">04</div>
-            <div class="proceso-text">
-              <h3 class="font-display proceso-title">Lanzamos</h3>
-              <p class="proceso-desc">Desplegamos, medimos y seguimos contigo si necesitas evolucionar el producto.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PORTAFOLIO ============ -->
-    <section id="portafolio" class="py-14 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
-      <div class="max-w-6xl mx-auto">
-        <div class="reveal flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
-          <div class="max-w-2xl">
-            <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 04 — Portafolio</p>
-            <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
-              Nuestros proyectos.
-            </h2>
-          </div>
-          <p class="text-ink-600 dark:text-ink-300 max-w-md">
-            Estos son los proyectos que hemos desarrollado. Explora las demos navegables y visita los sitios que ya están publicados.
-          </p>
-        </div>
-
-        <div class="portfolio-swipe-hint" aria-hidden="true">
-          <span>Desliza para explorar</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M14 7l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-
-        <div class="portfolio-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-             role="region" aria-label="Proyectos destacados; desplázate horizontalmente en móvil" tabindex="0">
-          <!-- Proyecto 1 — La Arboleda -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="La Arboleda"
-              data-demo="demos/arboleda/index.html"
-              data-images="assets/arboleda/cover1.jpg|assets/arboleda/cover2.jpg|assets/arboleda/cover3.jpg|assets/arboleda/cover4.jpg|assets/arboleda/cover5.jpg">
-              <span class="pf-carousel">
-                <img src="assets/arboleda/cover1.jpg" alt="Captura de la web del proyecto La Arboleda"
-                     loading="lazy" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2025 · Educación · Naturaleza</span>
-              <h3>La Arboleda</h3>
-              <p>Sitio para un laboratorio vivo de biodiversidad: catálogo de 106 especies nativas del NOA argentino, mapa del predio y reconocimientos. Ábrela y recórrela — es una demo navegable.</p>
-            </div>
-          </article>
-
-          <!-- Proyecto 2 — Grupo Scout Zenta -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="Grupo Scout Zenta"
-              data-demo="demos/zenta/index.html"
-              data-images="assets/zenta/Zenta1.jpg|assets/zenta/Zenta2.jpg|assets/zenta/Zenta3.jpg">
-              <span class="pf-carousel">
-                <img src="assets/zenta/Zenta1.jpg" alt="Web institucional del Grupo Scout Zenta"
-                     loading="lazy" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · Institucional</span>
-              <h3>Grupo Scout Zenta</h3>
-              <p>Web institucional del grupo scout de Orán: historia desde 1966, las cuatro ramas, galería, eventos y recursos descargables. Ábrela y recórrela — es una demo navegable.</p>
-            </div>
-          </article>
-
-          <!-- Proyecto 3 — Gregory Hernández -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="Gregory Hernández"
-              data-demo="demos/gregory-hernandez/index.html"
-              data-images="assets/gregory/cover1.jpg|assets/gregory/cover2.jpg|assets/gregory/cover3.jpg|assets/gregory/cover4.jpg|assets/gregory/cover5.jpg">
-              <span class="pf-carousel">
-                <img src="assets/gregory/cover1.jpg" alt="Captura de la web de marca personal de Gregory Hernández"
-                     loading="lazy" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · Marca personal</span>
-              <h3>Gregory Hernández</h3>
-              <p>Landing de marca personal para un barbero y formador: su método de trabajo, su comunidad y sus formaciones. Ábrela y recórrela — es una demo navegable.</p>
-            </div>
-          </article>
-
-          <!-- Proyecto 4 — Mueblería Christami (SITIO ACTUAL) -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="Mueblería Christami"
-              data-live="https://muebleriachristami.cl/"
-              aria-label="Abrir sitio actual de Mueblería Christami en una pestaña nueva"
-              data-images="assets/muebleria/actual.jpg">
-              <span class="pf-carousel">
-                <img src="assets/muebleria/actual.jpg" alt="Portada actual de Mueblería Christami"
-                     loading="lazy" decoding="async" width="960" height="720" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Sitio actual
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · Catálogo · Cotizador</span>
-              <h3>Mueblería Christami</h3>
-              <p>Sitio actual para muebles a medida en Los Lagos: catálogo de proyectos, cuarzos, presupuesto orientativo y cotización. Ábrelo para ver su versión vigente.</p>
-            </div>
-          </article>
-
-          <!-- Proyecto 5 — Estudio Creativo (DEMO NAVEGABLE) -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="Estudio Creativo"
-              data-demo="demos/estudio-creativo/"
-              data-images="assets/estudio-creativo/cover1.jpg|assets/estudio-creativo/cover2.jpg|assets/estudio-creativo/cover3.jpg|assets/estudio-creativo/cover4.jpg|assets/estudio-creativo/cover5.jpg">
-              <span class="pf-carousel">
-                <img src="assets/estudio-creativo/cover1.jpg" alt="Captura de la web y el CRM de Estudio Creativo"
-                     loading="lazy" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · Web + CRM interno</span>
-              <h3>Estudio Creativo</h3>
-              <p>Estudio audiovisual con web pública para agendar y un panel interno completo: clientes, proyectos, finanzas y equipo. Entra al CRM con un clic — es una demo navegable.</p>
-            </div>
-          </article>
-
-          <!-- Proyecto 6 — Administración Personal (DEMO NAVEGABLE) -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="Administración Personal"
-              data-demo="demos/administracion-personal/"
-              data-images="assets/administracion-personal/cover1.jpg|assets/administracion-personal/cover2.jpg|assets/administracion-personal/cover3.jpg|assets/administracion-personal/cover4.jpg|assets/administracion-personal/cover5.jpg">
-              <span class="pf-carousel">
-                <img src="assets/administracion-personal/cover1.jpg" alt="Captura de la app Administración Personal"
-                     loading="lazy" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · App de finanzas</span>
-              <h3>Administración Personal</h3>
-              <p>App para controlar ingresos, gastos, presupuestos y metas de ahorro. Dashboard con gráficos, categorías y movimientos recurrentes. Pruébala entera — es una demo navegable.</p>
-            </div>
-          </article>
-
-          <!-- Proyecto 7 — OperoEducator (DEMO NAVEGABLE) -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="OperoEducator"
-              data-demo="demos/opero/index.html"
-              data-images="assets/opero/cover1.jpg|assets/opero/cover2.jpg|assets/opero/cover3.jpg|assets/opero/cover4.jpg">
-              <span class="pf-carousel">
-                <img src="assets/opero/cover1.jpg" alt="OperoEducator — login y paneles por rol"
-                     loading="lazy" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · Plataforma educativa</span>
-              <h3>OperoEducator</h3>
-              <p>Sistema de gestión para una academia con 5 sucursales: alumnos, asistencias, pagos, instructores y profes guías. Entra como director, admin o instructor y mira el panel de cada uno.</p>
-            </div>
-          </article>
-
-          <!-- Proyecto 8 — Navaja (DEMO CON DATOS FICTICIOS) -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="Navaja"
-              data-demo="demos/navaja/index.html"
-              data-images="assets/navaja/cover.jpg">
-              <span class="pf-carousel">
-                <img src="assets/navaja/cover.jpg" alt="Vista de Navaja, sistema de gestión para profesionales independientes"
-                     loading="lazy" decoding="async" width="960" height="640" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · Gestión · App web</span>
-              <h3>Navaja</h3>
-              <p>Control de ingresos, clientes, agenda, boletas y reserva tributaria para profesionales independientes. Recorre una demo con datos ficticios.</p>
-            </div>
-          </article>
-
-          <!-- Proyecto 9 — Cursos Gregory Hernández (DEMO CONCEPTUAL) -->
-          <article class="reveal group">
-            <button type="button"
-              class="portfolio-trigger pf-card block w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-ink-100 dark:border-ink-800 cursor-pointer"
-              data-title="Cursos Gregory Hernández"
-              data-demo="demos/cursos-gregory/index.html"
-              data-images="assets/gregory-cursos/cover.svg">
-              <span class="pf-carousel">
-                <img src="assets/gregory-cursos/cover.svg" alt="Portada de la demo de cursos de Gregory Hernández"
-                     loading="lazy" decoding="async" width="960" height="720" class="pf-slide is-active" />
-              </span>
-              <span class="pf-shade"></span>
-              <span class="pf-badge pf-badge--demo">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                Demo navegable
-              </span>
-              <span class="pf-dots" aria-hidden="true"></span>
-              <span class="pf-cta pf-cta--demo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </button>
-            <div class="pf-info">
-              <span class="pf-meta"><span class="pf-dot"></span>2026 · Formación · Barbería</span>
-              <h3>Cursos Gregory Hernández</h3>
-              <p>Demo de la experiencia de formación: niveles Junior, Senior y Master del método Corte Óseo®. Información de muestra, sin inscripciones activas.</p>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FAQ ============ -->
-    <section id="faq" class="py-14 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
-      <div class="max-w-4xl mx-auto">
-        <div class="reveal max-w-2xl mb-12">
-          <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 05 — FAQ</p>
-          <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
-            Preguntas frecuentes.
-          </h2>
-        </div>
-
-        <div class="reveal">
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              <span>¿Cuánto tarda un proyecto desde cero?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer"><div class="faq-answer-inner"><div>
-              Depende del alcance. Una landing como esta toma entre 1 y 2 semanas. Una web con catálogo o dashboard 3–5 semanas. En la llamada inicial te damos un plazo concreto y lo cumplimos.
-            </div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              <span>¿Trabajan con clientes en todo Chile?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer"><div class="faq-answer-inner"><div>
-              Sí. Trabajamos de forma remota con clientes en todo Chile y coordinamos reuniones en horario chileno. Aceptamos pagos en pesos chilenos.
-            </div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              <span>¿Con qué rubros trabajan?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer"><div class="faq-answer-inner"><div>
-              Trabajamos con cualquier rubro. Primero entendemos lo que necesitas y evaluamos si podemos resolverlo bien con nuestros servicios. Si tu proyecto requiere algo fuera de nuestro alcance, te lo diremos con claridad desde el comienzo.
-            </div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              <span>¿Qué incluye el mantenimiento mensual?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer"><div class="faq-answer-inner"><div>
-              Backups semanales, actualizaciones de seguridad, cambios menores de texto e imágenes, monitoreo de uptime y soporte prioritario por WhatsApp. Pensado para que no tengas que preocuparte por tu web después del lanzamiento.
-            </div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              <span>¿Pueden integrar IA en mi web o producto?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer"><div class="faq-answer-inner"><div>
-              Sí. La IA es una capa opcional que añadimos cuando aporta valor real: un chatbot que atiende a tus clientes, un buscador que entiende lenguaje natural, recomendaciones personalizadas o análisis automático de datos. No es obligatoria — primero construimos una web sólida y bien programada, y la IA se suma encima si tu caso lo pide.
-            </div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              <span>¿La web es mía al 100%?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer"><div class="faq-answer-inner"><div>
-              Totalmente. Te entregamos el código, las cuentas (dominio, hosting, analítica) y la documentación. Si en algún momento decides trabajar con otra persona, no hay ataduras.
-            </div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              <span>¿Y si después necesito agregar algo nuevo?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer"><div class="faq-answer-inner"><div>
-              Lo hablamos. Si está cubierto por tu plan de mantenimiento, va incluido. Si es algo más grande (una sección nueva, una integración), te pasamos presupuesto fijo antes de empezar.
-            </div></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACTO ============ -->
-    <section id="contacto" class="py-14 sm:py-32 px-6 lg:px-8 border-t border-ink-100 dark:border-ink-800">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
-          <div class="reveal">
-            <p class="font-mono text-xs uppercase tracking-widest text-accent mb-4">/ 06 — Contacto</p>
-            <h2 class="font-display text-4xl sm:text-6xl font-bold tracking-tighter leading-[1]">
-              Cuéntanos tu idea.
-            </h2>
-            <p class="mt-4 text-lg text-ink-600 dark:text-ink-300 max-w-md">
-              Respondemos en menos de 24 horas. Sin compromiso, sin plantillas de venta.
-            </p>
-
-            <div class="mt-10 space-y-5">
-              <!-- Email -->
-              <a href="mailto:niduscode@gmail.com" class="flex items-start gap-4 group">
-                <div class="contact-icon contact-icon--mail">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M22 6l-10 7L2 6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400">Email</div>
-                  <div class="font-medium group-hover:text-accent transition-colors">niduscode@gmail.com</div>
-                </div>
-              </a>
-
-              <!-- WhatsApp con logo real de marca -->
-              <a href="https://wa.me/56977521515" target="_blank" rel="noopener" class="flex items-start gap-4 group">
-                <div class="contact-icon contact-icon--wa" aria-hidden="true">
-                  <svg viewBox="0 0 32 32" fill="currentColor">
-                    <path d="M16.04 4C9.4 4 4 9.4 4 16.04c0 2.12.55 4.19 1.6 6.02L4 28l6.1-1.6a12 12 0 0 0 5.94 1.52h.01c6.64 0 12.04-5.4 12.04-12.04C28.09 9.4 22.68 4 16.04 4zm0 21.94h-.01a10 10 0 0 1-5.09-1.39l-.36-.22-3.62.95.96-3.53-.24-.36a9.95 9.95 0 0 1-1.53-5.32c0-5.52 4.49-10.01 10.02-10.01 2.67 0 5.19 1.04 7.08 2.94a9.95 9.95 0 0 1 2.93 7.08c0 5.52-4.49 10.01-10.03 10.01zm5.5-7.5c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400">WhatsApp · Gregory 🇨🇱</div>
-                  <div class="font-medium group-hover:text-accent transition-colors">+56 9 7752 1515</div>
-                </div>
-              </a>
-
-              <!-- Instagram con logo real de marca -->
-              <a href="https://www.instagram.com/niduscode?utm_source=qr" target="_blank" rel="noopener" class="flex items-start gap-4 group">
-                <div class="contact-icon contact-icon--ig" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.25.07 1.63.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.25.06-1.63.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.22 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.21 8.78 2.2 12 2.2zm0 2c-3.16 0-3.53.01-4.77.07-.93.04-1.43.2-1.76.33-.44.17-.76.38-1.1.7a2.9 2.9 0 00-.7 1.1c-.13.34-.29.84-.33 1.77C4.2 8.47 4.2 8.84 4.2 12c0 3.16 0 3.53.07 4.77.04.93.2 1.43.33 1.76.17.44.38.76.7 1.1.34.32.66.53 1.1.7.33.13.83.29 1.76.33 1.24.06 1.61.07 4.77.07s3.53-.01 4.77-.07c.93-.04 1.43-.2 1.76-.33.44-.17.76-.38 1.1-.7.32-.34.53-.66.7-1.1.13-.33.29-.83.33-1.76.06-1.24.07-1.61.07-4.77s-.01-3.53-.07-4.77c-.04-.93-.2-1.43-.33-1.76a2.9 2.9 0 00-.7-1.1 2.9 2.9 0 00-1.1-.7c-.33-.13-.83-.29-1.76-.33C15.53 4.2 15.16 4.2 12 4.2zm0 3.4a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm0 2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zm5.6-2.55a1.04 1.04 0 110 2.08 1.04 1.04 0 010-2.08z"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400">Instagram</div>
-                  <div class="font-medium group-hover:text-accent transition-colors">@niduscode</div>
-                </div>
-              </a>
-
-              <!-- Ubicación -->
-              <div class="flex items-start gap-4">
-                <div class="contact-icon contact-icon--mail">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400">Ubicación</div>
-                  <div class="font-medium">Chile · 100% remoto</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- QR de Instagram -->
-            <a href="https://www.instagram.com/niduscode?utm_source=qr" target="_blank" rel="noopener" class="qr-card mt-10 group">
-              <div class="qr-card__img">
-                <img src="assets/qr-instagram.png" alt="Código QR de @niduscode en Instagram" width="200" height="200" decoding="async" />
-              </div>
-              <div class="qr-card__body">
-                <div class="text-xs font-mono uppercase tracking-widest text-ink-500 dark:text-ink-400 mb-2">Escaneá con la cámara</div>
-                <div class="font-display text-xl font-semibold mb-1">Seguinos en Instagram</div>
-                <div class="text-sm text-ink-600 dark:text-ink-300">Detrás de escena, demos en vivo y novedades de cada proyecto.</div>
-                <span class="qr-card__cta">@niduscode →</span>
-              </div>
-            </a>
-          </div>
-
-          <!-- Formulario de contacto · backend: Supabase -->
-          <form
-            id="contact-form"
-            name="contact"
-            class="reveal p-6 sm:p-8 rounded-2xl border border-ink-100 dark:border-ink-800 bg-white dark:bg-ink-800/30 space-y-5"
-            novalidate
-          >
-            <!-- Honeypot: si un bot lo rellena, descartamos el envío -->
-            <p class="hidden" aria-hidden="true">
-              <label>No rellenar: <input name="website" tabindex="-1" autocomplete="off" /></label>
-            </p>
-
-            <!-- Tipo de cliente: Persona / Empresa -->
-            <div>
-              <label class="block text-sm font-medium mb-2">¿Sos persona o empresa?</label>
-              <div class="client-type-grid" role="radiogroup" aria-label="Tipo de cliente">
-                <button type="button"
-                        class="client-type-card is-active"
-                        data-client-type="persona"
-                        role="radio" aria-checked="true">
-                  <svg class="client-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                    <circle cx="12" cy="8" r="4" stroke-linecap="round"/>
-                    <path d="M4 21c0-4.42 3.58-8 8-8s8 3.58 8 8" stroke-linecap="round"/>
-                  </svg>
-                  <span class="client-type-label">Persona</span>
-                  <span class="client-type-hint">Para vos</span>
-                </button>
-                <button type="button"
-                        class="client-type-card"
-                        data-client-type="empresa"
-                        role="radio" aria-checked="false">
-                  <svg class="client-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                    <path d="M3 21h18M5 21V7l7-4 7 4v14" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9 21v-6h6v6M9 11h.01M15 11h.01M9 15h.01M15 15h.01" stroke-linecap="round"/>
-                  </svg>
-                  <span class="client-type-label">Empresa</span>
-                  <span class="client-type-hint">Para tu negocio</span>
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label for="nombre" class="block text-sm font-medium mb-2" id="nombre-label">
-                <span data-label-for="persona">Nombre</span>
-                <span data-label-for="empresa" hidden>Nombre del representante</span>
-              </label>
-              <input
-                type="text" id="nombre" name="nombre" required
-                placeholder="Tu nombre"
-                data-placeholder-persona="Tu nombre"
-                data-placeholder-empresa="Quien nos contacta"
-                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
-              />
-            </div>
-
-            <!-- Solo en modo Empresa -->
-            <div id="empresa-wrap" hidden>
-              <label for="empresa" class="block text-sm font-medium mb-2">Nombre de la empresa</label>
-              <input
-                type="text" id="empresa" name="empresa"
-                placeholder="Nombre de tu empresa"
-                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
-              />
-            </div>
-
-            <div>
-              <label for="email" class="block text-sm font-medium mb-2">Email</label>
-              <input
-                type="email" id="email" name="email" required
-                placeholder="tu@email.com"
-                data-placeholder-persona="tu@email.com"
-                data-placeholder-empresa="empresa@email.com"
-                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
-              />
-            </div>
-
-            <div>
-              <label for="telefono" class="block text-sm font-medium mb-2">Teléfono / WhatsApp</label>
+          <div class="contact-fields-two">
+            <div class="contact-field"><label for="email">Email</label><input type="email" id="email" name="email" required autocomplete="email" placeholder="tu@email.com" data-placeholder-persona="tu@email.com" data-placeholder-empresa="empresa@email.com"></div>
+            <div class="contact-field">
+              <label for="telefono">Teléfono / WhatsApp</label>
               <div class="phone-input-wrap" data-default-code="+56" data-default-flag="🇨🇱" data-default-iso="CL">
-                <button type="button" class="phone-country-btn" id="phone-country-btn"
-                        aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar país">
-                  <span class="phone-flag" aria-hidden="true">🇨🇱</span>
-                  <span class="phone-code">+56</span>
-                  <svg class="phone-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-                <input
-                  type="tel" id="telefono" name="telefono" required
-                  inputmode="tel" autocomplete="tel-national"
-                  placeholder="9 1234 5678"
-                  class="phone-number-input"
-                />
-                <div class="phone-country-panel" id="phone-country-panel" role="listbox" hidden>
-                  <input type="search" class="phone-country-search" id="phone-country-search"
-                         placeholder="Buscar país…" autocomplete="off" aria-label="Buscar país" />
-                  <ul class="phone-country-list" id="phone-country-list" role="presentation">
-                    <!-- Inyectado por contact-form.js para mantener el HTML liviano -->
-                  </ul>
-                </div>
+                <button type="button" class="phone-country-btn" id="phone-country-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar país"><span class="phone-flag" aria-hidden="true">🇨🇱</span><span class="phone-code">+56</span><svg class="phone-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+                <input type="tel" id="telefono" name="telefono" required inputmode="tel" autocomplete="tel-national" placeholder="9 1234 5678" class="phone-number-input">
+                <div class="phone-country-panel" id="phone-country-panel" role="listbox" hidden><input type="search" class="phone-country-search" id="phone-country-search" placeholder="Buscar país…" autocomplete="off" aria-label="Buscar país"><ul class="phone-country-list" id="phone-country-list" role="presentation"></ul></div>
               </div>
             </div>
-
-            <div>
-              <label for="servicio" class="block text-sm font-medium mb-2">¿Qué te interesa?</label>
-              <select
-                id="servicio" name="servicio"
-                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
-              >
-                <option value="desarrollo">Desarrollo web a medida</option>
-                <option value="apps">Desarrollo de apps</option>
-                <option value="automatizacion">Automatización</option>
-                <option value="optimizacion">Optimización</option>
-                <option value="mantenimiento">Mantenimiento mensual</option>
-                <option value="otro">Otro / No estoy seguro</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="mensaje" class="block text-sm font-medium mb-2">Mensaje</label>
-              <textarea
-                id="mensaje" name="mensaje" rows="4" required
-                placeholder="Cuéntanos brevemente tu proyecto..."
-                class="w-full px-4 py-3 rounded-lg border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none"
-              ></textarea>
-            </div>
-
-            <button
-              id="contact-submit"
-              type="submit"
-              class="btn-primary w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-ink-900 dark:bg-white text-white dark:text-ink-900 font-medium hover:-translate-y-0.5 transition-transform"
-            >
-              <span class="contact-btn-label">Enviar mensaje</span>
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-
-            <!-- Feedback inline tras envío (éxito / error) -->
-            <div id="contact-feedback" class="contact-feedback" role="status" aria-live="polite" hidden></div>
-
-            <p class="text-xs text-ink-500 dark:text-ink-400 text-center">
-              Al enviar aceptas que te contactemos por email para responder a tu consulta.
-            </p>
-          </form>
-        </div>
+          </div>
+          <div class="contact-field">
+            <label for="servicio">¿Qué te interesa?</label>
+            <select id="servicio" name="servicio"><option value="desarrollo">Desarrollo web a medida</option><option value="apps">Desarrollo de apps</option><option value="automatizacion">Automatización</option><option value="optimizacion">Optimización</option><option value="mantenimiento">Mantenimiento mensual</option><option value="otro">Otro / No estoy seguro</option></select>
+          </div>
+          <div class="contact-field"><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" rows="4" required placeholder="Cuéntanos brevemente tu proyecto..."></textarea></div>
+          <button id="contact-submit" type="submit" class="button button-dark"><span class="contact-btn-label">Enviar mensaje</span><span aria-hidden="true">↗</span></button>
+          <div id="contact-feedback" class="contact-feedback" role="status" aria-live="polite" hidden></div>
+          <p class="contact-consent">Al enviar aceptas que te contactemos por email para responder a tu consulta.</p>
+        </form>
       </div>
     </section>
   </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="border-t border-ink-100 dark:border-ink-800 px-6 lg:px-8 py-12">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-        <div class="lg:col-span-2">
-          <div class="flex items-center gap-2.5 mb-4">
-            <img src="assets/nidus-logo.png" alt="NidusCode" class="h-8 w-auto" />
-            <span class="font-display font-semibold tracking-tight text-lg">NidusCode</span>
-          </div>
-          <p class="text-sm text-ink-600 dark:text-ink-300 max-w-sm">
-            Desde Chile construimos productos digitales a medida, con código de calidad y mucho criterio.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-display font-semibold text-sm mb-4">Navegación</h4>
-          <ul class="space-y-2 text-sm text-ink-600 dark:text-ink-300">
-            <li><a href="#servicios" class="hover:text-ink-900 dark:hover:text-white transition-colors">Servicios</a></li>
-            <li><a href="#kits" class="hover:text-ink-900 dark:hover:text-white transition-colors">Stack</a></li>
-            <li><a href="#portafolio" class="hover:text-ink-900 dark:hover:text-white transition-colors">Portafolio</a></li>
-            <li><a href="#proceso" class="hover:text-ink-900 dark:hover:text-white transition-colors">Proceso</a></li>
-            <li><a href="#faq" class="hover:text-ink-900 dark:hover:text-white transition-colors">FAQ</a></li>
-            <li><a href="#contacto" class="hover:text-ink-900 dark:hover:text-white transition-colors">Contacto</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-display font-semibold text-sm mb-4">Contacto</h4>
-          <ul class="space-y-2 text-sm text-ink-600 dark:text-ink-300">
-            <li><a href="mailto:niduscode@gmail.com" class="hover:text-ink-900 dark:hover:text-white transition-colors">niduscode@gmail.com</a></li>
-            <li>
-              <a href="https://wa.me/56977521515" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-ink-900 dark:hover:text-white transition-colors">
-                <svg class="w-4 h-4 text-[#25D366]" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.4 4 4 9.4 4 16.04c0 2.12.55 4.19 1.6 6.02L4 28l6.1-1.6a12 12 0 0 0 5.94 1.52h.01c6.64 0 12.04-5.4 12.04-12.04C28.09 9.4 22.68 4 16.04 4zm5.5 14.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
-                +56 9 7752 1515
-              </a>
-            </li>
-            <li>
-              <a href="https://www.instagram.com/niduscode?utm_source=qr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-ink-900 dark:hover:text-white transition-colors">
-                <svg class="w-4 h-4 ig-brand-fill" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.25.07 1.63.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.25.06-1.63.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.22 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.21 8.78 2.2 12 2.2zm0 2c-3.16 0-3.53.01-4.77.07-.93.04-1.43.2-1.76.33-.44.17-.76.38-1.1.7a2.9 2.9 0 00-.7 1.1c-.13.34-.29.84-.33 1.77C4.2 8.47 4.2 8.84 4.2 12c0 3.16 0 3.53.07 4.77.04.93.2 1.43.33 1.76.17.44.38.76.7 1.1.34.32.66.53 1.1.7.33.13.83.29 1.76.33 1.24.06 1.61.07 4.77.07s3.53-.01 4.77-.07c.93-.04 1.43-.2 1.76-.33.44-.17.76-.38 1.1-.7.32-.34.53-.66.7-1.1.13-.33.29-.83.33-1.76.06-1.24.07-1.61.07-4.77s-.01-3.53-.07-4.77c-.04-.93-.2-1.43-.33-1.76a2.9 2.9 0 00-.7-1.1 2.9 2.9 0 00-1.1-.7c-.33-.13-.83-.29-1.76-.33C15.53 4.2 15.16 4.2 12 4.2zm0 3.4a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm0 2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zm5.6-2.55a1.04 1.04 0 110 2.08 1.04 1.04 0 010-2.08z"/></svg>
-                @niduscode
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="pt-8 border-t border-ink-100 dark:border-ink-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p class="text-xs font-mono text-ink-500 dark:text-ink-400">
-          © <span id="year"></span> NidusCode
-        </p>
-        <p class="text-xs font-mono text-ink-400 dark:text-ink-500">v1.1 </p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ============ LIGHTBOX / GALERÍA ============ -->
-  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galería del proyecto">
-    <button class="lb-btn lb-close" aria-label="Cerrar galería">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
-    </button>
-    <button class="lb-btn lb-prev" aria-label="Imagen anterior">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button class="lb-btn lb-next" aria-label="Imagen siguiente">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <figure class="lb-stage">
-      <img class="lb-img" alt="Captura del proyecto" hidden />
-      <figcaption class="lb-cap">
-        <span class="lb-title"></span>
-        <span class="lb-counter"></span>
-      </figcaption>
-    </figure>
-  </div>
-
-  <!-- ============ MODAL DE DEMO INTERACTIVA ============ -->
-  <div id="demoModal" class="demo-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Demo interactiva del proyecto">
-    <!-- Botón X flotante: visible solo en mobile, siempre por encima del iframe -->
-    <button class="demo-close-float" id="demoCloseFloat" aria-label="Cerrar demo" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
-    </button>
-    <div class="demo-shell">
-      <header class="demo-bar">
-        <div class="demo-bar-id">
-          <span class="demo-tag"><span class="demo-tag-dot"></span>Demo interactiva</span>
-          <span class="demo-title" id="demoTitle">Proyecto</span>
-        </div>
-        <div class="demo-bar-actions">
-          <a id="demoNewTab" class="demo-newtab" href="#" target="_blank" rel="noopener">
-            <span class="demo-newtab-txt">Abrir en pestaña</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M19 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <button class="demo-close" id="demoClose" aria-label="Cerrar demo" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
-          </button>
-        </div>
-      </header>
-      <div class="demo-stage">
-        <div class="demo-loader" id="demoLoader">
-          <span class="demo-spinner"></span>
-          <span>Cargando demo…</span>
-        </div>
-        <iframe id="demoFrame" class="demo-frame" title="Demo interactiva del proyecto" src="about:blank"></iframe>
-      </div>
-      <p class="demo-foot">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>
-        Es una demo: puedes navegar y pulsar todo, pero nada se guarda ni se envía.
-      </p>
-    </div>
-  </div>
-
-  <!-- ============ BOTÓN FLOTANTE WHATSAPP ============ -->
-  <div class="wa-float">
-    <a href="https://wa.me/56977521515" target="_blank" rel="noopener" class="wa-button" aria-label="Contactar por WhatsApp">
-      <svg class="wa-icon-open" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
-        <path d="M16.04 4C9.4 4 4 9.4 4 16.04c0 2.12.55 4.19 1.6 6.02L4 28l6.1-1.6a12 12 0 0 0 5.94 1.52h.01c6.64 0 12.04-5.4 12.04-12.04C28.09 9.4 22.68 4 16.04 4zm0 21.94h-.01a10 10 0 0 1-5.09-1.39l-.36-.22-3.62.95.96-3.53-.24-.36a9.95 9.95 0 0 1-1.53-5.32c0-5.52 4.49-10.01 10.02-10.01 2.67 0 5.19 1.04 7.08 2.94a9.95 9.95 0 0 1 2.93 7.08c0 5.52-4.49 10.01-10.03 10.01zm5.5-7.5c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/>
-      </svg>
-    </a>
-  </div>
-
-  <script src="script.js?v=20260929"></script>
+  <footer><a class="brand" href="#inicio"><img src="assets/nidus-logo.png" width="28" height="33" alt=""><span>NidusCode</span></a><span>Desde Chile. 100% remoto.</span><button id="motion-toggle" type="button" aria-pressed="false">Movimiento: activo</button><span>© 2026 NidusCode</span></footer>
+  <script src="script.js?v=8.3" defer></script>
+  <script src="hero-05.js" defer></script>
+  <script src="hero-world.js?v=8" defer></script>
+  <script src="hero-06.js?v=8.3" defer></script>
   <script src="contact-form.js" defer></script>
   <script src="offline-game.js" defer></script>
-
-  <!-- Vercel Web Analytics · visitas y fuentes de tráfico (gratis, sin cookies) -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>

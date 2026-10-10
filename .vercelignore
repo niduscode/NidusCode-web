@@ -1,0 +1,14 @@
+.git
+.claude
+node_modules
+tests
+scripts
+screenshots
+vendor/scroll-world-upstream.js
+cap de pruebas*
+README.md
+DEPLOYMENT.md
+package-lock.json
+tailwind.input.css
+tailwind.config.cjs
+.DS_Store

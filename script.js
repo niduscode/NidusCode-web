@@ -1,425 +1,298 @@
-/* ===== NidusCode — JS ===== */
-(function () {
-  'use strict';
+'use strict';
 
-  // Año actual en footer
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+(() => {
+  const root = document.documentElement;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const mobileLayout = window.matchMedia('(max-width: 760px)');
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const motionButton = document.getElementById('motion-toggle');
+  const themeButton = document.getElementById('theme-toggle');
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const menuButton = document.querySelector('.menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const header = document.querySelector('.site-header');
+  const art = document.querySelector('.hero-art');
+  const cards = [...document.querySelectorAll('.tilt-card')];
+  const revealElements = [...document.querySelectorAll('.reveal')];
+  const animatedElements = [...document.querySelectorAll('.hero-art, .ambient, .gradient-text, .project-card')];
+  const pointerControllers = [];
+  const visibleAnimationTargets = new Map();
+  let userPausedMotion = false;
+  let revealObserver;
+  let themePreference = null;
 
-  // ===== Scroll progress bar =====
-  const progressEl = document.getElementById('scrollProgress');
-  const navbar = document.getElementById('navbar');
-  const hero = document.getElementById('hero');
-  const whatsappFloat = document.querySelector('.wa-float');
-  let lastScrollTop = window.scrollY;
+  // The header never slides away. Only switch its quiet reading surface at the top.
+  if (header) {
+    const syncHeader = () => header.classList.toggle('is-scrolled', (window.scrollY || 0) > 24);
+    window.addEventListener('scroll', syncHeader, { passive: true });
+    window.addEventListener('pageshow', syncHeader);
+    syncHeader();
+  }
 
-  const onScroll = () => {
-    const scrollTop = window.scrollY;
-    const docH = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
-    if (progressEl) progressEl.style.width = pct + '%';
-    if (hero && whatsappFloat) {
-      whatsappFloat.classList.toggle('is-visible', scrollTop > hero.offsetHeight - window.innerHeight * 0.45);
+  try {
+    const savedTheme = window.localStorage.getItem('nidus-preview-theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') themePreference = savedTheme;
+  } catch {
+    // The preview stays usable even when browser storage is unavailable.
+  }
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    if (themeColor) themeColor.setAttribute('content', theme === 'dark' ? '#100e18' : '#fafafb');
+    if (themeButton) {
+      const label = theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro';
+      themeButton.setAttribute('aria-label', label);
+      themeButton.setAttribute('title', label);
+      themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
     }
-    if (navbar) {
-      if (scrollTop > 12) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
+  }
 
-      const scrollingDown = scrollTop > lastScrollTop + 4;
-      const scrollingUp = scrollTop < lastScrollTop - 4;
-      if (scrollTop > 140 && scrollingDown && !navbar.classList.contains('menu-open')) {
-        navbar.classList.add('nav-hidden');
-      } else if (scrollingUp || scrollTop <= 140) {
-        navbar.classList.remove('nav-hidden');
+  if (themeButton) {
+    themeButton.addEventListener('click', () => {
+      themePreference = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(themePreference);
+      try {
+        window.localStorage.setItem('nidus-preview-theme', themePreference);
+      } catch {
+        // The explicit choice still applies for this visit without persistence.
       }
+    });
+  }
+  systemTheme.addEventListener('change', () => {
+    if (!themePreference) applyTheme(systemTheme.matches ? 'dark' : 'light');
+  });
+  applyTheme(themePreference || (systemTheme.matches ? 'dark' : 'light'));
+
+  const motionEnabled = () => !reducedMotion.matches && !userPausedMotion;
+  const pointerEnabled = () => motionEnabled() && finePointer.matches && !document.hidden;
+
+  function closeMenu(returnFocus = false) {
+    if (!menuButton || !mobileMenu) return;
+    const wasOpen = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', 'false');
+    mobileMenu.hidden = true;
+    if (returnFocus && wasOpen) menuButton.focus();
+  }
+
+  if (menuButton && mobileMenu) {
+    closeMenu();
+    menuButton.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') !== 'true';
+      menuButton.setAttribute('aria-expanded', String(open));
+      mobileMenu.hidden = !open;
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => closeMenu());
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeMenu(true);
+    });
+    document.addEventListener('click', event => {
+      if (event.target instanceof Element && !event.target.closest('.site-header')) closeMenu();
+    });
+    mobileLayout.addEventListener('change', () => closeMenu());
+  }
+
+  // Cards schedule one frame only when the pointer actually moves.
+  // The logo below interpolates briefly, then stops when it reaches its target.
+  function addPointerEffect(element, update, reset) {
+    let frame = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+
+    function stop() {
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = 0;
+      reset();
     }
-    lastScrollTop = Math.max(scrollTop, 0);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 
-  // ===== Menú móvil =====
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (menuToggle && mobileMenu) {
-    let closeTimer = null;
+    function render() {
+      frame = 0;
+      if (!pointerEnabled()) return stop();
+      const bounds = element.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return stop();
+      const x = Math.max(0, Math.min(1, (pointerX - bounds.left) / bounds.width));
+      const y = Math.max(0, Math.min(1, (pointerY - bounds.top) / bounds.height));
+      update(x, y);
+    }
 
-    const openMenu = () => {
-      if (closeTimer) {
-        clearTimeout(closeTimer);
-        closeTimer = null;
-      }
-      mobileMenu.hidden = false;
-      // forzar reflow para que la animación de entrada se aplique
-      void mobileMenu.offsetWidth;
-      mobileMenu.classList.add('is-open');
-      menuToggle.setAttribute('aria-expanded', 'true');
-      menuToggle.setAttribute('aria-label', 'Cerrar menú');
-      menuToggle.classList.add('is-active');
-      navbar?.classList.add('menu-open');
-      navbar?.classList.remove('nav-hidden');
-    };
-    const closeMenu = (immediate = false) => {
-      if (closeTimer) clearTimeout(closeTimer);
-      mobileMenu.classList.remove('is-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.setAttribute('aria-label', 'Abrir menú');
-      menuToggle.classList.remove('is-active');
-      navbar?.classList.remove('menu-open');
-      // esperar a que termine la transición antes de ocultar
-      if (immediate) {
-        mobileMenu.hidden = true;
-        closeTimer = null;
-      } else {
-        closeTimer = setTimeout(() => {
-          if (!mobileMenu.classList.contains('is-open')) mobileMenu.hidden = true;
-          closeTimer = null;
-        }, 280);
-      }
-    };
-    menuToggle.addEventListener('click', () => {
-      if (mobileMenu.classList.contains('is-open')) closeMenu();
-      else openMenu();
-    });
-    // Click en un link → cierra
-    mobileMenu.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', closeMenu);
-    });
-    // Click fuera de la tarjeta → cierra sin cubrir ni bloquear la página.
-    document.addEventListener('click', (e) => {
-      if (!mobileMenu.classList.contains('is-open')) return;
-      if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) closeMenu();
-    });
-    // Escape → cierra
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) closeMenu();
-    });
-    // Evita dejar el body bloqueado si el viewport cambia a escritorio.
-    const desktopQuery = window.matchMedia('(min-width: 768px)');
-    desktopQuery.addEventListener('change', (e) => {
-      if (e.matches && mobileMenu.classList.contains('is-open')) closeMenu(true);
-    });
-    window.addEventListener('scroll', () => {
-      if (mobileMenu.classList.contains('is-open')) closeMenu(true);
+    element.addEventListener('pointermove', event => {
+      if (!pointerEnabled() || event.pointerType === 'touch') return;
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (!frame) frame = window.requestAnimationFrame(render);
     }, { passive: true });
+    element.addEventListener('pointerleave', stop, { passive: true });
+    element.addEventListener('pointercancel', stop, { passive: true });
+    pointerControllers.push({ stop });
   }
 
-  // ===== Reveal animations =====
-  const revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && revealEls.length) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, idx) => {
-          if (entry.isIntersecting) {
-            entry.target.style.transitionDelay = `${Math.min(idx * 70, 280)}ms`;
+  cards.forEach(card => {
+    addPointerEffect(card, (x, y) => {
+      card.style.setProperty('--rx', ((0.5 - y) * 10).toFixed(2) + 'deg');
+      card.style.setProperty('--ry', ((x - 0.5) * 10).toFixed(2) + 'deg');
+      card.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+      card.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+    }, () => {
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
+    });
+  });
+
+  if (art) {
+    const neutral = { rotationY: 0, rotationX: 0, glowX: 50, glowY: 50 };
+    const current = { ...neutral };
+    const target = { ...neutral };
+    let frame = 0;
+    let previousTime = 0;
+
+    function paint() {
+      art.style.setProperty('--art-x', current.rotationY.toFixed(3) + 'deg');
+      art.style.setProperty('--art-y', current.rotationX.toFixed(3) + 'deg');
+      art.style.setProperty('--pointer-x', current.glowX.toFixed(2) + '%');
+      art.style.setProperty('--pointer-y', current.glowY.toFixed(2) + '%');
+    }
+
+    function stop() {
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = 0;
+      previousTime = 0;
+      Object.assign(current, neutral);
+      Object.assign(target, neutral);
+      paint();
+    }
+
+    function render(time) {
+      frame = 0;
+      if (!pointerEnabled() || visibleAnimationTargets.get(art) === false) return stop();
+      const elapsed = previousTime ? Math.max(0, Math.min(64, time - previousTime)) : 16.67;
+      previousTime = time;
+      const easing = 1 - Math.exp(-elapsed / 220);
+      let settled = true;
+      Object.keys(current).forEach(key => {
+        const tolerance = key.startsWith('rotation') ? 0.012 : 0.08;
+        current[key] += (target[key] - current[key]) * easing;
+        if (Math.abs(target[key] - current[key]) > tolerance) settled = false;
+        else current[key] = target[key];
+      });
+      paint();
+      if (!settled) frame = window.requestAnimationFrame(render);
+      else previousTime = 0;
+    }
+
+    function animateToTarget() {
+      if (!frame) frame = window.requestAnimationFrame(render);
+    }
+
+    function followPointer(event) {
+      if (!pointerEnabled() || event.pointerType === 'touch') return;
+      const bounds = art.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return;
+      const x = Math.max(0, Math.min(1, (event.clientX - bounds.left) / bounds.width));
+      const y = Math.max(0, Math.min(1, (event.clientY - bounds.top) / bounds.height));
+      target.rotationY = (x - 0.5) * 8;
+      target.rotationX = (0.5 - y) * 6;
+      target.glowX = x * 100;
+      target.glowY = y * 100;
+      animateToTarget();
+    }
+
+    function returnToCenter() {
+      Object.assign(target, neutral);
+      if (pointerEnabled()) animateToTarget();
+      else stop();
+    }
+
+    art.addEventListener('pointerenter', followPointer, { passive: true });
+    art.addEventListener('pointermove', followPointer, { passive: true });
+    art.addEventListener('pointerleave', returnToCenter, { passive: true });
+    art.addEventListener('pointercancel', stop, { passive: true });
+    pointerControllers.push({ stop });
+  }
+
+  function stopPointerEffects() {
+    pointerControllers.forEach(controller => controller.stop());
+  }
+
+  function updateAnimationPauses() {
+    animatedElements.forEach(element => {
+      const visible = visibleAnimationTargets.get(element) !== false;
+      element.classList.toggle('is-paused', !visible || !motionEnabled() || document.hidden);
+    });
+  }
+
+  function showAllReveals() {
+    root.classList.remove('motion-ready');
+    revealElements.forEach(element => element.classList.add('is-visible'));
+    if (revealObserver) revealObserver.disconnect();
+  }
+
+  function syncMotionPreference() {
+    const enabled = motionEnabled();
+    root.classList.toggle('motion-off', !enabled);
+    if (motionButton) {
+      motionButton.disabled = reducedMotion.matches;
+      motionButton.setAttribute('aria-pressed', String(!enabled));
+      motionButton.setAttribute('aria-label', reducedMotion.matches
+        ? 'Movimiento reducido por preferencia del sistema'
+        : userPausedMotion ? 'Reactivar animaciones decorativas' : 'Pausar animaciones decorativas');
+      motionButton.textContent = reducedMotion.matches
+        ? 'Movimiento: reducido'
+        : userPausedMotion ? 'Movimiento: pausado' : 'Movimiento: activo';
+    }
+    if (!enabled) {
+      stopPointerEffects();
+      showAllReveals();
+    }
+    updateAnimationPauses();
+  }
+
+  if ('IntersectionObserver' in window) {
+    try {
+      const animationObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => visibleAnimationTargets.set(entry.target, entry.isIntersecting));
+        updateAnimationPauses();
+      });
+      animatedElements.forEach(element => animationObserver.observe(element));
+
+      if (motionEnabled()) {
+        revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
             entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    revealEls.forEach((el) => el.classList.add('is-visible'));
-  }
-
-  // ===== Counter animado =====
-  const counters = document.querySelectorAll('.counter');
-  if ('IntersectionObserver' in window && counters.length) {
-    const counterObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          const target = parseInt(el.dataset.target || '0', 10);
-          const suffixEl = el.querySelector('span');
-          const suffix = suffixEl ? suffixEl.outerHTML : '';
-          const duration = 1600;
-          const start = performance.now();
-
-          const tick = (now) => {
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const value = Math.floor(eased * target);
-            el.innerHTML = value + suffix;
-            if (progress < 1) requestAnimationFrame(tick);
-            else el.innerHTML = target + suffix;
-          };
-          requestAnimationFrame(tick);
-          counterObserver.unobserve(el);
-        });
-      },
-      { threshold: 0.5 }
-    );
-    counters.forEach((c) => counterObserver.observe(c));
-  }
-
-  // ===== Smooth scroll =====
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (!href || href === '#') return;
-      const target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      const offset = (navbar ? navbar.offsetHeight : 0) + 12;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
-  });
-
-  // ===== Spotlight hover en tarjetas =====
-  const spotlights = document.querySelectorAll('.spotlight-card');
-  spotlights.forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mx', x + 'px');
-      card.style.setProperty('--my', y + 'px');
-    });
-  });
-
-  // ===== FAQ accordion =====
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach((item, index) => {
-    const btn = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-    if (!btn || !answer) return;
-    const answerId = `faq-answer-${index + 1}`;
-    answer.id = answerId;
-    answer.setAttribute('aria-hidden', 'true');
-    btn.setAttribute('aria-controls', answerId);
-
-    btn.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      // Cerrar todos los demás
-      faqItems.forEach((otherItem) => {
-        if (otherItem === item) return;
-        otherItem.classList.remove('open');
-        otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-        otherItem.querySelector('.faq-answer')?.setAttribute('aria-hidden', 'true');
-      });
-      item.classList.toggle('open', !isOpen);
-      btn.setAttribute('aria-expanded', String(!isOpen));
-      answer.setAttribute('aria-hidden', String(isOpen));
-    });
-  });
-
-  // ===== Lightbox / galería de portafolio =====
-  const lightbox = document.getElementById('lightbox');
-  if (lightbox) {
-    const lbImg = lightbox.querySelector('.lb-img');
-    const lbTitle = lightbox.querySelector('.lb-title');
-    const lbCounter = lightbox.querySelector('.lb-counter');
-    const lbClose = lightbox.querySelector('.lb-close');
-    const lbPrev = lightbox.querySelector('.lb-prev');
-    const lbNext = lightbox.querySelector('.lb-next');
-    let gallery = [];
-    let idx = 0;
-    let returnFocus = null;
-
-    const show = (i) => {
-      if (!gallery.length) return;
-      idx = (i + gallery.length) % gallery.length;
-      lbImg.hidden = false;
-      lbImg.src = gallery[idx];
-      lbCounter.textContent = (idx + 1) + ' / ' + gallery.length;
-    };
-    const openLb = (images, title) => {
-      returnFocus = document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
-      gallery = images;
-      lbTitle.textContent = title;
-      lightbox.classList.toggle('single', gallery.length <= 1);
-      show(0);
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      requestAnimationFrame(() => lbClose.focus());
-    };
-    const closeLb = () => {
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      if (returnFocus?.isConnected) returnFocus.focus();
-      returnFocus = null;
-      setTimeout(() => {
-        if (!lightbox.classList.contains('open')) {
-          lbImg.hidden = true;
-          lbImg.removeAttribute('src');
-        }
-      }, 300);
-    };
-
-    document.querySelectorAll('.portfolio-trigger').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        if (btn.dataset.live) {
-          window.open(btn.dataset.live, '_blank', 'noopener,noreferrer');
-          return;
-        }
-        // Tarjetas con demo navegable abren el modal; el resto, la galería.
-        if (btn.dataset.demo) {
-          openDemoModal(btn.dataset.demo, btn.dataset.title || 'Proyecto');
-          return;
-        }
-        const imgs = (btn.dataset.images || '').split('|').filter(Boolean);
-        if (imgs.length) openLb(imgs, btn.dataset.title || '');
-      });
-    });
-    lbClose.addEventListener('click', closeLb);
-    lbPrev.addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
-    lbNext.addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
-    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLb();
-      else if (e.key === 'ArrowLeft') show(idx - 1);
-      else if (e.key === 'ArrowRight') show(idx + 1);
-    });
-  }
-
-  // ===== Carrusel de las tarjetas de portafolio =====
-  (function setupCarousels() {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const mobile = window.matchMedia('(max-width: 639.98px)').matches;
-    const carouselObserver = 'IntersectionObserver' in window && !mobile && !reduce
-      ? new IntersectionObserver((entries) => {
-          entries.forEach(({ target, isIntersecting }) => {
-            if (isIntersecting && !target._carouselTimer) {
-              target._carouselTimer = setInterval(target._advanceCarousel, 3600);
-            } else if (!isIntersecting && target._carouselTimer) {
-              clearInterval(target._carouselTimer);
-              target._carouselTimer = null;
-            }
+            revealObserver.unobserve(entry.target);
           });
-        }, { rootMargin: '120px 0px' })
-      : null;
-    document.querySelectorAll('.portfolio-trigger').forEach((btn) => {
-      const carousel = btn.querySelector('.pf-carousel');
-      const dotsWrap = btn.querySelector('.pf-dots');
-      const imgs = (btn.dataset.images || '').split('|').filter(Boolean);
-      // En móvil una sola imagen por tarjeta reduce descargas y movimiento.
-      if (!carousel || imgs.length < 2 || reduce || mobile) {
-        if (dotsWrap) dotsWrap.remove();
-        return;
+        }, { threshold: 0.08, rootMargin: '0px 0px -12px 0px' });
+        // The observer is ready before CSS hides anything: no-JS remains readable.
+        revealElements.forEach(element => revealObserver.observe(element));
+        root.classList.add('motion-ready');
+      } else {
+        showAllReveals();
       }
-      // El primer slide ya está en el HTML; añadimos el resto.
-      for (let i = 1; i < imgs.length; i++) {
-        const s = document.createElement('img');
-        s.className = 'pf-slide';
-        s.src = imgs[i];
-        s.alt = '';
-        s.loading = 'lazy';
-        carousel.appendChild(s);
-      }
-      const slides = carousel.querySelectorAll('.pf-slide');
-      const dots = [];
-      if (dotsWrap) {
-        slides.forEach((_, d) => {
-          const dot = document.createElement('span');
-          dot.className = 'pf-dot' + (d === 0 ? ' is-active' : '');
-          dotsWrap.appendChild(dot);
-          dots.push(dot);
-        });
-      }
-      let idx = 0;
-      const advance = () => {
-        slides[idx].classList.remove('is-active');
-        if (dots[idx]) dots[idx].classList.remove('is-active');
-        idx = (idx + 1) % slides.length;
-        slides[idx].classList.add('is-active');
-        if (dots[idx]) dots[idx].classList.add('is-active');
-      };
-      btn._advanceCarousel = () => { if (!document.hidden) advance(); };
-      if (carouselObserver) carouselObserver.observe(btn);
-    });
-  })();
+    } catch {
+      // Enhancement failure must never make navigation or content disappear.
+      showAllReveals();
+    }
+  } else {
+    showAllReveals();
+  }
 
-  // ===== Modal de demo interactiva =====
-  let demoReturnFocus = null;
-
-  function openDemoModal(src, title) {
-    const modal = document.getElementById('demoModal');
-    if (!modal) return;
-    demoReturnFocus = document.activeElement instanceof HTMLElement
-      ? document.activeElement
-      : null;
-    const frame = document.getElementById('demoFrame');
-    const loader = document.getElementById('demoLoader');
-    document.getElementById('demoTitle').textContent = title;
-    document.getElementById('demoNewTab').href = src;
-    loader.classList.remove('hidden');
-    frame.src = src;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => {
-      const closeButtons = [
-        document.getElementById('demoCloseFloat'),
-        document.getElementById('demoClose')
-      ];
-      closeButtons.find((btn) => {
-        if (!btn) return false;
-        const style = window.getComputedStyle(btn);
-        return style.display !== 'none' && style.visibility !== 'hidden';
-      })?.focus();
+  if (motionButton) {
+    motionButton.addEventListener('click', () => {
+      if (reducedMotion.matches) return;
+      userPausedMotion = !userPausedMotion;
+      syncMotionPreference();
     });
   }
-  (function setupDemoModal() {
-    const modal = document.getElementById('demoModal');
-    if (!modal) return;
-    const frame = document.getElementById('demoFrame');
-    const loader = document.getElementById('demoLoader');
-    const close = () => {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      // Liberamos el iframe: descarga la demo y detiene timers/sonidos.
-      setTimeout(() => {
-        if (!modal.classList.contains('open')) frame.src = 'about:blank';
-      }, 350);
-      if (demoReturnFocus?.isConnected) demoReturnFocus.focus();
-      demoReturnFocus = null;
-    };
-    frame.addEventListener('load', () => {
-      if (modal.classList.contains('open')) loader.classList.add('hidden');
-    });
-    // Wireamos AMBOS botones — el del header (desktop/tablet) y el flotante (mobile)
-    const btnHeader = document.getElementById('demoClose');
-    const btnFloat  = document.getElementById('demoCloseFloat');
-    [btnHeader, btnFloat].forEach(btn => {
-      if (!btn) return;
-      btn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
-      // touchstart adicional en mobile — evita que un click "muerto" sobre un iframe
-      // que captura el touch nos deje sin forma de salir
-      btn.addEventListener('touchstart', (e) => { e.stopPropagation(); e.preventDefault(); close(); }, { passive: false });
-    });
-    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) close();
-    });
-  })();
-
-  // ===== Parallax sutil en aurora del hero =====
-  const aurora = document.querySelector('.aurora');
-  if (aurora && !window.matchMedia('(max-width: 639.98px), (prefers-reduced-motion: reduce)').matches) {
-    let ticking = false;
-    window.addEventListener(
-      'scroll',
-      () => {
-        if (ticking) return;
-        requestAnimationFrame(() => {
-          const y = window.scrollY * 0.3;
-          aurora.style.transform = `translateY(${y}px)`;
-          ticking = false;
-        });
-        ticking = true;
-      },
-      { passive: true }
-    );
-  }
+  reducedMotion.addEventListener('change', syncMotionPreference);
+  finePointer.addEventListener('change', stopPointerEffects);
+  window.addEventListener('blur', stopPointerEffects);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopPointerEffects();
+    updateAnimationPauses();
+  });
+  syncMotionPreference();
 })();

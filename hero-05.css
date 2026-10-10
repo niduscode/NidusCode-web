@@ -1,0 +1,377 @@
+/* Hero 05: motion is an enhancement, not a loading screen.
+   Keep the type, flow boxes and hit areas approved in version 04. */
+.hero {
+  --hero-exit-x: 0px;
+  --hero-exit-y: 0px;
+  --hero-exit-scale: 1;
+}
+
+/* The outer line handles scroll; the ink handles its one-shot entrance.
+   Negative mask insets leave room for the accent in MÁS and font overshoot. */
+#hero-title .hero-line {
+  animation: none;
+  opacity: 1;
+  translate: none;
+  clip-path: inset(-.24em -.075em -.20em -.075em);
+  transform-origin: 50% 50%;
+}
+#hero-title .hero-line-one {
+  transform: translate3d(calc(var(--hero-exit-x) * -1), var(--hero-exit-y), 0)
+    scale(var(--hero-exit-scale));
+}
+#hero-title .hero-line-two {
+  transform: translate3d(var(--hero-exit-x), var(--hero-exit-y), 0)
+    scale(var(--hero-exit-scale));
+}
+#hero-title .hero-ink {
+  display: block;
+  position: relative;
+  line-height: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  animation: none;
+  transform: none;
+  opacity: 1;
+  background-image: linear-gradient(110deg, #6242d2 4%, #9346d4 22%, #d92691 44%,
+    #5350d0 65%, #1670b5 82%, #6242d2 100%);
+  background-size: 230% 100%;
+  background-position: 50% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  --ink-x: 50%;
+  --ink-y: 50%;
+  --ink-active: 0;
+}
+#hero-title .hero-ink::before,
+#hero-title .hero-ink::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+  pointer-events: none;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: 0;
+}
+/* A single satin sweep settles into the base gradient, with no flashing. */
+#hero-title .hero-ink::before {
+  background-image: linear-gradient(112deg, transparent 36%, #c4b2ff66 43%,
+    #fff9 49%, #f9c8ee77 54%, transparent 62%);
+  background-size: 260% 100%;
+  background-position: 100% 50%;
+}
+/* Only the illumination follows the mouse; the type remains still. */
+#hero-title .hero-ink::after {
+  background-image: radial-gradient(ellipse 1.2em .8em at var(--ink-x) var(--ink-y),
+    #fff 0%, #e5ceffbb 25%, #fac5eb55 48%, transparent 75%);
+  opacity: calc(var(--ink-active) * .72);
+  transition: opacity 250ms ease;
+}
+.hero-motion-ready #hero-title .hero-line-one .hero-ink {
+  animation: heroInkRise 880ms cubic-bezier(.16, 1, .3, 1) both;
+}
+.hero-motion-ready #hero-title .hero-line-two .hero-ink {
+  animation: heroInkFall 920ms 130ms cubic-bezier(.16, 1, .3, 1) both;
+}
+.hero-motion-ready #hero-title .hero-ink::before {
+  animation: heroInkSatin 1700ms 500ms ease-out both;
+}
+.hero-motion-ready #hero-title .hero-line-two .hero-ink::before {
+  animation-delay: 660ms;
+}
+
+/* The faithful SVG contour shares the front mask's center/contain framing. */
+.hero-art .monogram-wrap {
+  transform: translate3d(0, var(--hero-exit-y), 0) scale(var(--hero-exit-scale));
+  transform-origin: 50% 50%;
+}
+.hero-art .metal-object {
+  animation: none;
+}
+.hero-motion-ready .hero-art .metal-object {
+  animation: heroLogoFloat 8.5s ease-in-out infinite;
+}
+.hero-art .logo-trace {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 1;
+}
+.hero-art .logo-trace-path {
+  fill: none;
+  stroke: #f9eaff;
+  stroke-width: 1.8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+.hero-motion-ready .hero-art .logo-trace-path {
+  animation: heroLogoTrace 1550ms 250ms cubic-bezier(.45, 0, .2, 1) both;
+}
+.hero-motion-ready .hero-art .logo-trace-path:nth-child(2) {
+  animation-delay: 410ms;
+}
+.hero-art .metal-front::after {
+  content: '';
+  position: absolute;
+  inset: -15%;
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 32%, #ffffff12 41%,
+    #ffffffd9 49%, #eed4ff66 53%, transparent 63%);
+  transform: translate3d(-90%, 0, 0);
+  opacity: 0;
+}
+.hero-motion-ready .hero-art .metal-front::after {
+  animation: heroLogoPolish 1250ms 650ms ease-in-out both;
+}
+
+/* The link is fixed. Only its decorative surface moves by at most 4px. */
+.hero .hero-actions .button {
+  --hero-button-block: 17px;
+  --hero-button-inline: 23px;
+  gap: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  transform: none;
+  box-shadow: none;
+  transition: none;
+}
+.hero .hero-actions .button:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+.hero .hero-actions .button .button-surface {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  min-width: 0;
+  gap: 26px;
+  padding: var(--hero-button-block) var(--hero-button-inline);
+  border-radius: inherit;
+  font: inherit;
+  line-height: inherit;
+  transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0);
+  transition: box-shadow 240ms ease, background-color 240ms ease,
+    border-color 240ms ease;
+}
+.hero .hero-actions .button-dark .button-surface {
+  background: #191321;
+  color: #fff;
+}
+.hero .hero-actions .button-glass .button-surface {
+  background: #ffffffa3;
+  border: 1px solid #a7a0bc;
+  color: #282035;
+}
+.hero .hero-actions .button .button-label,
+.hero .hero-actions .button:hover .button-label {
+  font: inherit;
+  line-height: inherit;
+  transform: none;
+  transition: none;
+}
+.hero .hero-actions .button .button-arrow {
+  display: inline-block;
+  flex: none;
+  font-size: 21px;
+  line-height: 1;
+  transform: none;
+  transition: transform 320ms cubic-bezier(.16, 1, .3, 1);
+}
+.hero .hero-actions .button:focus-visible .button-surface {
+  transform: none;
+  box-shadow: 0 0 0 1px #b192eb, 0 6px 24px #8060bd22;
+}
+.hero .hero-actions .button:focus-visible .button-arrow {
+  transform: translate(3px, -3px);
+}
+.hero .hero-actions .button[href='#proyectos']:focus-visible .button-arrow {
+  transform: translate(3px, 3px);
+}
+
+[data-theme='dark'] .hero .hero-actions .button-dark .button-surface {
+  background: #f4ecff;
+  color: #1e152c;
+}
+[data-theme='dark'] .hero .hero-actions .button-glass .button-surface {
+  background: #30273fcc;
+  border-color: #79648f;
+  color: #f5edff;
+}
+[data-theme='dark'] .hero-art .logo-trace-path {
+  stroke: #fae8ff;
+}
+[data-theme='dark'] #hero-title .hero-ink {
+  background-image: linear-gradient(110deg, #d2b2ff 4%, #bba4ff 22%, #ff8cd6 44%,
+    #aca0ff 65%, #77d3ee 82%, #d2b2ff 100%);
+}
+[data-theme='dark'] #hero-title .hero-ink::after {
+  opacity: calc(var(--ink-active) * .6);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #hero-title .hero-ink { pointer-events: auto; }
+  .hero .hero-actions .button:hover .button-surface {
+    box-shadow: 0 0 0 1px #b192eb88, 0 8px 25px #8060bd30;
+  }
+  .hero .hero-actions .button-glass:hover .button-surface {
+    border-color: #9272c7;
+    background: #ffffffd9;
+  }
+  .hero .hero-actions .button:hover .button-arrow {
+    transform: translate(3px, -3px);
+  }
+  .hero .hero-actions .button[href='#proyectos']:hover .button-arrow {
+    transform: translate(3px, 3px);
+  }
+  [data-theme='dark'] .hero .hero-actions .button:hover .button-surface {
+    box-shadow: 0 0 0 1px #c8a2f0aa, 0 8px 25px #0005;
+  }
+  [data-theme='dark'] .hero .hero-actions .button-glass:hover .button-surface {
+    border-color: #b291cc;
+    background: #3b2e4d;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero .hero-actions .button {
+    --hero-button-block: 14px;
+    --hero-button-inline: 19px;
+  }
+  .hero .hero-actions .button .button-surface { gap: 17px; }
+  .hero-motion-ready #hero-title .hero-ink::before {
+    animation-duration: 2000ms;
+  }
+  #hero-title .hero-ink::after { display: none; }
+  .hero-motion-ready .hero-art .metal-object {
+    animation-duration: 10s;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .hero .hero-actions .button .button-surface { transform: none; }
+  .hero .hero-actions .button:active .button-surface {
+    box-shadow: inset 0 0 0 2px #b192eb88;
+  }
+}
+
+/* JS completes the intro after the second satin sweep, or on an interruption.
+   Returning to the hero must never replay the reveal or hide its copy. */
+.hero-intro-complete #hero-title .hero-line .hero-ink {
+  animation: none;
+  transform: none;
+  opacity: 1;
+}
+.hero-intro-complete #hero-title .hero-ink::before,
+.hero-intro-complete .logo-trace,
+.hero-intro-complete .metal-front::after { display: none; }
+
+/* Tab blur, hidden document and offscreen hero freeze decorative work. */
+.hero-motion-paused *,
+.hero-motion-paused *::before,
+.hero-motion-paused *::after {
+  animation-play-state: paused !important;
+}
+.hero-motion-paused #hero-title .hero-line {
+  transform: none;
+  clip-path: none;
+}
+.hero-motion-paused #hero-title .hero-ink {
+  animation: none !important;
+  transform: none;
+  opacity: 1;
+}
+.hero-motion-paused #hero-title .hero-ink::before,
+.hero-motion-paused .logo-trace,
+.hero-motion-paused .metal-front::after { display: none; }
+.hero-motion-paused #hero-title .hero-ink::after { opacity: 0; }
+.hero-motion-paused .hero-art .monogram-wrap { transform: none; }
+
+/* An explicit pause restores a readable static composition immediately. */
+.motion-off #hero-title .hero-line {
+  transform: none;
+  clip-path: none;
+}
+.motion-off #hero-title .hero-ink {
+  transform: none;
+  opacity: 1;
+}
+.motion-off #hero-title .hero-ink::before,
+.motion-off #hero-title .hero-ink::after,
+.motion-off .hero-art .logo-trace,
+.motion-off .hero-art .metal-front::after { display: none; }
+.motion-off .hero-art .metal-object { translate: none; rotate: none; }
+.motion-off .hero-art .metal-hover { transform: none; }
+.motion-off .hero-art .monogram-wrap { transform: none; }
+.motion-off .hero .hero-actions .button .button-surface,
+.motion-off .hero .hero-actions .button .button-arrow { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  #hero-title .hero-line,
+  #hero-title .hero-ink {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1;
+  }
+  #hero-title .hero-line { clip-path: none; }
+  #hero-title .hero-ink::before,
+  #hero-title .hero-ink::after,
+  .hero-art .logo-trace,
+  .hero-art .metal-front::after { display: none; }
+  .hero-art .metal-object {
+    animation: none !important;
+    translate: none;
+    rotate: none;
+  }
+  .hero-art .metal-hover { transform: none; }
+  .hero-art .monogram-wrap { transform: none; }
+  .hero .hero-actions .button .button-surface,
+  .hero .hero-actions .button .button-arrow { transform: none !important; }
+}
+
+@keyframes heroInkRise {
+  from { transform: translate3d(-.035em, 1.3em, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes heroInkFall {
+  from { transform: translate3d(.05em, -1.35em, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes heroInkSatin {
+  0% { background-position: 100% 50%; opacity: 0; }
+  18% { opacity: .55; }
+  78% { opacity: .55; }
+  100% { background-position: 0% 50%; opacity: 0; }
+}
+@keyframes heroLogoTrace {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  12% { opacity: .95; }
+  72% { stroke-dashoffset: 0; opacity: .95; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes heroLogoPolish {
+  0% { transform: translate3d(-90%, 0, 0); opacity: 0; }
+  20% { opacity: .65; }
+  78% { opacity: .65; }
+  100% { transform: translate3d(90%, 0, 0); opacity: 0; }
+}
+@keyframes heroLogoFloat {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  50% { translate: 0 -7px; rotate: 1deg; }
+}

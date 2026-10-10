@@ -12,6 +12,8 @@ desktop.ini
 # Logs y temporales
 *.log
 node_modules/
+.vercel/
+screenshots/
 package-lock.json
 
 # Netlify
@@ -25,3 +27,4 @@ cap de pruebas*/
 
 # Código fuente crudo de proyectos cliente: vive en ../niduscode-fuentes/
 # (fuera de este repo). Nunca debe entrar aquí: contiene .env y claves privadas.
+.vercel
