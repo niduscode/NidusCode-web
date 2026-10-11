@@ -11,7 +11,6 @@
   const steps = Array.from(journey.querySelectorAll('[data-journey-step]'));
   const art = hero.querySelector('.hero-art');
   const stage = hero.querySelector('.hero-stage');
-  const toggle = journey.querySelector('[data-journey-toggle]');
   if (panels.length !== 4 || !art || !stage) return;
 
   const desktop = window.matchMedia('(min-width: 1001px) and (min-height: 600px)');
@@ -203,14 +202,6 @@
     else previousTime = 0;
   }
 
-  function syncToggle() {
-    if (!toggle) return;
-    const paused = reduced.matches || root.classList.contains('motion-off');
-    toggle.disabled = reduced.matches;
-    toggle.textContent = reduced.matches ? 'Movimiento reducido' : paused ? 'Reanudar movimiento' : 'Pausar movimiento';
-    toggle.setAttribute('aria-pressed', String(paused));
-  }
-
   function commitStarting() {
     if (!root.classList.contains('journey-starting')) return;
     // Initialization must not wait for RAF/visibility: Safari may report a visible
@@ -259,7 +250,6 @@
     root.classList.toggle('journey-supported', desktop.matches);
     root.classList.toggle('journey-ready', ready);
     if (window.nidusWorld) window.nidusWorld.setEnabled(ready);
-    syncToggle();
     preservePosition(before, wasReady, ready);
     layoutDirty = true;
     scrollDirty = true;

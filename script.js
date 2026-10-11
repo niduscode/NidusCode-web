@@ -5,7 +5,6 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   const mobileLayout = window.matchMedia('(max-width: 760px)');
-  const motionButton = document.querySelector('[data-journey-toggle]');
   const menuButton = document.querySelector('.menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const header = document.querySelector('.site-header');
@@ -15,7 +14,6 @@
   const animatedElements = [...document.querySelectorAll('.hero-art, .ambient, .gradient-text, .project-card')];
   const pointerControllers = [];
   const visibleAnimationTargets = new Map();
-  let userPausedMotion = false;
   let revealObserver;
 
   // The header never slides away. Only switch its quiet reading surface at the top.
@@ -29,7 +27,7 @@
   // Dark from the initial HTML paint, regardless of OS theme or legacy saved choices.
   root.dataset.theme = 'dark';
 
-  const motionEnabled = () => !reducedMotion.matches && !userPausedMotion;
+  const motionEnabled = () => !reducedMotion.matches;
   const pointerEnabled = () => motionEnabled() && finePointer.matches && !document.hidden;
 
   function closeMenu(returnFocus = false) {
@@ -198,16 +196,6 @@
   function syncMotionPreference() {
     const enabled = motionEnabled();
     root.classList.toggle('motion-off', !enabled);
-    if (motionButton) {
-      motionButton.disabled = reducedMotion.matches;
-      motionButton.setAttribute('aria-pressed', String(!enabled));
-      motionButton.setAttribute('aria-label', reducedMotion.matches
-        ? 'Movimiento reducido por preferencia del sistema'
-        : userPausedMotion ? 'Reactivar animaciones decorativas' : 'Pausar animaciones decorativas');
-      motionButton.textContent = reducedMotion.matches
-        ? 'Movimiento reducido'
-        : userPausedMotion ? 'Reanudar movimiento' : 'Pausar movimiento';
-    }
     if (!enabled) {
       stopPointerEffects();
       showAllReveals();
@@ -245,13 +233,6 @@
     showAllReveals();
   }
 
-  if (motionButton) {
-    motionButton.addEventListener('click', () => {
-      if (reducedMotion.matches) return;
-      userPausedMotion = !userPausedMotion;
-      syncMotionPreference();
-    });
-  }
   reducedMotion.addEventListener('change', syncMotionPreference);
   finePointer.addEventListener('change', stopPointerEffects);
   window.addEventListener('blur', stopPointerEffects);

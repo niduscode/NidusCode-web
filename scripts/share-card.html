@@ -18,6 +18,7 @@
     header { display: flex; align-items: center; justify-content: space-between; height: 48px; }
     .brand { display: flex; align-items: center; gap: 13px; font-size: 30px; font-weight: 700; letter-spacing: -1.1px; }
     .symbol { width: 38px; height: 45px; background: linear-gradient(145deg, #9b73ff, #e74fc8); mask: url('../assets/nidus-symbol.svg') center / contain no-repeat; }
+    .hero-symbol { position: absolute; right: 60px; top: 292px; width: 174px; height: 206px; background: linear-gradient(145deg, #a779ff, #b763ee 42%, #ed60cc); mask: url('../assets/nidus-symbol.svg') center / contain no-repeat; filter: drop-shadow(0 12px 20px #7c3cbd33); }
     .location { display: flex; align-items: center; gap: 10px; color: #c6b7d8; font-size: 17px; font-weight: 500; }
     .location i { width: 7px; height: 7px; border-radius: 50%; background: #40d7aa; }
     h1 { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 194px; line-height: .84; letter-spacing: -2px; margin: 43px 0 32px; }
@@ -31,6 +32,7 @@
 <body>
   <header><div class="brand"><i class="symbol" aria-hidden="true"></i>NidusCode</div><span class="location"><i></i>Desde Chile · 100% remoto</span></header>
   <h1><span>Gasta menos.</span><span class="gradient">Vende más.</span></h1>
+  <i class="hero-symbol" aria-label="Logo de NidusCode"></i>
   <footer><p>Automatización, construcción web y optimización.</p><p class="note">Todo a medida para tu negocio.</p></footer>
 </body>
 </html>

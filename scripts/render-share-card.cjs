@@ -16,7 +16,14 @@ const { chromium } = require(process.env.NIDUS_PLAYWRIGHT_MODULE || 'playwright'
       const box = element.getBoundingClientRect(); return box.right <= 1140 && box.bottom <= 600;
     }));
     assert.ok(fits, 'Share-card copy must fit inside safe margins');
-    const output = path.resolve(__dirname, '../assets/og-niduscode-dark-20261010.jpg');
+    const logoFits = await page.evaluate(() => {
+      const logo = document.querySelector('.hero-symbol').getBoundingClientRect();
+      const title = document.querySelector('h1 .gradient').getBoundingClientRect();
+      const footer = document.querySelector('footer').getBoundingClientRect();
+      return logo.left > title.right + 24 && logo.bottom <= footer.top;
+    });
+    assert.ok(logoFits, 'Prominent brand symbol must not cover headline or footer');
+    const output = path.resolve(__dirname, '../assets/og-niduscode-dark-logo-20261010.jpg');
     await page.screenshot({ path: output, type: 'jpeg', quality: 92 });
     console.log(JSON.stringify({ output, width: 1200, height: 630 }));
   } finally { await browser.close(); }

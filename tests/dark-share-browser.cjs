@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const { chromium } = require(process.env.NIDUS_PLAYWRIGHT_MODULE || 'playwright');
 const base = process.env.NIDUS_QA_URL || 'http://127.0.0.1:8800/';
-const imageURL = 'https://nidus-code-web.vercel.app/assets/og-niduscode-dark-20261010.jpg';
+const imageURL = 'https://nidus-code-web.vercel.app/assets/og-niduscode-dark-logo-20261010.jpg';
 (async () => {
   const browser = await chromium.launch({ headless: true,
     executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' });
@@ -28,6 +28,8 @@ const imageURL = 'https://nidus-code-web.vercel.app/assets/og-niduscode-dark-202
       assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
       assert.equal(await page.locator('#theme-toggle').count(), 0);
       assert.equal(await page.locator('#motion-toggle').count(), 0);
+      assert.equal(await page.locator('[data-journey-toggle]').count(), 0);
+      assert.equal(await page.getByRole('button', { name: /pausar|reanudar|reactivar/i }).count(), 0);
       assert.equal(await page.locator('footer button').count(), 0);
       const palette = await page.evaluate(() => ({
         scheme: getComputedStyle(document.documentElement).colorScheme,
@@ -57,10 +59,10 @@ const imageURL = 'https://nidus-code-web.vercel.app/assets/og-niduscode-dark-202
       }
       if (variant.viewport.width === 1440 && variant.saved === 'light') {
         await page.waitForFunction(() => document.documentElement.classList.contains('journey-ready'));
-        await page.locator('[data-journey-toggle]').click();
+        await page.emulateMedia({ reducedMotion: 'reduce' });
         await page.waitForFunction(() => document.documentElement.classList.contains('motion-off'));
         assert.equal(await page.evaluate(() => document.documentElement.classList.contains('journey-ready')), false);
-        await page.locator('[data-journey-toggle]').click();
+        await page.emulateMedia({ reducedMotion: 'no-preference' });
         await page.waitForFunction(() => document.documentElement.classList.contains('journey-ready'));
         await page.screenshot({ path: path.resolve(__dirname, '../screenshots/dark-only-desktop.png') });
         const asset = await context.request.get(new URL(new URL(imageURL).pathname, base).href);
