@@ -12,7 +12,6 @@
   const art = hero.querySelector('.hero-art');
   const stage = hero.querySelector('.hero-stage');
   const toggle = journey.querySelector('[data-journey-toggle]');
-  const sharedToggle = document.querySelector('#motion-toggle');
   if (panels.length !== 4 || !art || !stage) return;
 
   const desktop = window.matchMedia('(min-width: 1001px) and (min-height: 600px)');
@@ -207,7 +206,7 @@
   function syncToggle() {
     if (!toggle) return;
     const paused = reduced.matches || root.classList.contains('motion-off');
-    toggle.disabled = reduced.matches || !sharedToggle;
+    toggle.disabled = reduced.matches;
     toggle.textContent = reduced.matches ? 'Movimiento reducido' : paused ? 'Reanudar movimiento' : 'Pausar movimiento';
     toggle.setAttribute('aria-pressed', String(paused));
   }
@@ -318,9 +317,6 @@
     window.scrollTo({ top: geometry.top + geometry.range * sceneProgress, behavior: awake() ? 'smooth' : 'instant' });
     if (!awake()) onScroll();
   }));
-  if (toggle && sharedToggle) toggle.addEventListener('click', () => {
-    if (!reduced.matches) sharedToggle.click();
-  });
 
   window.addEventListener('scroll', onScroll, { passive: true });
   journey.addEventListener('nidus:world-unavailable', () => {

@@ -76,7 +76,8 @@ const output = path.resolve(__dirname, '../screenshots');
     assert.ok(Math.abs(reverse.scale - 1) < 0.001);
     assert.ok(reverse.worldOpacity > 0.999);
 
-    await page.locator('#theme-toggle').click();
+    await page.emulateMedia({ colorScheme: 'light' });
+    assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
     await at(0.99);
     await page.screenshot({ path: path.join(output, 'v8.3-cierre-oscuro.png') });
     await page.locator('.desktop-nav a[href="#servicios"]').click();

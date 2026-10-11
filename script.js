@@ -5,10 +5,7 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   const mobileLayout = window.matchMedia('(max-width: 760px)');
-  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
-  const motionButton = document.getElementById('motion-toggle');
-  const themeButton = document.getElementById('theme-toggle');
-  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const motionButton = document.querySelector('[data-journey-toggle]');
   const menuButton = document.querySelector('.menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const header = document.querySelector('.site-header');
@@ -20,7 +17,6 @@
   const visibleAnimationTargets = new Map();
   let userPausedMotion = false;
   let revealObserver;
-  let themePreference = null;
 
   // The header never slides away. Only switch its quiet reading surface at the top.
   if (header) {
@@ -30,39 +26,8 @@
     syncHeader();
   }
 
-  try {
-    const savedTheme = window.localStorage.getItem('nidus-preview-theme');
-    if (savedTheme === 'light' || savedTheme === 'dark') themePreference = savedTheme;
-  } catch {
-    // The preview stays usable even when browser storage is unavailable.
-  }
-
-  function applyTheme(theme) {
-    root.setAttribute('data-theme', theme);
-    if (themeColor) themeColor.setAttribute('content', theme === 'dark' ? '#100e18' : '#fafafb');
-    if (themeButton) {
-      const label = theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro';
-      themeButton.setAttribute('aria-label', label);
-      themeButton.setAttribute('title', label);
-      themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
-    }
-  }
-
-  if (themeButton) {
-    themeButton.addEventListener('click', () => {
-      themePreference = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      applyTheme(themePreference);
-      try {
-        window.localStorage.setItem('nidus-preview-theme', themePreference);
-      } catch {
-        // The explicit choice still applies for this visit without persistence.
-      }
-    });
-  }
-  systemTheme.addEventListener('change', () => {
-    if (!themePreference) applyTheme(systemTheme.matches ? 'dark' : 'light');
-  });
-  applyTheme(themePreference || (systemTheme.matches ? 'dark' : 'light'));
+  // Dark from the initial HTML paint, regardless of OS theme or legacy saved choices.
+  root.dataset.theme = 'dark';
 
   const motionEnabled = () => !reducedMotion.matches && !userPausedMotion;
   const pointerEnabled = () => motionEnabled() && finePointer.matches && !document.hidden;
@@ -240,8 +205,8 @@
         ? 'Movimiento reducido por preferencia del sistema'
         : userPausedMotion ? 'Reactivar animaciones decorativas' : 'Pausar animaciones decorativas');
       motionButton.textContent = reducedMotion.matches
-        ? 'Movimiento: reducido'
-        : userPausedMotion ? 'Movimiento: pausado' : 'Movimiento: activo';
+        ? 'Movimiento reducido'
+        : userPausedMotion ? 'Reanudar movimiento' : 'Pausar movimiento';
     }
     if (!enabled) {
       stopPointerEffects();

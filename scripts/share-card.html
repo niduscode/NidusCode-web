@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1200, initial-scale=1">
+  <title>NidusCode · Tarjeta para compartir</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+    body {
+      padding: 46px 60px 40px;
+      color: #f8f3ff;
+      background: radial-gradient(ellipse at 90% 10%, #37244f 0%, transparent 48%),
+        radial-gradient(ellipse at 15% 100%, #20203e 0%, transparent 60%), #100e18;
+      font-family: Inter, Arial, sans-serif;
+    }
+    header { display: flex; align-items: center; justify-content: space-between; height: 48px; }
+    .brand { display: flex; align-items: center; gap: 13px; font-size: 30px; font-weight: 700; letter-spacing: -1.1px; }
+    .symbol { width: 38px; height: 45px; background: linear-gradient(145deg, #9b73ff, #e74fc8); mask: url('../assets/nidus-symbol.svg') center / contain no-repeat; }
+    .location { display: flex; align-items: center; gap: 10px; color: #c6b7d8; font-size: 17px; font-weight: 500; }
+    .location i { width: 7px; height: 7px; border-radius: 50%; background: #40d7aa; }
+    h1 { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 194px; line-height: .84; letter-spacing: -2px; margin: 43px 0 32px; }
+    h1 span { display: block; width: max-content; }
+    h1 .gradient { margin-top: 9px; background: linear-gradient(100deg, #b6a0ff 0%, #e2a0ef 28%, #ff88cb 62%, #9bc8ff 100%); background-clip: text; -webkit-text-fill-color: transparent; }
+    footer { padding-top: 20px; border-top: 1px solid #8970a94d; }
+    p { margin: 0; font-size: 24px; letter-spacing: -.5px; line-height: 1.45; font-weight: 500; }
+    .note { color: #bdb0cf; font-size: 19px; margin-top: 5px; font-weight: 400; }
+  </style>
+</head>
+<body>
+  <header><div class="brand"><i class="symbol" aria-hidden="true"></i>NidusCode</div><span class="location"><i></i>Desde Chile · 100% remoto</span></header>
+  <h1><span>Gasta menos.</span><span class="gradient">Vende más.</span></h1>
+  <footer><p>Automatización, construcción web y optimización.</p><p class="note">Todo a medida para tu negocio.</p></footer>
+</body>
+</html>

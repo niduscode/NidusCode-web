@@ -166,7 +166,8 @@ fs.mkdirSync(path.join(root, 'screenshots'), { recursive: true });
       assert.equal(await details.getAttribute('open'), '');
       await details.locator('summary').click();
     }
-    await page.locator('#theme-toggle').click();
+    await page.emulateMedia({ colorScheme: 'light' });
+    assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
     await page.locator('#contacto').scrollIntoViewIfNeeded();
     await page.waitForTimeout(600);
     await page.locator('#contacto').screenshot({ path: path.join(root, 'screenshots/release-contact-dark.png') });
